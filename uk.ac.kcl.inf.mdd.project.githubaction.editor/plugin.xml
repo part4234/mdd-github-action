@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated githubaction -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="uk.ac.kcl.inf.mdd.project.githubaction.presentation.GithubactionModelWizardID"
+            name="%_UI_GithubactionModelWizard_label"
+            class="uk.ac.kcl.inf.mdd.project.githubaction.presentation.GithubactionModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/GithubactionModelFile.gif">
+         <description>%_UI_GithubactionModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated githubaction -->
+      <editor
+            id="uk.ac.kcl.inf.mdd.project.githubaction.presentation.GithubactionEditorID"
+            name="%_UI_GithubactionEditor_label"
+            icon="icons/full/obj16/GithubactionModelFile.gif"
+            extensions="githubaction"
+            class="uk.ac.kcl.inf.mdd.project.githubaction.presentation.GithubactionEditor"
+            contributorClass="uk.ac.kcl.inf.mdd.project.githubaction.presentation.GithubactionActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
