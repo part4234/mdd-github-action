@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="githubaction" nsURI="http://www.example.org/githubaction" nsPrefix="githubaction">
-  <eClassifiers xsi:type="ecore:EClass" name="BranchEvent" abstract="true" eSuperTypes="#//Event">
+  <eClassifiers xsi:type="ecore:EClass" name="BranchEvent" abstract="true" eSuperTypes="#//WebhookEvent">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="branches" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tags" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -22,11 +22,157 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
         eType="#//Event" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Step"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Job">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="env" upperBound="-1" eType="#//Env"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uses" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="run" eType="#//Run" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Job">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
         eType="#//Step" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="env" upperBound="-1" eType="#//Env"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="runsOn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScheduleEvent" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hour" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="day" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="month" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dayOfWeek" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ManualEvent" abstract="true" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WorkflowDispatchEvent" eSuperTypes="#//ManualEvent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="#//Input" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RepositoryDispatchEvent" eSuperTypes="#//ManualEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventTypes" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Input">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WebhookEvent" abstract="true" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CheckRunEvent" eSuperTypes="#//WebhookEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
+        eType="#//CheckRunActivityType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CheckRunActivityType">
+    <eLiterals name="created"/>
+    <eLiterals name="rerequested" value="1"/>
+    <eLiterals name="completed" value="2"/>
+    <eLiterals name="requested_action" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CheckSuiteEvent" eSuperTypes="#//WebhookEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
+        eType="#//CheckSuitActivityType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CheckSuitActivityType">
+    <eLiterals name="completed"/>
+    <eLiterals name="requested" value="1"/>
+    <eLiterals name="rerequested" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CreateEvent" eSuperTypes="#//WebhookEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeleteEvent" eSuperTypes="#//WebhookEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeploymentEvent" eSuperTypes="#//WebhookEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeploymentStatusEvent" eSuperTypes="#//WebhookEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ForkEvent" eSuperTypes="#//WebhookEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GollumEvent" eSuperTypes="#//WebhookEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IssueCommentEvent" eSuperTypes="#//WebhookEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
+        eType="#//IssueCommentActivityType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="IssueCommentActivityType">
+    <eLiterals name="created"/>
+    <eLiterals name="edited" value="1"/>
+    <eLiterals name="deleted" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IssueEvent" eSuperTypes="#//WebhookEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
+        eType="#//IssueActivityType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="IssueActivityType">
+    <eLiterals name="opened"/>
+    <eLiterals name="edited" value="1"/>
+    <eLiterals name="deleted" value="2"/>
+    <eLiterals name="transferred" value="3"/>
+    <eLiterals name="pinned" value="4"/>
+    <eLiterals name="unpinned" value="5"/>
+    <eLiterals name="closed" value="6"/>
+    <eLiterals name="reopened" value="7"/>
+    <eLiterals name="assigned" value="8"/>
+    <eLiterals name="unassigned" value="9"/>
+    <eLiterals name="labeled" value="10"/>
+    <eLiterals name="unlabeled" value="11"/>
+    <eLiterals name="locked" value="12"/>
+    <eLiterals name="unlocked" value="13"/>
+    <eLiterals name="milestoned" value="14"/>
+    <eLiterals name="demilestoned" value="15"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LabelEvent" eSuperTypes="#//WebhookEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
+        eType="#//LabelActivityType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LabelActivityType">
+    <eLiterals name="created"/>
+    <eLiterals name="edited" value="1"/>
+    <eLiterals name="deleted" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MilestoneEvent" eSuperTypes="#//WebhookEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ActivityTypes" upperBound="-1"
+        eType="#//MilestoneActivityType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MilestoneActivityType">
+    <eLiterals name="created"/>
+    <eLiterals name="closed" value="1"/>
+    <eLiterals name="opened" value="2"/>
+    <eLiterals name="edited" value="3"/>
+    <eLiterals name="deleted" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PageBuildEvent" eSuperTypes="#//WebhookEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProjectEvent" eSuperTypes="#//WebhookEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
+        eType="#//ProjectActivityType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ProjectActivityType">
+    <eLiterals name="created"/>
+    <eLiterals name="updated" value="1"/>
+    <eLiterals name="closed" value="2"/>
+    <eLiterals name="reopened" value="3"/>
+    <eLiterals name="edited" value="4"/>
+    <eLiterals name="deleted" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProjectCardEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
+        eType="#//ProjectCardActivityType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ProjectCardActivityType">
+    <eLiterals name="created"/>
+    <eLiterals name="moved" value="1"/>
+    <eLiterals name="coverted" value="2"/>
+    <eLiterals name="edited" value="3"/>
+    <eLiterals name="deleted" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Env">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NewEClass30"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Run">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commands" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="workingDirectory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shell" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="with" upperBound="-1" eType="#//Env"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

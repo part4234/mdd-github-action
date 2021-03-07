@@ -11,6 +11,67 @@
   <testsDirectory xsi:nil="true"/>
   <genPackages prefix="Githubaction" basePackage="uk.ac.kcl.inf.mdd.project" disposableProviderFactory="true"
       ecorePackage="githubaction.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="githubaction.ecore#//CheckRunActivityType">
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//CheckRunActivityType/created"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//CheckRunActivityType/rerequested"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//CheckRunActivityType/completed"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//CheckRunActivityType/requested_action"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="githubaction.ecore#//CheckSuitActivityType">
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//CheckSuitActivityType/completed"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//CheckSuitActivityType/requested"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//CheckSuitActivityType/rerequested"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="githubaction.ecore#//IssueCommentActivityType">
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueCommentActivityType/created"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueCommentActivityType/edited"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueCommentActivityType/deleted"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="githubaction.ecore#//IssueActivityType">
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/opened"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/edited"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/deleted"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/transferred"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/pinned"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/unpinned"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/closed"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/reopened"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/assigned"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/unassigned"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/labeled"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/unlabeled"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/locked"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/unlocked"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/milestoned"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//IssueActivityType/demilestoned"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="githubaction.ecore#//LabelActivityType">
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//LabelActivityType/created"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//LabelActivityType/edited"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//LabelActivityType/deleted"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="githubaction.ecore#//MilestoneActivityType">
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//MilestoneActivityType/created"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//MilestoneActivityType/closed"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//MilestoneActivityType/opened"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//MilestoneActivityType/edited"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//MilestoneActivityType/deleted"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="githubaction.ecore#//ProjectActivityType">
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//ProjectActivityType/created"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//ProjectActivityType/updated"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//ProjectActivityType/closed"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//ProjectActivityType/reopened"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//ProjectActivityType/edited"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//ProjectActivityType/deleted"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="githubaction.ecore#//ProjectCardActivityType">
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//ProjectCardActivityType/created"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//ProjectCardActivityType/moved"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//ProjectCardActivityType/coverted"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//ProjectCardActivityType/edited"/>
+      <genEnumLiterals ecoreEnumLiteral="githubaction.ecore#//ProjectCardActivityType/deleted"/>
+    </genEnums>
     <genClasses ecoreClass="githubaction.ecore#//BranchEvent">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//BranchEvent/branches"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//BranchEvent/tags"/>
@@ -25,11 +86,82 @@
     <genClasses ecoreClass="githubaction.ecore#//Workflow">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Workflow/jobs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Workflow/events"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Workflow/name"/>
     </genClasses>
-    <genClasses ecoreClass="githubaction.ecore#//Step"/>
+    <genClasses ecoreClass="githubaction.ecore#//Step">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Step/env"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/uses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Step/run"/>
+    </genClasses>
     <genClasses ecoreClass="githubaction.ecore#//Job">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Job/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Job/steps"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Job/env"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Job/runsOn"/>
+    </genClasses>
+    <genClasses ecoreClass="githubaction.ecore#//ScheduleEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//ScheduleEvent/minute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//ScheduleEvent/hour"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//ScheduleEvent/day"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//ScheduleEvent/month"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//ScheduleEvent/dayOfWeek"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="githubaction.ecore#//ManualEvent"/>
+    <genClasses ecoreClass="githubaction.ecore#//WorkflowDispatchEvent">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//WorkflowDispatchEvent/inputs"/>
+    </genClasses>
+    <genClasses ecoreClass="githubaction.ecore#//RepositoryDispatchEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//RepositoryDispatchEvent/eventTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="githubaction.ecore#//Input">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Input/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Input/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Input/default"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Input/required"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="githubaction.ecore#//WebhookEvent"/>
+    <genClasses ecoreClass="githubaction.ecore#//CheckRunEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//CheckRunEvent/activityTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="githubaction.ecore#//CheckSuiteEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//CheckSuiteEvent/activityTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="githubaction.ecore#//CreateEvent"/>
+    <genClasses ecoreClass="githubaction.ecore#//DeleteEvent"/>
+    <genClasses ecoreClass="githubaction.ecore#//DeploymentEvent"/>
+    <genClasses ecoreClass="githubaction.ecore#//DeploymentStatusEvent"/>
+    <genClasses ecoreClass="githubaction.ecore#//ForkEvent"/>
+    <genClasses ecoreClass="githubaction.ecore#//GollumEvent"/>
+    <genClasses ecoreClass="githubaction.ecore#//IssueCommentEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//IssueCommentEvent/activityTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="githubaction.ecore#//IssueEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//IssueEvent/activityTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="githubaction.ecore#//LabelEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//LabelEvent/activityTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="githubaction.ecore#//MilestoneEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//MilestoneEvent/ActivityTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="githubaction.ecore#//PageBuildEvent"/>
+    <genClasses ecoreClass="githubaction.ecore#//ProjectEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//ProjectEvent/activityTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="githubaction.ecore#//ProjectCardEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//ProjectCardEvent/activityTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="githubaction.ecore#//Env">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Env/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Env/value"/>
+    </genClasses>
+    <genClasses ecoreClass="githubaction.ecore#//NewEClass30"/>
+    <genClasses ecoreClass="githubaction.ecore#//Run">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Run/commands"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Run/workingDirectory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Run/shell"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Run/with"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
