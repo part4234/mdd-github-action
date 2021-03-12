@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: uk.ac.kcl.inf.mdd.project.githubaction.xtext.ui
+Bundle-ManifestVersion: 2
+Bundle-Name: uk.ac.kcl.inf.mdd.project.githubaction.xtext.ui
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: uk.ac.kcl.inf.mdd.project.githubaction.xtext.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: uk.ac.kcl.inf.mdd.project.githubaction.xtext,
+ uk.ac.kcl.inf.mdd.project.githubaction.xtext.ide,
+ uk.ac.kcl.inf.mdd.project.githubaction,
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0"
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-11
