@@ -4,26 +4,14 @@ grammar uk.ac.kcl.inf.mdd.project.Githubaction with org.eclipse.xtext.common.Ter
 import "http://www.example.org/githubaction" 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
-Repository returns Repository:
+Repository:
 	{Repository}
 	'Repository'
 	'{'
 		('workflows' '{' workflows+=Workflow ( "," workflows+=Workflow)* '}' )?
 	'}';
 
-
-
-Event returns Event:
-	PushEvent | PullRequestEvent | ScheduleEvent | WorkflowDispatchEvent | RepositoryDispatchEvent | CreateEvent | DeleteEvent | DeploymentEvent | IssueEvent | LabelEvent;
-
-
-
-
-
-
-
-
-Workflow returns Workflow:
+Workflow:
 	{Workflow}
 	'Workflow'
 	name=EString
@@ -34,7 +22,19 @@ Workflow returns Workflow:
 		('defaults' defaults=RunSetting)?
 	'}';
 
-Job returns Job:
+Event:
+	PushEvent
+	| PullRequestEvent
+	| ScheduleEvent
+	| WorkflowDispatchEvent
+	| RepositoryDispatchEvent
+	| CreateEvent
+	| DeleteEvent
+	| DeploymentEvent
+	| IssueEvent
+	| LabelEvent;
+
+Job:
 	'Job'
 	name=EString
 	'{'
@@ -49,10 +49,7 @@ Job returns Job:
 		('defaults' '{' defaults+=RunSetting ( "," defaults+=RunSetting)* '}' )?
 	'}';
 
-EString returns ecore::EString:
-	STRING | ID;
-
-Env returns Env:
+Env:
 	{Env}
 	'Env'
 	name=EString
@@ -60,7 +57,7 @@ Env returns Env:
 		('value' value=EString)?
 	'}';
 
-RunSetting returns RunSetting:
+RunSetting:
 	{RunSetting}
 	'RunSetting'
 	'{'
@@ -69,7 +66,7 @@ RunSetting returns RunSetting:
 		('with' '{' ^with+=Env ( "," ^with+=Env)* '}' )?
 	'}';
 
-Step returns Step:
+Step:
 	{Step}
 	'Step'
 	name=EString
@@ -85,7 +82,7 @@ Step returns Step:
 		('with' '{' ^with+=InputParameter ( "," ^with+=InputParameter)* '}' )?
 	'}';
 
-Environment returns Environment:
+Environment:
 	{Environment}
 	'Environment'
 	name=EString
@@ -93,7 +90,7 @@ Environment returns Environment:
 		('url' url=EString)?
 	'}';
 
-Run returns Run:
+Run:
 	{Run}
 	'Run'
 	name=EString
@@ -101,7 +98,7 @@ Run returns Run:
 		('commands' commands=EString)?
 	'}';
 
-InputParameter returns InputParameter:
+InputParameter:
 	{InputParameter}
 	'InputParameter'
 	name=EString
@@ -109,7 +106,7 @@ InputParameter returns InputParameter:
 		('value' value=EString)?
 	'}';
 
-PushEvent returns PushEvent:
+PushEvent:
 	{PushEvent}
 	'PushEvent'
 	'{'
@@ -121,7 +118,7 @@ PushEvent returns PushEvent:
 		('pathsIgnore' '{' pathsIgnore+=EString ( "," pathsIgnore+=EString)* '}' )?
 	'}';
 
-PullRequestEvent returns PullRequestEvent:
+PullRequestEvent:
 	{PullRequestEvent}
 	'PullRequestEvent'
 	'{'
@@ -133,7 +130,7 @@ PullRequestEvent returns PullRequestEvent:
 		('pathsIgnore' '{' pathsIgnore+=EString ( "," pathsIgnore+=EString)* '}' )?
 	'}';
 
-ScheduleEvent returns ScheduleEvent:
+ScheduleEvent:
 	{ScheduleEvent}
 	'ScheduleEvent'
 	'{'
@@ -144,50 +141,50 @@ ScheduleEvent returns ScheduleEvent:
 		('dayOfWeek' dayOfWeek=EString)?
 	'}';
 
-WorkflowDispatchEvent returns WorkflowDispatchEvent:
+WorkflowDispatchEvent:
 	{WorkflowDispatchEvent}
 	'WorkflowDispatchEvent'
 	'{'
 		('inputs' '{' inputs+=Input ( "," inputs+=Input)* '}' )?
 	'}';
 
-RepositoryDispatchEvent returns RepositoryDispatchEvent:
+RepositoryDispatchEvent:
 	{RepositoryDispatchEvent}
 	'RepositoryDispatchEvent'
 	'{'
 		('eventTypes' '{' eventTypes+=EString ( "," eventTypes+=EString)* '}' )?
 	'}';
 
-CreateEvent returns CreateEvent:
+CreateEvent:
 	{CreateEvent}
 	'CreateEvent'
 	;
 
-DeleteEvent returns DeleteEvent:
+DeleteEvent:
 	{DeleteEvent}
 	'DeleteEvent'
 	;
 
-DeploymentEvent returns DeploymentEvent:
+DeploymentEvent:
 	{DeploymentEvent}
 	'DeploymentEvent'
 	;
 
-IssueEvent returns IssueEvent:
+IssueEvent:
 	{IssueEvent}
 	'IssueEvent'
 	'{'
 		('activityTypes' '{' activityTypes+=IssueActivityType ( "," activityTypes+=IssueActivityType)* '}' )?
 	'}';
 
-LabelEvent returns LabelEvent:
+LabelEvent:
 	{LabelEvent}
 	'LabelEvent'
 	'{'
 		('activityTypes' '{' activityTypes+=LabelActivityType ( "," activityTypes+=LabelActivityType)* '}' )?
 	'}';
 
-Input returns Input:
+Input:
 	{Input}
 	(required?='required')?
 	'Input'
@@ -197,11 +194,32 @@ Input returns Input:
 		('default' default=EString)?
 	'}';
 
+EString returns ecore::EString:
+	STRING | ID;
+	
 EBoolean returns ecore::EBoolean:
 	'true' | 'false';
 
-enum IssueActivityType returns IssueActivityType:
-				opened = 'opened' | edited = 'edited' | deleted = 'deleted' | transferred = 'transferred' | pinned = 'pinned' | unpinned = 'unpinned' | closed = 'closed' | reopened = 'reopened' | assigned = 'assigned' | unassigned = 'unassigned' | labeled = 'labeled' | unlabeled = 'unlabeled' | locked = 'locked' | unlocked = 'unlocked' | milestoned = 'milestoned' | demilestoned = 'demilestoned';
+enum IssueActivityType:
+	opened = 'opened'
+	| edited = 'edited'
+	| deleted = 'deleted'
+	| transferred = 'transferred'
+	| pinned = 'pinned'
+	| unpinned = 'unpinned'
+	| closed = 'closed'
+	| reopened = 'reopened'
+	| assigned = 'assigned'
+	| unassigned = 'unassigned'
+	| labeled = 'labeled'
+	| unlabeled = 'unlabeled'
+	| locked = 'locked'
+	| unlocked = 'unlocked'
+	| milestoned = 'milestoned'
+	| demilestoned = 'demilestoned';
 
-enum LabelActivityType returns LabelActivityType:
-				created = 'created' | edited = 'edited' | deleted = 'deleted';
+enum LabelActivityType:
+	created = 'created'
+	| edited = 'edited'
+	| deleted = 'deleted';
+
