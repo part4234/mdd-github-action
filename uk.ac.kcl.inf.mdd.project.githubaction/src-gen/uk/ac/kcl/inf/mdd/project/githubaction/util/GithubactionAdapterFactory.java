@@ -102,6 +102,91 @@ public class GithubactionAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseScheduleEvent(ScheduleEvent object) {
+			return createScheduleEventAdapter();
+		}
+
+		@Override
+		public Adapter caseManualEvent(ManualEvent object) {
+			return createManualEventAdapter();
+		}
+
+		@Override
+		public Adapter caseWorkflowDispatchEvent(WorkflowDispatchEvent object) {
+			return createWorkflowDispatchEventAdapter();
+		}
+
+		@Override
+		public Adapter caseRepositoryDispatchEvent(RepositoryDispatchEvent object) {
+			return createRepositoryDispatchEventAdapter();
+		}
+
+		@Override
+		public Adapter caseInput(Input object) {
+			return createInputAdapter();
+		}
+
+		@Override
+		public Adapter caseWebhookEvent(WebhookEvent object) {
+			return createWebhookEventAdapter();
+		}
+
+		@Override
+		public Adapter caseCreateEvent(CreateEvent object) {
+			return createCreateEventAdapter();
+		}
+
+		@Override
+		public Adapter caseDeleteEvent(DeleteEvent object) {
+			return createDeleteEventAdapter();
+		}
+
+		@Override
+		public Adapter caseDeploymentEvent(DeploymentEvent object) {
+			return createDeploymentEventAdapter();
+		}
+
+		@Override
+		public Adapter caseIssueEvent(IssueEvent object) {
+			return createIssueEventAdapter();
+		}
+
+		@Override
+		public Adapter caseLabelEvent(LabelEvent object) {
+			return createLabelEventAdapter();
+		}
+
+		@Override
+		public Adapter caseEnv(Env object) {
+			return createEnvAdapter();
+		}
+
+		@Override
+		public Adapter caseRunSetting(RunSetting object) {
+			return createRunSettingAdapter();
+		}
+
+		@Override
+		public Adapter caseEnvironment(Environment object) {
+			return createEnvironmentAdapter();
+		}
+
+		@Override
+		public Adapter caseRun(Run object) {
+			return createRunAdapter();
+		}
+
+		@Override
+		public Adapter caseInputParameter(InputParameter object) {
+			return createInputParameterAdapter();
+		}
+
+		@Override
+		public Adapter caseRepository(Repository object) {
+			return createRepositoryAdapter();
+		}
+
+		@Override
 		public Adapter defaultCase(EObject object) {
 			return createEObjectAdapter();
 		}
@@ -215,6 +300,244 @@ public class GithubactionAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createJobAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.ScheduleEvent <em>Schedule Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.ScheduleEvent
+	 * @generated
+	 */
+	public Adapter createScheduleEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.ManualEvent <em>Manual Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.ManualEvent
+	 * @generated
+	 */
+	public Adapter createManualEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.WorkflowDispatchEvent <em>Workflow Dispatch Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.WorkflowDispatchEvent
+	 * @generated
+	 */
+	public Adapter createWorkflowDispatchEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.RepositoryDispatchEvent <em>Repository Dispatch Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.RepositoryDispatchEvent
+	 * @generated
+	 */
+	public Adapter createRepositoryDispatchEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.Input <em>Input</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Input
+	 * @generated
+	 */
+	public Adapter createInputAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.WebhookEvent <em>Webhook Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.WebhookEvent
+	 * @generated
+	 */
+	public Adapter createWebhookEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.CreateEvent <em>Create Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.CreateEvent
+	 * @generated
+	 */
+	public Adapter createCreateEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.DeleteEvent <em>Delete Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.DeleteEvent
+	 * @generated
+	 */
+	public Adapter createDeleteEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.DeploymentEvent <em>Deployment Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.DeploymentEvent
+	 * @generated
+	 */
+	public Adapter createDeploymentEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.IssueEvent <em>Issue Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.IssueEvent
+	 * @generated
+	 */
+	public Adapter createIssueEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.LabelEvent <em>Label Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.LabelEvent
+	 * @generated
+	 */
+	public Adapter createLabelEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.Env <em>Env</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Env
+	 * @generated
+	 */
+	public Adapter createEnvAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.RunSetting <em>Run Setting</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.RunSetting
+	 * @generated
+	 */
+	public Adapter createRunSettingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.Environment <em>Environment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Environment
+	 * @generated
+	 */
+	public Adapter createEnvironmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.Run <em>Run</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Run
+	 * @generated
+	 */
+	public Adapter createRunAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.InputParameter <em>Input Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.InputParameter
+	 * @generated
+	 */
+	public Adapter createInputParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.Repository <em>Repository</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Repository
+	 * @generated
+	 */
+	public Adapter createRepositoryAdapter() {
 		return null;
 	}
 

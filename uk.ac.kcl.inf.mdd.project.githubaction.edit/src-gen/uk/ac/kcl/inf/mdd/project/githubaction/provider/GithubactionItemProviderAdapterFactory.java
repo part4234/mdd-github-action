@@ -188,6 +188,351 @@ public class GithubactionItemProviderAdapterFactory extends GithubactionAdapterF
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.ScheduleEvent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ScheduleEventItemProvider scheduleEventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.ScheduleEvent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createScheduleEventAdapter() {
+		if (scheduleEventItemProvider == null) {
+			scheduleEventItemProvider = new ScheduleEventItemProvider(this);
+		}
+
+		return scheduleEventItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.WorkflowDispatchEvent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected WorkflowDispatchEventItemProvider workflowDispatchEventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.WorkflowDispatchEvent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createWorkflowDispatchEventAdapter() {
+		if (workflowDispatchEventItemProvider == null) {
+			workflowDispatchEventItemProvider = new WorkflowDispatchEventItemProvider(this);
+		}
+
+		return workflowDispatchEventItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.RepositoryDispatchEvent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RepositoryDispatchEventItemProvider repositoryDispatchEventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.RepositoryDispatchEvent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRepositoryDispatchEventAdapter() {
+		if (repositoryDispatchEventItemProvider == null) {
+			repositoryDispatchEventItemProvider = new RepositoryDispatchEventItemProvider(this);
+		}
+
+		return repositoryDispatchEventItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.Input} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InputItemProvider inputItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.Input}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createInputAdapter() {
+		if (inputItemProvider == null) {
+			inputItemProvider = new InputItemProvider(this);
+		}
+
+		return inputItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.CreateEvent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CreateEventItemProvider createEventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.CreateEvent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCreateEventAdapter() {
+		if (createEventItemProvider == null) {
+			createEventItemProvider = new CreateEventItemProvider(this);
+		}
+
+		return createEventItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.DeleteEvent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DeleteEventItemProvider deleteEventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.DeleteEvent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDeleteEventAdapter() {
+		if (deleteEventItemProvider == null) {
+			deleteEventItemProvider = new DeleteEventItemProvider(this);
+		}
+
+		return deleteEventItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.DeploymentEvent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DeploymentEventItemProvider deploymentEventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.DeploymentEvent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDeploymentEventAdapter() {
+		if (deploymentEventItemProvider == null) {
+			deploymentEventItemProvider = new DeploymentEventItemProvider(this);
+		}
+
+		return deploymentEventItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.IssueEvent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IssueEventItemProvider issueEventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.IssueEvent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIssueEventAdapter() {
+		if (issueEventItemProvider == null) {
+			issueEventItemProvider = new IssueEventItemProvider(this);
+		}
+
+		return issueEventItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.LabelEvent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LabelEventItemProvider labelEventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.LabelEvent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLabelEventAdapter() {
+		if (labelEventItemProvider == null) {
+			labelEventItemProvider = new LabelEventItemProvider(this);
+		}
+
+		return labelEventItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.Env} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EnvItemProvider envItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.Env}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEnvAdapter() {
+		if (envItemProvider == null) {
+			envItemProvider = new EnvItemProvider(this);
+		}
+
+		return envItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.RunSetting} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RunSettingItemProvider runSettingItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.RunSetting}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRunSettingAdapter() {
+		if (runSettingItemProvider == null) {
+			runSettingItemProvider = new RunSettingItemProvider(this);
+		}
+
+		return runSettingItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.Environment} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EnvironmentItemProvider environmentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.Environment}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEnvironmentAdapter() {
+		if (environmentItemProvider == null) {
+			environmentItemProvider = new EnvironmentItemProvider(this);
+		}
+
+		return environmentItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.Run} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RunItemProvider runItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.Run}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRunAdapter() {
+		if (runItemProvider == null) {
+			runItemProvider = new RunItemProvider(this);
+		}
+
+		return runItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.InputParameter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InputParameterItemProvider inputParameterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.InputParameter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createInputParameterAdapter() {
+		if (inputParameterItemProvider == null) {
+			inputParameterItemProvider = new InputParameterItemProvider(this);
+		}
+
+		return inputParameterItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.Repository} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RepositoryItemProvider repositoryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.Repository}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRepositoryAdapter() {
+		if (repositoryItemProvider == null) {
+			repositoryItemProvider = new RepositoryItemProvider(this);
+		}
+
+		return repositoryItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -302,6 +647,36 @@ public class GithubactionItemProviderAdapterFactory extends GithubactionAdapterF
 			stepItemProvider.dispose();
 		if (jobItemProvider != null)
 			jobItemProvider.dispose();
+		if (scheduleEventItemProvider != null)
+			scheduleEventItemProvider.dispose();
+		if (workflowDispatchEventItemProvider != null)
+			workflowDispatchEventItemProvider.dispose();
+		if (repositoryDispatchEventItemProvider != null)
+			repositoryDispatchEventItemProvider.dispose();
+		if (inputItemProvider != null)
+			inputItemProvider.dispose();
+		if (createEventItemProvider != null)
+			createEventItemProvider.dispose();
+		if (deleteEventItemProvider != null)
+			deleteEventItemProvider.dispose();
+		if (deploymentEventItemProvider != null)
+			deploymentEventItemProvider.dispose();
+		if (issueEventItemProvider != null)
+			issueEventItemProvider.dispose();
+		if (labelEventItemProvider != null)
+			labelEventItemProvider.dispose();
+		if (envItemProvider != null)
+			envItemProvider.dispose();
+		if (runSettingItemProvider != null)
+			runSettingItemProvider.dispose();
+		if (environmentItemProvider != null)
+			environmentItemProvider.dispose();
+		if (runItemProvider != null)
+			runItemProvider.dispose();
+		if (inputParameterItemProvider != null)
+			inputParameterItemProvider.dispose();
+		if (repositoryItemProvider != null)
+			repositoryItemProvider.dispose();
 	}
 
 }

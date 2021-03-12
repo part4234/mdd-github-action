@@ -9,6 +9,11 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Branch Event</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestbranchestags
+ * https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestpaths
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -25,7 +30,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface BranchEvent extends Event {
+public interface BranchEvent extends WebhookEvent {
 	/**
 	 * Returns the value of the '<em><b>Branches</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.

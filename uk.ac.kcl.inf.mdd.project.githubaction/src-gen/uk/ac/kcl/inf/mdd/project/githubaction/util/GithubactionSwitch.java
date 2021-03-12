@@ -70,6 +70,8 @@ public class GithubactionSwitch<T> extends Switch<T> {
 			BranchEvent branchEvent = (BranchEvent) theEObject;
 			T result = caseBranchEvent(branchEvent);
 			if (result == null)
+				result = caseWebhookEvent(branchEvent);
+			if (result == null)
 				result = caseEvent(branchEvent);
 			if (result == null)
 				result = defaultCase(theEObject);
@@ -81,6 +83,8 @@ public class GithubactionSwitch<T> extends Switch<T> {
 			if (result == null)
 				result = caseBranchEvent(pushEvent);
 			if (result == null)
+				result = caseWebhookEvent(pushEvent);
+			if (result == null)
 				result = caseEvent(pushEvent);
 			if (result == null)
 				result = defaultCase(theEObject);
@@ -91,6 +95,8 @@ public class GithubactionSwitch<T> extends Switch<T> {
 			T result = casePullRequestEvent(pullRequestEvent);
 			if (result == null)
 				result = caseBranchEvent(pullRequestEvent);
+			if (result == null)
+				result = caseWebhookEvent(pullRequestEvent);
 			if (result == null)
 				result = caseEvent(pullRequestEvent);
 			if (result == null)
@@ -121,6 +127,159 @@ public class GithubactionSwitch<T> extends Switch<T> {
 		case GithubactionPackage.JOB: {
 			Job job = (Job) theEObject;
 			T result = caseJob(job);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.SCHEDULE_EVENT: {
+			ScheduleEvent scheduleEvent = (ScheduleEvent) theEObject;
+			T result = caseScheduleEvent(scheduleEvent);
+			if (result == null)
+				result = caseEvent(scheduleEvent);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.MANUAL_EVENT: {
+			ManualEvent manualEvent = (ManualEvent) theEObject;
+			T result = caseManualEvent(manualEvent);
+			if (result == null)
+				result = caseEvent(manualEvent);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.WORKFLOW_DISPATCH_EVENT: {
+			WorkflowDispatchEvent workflowDispatchEvent = (WorkflowDispatchEvent) theEObject;
+			T result = caseWorkflowDispatchEvent(workflowDispatchEvent);
+			if (result == null)
+				result = caseManualEvent(workflowDispatchEvent);
+			if (result == null)
+				result = caseEvent(workflowDispatchEvent);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.REPOSITORY_DISPATCH_EVENT: {
+			RepositoryDispatchEvent repositoryDispatchEvent = (RepositoryDispatchEvent) theEObject;
+			T result = caseRepositoryDispatchEvent(repositoryDispatchEvent);
+			if (result == null)
+				result = caseManualEvent(repositoryDispatchEvent);
+			if (result == null)
+				result = caseEvent(repositoryDispatchEvent);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.INPUT: {
+			Input input = (Input) theEObject;
+			T result = caseInput(input);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.WEBHOOK_EVENT: {
+			WebhookEvent webhookEvent = (WebhookEvent) theEObject;
+			T result = caseWebhookEvent(webhookEvent);
+			if (result == null)
+				result = caseEvent(webhookEvent);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.CREATE_EVENT: {
+			CreateEvent createEvent = (CreateEvent) theEObject;
+			T result = caseCreateEvent(createEvent);
+			if (result == null)
+				result = caseWebhookEvent(createEvent);
+			if (result == null)
+				result = caseEvent(createEvent);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.DELETE_EVENT: {
+			DeleteEvent deleteEvent = (DeleteEvent) theEObject;
+			T result = caseDeleteEvent(deleteEvent);
+			if (result == null)
+				result = caseWebhookEvent(deleteEvent);
+			if (result == null)
+				result = caseEvent(deleteEvent);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.DEPLOYMENT_EVENT: {
+			DeploymentEvent deploymentEvent = (DeploymentEvent) theEObject;
+			T result = caseDeploymentEvent(deploymentEvent);
+			if (result == null)
+				result = caseWebhookEvent(deploymentEvent);
+			if (result == null)
+				result = caseEvent(deploymentEvent);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.ISSUE_EVENT: {
+			IssueEvent issueEvent = (IssueEvent) theEObject;
+			T result = caseIssueEvent(issueEvent);
+			if (result == null)
+				result = caseWebhookEvent(issueEvent);
+			if (result == null)
+				result = caseEvent(issueEvent);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.LABEL_EVENT: {
+			LabelEvent labelEvent = (LabelEvent) theEObject;
+			T result = caseLabelEvent(labelEvent);
+			if (result == null)
+				result = caseWebhookEvent(labelEvent);
+			if (result == null)
+				result = caseEvent(labelEvent);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.ENV: {
+			Env env = (Env) theEObject;
+			T result = caseEnv(env);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.RUN_SETTING: {
+			RunSetting runSetting = (RunSetting) theEObject;
+			T result = caseRunSetting(runSetting);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.ENVIRONMENT: {
+			Environment environment = (Environment) theEObject;
+			T result = caseEnvironment(environment);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.RUN: {
+			Run run = (Run) theEObject;
+			T result = caseRun(run);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.INPUT_PARAMETER: {
+			InputParameter inputParameter = (InputParameter) theEObject;
+			T result = caseInputParameter(inputParameter);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case GithubactionPackage.REPOSITORY: {
+			Repository repository = (Repository) theEObject;
+			T result = caseRepository(repository);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -232,6 +391,261 @@ public class GithubactionSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseJob(Job object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Schedule Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Schedule Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScheduleEvent(ScheduleEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Manual Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Manual Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseManualEvent(ManualEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Workflow Dispatch Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Workflow Dispatch Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWorkflowDispatchEvent(WorkflowDispatchEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Repository Dispatch Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Repository Dispatch Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRepositoryDispatchEvent(RepositoryDispatchEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Input</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Input</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInput(Input object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Webhook Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Webhook Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWebhookEvent(WebhookEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Create Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Create Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCreateEvent(CreateEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Delete Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Delete Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeleteEvent(DeleteEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Deployment Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Deployment Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeploymentEvent(DeploymentEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Issue Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Issue Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIssueEvent(IssueEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Label Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Label Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLabelEvent(LabelEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Env</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Env</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnv(Env object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Run Setting</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Run Setting</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRunSetting(RunSetting object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Environment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Environment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnvironment(Environment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Run</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Run</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRun(Run object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Input Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Input Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInputParameter(InputParameter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Repository</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Repository</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRepository(Repository object) {
 		return null;
 	}
 

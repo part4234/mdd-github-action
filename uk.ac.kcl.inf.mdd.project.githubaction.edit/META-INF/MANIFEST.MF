@@ -8,7 +8,7 @@ Bundle-ClassPath: .
 Bundle-Activator: uk.ac.kcl.inf.mdd.project.githubaction.provider.GithubactionEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: uk.ac.kcl.inf.mdd.project.githubaction.provider
 Require-Bundle: org.eclipse.core.runtime,
  uk.ac.kcl.inf.mdd.project.githubaction;visibility:=reexport,

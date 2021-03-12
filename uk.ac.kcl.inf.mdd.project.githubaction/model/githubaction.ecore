@@ -2,6 +2,9 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="githubaction" nsURI="http://www.example.org/githubaction" nsPrefix="githubaction">
   <eClassifiers xsi:type="ecore:EClass" name="BranchEvent" abstract="true" eSuperTypes="#//WebhookEvent">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestbranchestags&#xD;&#xA;https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestpaths"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="branches" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tags" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -16,30 +19,158 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PushEvent" eSuperTypes="#//BranchEvent"/>
   <eClassifiers xsi:type="ecore:EClass" name="PullRequestEvent" eSuperTypes="#//BranchEvent"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="https://docs.github.com/en/actions/reference/events-that-trigger-workflows"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Workflow">
     <eStructuralFeatures xsi:type="ecore:EReference" name="jobs" upperBound="-1" eType="#//Job"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
-        eType="#//Event" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="on" upperBound="-1" eType="#//Event"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#on"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#name"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="env" upperBound="-1" eType="#//Env"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#env"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaults" eType="#//RunSetting"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#defaultsrun"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="env" upperBound="-1" eType="#//Env"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uses" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="run" eType="#//Run" containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsenv"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsname"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uses" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runSetting" eType="#//RunSetting"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsid"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="if" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="run" eType="#//Run" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="with" upperBound="-1" eType="#//InputParameter"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="entrypoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswithentrypoint"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="args" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswithargs"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Job">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idname"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
-        eType="#//Step" containment="true"/>
+        eType="#//Step" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idsteps"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="env" upperBound="-1" eType="#//Env"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="runsOn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idenv"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="runsOn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="needs" upperBound="-1"
+        eType="#//Job">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idneeds"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="environment" eType="#//Environment">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idenvironment"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outputs" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idoutputs"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaults" upperBound="-1"
+        eType="#//RunSetting" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_iddefaultsrun"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="if" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_id"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduleEvent" eSuperTypes="#//Event">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="minute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="hour" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="day" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -62,40 +193,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WebhookEvent" abstract="true" eSuperTypes="#//Event"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CheckRunEvent" eSuperTypes="#//WebhookEvent">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
-        eType="#//CheckRunActivityType"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="CheckRunActivityType">
-    <eLiterals name="created"/>
-    <eLiterals name="rerequested" value="1"/>
-    <eLiterals name="completed" value="2"/>
-    <eLiterals name="requested_action" value="3"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CheckSuiteEvent" eSuperTypes="#//WebhookEvent">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
-        eType="#//CheckSuitActivityType"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="CheckSuitActivityType">
-    <eLiterals name="completed"/>
-    <eLiterals name="requested" value="1"/>
-    <eLiterals name="rerequested" value="2"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CreateEvent" eSuperTypes="#//WebhookEvent"/>
   <eClassifiers xsi:type="ecore:EClass" name="DeleteEvent" eSuperTypes="#//WebhookEvent"/>
   <eClassifiers xsi:type="ecore:EClass" name="DeploymentEvent" eSuperTypes="#//WebhookEvent"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DeploymentStatusEvent" eSuperTypes="#//WebhookEvent"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ForkEvent" eSuperTypes="#//WebhookEvent"/>
-  <eClassifiers xsi:type="ecore:EClass" name="GollumEvent" eSuperTypes="#//WebhookEvent"/>
-  <eClassifiers xsi:type="ecore:EClass" name="IssueCommentEvent" eSuperTypes="#//WebhookEvent">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
-        eType="#//IssueCommentActivityType"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="IssueCommentActivityType">
-    <eLiterals name="created"/>
-    <eLiterals name="edited" value="1"/>
-    <eLiterals name="deleted" value="2"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IssueEvent" eSuperTypes="#//WebhookEvent">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
         eType="#//IssueActivityType"/>
@@ -127,52 +227,30 @@
     <eLiterals name="edited" value="1"/>
     <eLiterals name="deleted" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MilestoneEvent" eSuperTypes="#//WebhookEvent">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ActivityTypes" upperBound="-1"
-        eType="#//MilestoneActivityType"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="MilestoneActivityType">
-    <eLiterals name="created"/>
-    <eLiterals name="closed" value="1"/>
-    <eLiterals name="opened" value="2"/>
-    <eLiterals name="edited" value="3"/>
-    <eLiterals name="deleted" value="4"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PageBuildEvent" eSuperTypes="#//WebhookEvent"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ProjectEvent" eSuperTypes="#//WebhookEvent">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
-        eType="#//ProjectActivityType"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ProjectActivityType">
-    <eLiterals name="created"/>
-    <eLiterals name="updated" value="1"/>
-    <eLiterals name="closed" value="2"/>
-    <eLiterals name="reopened" value="3"/>
-    <eLiterals name="edited" value="4"/>
-    <eLiterals name="deleted" value="5"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ProjectCardEvent">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityTypes" upperBound="-1"
-        eType="#//ProjectCardActivityType"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ProjectCardActivityType">
-    <eLiterals name="created"/>
-    <eLiterals name="moved" value="1"/>
-    <eLiterals name="coverted" value="2"/>
-    <eLiterals name="edited" value="3"/>
-    <eLiterals name="deleted" value="4"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Env">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NewEClass30"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Run">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commands" lowerBound="1"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RunSetting">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="workingDirectory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="shell" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="with" upperBound="-1" eType="#//Env"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Environment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Run">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commands" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Repository">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workflows" upperBound="-1"
+        eType="#//Workflow" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

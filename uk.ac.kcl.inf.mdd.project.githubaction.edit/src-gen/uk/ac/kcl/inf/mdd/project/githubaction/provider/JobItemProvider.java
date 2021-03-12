@@ -57,6 +57,12 @@ public class JobItemProvider extends ItemProviderAdapter implements IEditingDoma
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addRunsOnPropertyDescriptor(object);
+			addNeedsPropertyDescriptor(object);
+			addEnvironmentPropertyDescriptor(object);
+			addOutputsPropertyDescriptor(object);
+			addIfPropertyDescriptor(object);
+			addIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -77,6 +83,94 @@ public class JobItemProvider extends ItemProviderAdapter implements IEditingDoma
 	}
 
 	/**
+	 * This adds a property descriptor for the Runs On feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRunsOnPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Job_runsOn_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Job_runsOn_feature", "_UI_Job_type"),
+						GithubactionPackage.Literals.JOB__RUNS_ON, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Needs feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNeedsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Job_needs_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Job_needs_feature", "_UI_Job_type"),
+						GithubactionPackage.Literals.JOB__NEEDS, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Environment feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEnvironmentPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Job_environment_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Job_environment_feature", "_UI_Job_type"),
+						GithubactionPackage.Literals.JOB__ENVIRONMENT, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Outputs feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOutputsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Job_outputs_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Job_outputs_feature", "_UI_Job_type"),
+						GithubactionPackage.Literals.JOB__OUTPUTS, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the If feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIfPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Job_if_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Job_if_feature", "_UI_Job_type"),
+						GithubactionPackage.Literals.JOB__IF, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Job_id_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Job_id_feature", "_UI_Job_type"),
+						GithubactionPackage.Literals.JOB__ID, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -89,6 +183,8 @@ public class JobItemProvider extends ItemProviderAdapter implements IEditingDoma
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(GithubactionPackage.Literals.JOB__STEPS);
+			childrenFeatures.add(GithubactionPackage.Literals.JOB__ENV);
+			childrenFeatures.add(GithubactionPackage.Literals.JOB__DEFAULTS);
 		}
 		return childrenFeatures;
 	}
@@ -153,9 +249,15 @@ public class JobItemProvider extends ItemProviderAdapter implements IEditingDoma
 
 		switch (notification.getFeatureID(Job.class)) {
 		case GithubactionPackage.JOB__NAME:
+		case GithubactionPackage.JOB__RUNS_ON:
+		case GithubactionPackage.JOB__OUTPUTS:
+		case GithubactionPackage.JOB__IF:
+		case GithubactionPackage.JOB__ID:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case GithubactionPackage.JOB__STEPS:
+		case GithubactionPackage.JOB__ENV:
+		case GithubactionPackage.JOB__DEFAULTS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -175,6 +277,12 @@ public class JobItemProvider extends ItemProviderAdapter implements IEditingDoma
 
 		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.JOB__STEPS,
 				GithubactionFactory.eINSTANCE.createStep()));
+
+		newChildDescriptors.add(
+				createChildParameter(GithubactionPackage.Literals.JOB__ENV, GithubactionFactory.eINSTANCE.createEnv()));
+
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.JOB__DEFAULTS,
+				GithubactionFactory.eINSTANCE.createRunSetting()));
 	}
 
 	/**

@@ -22,7 +22,7 @@ import uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class BranchEventItemProvider extends EventItemProvider {
+public class BranchEventItemProvider extends WebhookEventItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

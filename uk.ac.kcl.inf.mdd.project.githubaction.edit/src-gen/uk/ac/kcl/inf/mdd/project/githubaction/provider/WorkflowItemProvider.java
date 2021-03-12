@@ -12,12 +12,14 @@ import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -54,8 +56,25 @@ public class WorkflowItemProvider extends ItemProviderAdapter implements IEditin
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Workflow_name_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Workflow_name_feature",
+								"_UI_Workflow_type"),
+						GithubactionPackage.Literals.WORKFLOW__NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -71,7 +90,9 @@ public class WorkflowItemProvider extends ItemProviderAdapter implements IEditin
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(GithubactionPackage.Literals.WORKFLOW__JOBS);
-			childrenFeatures.add(GithubactionPackage.Literals.WORKFLOW__EVENTS);
+			childrenFeatures.add(GithubactionPackage.Literals.WORKFLOW__ON);
+			childrenFeatures.add(GithubactionPackage.Literals.WORKFLOW__ENV);
+			childrenFeatures.add(GithubactionPackage.Literals.WORKFLOW__DEFAULTS);
 		}
 		return childrenFeatures;
 	}
@@ -118,7 +139,9 @@ public class WorkflowItemProvider extends ItemProviderAdapter implements IEditin
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Workflow_type");
+		String label = ((Workflow) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_Workflow_type")
+				: getString("_UI_Workflow_type") + " " + label;
 	}
 
 	/**
@@ -133,8 +156,13 @@ public class WorkflowItemProvider extends ItemProviderAdapter implements IEditin
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Workflow.class)) {
+		case GithubactionPackage.WORKFLOW__NAME:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			return;
 		case GithubactionPackage.WORKFLOW__JOBS:
-		case GithubactionPackage.WORKFLOW__EVENTS:
+		case GithubactionPackage.WORKFLOW__ON:
+		case GithubactionPackage.WORKFLOW__ENV:
+		case GithubactionPackage.WORKFLOW__DEFAULTS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -155,11 +183,41 @@ public class WorkflowItemProvider extends ItemProviderAdapter implements IEditin
 		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__JOBS,
 				GithubactionFactory.eINSTANCE.createJob()));
 
-		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__EVENTS,
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__ON,
 				GithubactionFactory.eINSTANCE.createPushEvent()));
 
-		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__EVENTS,
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__ON,
 				GithubactionFactory.eINSTANCE.createPullRequestEvent()));
+
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__ON,
+				GithubactionFactory.eINSTANCE.createScheduleEvent()));
+
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__ON,
+				GithubactionFactory.eINSTANCE.createWorkflowDispatchEvent()));
+
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__ON,
+				GithubactionFactory.eINSTANCE.createRepositoryDispatchEvent()));
+
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__ON,
+				GithubactionFactory.eINSTANCE.createCreateEvent()));
+
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__ON,
+				GithubactionFactory.eINSTANCE.createDeleteEvent()));
+
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__ON,
+				GithubactionFactory.eINSTANCE.createDeploymentEvent()));
+
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__ON,
+				GithubactionFactory.eINSTANCE.createIssueEvent()));
+
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__ON,
+				GithubactionFactory.eINSTANCE.createLabelEvent()));
+
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__ENV,
+				GithubactionFactory.eINSTANCE.createEnv()));
+
+		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.WORKFLOW__DEFAULTS,
+				GithubactionFactory.eINSTANCE.createRunSetting()));
 	}
 
 	/**

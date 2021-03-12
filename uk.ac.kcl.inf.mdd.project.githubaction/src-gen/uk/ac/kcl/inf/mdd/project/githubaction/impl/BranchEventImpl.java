@@ -31,7 +31,7 @@ import uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage;
  *
  * @generated
  */
-public abstract class BranchEventImpl extends EventImpl implements BranchEvent {
+public abstract class BranchEventImpl extends WebhookEventImpl implements BranchEvent {
 	/**
 	 * The cached value of the '{@link #getBranches() <em>Branches</em>}' attribute list.
 	 * <!-- begin-user-doc -->
