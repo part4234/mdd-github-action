@@ -56,7 +56,7 @@ Step:
 	'{'
 		('id' id=EString)?
 		('if' if=EString)?
-		('uses' '{' uses+=EString ( "," uses+=EString)* '}' )?
+		('uses' uses=EString)?
 		('run' run=Run)?
 		('runSetting' runSetting=RunSetting)?
 		('with' '{' ^with+=InputParameter ( "," ^with+=InputParameter)* '}' )?
