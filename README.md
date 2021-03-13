@@ -1,4 +1,5 @@
 # Modeling language for Github Action workflow syntax
+* Project `TestTextualSyntax` is for testing xtext grammar in runtime Eclipse
 
 ## Eclipse Setup
 ```
