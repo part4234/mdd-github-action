@@ -59,10 +59,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Step/runSetting"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/if"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Step/run"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Step/with"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/entrypoint"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/args"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/run"/>
     </genClasses>
     <genClasses ecoreClass="githubaction.ecore#//Job">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Job/name"/>
@@ -118,10 +118,6 @@
     <genClasses ecoreClass="githubaction.ecore#//Environment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Environment/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Environment/url"/>
-    </genClasses>
-    <genClasses ecoreClass="githubaction.ecore#//Run">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Run/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Run/commands"/>
     </genClasses>
     <genClasses ecoreClass="githubaction.ecore#//InputParameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//InputParameter/name"/>

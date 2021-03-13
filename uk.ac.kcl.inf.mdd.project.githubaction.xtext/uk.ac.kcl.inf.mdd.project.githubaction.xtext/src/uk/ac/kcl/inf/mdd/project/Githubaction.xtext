@@ -57,7 +57,7 @@ Step:
 		('id' id=EString)?
 		('if' if=EString)?
 		('uses' uses=EString)?
-		('run' run=Run)?
+		('run' '{' run+=EString ( "," ^run+=EString)* '}')?
 		('runSetting' runSetting=RunSetting)?
 		('with' '{' ^with+=InputParameter ( "," ^with+=InputParameter)* '}' )?
 		('entrypoint' entrypoint=EString)?
@@ -88,14 +88,6 @@ RunSetting:
 		('workingDirectory' workingDirectory=EString)?
 		('shell' shell=EString)?
 		('with' '{' ^with+=Env ( "," ^with+=Env)* '}' )?
-	'}';
-
-Run:
-	{Run}
-	'Run'
-	name=EString
-	'{'
-		('commands' commands=EString)?
 	'}';
 
 InputParameter:
