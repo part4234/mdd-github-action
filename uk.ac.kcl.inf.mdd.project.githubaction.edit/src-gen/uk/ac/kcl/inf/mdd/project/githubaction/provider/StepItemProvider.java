@@ -56,14 +56,30 @@ public class StepItemProvider extends ItemProviderAdapter implements IEditingDom
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
+			addStepNamePropertyDescriptor(object);
 			addUsesPropertyDescriptor(object);
-			addIdPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 			addIfPropertyDescriptor(object);
 			addEntrypointPropertyDescriptor(object);
 			addArgsPropertyDescriptor(object);
+			addRunPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Step Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStepNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Step_stepName_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Step_stepName_feature", "_UI_Step_type"),
+						GithubactionPackage.Literals.STEP__STEP_NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -93,21 +109,6 @@ public class StepItemProvider extends ItemProviderAdapter implements IEditingDom
 						getResourceLocator(), getString("_UI_Step_uses_feature"),
 						getString("_UI_PropertyDescriptor_description", "_UI_Step_uses_feature", "_UI_Step_type"),
 						GithubactionPackage.Literals.STEP__USES, true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Id feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Step_id_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Step_id_feature", "_UI_Step_type"),
-						GithubactionPackage.Literals.STEP__ID, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -157,6 +158,21 @@ public class StepItemProvider extends ItemProviderAdapter implements IEditingDom
 	}
 
 	/**
+	 * This adds a property descriptor for the Run feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRunPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Step_run_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Step_run_feature", "_UI_Step_type"),
+						GithubactionPackage.Literals.STEP__RUN, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -170,7 +186,6 @@ public class StepItemProvider extends ItemProviderAdapter implements IEditingDom
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(GithubactionPackage.Literals.STEP__ENV);
 			childrenFeatures.add(GithubactionPackage.Literals.STEP__RUN_SETTING);
-			childrenFeatures.add(GithubactionPackage.Literals.STEP__RUN);
 			childrenFeatures.add(GithubactionPackage.Literals.STEP__WITH);
 		}
 		return childrenFeatures;
@@ -235,17 +250,17 @@ public class StepItemProvider extends ItemProviderAdapter implements IEditingDom
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Step.class)) {
-		case GithubactionPackage.STEP__NAME:
+		case GithubactionPackage.STEP__STEP_NAME:
 		case GithubactionPackage.STEP__USES:
-		case GithubactionPackage.STEP__ID:
+		case GithubactionPackage.STEP__NAME:
 		case GithubactionPackage.STEP__IF:
 		case GithubactionPackage.STEP__ENTRYPOINT:
 		case GithubactionPackage.STEP__ARGS:
+		case GithubactionPackage.STEP__RUN:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case GithubactionPackage.STEP__ENV:
 		case GithubactionPackage.STEP__RUN_SETTING:
-		case GithubactionPackage.STEP__RUN:
 		case GithubactionPackage.STEP__WITH:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
@@ -269,9 +284,6 @@ public class StepItemProvider extends ItemProviderAdapter implements IEditingDom
 
 		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.STEP__RUN_SETTING,
 				GithubactionFactory.eINSTANCE.createRunSetting()));
-
-		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.STEP__RUN,
-				GithubactionFactory.eINSTANCE.createRun()));
 
 		newChildDescriptors.add(createChildParameter(GithubactionPackage.Literals.STEP__WITH,
 				GithubactionFactory.eINSTANCE.createInputParameter()));

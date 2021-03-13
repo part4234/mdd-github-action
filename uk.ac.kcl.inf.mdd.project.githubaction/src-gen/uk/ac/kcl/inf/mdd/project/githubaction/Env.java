@@ -29,7 +29,7 @@ public interface Env extends EObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getEnv_Name()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getName();
@@ -51,7 +51,7 @@ public interface Env extends EObject {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getEnv_Value()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getValue();

@@ -263,13 +263,6 @@ public class GithubactionSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case GithubactionPackage.RUN: {
-			Run run = (Run) theEObject;
-			T result = caseRun(run);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case GithubactionPackage.INPUT_PARAMETER: {
 			InputParameter inputParameter = (InputParameter) theEObject;
 			T result = caseInputParameter(inputParameter);
@@ -601,21 +594,6 @@ public class GithubactionSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEnvironment(Environment object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Run</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Run</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRun(Run object) {
 		return null;
 	}
 

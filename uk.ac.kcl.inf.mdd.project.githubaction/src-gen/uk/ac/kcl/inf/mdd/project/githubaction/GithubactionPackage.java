@@ -452,16 +452,16 @@ public interface GithubactionPackage extends EPackage {
 	int STEP__ENV = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Step Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STEP__NAME = 1;
+	int STEP__STEP_NAME = 1;
 
 	/**
-	 * The feature id for the '<em><b>Uses</b></em>' attribute list.
+	 * The feature id for the '<em><b>Uses</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -479,13 +479,13 @@ public interface GithubactionPackage extends EPackage {
 	int STEP__RUN_SETTING = 3;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STEP__ID = 4;
+	int STEP__NAME = 4;
 
 	/**
 	 * The feature id for the '<em><b>If</b></em>' attribute.
@@ -497,22 +497,13 @@ public interface GithubactionPackage extends EPackage {
 	int STEP__IF = 5;
 
 	/**
-	 * The feature id for the '<em><b>Run</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STEP__RUN = 6;
-
-	/**
 	 * The feature id for the '<em><b>With</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STEP__WITH = 7;
+	int STEP__WITH = 6;
 
 	/**
 	 * The feature id for the '<em><b>Entrypoint</b></em>' attribute.
@@ -521,7 +512,7 @@ public interface GithubactionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STEP__ENTRYPOINT = 8;
+	int STEP__ENTRYPOINT = 7;
 
 	/**
 	 * The feature id for the '<em><b>Args</b></em>' attribute.
@@ -530,7 +521,16 @@ public interface GithubactionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STEP__ARGS = 9;
+	int STEP__ARGS = 8;
+
+	/**
+	 * The feature id for the '<em><b>Run</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP__RUN = 9;
 
 	/**
 	 * The number of structural features of the '<em>Step</em>' class.
@@ -561,13 +561,13 @@ public interface GithubactionPackage extends EPackage {
 	int JOB = 6;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Job Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JOB__NAME = 0;
+	int JOB__JOB_NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Steps</b></em>' containment reference list.
@@ -642,13 +642,13 @@ public interface GithubactionPackage extends EPackage {
 	int JOB__IF = 8;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JOB__ID = 9;
+	int JOB__NAME = 9;
 
 	/**
 	 * The number of structural features of the '<em>Job</em>' class.
@@ -1213,52 +1213,6 @@ public interface GithubactionPackage extends EPackage {
 	int ENVIRONMENT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.RunImpl <em>Run</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see uk.ac.kcl.inf.mdd.project.githubaction.impl.RunImpl
-	 * @see uk.ac.kcl.inf.mdd.project.githubaction.impl.GithubactionPackageImpl#getRun()
-	 * @generated
-	 */
-	int RUN = 21;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUN__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Commands</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUN__COMMANDS = 1;
-
-	/**
-	 * The number of structural features of the '<em>Run</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUN_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Run</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUN_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.InputParameterImpl <em>Input Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1266,7 +1220,7 @@ public interface GithubactionPackage extends EPackage {
 	 * @see uk.ac.kcl.inf.mdd.project.githubaction.impl.GithubactionPackageImpl#getInputParameter()
 	 * @generated
 	 */
-	int INPUT_PARAMETER = 22;
+	int INPUT_PARAMETER = 21;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1312,7 +1266,7 @@ public interface GithubactionPackage extends EPackage {
 	 * @see uk.ac.kcl.inf.mdd.project.githubaction.impl.GithubactionPackageImpl#getRepository()
 	 * @generated
 	 */
-	int REPOSITORY = 23;
+	int REPOSITORY = 22;
 
 	/**
 	 * The feature id for the '<em><b>Workflows</b></em>' containment reference list.
@@ -1349,7 +1303,7 @@ public interface GithubactionPackage extends EPackage {
 	 * @see uk.ac.kcl.inf.mdd.project.githubaction.impl.GithubactionPackageImpl#getIssueActivityType()
 	 * @generated
 	 */
-	int ISSUE_ACTIVITY_TYPE = 24;
+	int ISSUE_ACTIVITY_TYPE = 23;
 
 	/**
 	 * The meta object id for the '{@link uk.ac.kcl.inf.mdd.project.githubaction.LabelActivityType <em>Label Activity Type</em>}' enum.
@@ -1359,7 +1313,7 @@ public interface GithubactionPackage extends EPackage {
 	 * @see uk.ac.kcl.inf.mdd.project.githubaction.impl.GithubactionPackageImpl#getLabelActivityType()
 	 * @generated
 	 */
-	int LABEL_ACTIVITY_TYPE = 25;
+	int LABEL_ACTIVITY_TYPE = 24;
 
 	/**
 	 * Returns the meta object for class '{@link uk.ac.kcl.inf.mdd.project.githubaction.BranchEvent <em>Branch Event</em>}'.
@@ -1554,6 +1508,17 @@ public interface GithubactionPackage extends EPackage {
 	EReference getStep_Env();
 
 	/**
+	 * Returns the meta object for the attribute '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getStepName <em>Step Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Step Name</em>'.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Step#getStepName()
+	 * @see #getStep()
+	 * @generated
+	 */
+	EAttribute getStep_StepName();
+
+	/**
 	 * Returns the meta object for the attribute '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1565,10 +1530,10 @@ public interface GithubactionPackage extends EPackage {
 	EAttribute getStep_Name();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getUses <em>Uses</em>}'.
+	 * Returns the meta object for the attribute '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getUses <em>Uses</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Uses</em>'.
+	 * @return the meta object for the attribute '<em>Uses</em>'.
 	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Step#getUses()
 	 * @see #getStep()
 	 * @generated
@@ -1587,17 +1552,6 @@ public interface GithubactionPackage extends EPackage {
 	EReference getStep_RunSetting();
 
 	/**
-	 * Returns the meta object for the attribute '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getId <em>Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Step#getId()
-	 * @see #getStep()
-	 * @generated
-	 */
-	EAttribute getStep_Id();
-
-	/**
 	 * Returns the meta object for the attribute '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getIf <em>If</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1607,17 +1561,6 @@ public interface GithubactionPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getStep_If();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getRun <em>Run</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Run</em>'.
-	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Step#getRun()
-	 * @see #getStep()
-	 * @generated
-	 */
-	EReference getStep_Run();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getWith <em>With</em>}'.
@@ -1653,6 +1596,17 @@ public interface GithubactionPackage extends EPackage {
 	EAttribute getStep_Args();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getRun <em>Run</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Run</em>'.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Step#getRun()
+	 * @see #getStep()
+	 * @generated
+	 */
+	EAttribute getStep_Run();
+
+	/**
 	 * Returns the meta object for class '{@link uk.ac.kcl.inf.mdd.project.githubaction.Job <em>Job</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1661,6 +1615,17 @@ public interface GithubactionPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getJob();
+
+	/**
+	 * Returns the meta object for the attribute '{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getJobName <em>Job Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Job Name</em>'.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Job#getJobName()
+	 * @see #getJob()
+	 * @generated
+	 */
+	EAttribute getJob_JobName();
 
 	/**
 	 * Returns the meta object for the attribute '{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getName <em>Name</em>}'.
@@ -1760,17 +1725,6 @@ public interface GithubactionPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getJob_If();
-
-	/**
-	 * Returns the meta object for the attribute '{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getId <em>Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Job#getId()
-	 * @see #getJob()
-	 * @generated
-	 */
-	EAttribute getJob_Id();
 
 	/**
 	 * Returns the meta object for class '{@link uk.ac.kcl.inf.mdd.project.githubaction.ScheduleEvent <em>Schedule Event</em>}'.
@@ -2133,38 +2087,6 @@ public interface GithubactionPackage extends EPackage {
 	EAttribute getEnvironment_Url();
 
 	/**
-	 * Returns the meta object for class '{@link uk.ac.kcl.inf.mdd.project.githubaction.Run <em>Run</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Run</em>'.
-	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Run
-	 * @generated
-	 */
-	EClass getRun();
-
-	/**
-	 * Returns the meta object for the attribute '{@link uk.ac.kcl.inf.mdd.project.githubaction.Run#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Run#getName()
-	 * @see #getRun()
-	 * @generated
-	 */
-	EAttribute getRun_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link uk.ac.kcl.inf.mdd.project.githubaction.Run#getCommands <em>Commands</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Commands</em>'.
-	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Run#getCommands()
-	 * @see #getRun()
-	 * @generated
-	 */
-	EAttribute getRun_Commands();
-
-	/**
 	 * Returns the meta object for class '{@link uk.ac.kcl.inf.mdd.project.githubaction.InputParameter <em>Input Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2417,6 +2339,14 @@ public interface GithubactionPackage extends EPackage {
 		EReference STEP__ENV = eINSTANCE.getStep_Env();
 
 		/**
+		 * The meta object literal for the '<em><b>Step Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STEP__STEP_NAME = eINSTANCE.getStep_StepName();
+
+		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2425,7 +2355,7 @@ public interface GithubactionPackage extends EPackage {
 		EAttribute STEP__NAME = eINSTANCE.getStep_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Uses</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Uses</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2441,28 +2371,12 @@ public interface GithubactionPackage extends EPackage {
 		EReference STEP__RUN_SETTING = eINSTANCE.getStep_RunSetting();
 
 		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STEP__ID = eINSTANCE.getStep_Id();
-
-		/**
 		 * The meta object literal for the '<em><b>If</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute STEP__IF = eINSTANCE.getStep_If();
-
-		/**
-		 * The meta object literal for the '<em><b>Run</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STEP__RUN = eINSTANCE.getStep_Run();
 
 		/**
 		 * The meta object literal for the '<em><b>With</b></em>' containment reference list feature.
@@ -2489,6 +2403,14 @@ public interface GithubactionPackage extends EPackage {
 		EAttribute STEP__ARGS = eINSTANCE.getStep_Args();
 
 		/**
+		 * The meta object literal for the '<em><b>Run</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STEP__RUN = eINSTANCE.getStep_Run();
+
+		/**
 		 * The meta object literal for the '{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.JobImpl <em>Job</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2497,6 +2419,14 @@ public interface GithubactionPackage extends EPackage {
 		 * @generated
 		 */
 		EClass JOB = eINSTANCE.getJob();
+
+		/**
+		 * The meta object literal for the '<em><b>Job Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JOB__JOB_NAME = eINSTANCE.getJob_JobName();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -2569,14 +2499,6 @@ public interface GithubactionPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute JOB__IF = eINSTANCE.getJob_If();
-
-		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute JOB__ID = eINSTANCE.getJob_Id();
 
 		/**
 		 * The meta object literal for the '{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.ScheduleEventImpl <em>Schedule Event</em>}' class.
@@ -2877,32 +2799,6 @@ public interface GithubactionPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ENVIRONMENT__URL = eINSTANCE.getEnvironment_Url();
-
-		/**
-		 * The meta object literal for the '{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.RunImpl <em>Run</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see uk.ac.kcl.inf.mdd.project.githubaction.impl.RunImpl
-		 * @see uk.ac.kcl.inf.mdd.project.githubaction.impl.GithubactionPackageImpl#getRun()
-		 * @generated
-		 */
-		EClass RUN = eINSTANCE.getRun();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RUN__NAME = eINSTANCE.getRun_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Commands</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RUN__COMMANDS = eINSTANCE.getRun_Commands();
 
 		/**
 		 * The meta object literal for the '{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.InputParameterImpl <em>Input Parameter</em>}' class.

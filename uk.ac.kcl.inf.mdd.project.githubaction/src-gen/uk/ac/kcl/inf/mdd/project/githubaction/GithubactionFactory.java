@@ -175,15 +175,6 @@ public interface GithubactionFactory extends EFactory {
 	Environment createEnvironment();
 
 	/**
-	 * Returns a new object of class '<em>Run</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Run</em>'.
-	 * @generated
-	 */
-	Run createRun();
-
-	/**
 	 * Returns a new object of class '<em>Input Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

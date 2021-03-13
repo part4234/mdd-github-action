@@ -91,8 +91,6 @@ public class GithubactionFactoryImpl extends EFactoryImpl implements Githubactio
 			return createRunSetting();
 		case GithubactionPackage.ENVIRONMENT:
 			return createEnvironment();
-		case GithubactionPackage.RUN:
-			return createRun();
 		case GithubactionPackage.INPUT_PARAMETER:
 			return createInputParameter();
 		case GithubactionPackage.REPOSITORY:
@@ -321,17 +319,6 @@ public class GithubactionFactoryImpl extends EFactoryImpl implements Githubactio
 	public Environment createEnvironment() {
 		EnvironmentImpl environment = new EnvironmentImpl();
 		return environment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Run createRun() {
-		RunImpl run = new RunImpl();
-		return run;
 	}
 
 	/**

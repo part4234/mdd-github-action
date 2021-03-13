@@ -35,7 +35,7 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Step;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.JobImpl#getName <em>Name</em>}</li>
+ *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.JobImpl#getJobName <em>Job Name</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.JobImpl#getSteps <em>Steps</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.JobImpl#getEnv <em>Env</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.JobImpl#getRunsOn <em>Runs On</em>}</li>
@@ -44,31 +44,31 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Step;
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.JobImpl#getOutputs <em>Outputs</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.JobImpl#getDefaults <em>Defaults</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.JobImpl#getIf <em>If</em>}</li>
- *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.JobImpl#getId <em>Id</em>}</li>
+ *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.JobImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getJobName() <em>Job Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getJobName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected static final String JOB_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getJobName() <em>Job Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getJobName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+	protected String jobName = JOB_NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
@@ -171,24 +171,24 @@ public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 	protected String if_ = IF_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ID_EDEFAULT = null;
+	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String id = ID_EDEFAULT;
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,6 +207,30 @@ public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 	@Override
 	protected EClass eStaticClass() {
 		return GithubactionPackage.Literals.JOB;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getJobName() {
+		return jobName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setJobName(String newJobName) {
+		String oldJobName = jobName;
+		jobName = newJobName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GithubactionPackage.JOB__JOB_NAME, oldJobName,
+					jobName));
 	}
 
 	/**
@@ -392,29 +416,6 @@ public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 	 * @generated
 	 */
 	@Override
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setId(String newId) {
-		String oldId = id;
-		id = newId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GithubactionPackage.JOB__ID, oldId, id));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case GithubactionPackage.JOB__STEPS:
@@ -435,8 +436,8 @@ public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case GithubactionPackage.JOB__NAME:
-			return getName();
+		case GithubactionPackage.JOB__JOB_NAME:
+			return getJobName();
 		case GithubactionPackage.JOB__STEPS:
 			return getSteps();
 		case GithubactionPackage.JOB__ENV:
@@ -455,8 +456,8 @@ public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 			return getDefaults();
 		case GithubactionPackage.JOB__IF:
 			return getIf();
-		case GithubactionPackage.JOB__ID:
-			return getId();
+		case GithubactionPackage.JOB__NAME:
+			return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -470,8 +471,8 @@ public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case GithubactionPackage.JOB__NAME:
-			setName((String) newValue);
+		case GithubactionPackage.JOB__JOB_NAME:
+			setJobName((String) newValue);
 			return;
 		case GithubactionPackage.JOB__STEPS:
 			getSteps().clear();
@@ -502,8 +503,8 @@ public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 		case GithubactionPackage.JOB__IF:
 			setIf((String) newValue);
 			return;
-		case GithubactionPackage.JOB__ID:
-			setId((String) newValue);
+		case GithubactionPackage.JOB__NAME:
+			setName((String) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -517,8 +518,8 @@ public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case GithubactionPackage.JOB__NAME:
-			setName(NAME_EDEFAULT);
+		case GithubactionPackage.JOB__JOB_NAME:
+			setJobName(JOB_NAME_EDEFAULT);
 			return;
 		case GithubactionPackage.JOB__STEPS:
 			getSteps().clear();
@@ -544,8 +545,8 @@ public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 		case GithubactionPackage.JOB__IF:
 			setIf(IF_EDEFAULT);
 			return;
-		case GithubactionPackage.JOB__ID:
-			setId(ID_EDEFAULT);
+		case GithubactionPackage.JOB__NAME:
+			setName(NAME_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -559,8 +560,8 @@ public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case GithubactionPackage.JOB__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+		case GithubactionPackage.JOB__JOB_NAME:
+			return JOB_NAME_EDEFAULT == null ? jobName != null : !JOB_NAME_EDEFAULT.equals(jobName);
 		case GithubactionPackage.JOB__STEPS:
 			return steps != null && !steps.isEmpty();
 		case GithubactionPackage.JOB__ENV:
@@ -577,8 +578,8 @@ public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 			return defaults != null && !defaults.isEmpty();
 		case GithubactionPackage.JOB__IF:
 			return IF_EDEFAULT == null ? if_ != null : !IF_EDEFAULT.equals(if_);
-		case GithubactionPackage.JOB__ID:
-			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+		case GithubactionPackage.JOB__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -594,16 +595,16 @@ public class JobImpl extends MinimalEObjectImpl.Container implements Job {
 			return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
+		result.append(" (jobName: ");
+		result.append(jobName);
 		result.append(", runsOn: ");
 		result.append(runsOn);
 		result.append(", outputs: ");
 		result.append(outputs);
 		result.append(", if: ");
 		result.append(if_);
-		result.append(", id: ");
-		result.append(id);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

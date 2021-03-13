@@ -56,15 +56,30 @@ public class JobItemProvider extends ItemProviderAdapter implements IEditingDoma
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
+			addJobNamePropertyDescriptor(object);
 			addRunsOnPropertyDescriptor(object);
 			addNeedsPropertyDescriptor(object);
 			addEnvironmentPropertyDescriptor(object);
 			addOutputsPropertyDescriptor(object);
 			addIfPropertyDescriptor(object);
-			addIdPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Job Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addJobNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Job_jobName_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Job_jobName_feature", "_UI_Job_type"),
+						GithubactionPackage.Literals.JOB__JOB_NAME, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -156,21 +171,6 @@ public class JobItemProvider extends ItemProviderAdapter implements IEditingDoma
 	}
 
 	/**
-	 * This adds a property descriptor for the Id feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Job_id_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Job_id_feature", "_UI_Job_type"),
-						GithubactionPackage.Literals.JOB__ID, true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -248,11 +248,11 @@ public class JobItemProvider extends ItemProviderAdapter implements IEditingDoma
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Job.class)) {
-		case GithubactionPackage.JOB__NAME:
+		case GithubactionPackage.JOB__JOB_NAME:
 		case GithubactionPackage.JOB__RUNS_ON:
 		case GithubactionPackage.JOB__OUTPUTS:
 		case GithubactionPackage.JOB__IF:
-		case GithubactionPackage.JOB__ID:
+		case GithubactionPackage.JOB__NAME:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case GithubactionPackage.JOB__STEPS:

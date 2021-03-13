@@ -9,5 +9,17 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: uk.ac.kcl.inf.mdd.project.githubaction,
  org.eclipse.xtext,
  org.eclipse.xtext.xbase,
- org.eclipse.equinox.common;bundle-version="3.5.0"
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: uk.ac.kcl.inf.mdd.project.validation,
+ uk.ac.kcl.inf.mdd.project.scoping,
+ uk.ac.kcl.inf.mdd.project.serializer,
+ uk.ac.kcl.inf.mdd.project.parser.antlr,
+ uk.ac.kcl.inf.mdd.project,
+ uk.ac.kcl.inf.mdd.project.services,
+ uk.ac.kcl.inf.mdd.project.generator,
+ uk.ac.kcl.inf.mdd.project.parser.antlr.internal
+Import-Package: org.apache.log4j

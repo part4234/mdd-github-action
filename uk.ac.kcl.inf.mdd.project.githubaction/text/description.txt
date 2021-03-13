@@ -30,18 +30,18 @@ Package githubaction <http://www.example.org/githubaction>
 
   Class Step
     Reference env : Env<<0..*>>
-    Attribute name : EString
-    Attribute uses : EString<<0..*>>
+    Attribute stepName : EString
+    Attribute uses : EString
     Reference runSetting : RunSetting
-    Attribute id : EString
+    Attribute name : ID
     Attribute if : EString
-    Reference run : Run
     Reference with : InputParameter<<0..*>>
     Attribute entrypoint : EString
     Attribute args : EString
+    Attribute run : EString<<0..*>>
 
   Class Job
-    Attribute name : EString
+    Attribute jobName : EString
     Reference steps : Step<<0..*>>
     Reference env : Env<<0..*>>
     Attribute runsOn : EString
@@ -50,7 +50,7 @@ Package githubaction <http://www.example.org/githubaction>
     Attribute outputs : EString<<0..*>>
     Reference defaults : RunSetting<<0..*>>
     Attribute if : EString
-    Attribute id : EString<<1..1>>
+    Attribute name : ID<<1..1>>
 
   Class ScheduleEvent -> Event
     Attribute minute : EString
@@ -88,8 +88,8 @@ Package githubaction <http://www.example.org/githubaction>
     Attribute activityTypes : LabelActivityType<<0..*>>
 
   Class Env
-    Attribute name : EString
-    Attribute value : EString
+    Attribute name : EString<<1..1>>
+    Attribute value : EString<<1..1>>
 
   Class RunSetting
     Attribute workingDirectory : EString
@@ -97,16 +97,12 @@ Package githubaction <http://www.example.org/githubaction>
     Reference with : Env<<0..*>>
 
   Class Environment
-    Attribute name : EString
+    Attribute name : EString<<1..1>>
     Attribute url : EString
 
-  Class Run
-    Attribute name : EString
-    Attribute commands : EString
-
   Class InputParameter
-    Attribute name : EString
-    Attribute value : EString
+    Attribute name : EString<<1..1>>
+    Attribute value : EString<<1..1>>
 
   Class Repository
     Reference workflows : Workflow<<0..*>>

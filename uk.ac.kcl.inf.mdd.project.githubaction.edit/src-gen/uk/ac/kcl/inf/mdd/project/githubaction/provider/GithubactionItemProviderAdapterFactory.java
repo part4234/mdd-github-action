@@ -464,29 +464,6 @@ public class GithubactionItemProviderAdapterFactory extends GithubactionAdapterF
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.Run} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RunItemProvider runItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link uk.ac.kcl.inf.mdd.project.githubaction.Run}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRunAdapter() {
-		if (runItemProvider == null) {
-			runItemProvider = new RunItemProvider(this);
-		}
-
-		return runItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link uk.ac.kcl.inf.mdd.project.githubaction.InputParameter} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -671,8 +648,6 @@ public class GithubactionItemProviderAdapterFactory extends GithubactionAdapterF
 			runSettingItemProvider.dispose();
 		if (environmentItemProvider != null)
 			environmentItemProvider.dispose();
-		if (runItemProvider != null)
-			runItemProvider.dispose();
 		if (inputParameterItemProvider != null)
 			inputParameterItemProvider.dispose();
 		if (repositoryItemProvider != null)

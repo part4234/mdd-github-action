@@ -172,11 +172,6 @@ public class GithubactionAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseRun(Run object) {
-			return createRunAdapter();
-		}
-
-		@Override
 		public Adapter caseInputParameter(InputParameter object) {
 			return createInputParameterAdapter();
 		}
@@ -496,20 +491,6 @@ public class GithubactionAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEnvironmentAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link uk.ac.kcl.inf.mdd.project.githubaction.Run <em>Run</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see uk.ac.kcl.inf.mdd.project.githubaction.Run
-	 * @generated
-	 */
-	public Adapter createRunAdapter() {
 		return null;
 	}
 

@@ -16,15 +16,15 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getEnv <em>Env</em>}</li>
- *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getName <em>Name</em>}</li>
+ *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getStepName <em>Step Name</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getUses <em>Uses</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getRunSetting <em>Run Setting</em>}</li>
- *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getId <em>Id</em>}</li>
+ *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getIf <em>If</em>}</li>
- *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getRun <em>Run</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getWith <em>With</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getEntrypoint <em>Entrypoint</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getArgs <em>Args</em>}</li>
+ *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getRun <em>Run</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getStep()
@@ -48,16 +48,41 @@ public interface Step extends EObject {
 	EList<Env> getEnv();
 
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Step Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsname
 	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Step Name</em>' attribute.
+	 * @see #setStepName(String)
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getStep_StepName()
+	 * @model
+	 * @generated
+	 */
+	String getStepName();
+
+	/**
+	 * Sets the value of the '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getStepName <em>Step Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Step Name</em>' attribute.
+	 * @see #getStepName()
+	 * @generated
+	 */
+	void setStepName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsid
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getStep_Name()
-	 * @model
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.ID"
 	 * @generated
 	 */
 	String getName();
@@ -73,19 +98,29 @@ public interface Step extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Uses</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
+	 * Returns the value of the '<em><b>Uses</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Uses</em>' attribute list.
+	 * @return the value of the '<em>Uses</em>' attribute.
+	 * @see #setUses(String)
 	 * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getStep_Uses()
 	 * @model
 	 * @generated
 	 */
-	EList<String> getUses();
+	String getUses();
+
+	/**
+	 * Sets the value of the '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getUses <em>Uses</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Uses</em>' attribute.
+	 * @see #getUses()
+	 * @generated
+	 */
+	void setUses(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Run Setting</b></em>' containment reference.
@@ -113,31 +148,6 @@ public interface Step extends EObject {
 	void setRunSetting(RunSetting value);
 
 	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsid
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getStep_Id()
-	 * @model
-	 * @generated
-	 */
-	String getId();
-
-	/**
-	 * Sets the value of the '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getId <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
-	 * @generated
-	 */
-	void setId(String value);
-
-	/**
 	 * Returns the value of the '<em><b>If</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -161,31 +171,6 @@ public interface Step extends EObject {
 	 * @generated
 	 */
 	void setIf(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Run</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Run</em>' containment reference.
-	 * @see #setRun(Run)
-	 * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getStep_Run()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Run getRun();
-
-	/**
-	 * Sets the value of the '{@link uk.ac.kcl.inf.mdd.project.githubaction.Step#getRun <em>Run</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Run</em>' containment reference.
-	 * @see #getRun()
-	 * @generated
-	 */
-	void setRun(Run value);
 
 	/**
 	 * Returns the value of the '<em><b>With</b></em>' containment reference list.
@@ -251,5 +236,17 @@ public interface Step extends EObject {
 	 * @generated
 	 */
 	void setArgs(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Run</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Run</em>' attribute list.
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getStep_Run()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getRun();
 
 } // Step

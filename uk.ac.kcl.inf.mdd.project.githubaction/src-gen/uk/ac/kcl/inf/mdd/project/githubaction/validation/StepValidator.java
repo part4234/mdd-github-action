@@ -8,7 +8,6 @@ import org.eclipse.emf.common.util.EList;
 
 import uk.ac.kcl.inf.mdd.project.githubaction.Env;
 import uk.ac.kcl.inf.mdd.project.githubaction.InputParameter;
-import uk.ac.kcl.inf.mdd.project.githubaction.Run;
 import uk.ac.kcl.inf.mdd.project.githubaction.RunSetting;
 
 /**
@@ -22,9 +21,11 @@ public interface StepValidator {
 
 	boolean validateEnv(EList<Env> value);
 
+	boolean validateStepName(String value);
+
 	boolean validateName(String value);
 
-	boolean validateUses(EList<String> value);
+	boolean validateUses(String value);
 
 	boolean validateRunSetting(RunSetting value);
 
@@ -32,11 +33,11 @@ public interface StepValidator {
 
 	boolean validateIf(String value);
 
-	boolean validateRun(Run value);
-
 	boolean validateWith(EList<InputParameter> value);
 
 	boolean validateEntrypoint(String value);
 
 	boolean validateArgs(String value);
+
+	boolean validateRun(EList<String> value);
 }

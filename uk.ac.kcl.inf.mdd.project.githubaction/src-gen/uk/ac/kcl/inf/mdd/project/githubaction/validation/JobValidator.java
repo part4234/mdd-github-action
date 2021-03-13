@@ -21,6 +21,8 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 public interface JobValidator {
 	boolean validate();
 
+	boolean validateJobName(String value);
+
 	boolean validateName(String value);
 
 	boolean validateSteps(EList<Step> value);

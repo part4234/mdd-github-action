@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import uk.ac.kcl.inf.mdd.project.githubaction.BranchEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.CreateEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.DeleteEvent;
@@ -31,7 +32,6 @@ import uk.ac.kcl.inf.mdd.project.githubaction.PullRequestEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.PushEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Repository;
 import uk.ac.kcl.inf.mdd.project.githubaction.RepositoryDispatchEvent;
-import uk.ac.kcl.inf.mdd.project.githubaction.Run;
 import uk.ac.kcl.inf.mdd.project.githubaction.RunSetting;
 import uk.ac.kcl.inf.mdd.project.githubaction.ScheduleEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
@@ -198,13 +198,6 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass runEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass inputParameterEClass = null;
 
 	/**
@@ -277,6 +270,9 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 				: new GithubactionPackageImpl();
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		XMLTypePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theGithubactionPackage.createPackageContents();
@@ -478,8 +474,18 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 	 * @generated
 	 */
 	@Override
-	public EAttribute getStep_Name() {
+	public EAttribute getStep_StepName() {
 		return (EAttribute) stepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getStep_Name() {
+		return (EAttribute) stepEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -508,16 +514,6 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 	 * @generated
 	 */
 	@Override
-	public EAttribute getStep_Id() {
-		return (EAttribute) stepEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EAttribute getStep_If() {
 		return (EAttribute) stepEClass.getEStructuralFeatures().get(5);
 	}
@@ -528,7 +524,7 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 	 * @generated
 	 */
 	@Override
-	public EReference getStep_Run() {
+	public EReference getStep_With() {
 		return (EReference) stepEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -538,18 +534,8 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 	 * @generated
 	 */
 	@Override
-	public EReference getStep_With() {
-		return (EReference) stepEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EAttribute getStep_Entrypoint() {
-		return (EAttribute) stepEClass.getEStructuralFeatures().get(8);
+		return (EAttribute) stepEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -559,6 +545,16 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 	 */
 	@Override
 	public EAttribute getStep_Args() {
+		return (EAttribute) stepEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getStep_Run() {
 		return (EAttribute) stepEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -578,8 +574,18 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 	 * @generated
 	 */
 	@Override
-	public EAttribute getJob_Name() {
+	public EAttribute getJob_JobName() {
 		return (EAttribute) jobEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getJob_Name() {
+		return (EAttribute) jobEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -660,16 +666,6 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 	@Override
 	public EAttribute getJob_If() {
 		return (EAttribute) jobEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getJob_Id() {
-		return (EAttribute) jobEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -1018,36 +1014,6 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 	 * @generated
 	 */
 	@Override
-	public EClass getRun() {
-		return runEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getRun_Name() {
-		return (EAttribute) runEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getRun_Commands() {
-		return (EAttribute) runEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getInputParameter() {
 		return inputParameterEClass;
 	}
@@ -1165,18 +1131,18 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 
 		stepEClass = createEClass(STEP);
 		createEReference(stepEClass, STEP__ENV);
-		createEAttribute(stepEClass, STEP__NAME);
+		createEAttribute(stepEClass, STEP__STEP_NAME);
 		createEAttribute(stepEClass, STEP__USES);
 		createEReference(stepEClass, STEP__RUN_SETTING);
-		createEAttribute(stepEClass, STEP__ID);
+		createEAttribute(stepEClass, STEP__NAME);
 		createEAttribute(stepEClass, STEP__IF);
-		createEReference(stepEClass, STEP__RUN);
 		createEReference(stepEClass, STEP__WITH);
 		createEAttribute(stepEClass, STEP__ENTRYPOINT);
 		createEAttribute(stepEClass, STEP__ARGS);
+		createEAttribute(stepEClass, STEP__RUN);
 
 		jobEClass = createEClass(JOB);
-		createEAttribute(jobEClass, JOB__NAME);
+		createEAttribute(jobEClass, JOB__JOB_NAME);
 		createEReference(jobEClass, JOB__STEPS);
 		createEReference(jobEClass, JOB__ENV);
 		createEAttribute(jobEClass, JOB__RUNS_ON);
@@ -1185,7 +1151,7 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 		createEAttribute(jobEClass, JOB__OUTPUTS);
 		createEReference(jobEClass, JOB__DEFAULTS);
 		createEAttribute(jobEClass, JOB__IF);
-		createEAttribute(jobEClass, JOB__ID);
+		createEAttribute(jobEClass, JOB__NAME);
 
 		scheduleEventEClass = createEClass(SCHEDULE_EVENT);
 		createEAttribute(scheduleEventEClass, SCHEDULE_EVENT__MINUTE);
@@ -1235,10 +1201,6 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 		createEAttribute(environmentEClass, ENVIRONMENT__NAME);
 		createEAttribute(environmentEClass, ENVIRONMENT__URL);
 
-		runEClass = createEClass(RUN);
-		createEAttribute(runEClass, RUN__NAME);
-		createEAttribute(runEClass, RUN__COMMANDS);
-
 		inputParameterEClass = createEClass(INPUT_PARAMETER);
 		createEAttribute(inputParameterEClass, INPUT_PARAMETER__NAME);
 		createEAttribute(inputParameterEClass, INPUT_PARAMETER__VALUE);
@@ -1274,6 +1236,10 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 		setName(eNAME);
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
+
+		// Obtain other dependent packages
+		XMLTypePackage theXMLTypePackage = (XMLTypePackage) EPackage.Registry.INSTANCE
+				.getEPackage(XMLTypePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1341,19 +1307,17 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 		initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStep_Env(), this.getEnv(), null, "env", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStep_Name(), ecorePackage.getEString(), "name", null, 0, 1, Step.class, !IS_TRANSIENT,
+		initEAttribute(getStep_StepName(), ecorePackage.getEString(), "stepName", null, 0, 1, Step.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStep_Uses(), ecorePackage.getEString(), "uses", null, 0, -1, Step.class, !IS_TRANSIENT,
+		initEAttribute(getStep_Uses(), ecorePackage.getEString(), "uses", null, 0, 1, Step.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStep_RunSetting(), this.getRunSetting(), null, "runSetting", null, 0, 1, Step.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStep_Id(), ecorePackage.getEString(), "id", null, 0, 1, Step.class, !IS_TRANSIENT,
+		initEAttribute(getStep_Name(), theXMLTypePackage.getID(), "name", null, 0, 1, Step.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStep_If(), ecorePackage.getEString(), "if", null, 0, 1, Step.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStep_Run(), this.getRun(), null, "run", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStep_With(), this.getInputParameter(), null, "with", null, 0, -1, Step.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
@@ -1361,9 +1325,11 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStep_Args(), ecorePackage.getEString(), "args", null, 0, 1, Step.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStep_Run(), ecorePackage.getEString(), "run", null, 0, -1, Step.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jobEClass, Job.class, "Job", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getJob_Name(), ecorePackage.getEString(), "name", null, 0, 1, Job.class, !IS_TRANSIENT,
+		initEAttribute(getJob_JobName(), ecorePackage.getEString(), "jobName", null, 0, 1, Job.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJob_Steps(), this.getStep(), null, "steps", null, 0, -1, Job.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
@@ -1385,8 +1351,8 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 				IS_ORDERED);
 		initEAttribute(getJob_If(), ecorePackage.getEString(), "if", null, 0, 1, Job.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getJob_Id(), ecorePackage.getEString(), "id", null, 1, 1, Job.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJob_Name(), theXMLTypePackage.getID(), "name", null, 1, 1, Job.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scheduleEventEClass, ScheduleEvent.class, "ScheduleEvent", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -1452,9 +1418,9 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 				!IS_DERIVED, IS_ORDERED);
 
 		initEClass(envEClass, Env.class, "Env", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEnv_Name(), ecorePackage.getEString(), "name", null, 0, 1, Env.class, !IS_TRANSIENT,
+		initEAttribute(getEnv_Name(), ecorePackage.getEString(), "name", null, 1, 1, Env.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEnv_Value(), ecorePackage.getEString(), "value", null, 0, 1, Env.class, !IS_TRANSIENT,
+		initEAttribute(getEnv_Value(), ecorePackage.getEString(), "value", null, 1, 1, Env.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(runSettingEClass, RunSetting.class, "RunSetting", !IS_ABSTRACT, !IS_INTERFACE,
@@ -1470,22 +1436,16 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
 
 		initEClass(environmentEClass, Environment.class, "Environment", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEnvironment_Name(), ecorePackage.getEString(), "name", null, 0, 1, Environment.class,
+		initEAttribute(getEnvironment_Name(), ecorePackage.getEString(), "name", null, 1, 1, Environment.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEnvironment_Url(), ecorePackage.getEString(), "url", null, 0, 1, Environment.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(runEClass, Run.class, "Run", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRun_Name(), ecorePackage.getEString(), "name", null, 0, 1, Run.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRun_Commands(), ecorePackage.getEString(), "commands", null, 0, 1, Run.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(inputParameterEClass, InputParameter.class, "InputParameter", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getInputParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, InputParameter.class,
+		initEAttribute(getInputParameter_Name(), ecorePackage.getEString(), "name", null, 1, 1, InputParameter.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getInputParameter_Value(), ecorePackage.getEString(), "value", null, 0, 1, InputParameter.class,
+		initEAttribute(getInputParameter_Value(), ecorePackage.getEString(), "value", null, 1, 1, InputParameter.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(repositoryEClass, Repository.class, "Repository", !IS_ABSTRACT, !IS_INTERFACE,

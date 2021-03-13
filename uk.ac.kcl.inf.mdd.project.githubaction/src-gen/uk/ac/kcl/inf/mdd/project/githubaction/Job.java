@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getName <em>Name</em>}</li>
+ *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getJobName <em>Job Name</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getSteps <em>Steps</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getEnv <em>Env</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getRunsOn <em>Runs On</em>}</li>
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getOutputs <em>Outputs</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getDefaults <em>Defaults</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getIf <em>If</em>}</li>
- *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getId <em>Id</em>}</li>
+ *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getJob()
@@ -33,16 +33,41 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Job extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Job Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idname
 	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Job Name</em>' attribute.
+	 * @see #setJobName(String)
+	 * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getJob_JobName()
+	 * @model
+	 * @generated
+	 */
+	String getJobName();
+
+	/**
+	 * Sets the value of the '{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getJobName <em>Job Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Job Name</em>' attribute.
+	 * @see #getJobName()
+	 * @generated
+	 */
+	void setJobName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_id
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getJob_Name()
-	 * @model
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.ID" required="true"
 	 * @generated
 	 */
 	String getName();
@@ -206,30 +231,5 @@ public interface Job extends EObject {
 	 * @generated
 	 */
 	void setIf(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_id
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getJob_Id()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getId();
-
-	/**
-	 * Sets the value of the '{@link uk.ac.kcl.inf.mdd.project.githubaction.Job#getId <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
-	 * @generated
-	 */
-	void setId(String value);
 
 } // Job
