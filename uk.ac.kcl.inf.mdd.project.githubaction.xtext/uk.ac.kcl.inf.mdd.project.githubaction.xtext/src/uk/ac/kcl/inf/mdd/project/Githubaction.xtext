@@ -16,10 +16,10 @@ Workflow:
 	'Workflow'
 	name=EString
 	'{'
-		('jobs' '{' jobs+=Job ( "," jobs+=Job)* '}' )?
 		('on' '{' on+=Event ( "," on+=Event)* '}' )?
 		('env' '{' env+=Env ( "," env+=Env)* '}' )?
 		('defaults' defaults=RunSetting)?
+		('jobs' '{' jobs+=Job ( "," jobs+=Job)* '}' )?
 	'}';
 
 Event:
@@ -38,15 +38,31 @@ Job:
 	'Job'
 	name=EString
 	'{'
-		('runsOn' runsOn=EString)?
-		('outputs' '{' outputs+=EString ( "," outputs+=EString)* '}' )?
-		('if' if=EString)?
 		'id' id=EString
 		('needs' '(' needs+=[Job|EString] ( "," needs+=[Job|EString])* ')' )?
+		('runsOn' runsOn=EString)?
 		('environment' environment=[Environment|EString])?
-		('steps' '{' steps+=Step ( "," steps+=Step)* '}' )?
+		('outputs' '{' outputs+=EString ( "," outputs+=EString)* '}' )?
 		('env' '{' env+=Env ( "," env+=Env)* '}' )?
 		('defaults' '{' defaults+=RunSetting ( "," defaults+=RunSetting)* '}' )?
+		('if' if=EString)?		
+		('steps' '{' steps+=Step ( "," steps+=Step)* '}' )?
+	'}';
+
+Step:
+	{Step}
+	'Step'
+	name=EString
+	'{'
+		('id' id=EString)?
+		('if' if=EString)?
+		('uses' '{' uses+=EString ( "," uses+=EString)* '}' )?
+		('run' run=Run)?
+		('runSetting' runSetting=RunSetting)?
+		('with' '{' ^with+=InputParameter ( "," ^with+=InputParameter)* '}' )?
+		('entrypoint' entrypoint=EString)?
+		('args' args=EString)?
+		('env' '{' env+=Env ( "," env+=Env)* '}' )?
 	'}';
 
 Env:
@@ -57,6 +73,14 @@ Env:
 		('value' value=EString)?
 	'}';
 
+Environment:
+	{Environment}
+	'Environment'
+	name=EString
+	'{'
+		('url' url=EString)?
+	'}';
+
 RunSetting:
 	{RunSetting}
 	'RunSetting'
@@ -64,30 +88,6 @@ RunSetting:
 		('workingDirectory' workingDirectory=EString)?
 		('shell' shell=EString)?
 		('with' '{' ^with+=Env ( "," ^with+=Env)* '}' )?
-	'}';
-
-Step:
-	{Step}
-	'Step'
-	name=EString
-	'{'
-		('uses' '{' uses+=EString ( "," uses+=EString)* '}' )?
-		('id' id=EString)?
-		('if' if=EString)?
-		('entrypoint' entrypoint=EString)?
-		('args' args=EString)?
-		('env' '{' env+=Env ( "," env+=Env)* '}' )?
-		('runSetting' runSetting=RunSetting)?
-		('run' run=Run)?
-		('with' '{' ^with+=InputParameter ( "," ^with+=InputParameter)* '}' )?
-	'}';
-
-Environment:
-	{Environment}
-	'Environment'
-	name=EString
-	'{'
-		('url' url=EString)?
 	'}';
 
 Run:
