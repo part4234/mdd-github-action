@@ -14,8 +14,8 @@ Repository:
 Workflow:
 	{Workflow}
 	'Workflow'
-	name=EString
 	'{'
+		('name' name=EString)?
 		('on' '{' on+=Event ( "," on+=Event)* '}' )?
 		('env' '{' env+=Env ( "," env+=Env)* '}' )?
 		('defaults' defaults=RunSetting)?
@@ -36,25 +36,25 @@ Event:
 
 Job:
 	'Job'
-	name=EString
+	name=ID
 	'{'
-		'id' id=EString
+		('name' jobName=EString)?
 		('needs' '(' needs+=[Job|EString] ( "," needs+=[Job|EString])* ')' )?
 		('runsOn' runsOn=EString)?
 		('environment' environment=[Environment|EString])?
 		('outputs' '{' outputs+=EString ( "," outputs+=EString)* '}' )?
 		('env' '{' env+=Env ( "," env+=Env)* '}' )?
 		('defaults' '{' defaults+=RunSetting ( "," defaults+=RunSetting)* '}' )?
-		('if' if=EString)?		
+		('if' if=EString)?
 		('steps' '{' steps+=Step ( "," steps+=Step)* '}' )?
 	'}';
 
 Step:
 	{Step}
 	'Step'
-	name=EString
+	(name=ID)?
 	'{'
-		('id' id=EString)?
+		('name' stepName=EString)?
 		('if' if=EString)?
 		('uses' uses=EString)?
 		('run' '{' run+=EString ( "," ^run+=EString)* '}')?
@@ -67,11 +67,11 @@ Step:
 
 Env:
 	{Env}
-	'Env'
-	name=EString
-	'{'
-		('value' value=EString)?
-	'}';
+	name=EString ':' value=EString;
+	
+InputParameter:
+	{InputParameter}
+	name=EString ':' value=EString;
 
 Environment:
 	{Environment}
@@ -88,14 +88,6 @@ RunSetting:
 		('workingDirectory' workingDirectory=EString)?
 		('shell' shell=EString)?
 		('with' '{' ^with+=Env ( "," ^with+=Env)* '}' )?
-	'}';
-
-InputParameter:
-	{InputParameter}
-	'InputParameter'
-	name=EString
-	'{'
-		('value' value=EString)?
 	'}';
 
 PushEvent:

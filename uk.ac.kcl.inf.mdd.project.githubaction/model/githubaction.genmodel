@@ -54,10 +54,10 @@
     </genClasses>
     <genClasses ecoreClass="githubaction.ecore#//Step">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Step/env"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/stepName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/uses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Step/runSetting"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/if"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Step/with"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/entrypoint"/>
@@ -65,7 +65,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Step/run"/>
     </genClasses>
     <genClasses ecoreClass="githubaction.ecore#//Job">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Job/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Job/jobName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Job/steps"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Job/env"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Job/runsOn"/>
@@ -74,7 +74,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Job/outputs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference githubaction.ecore#//Job/defaults"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Job/if"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Job/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//Job/name"/>
     </genClasses>
     <genClasses ecoreClass="githubaction.ecore#//ScheduleEvent">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute githubaction.ecore#//ScheduleEvent/minute"/>
