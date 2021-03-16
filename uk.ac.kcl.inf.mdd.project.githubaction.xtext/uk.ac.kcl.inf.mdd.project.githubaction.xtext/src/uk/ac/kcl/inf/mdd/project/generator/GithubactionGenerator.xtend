@@ -8,6 +8,14 @@ import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 
+import uk.ac.kcl.inf.mdd.project.githubaction.Repository;
+import uk.ac.kcl.inf.mdd.project.githubaction.Workflow;
+import uk.ac.kcl.inf.mdd.project.githubaction.Event;
+import uk.ac.kcl.inf.mdd.project.githubaction.Job;
+import uk.ac.kcl.inf.mdd.project.githubaction.Step;
+
+
+
 /**
  * Generates code from your model files on save.
  * 
@@ -16,10 +24,31 @@ import org.eclipse.xtext.generator.IGeneratorContext
 class GithubactionGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(Greeting)
-//				.map[name]
-//				.join(', '))
+
+		val model = resource.contents.head as Repository
+		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats )
+		model.doGenerateStats}
+	
+	
+	def deriveStatsTargetFileNameFor(Resource resource) {
+		resource.URI.appendFileExtension('txt').lastSegment
 	}
+	
+
+	def String doGenerateStats(Repository program) '''
+		Program contains:
+		
+		- «program.eAllContents.filter(Repository).size» Repositories
+		- «program.eAllContents.filter(Workflow).size» Workflows
+		- «program.eAllContents.filter(Event).size» Events
+		- «program.eAllContents.filter(Job).size» Jobs
+		- «program.eAllContents.filter(Step).size» Steps
+	'''
+	
+		def deriveClassNameFor(Resource resource) {
+		val origName = resource.URI.lastSegment
+		
+		origName.substring(0, origName.indexOf('.')).toFirstUpper + 'Turtle'
+	}
+		
 }

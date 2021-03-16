@@ -5,11 +5,13 @@ package uk.ac.kcl.inf.mdd.project;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.common.TerminalsStandaloneSetup;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage;
 
 @SuppressWarnings("all")
 public class GithubactionStandaloneSetupGenerated implements ISetup {
@@ -28,6 +30,9 @@ public class GithubactionStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public void register(Injector injector) {
+		if (!EPackage.Registry.INSTANCE.containsKey("http://www.ac.uk/kcl/inf/mdd/project/githubaction/xtext/Githubaction")) {
+			EPackage.Registry.INSTANCE.put("http://www.ac.uk/kcl/inf/mdd/project/githubaction/xtext/Githubaction", GithubactionPackage.eINSTANCE);
+		}
 		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
 		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		

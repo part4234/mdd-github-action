@@ -1,4 +1,21 @@
 /* XPECT_SETUP uk.ac.kcl.inf.mdd.project.githubaction.xpect.XPectTests END_SETUP */
+
+
+/*
+XPECT generated file textStats.githubaction.txt ---
+Action file contains:
+
+- 1 Repositories
+- 1 Workflows
+- 1 on
+- 1 job
+- 1 steps
+- 1 Step
+  
+ */
+
+
+
 Repository {
 	workflows {
 		

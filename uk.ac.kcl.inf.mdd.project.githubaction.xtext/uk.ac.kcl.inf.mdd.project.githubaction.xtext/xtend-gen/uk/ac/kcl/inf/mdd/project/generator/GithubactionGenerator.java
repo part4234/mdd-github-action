@@ -3,10 +3,21 @@
  */
 package uk.ac.kcl.inf.mdd.project.generator;
 
+import com.google.common.collect.Iterators;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
+import uk.ac.kcl.inf.mdd.project.githubaction.Event;
+import uk.ac.kcl.inf.mdd.project.githubaction.Job;
+import uk.ac.kcl.inf.mdd.project.githubaction.Repository;
+import uk.ac.kcl.inf.mdd.project.githubaction.Step;
+import uk.ac.kcl.inf.mdd.project.githubaction.Workflow;
 
 /**
  * Generates code from your model files on save.
@@ -17,5 +28,56 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 public class GithubactionGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    EObject _head = IterableExtensions.<EObject>head(resource.getContents());
+    final Repository model = ((Repository) _head);
+    fsa.generateFile(this.deriveStatsTargetFileNameFor(resource), this.doGenerateStats(model));
+    this.doGenerateStats(model);
+  }
+  
+  public String deriveStatsTargetFileNameFor(final Resource resource) {
+    return resource.getURI().appendFileExtension("txt").lastSegment();
+  }
+  
+  public String doGenerateStats(final Repository program) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Program contains:");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("- ");
+    int _size = IteratorExtensions.size(Iterators.<Repository>filter(program.eAllContents(), Repository.class));
+    _builder.append(_size);
+    _builder.append(" Repositories");
+    _builder.newLineIfNotEmpty();
+    _builder.append("- ");
+    int _size_1 = IteratorExtensions.size(Iterators.<Workflow>filter(program.eAllContents(), Workflow.class));
+    _builder.append(_size_1);
+    _builder.append(" Workflows");
+    _builder.newLineIfNotEmpty();
+    _builder.append("- ");
+    int _size_2 = IteratorExtensions.size(Iterators.<Event>filter(program.eAllContents(), Event.class));
+    _builder.append(_size_2);
+    _builder.append(" Events");
+    _builder.newLineIfNotEmpty();
+    _builder.append("- ");
+    int _size_3 = IteratorExtensions.size(Iterators.<Job>filter(program.eAllContents(), Job.class));
+    _builder.append(_size_3);
+    _builder.append(" Jobs");
+    _builder.newLineIfNotEmpty();
+    _builder.append("- ");
+    int _size_4 = IteratorExtensions.size(Iterators.<Step>filter(program.eAllContents(), Step.class));
+    _builder.append(_size_4);
+    _builder.append(" Steps");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  public String deriveClassNameFor(final Resource resource) {
+    String _xblockexpression = null;
+    {
+      final String origName = resource.getURI().lastSegment();
+      String _firstUpper = StringExtensions.toFirstUpper(origName.substring(0, origName.indexOf(".")));
+      _xblockexpression = (_firstUpper + "Turtle");
+    }
+    return _xblockexpression;
   }
 }

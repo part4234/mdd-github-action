@@ -13,7 +13,7 @@ public abstract class AbstractGithubactionValidator extends AbstractDeclarativeV
 	@Override
 	protected List<EPackage> getEPackages() {
 		List<EPackage> result = new ArrayList<EPackage>();
-		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.example.org/githubaction"));
+		result.add(uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage.eINSTANCE);
 		return result;
 	}
 }
