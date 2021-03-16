@@ -7126,7 +7126,7 @@ public class InternalGithubactionParser extends AbstractInternalAntlrParser {
                     					if (current==null) {
                     						current = createModelElement(grammarAccess.getInputRule());
                     					}
-                    					setWithLastConsumed(current, "required", true, "required");
+                    					setWithLastConsumed(current, "required", lv_required_1_0 != null, "required");
                     				
 
                     }
