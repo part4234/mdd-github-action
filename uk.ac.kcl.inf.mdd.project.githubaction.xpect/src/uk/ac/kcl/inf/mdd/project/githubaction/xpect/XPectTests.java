@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
 	ValidationTest.class, // 
 })
 @RunWith(XpectRunner.class)
-public class XPectTests extends GeneratorTest{
+public class XPectTests extends GeneratorTest {
 	
 	
 
