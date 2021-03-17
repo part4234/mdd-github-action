@@ -4,18 +4,23 @@
 package uk.ac.kcl.inf.mdd.project.generator;
 
 import com.google.common.collect.Iterators;
+import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import uk.ac.kcl.inf.mdd.project.githubaction.Env;
 import uk.ac.kcl.inf.mdd.project.githubaction.Event;
 import uk.ac.kcl.inf.mdd.project.githubaction.Job;
 import uk.ac.kcl.inf.mdd.project.githubaction.Repository;
+import uk.ac.kcl.inf.mdd.project.githubaction.RunSetting;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 import uk.ac.kcl.inf.mdd.project.githubaction.Workflow;
 
@@ -31,11 +36,11 @@ public class GithubactionGenerator extends AbstractGenerator {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final Repository model = ((Repository) _head);
     fsa.generateFile(this.deriveStatsTargetFileNameFor(resource), this.doGenerateStats(model));
-    this.doGenerateStats(model);
+    fsa.generateFile(this.deriveStatsTargetFileNameFor(resource), this.doGenerateClass(model));
   }
   
   public String deriveStatsTargetFileNameFor(final Resource resource) {
-    return resource.getURI().appendFileExtension("txt").lastSegment();
+    return resource.getURI().appendFileExtension("yaml").lastSegment();
   }
   
   public String doGenerateStats(final Repository program) {
@@ -68,6 +73,7 @@ public class GithubactionGenerator extends AbstractGenerator {
     _builder.append(_size_4);
     _builder.append(" Steps");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
     return _builder.toString();
   }
   
@@ -79,5 +85,106 @@ public class GithubactionGenerator extends AbstractGenerator {
       _xblockexpression = (_firstUpper + "Turtle");
     }
     return _xblockexpression;
+  }
+  
+  /**
+   * Below are parseable dispatch mathos for all grammar types
+   */
+  public String doGenerateClass(final Repository program) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("# This is the generated .yaml file for the input repository.");
+    _builder.newLine();
+    _builder.append("# Files are individually generated Individually for each workflow and differ by main/feature");
+    _builder.newLine();
+    _builder.newLine();
+    final Function1<Workflow, String> _function = (Workflow it) -> {
+      return this.generateActiontStmt(it);
+    };
+    String _join = IterableExtensions.join(ListExtensions.<Workflow, String>map(program.getWorkflows(), _function), "\n");
+    _builder.append(_join);
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
+  protected String _generateActiontStmt(final Workflow stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
+  protected String _generateActiontStmt(final Event stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateActiontStmt(final Env stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateActiontStmt(final RunSetting stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateActiontStmt(final Job stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateActiontStmt(final Step stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateActiontStmt(final String stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("#check for value comparisons here - may need to hardcode it");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
+  public String generateActiontStmt(final Object stmt) {
+    if (stmt instanceof Env) {
+      return _generateActiontStmt((Env)stmt);
+    } else if (stmt instanceof Event) {
+      return _generateActiontStmt((Event)stmt);
+    } else if (stmt instanceof Job) {
+      return _generateActiontStmt((Job)stmt);
+    } else if (stmt instanceof RunSetting) {
+      return _generateActiontStmt((RunSetting)stmt);
+    } else if (stmt instanceof Step) {
+      return _generateActiontStmt((Step)stmt);
+    } else if (stmt instanceof Workflow) {
+      return _generateActiontStmt((Workflow)stmt);
+    } else if (stmt instanceof String) {
+      return _generateActiontStmt((String)stmt);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(stmt).toString());
+    }
   }
 }

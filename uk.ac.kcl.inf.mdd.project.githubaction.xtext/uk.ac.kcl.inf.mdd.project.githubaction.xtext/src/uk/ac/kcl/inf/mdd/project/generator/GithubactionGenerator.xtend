@@ -14,7 +14,7 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Event;
 import uk.ac.kcl.inf.mdd.project.githubaction.Job;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 
-
+import uk.ac.kcl.inf.mdd.project.githubaction.*; //says deprecated but works :o
 
 /**
  * Generates code from your model files on save.
@@ -27,11 +27,15 @@ class GithubactionGenerator extends AbstractGenerator {
 
 		val model = resource.contents.head as Repository
 		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats )
-		model.doGenerateStats}
+		
+		//The base call, this doesnt differ on the 2 file requirement in the same repo
+		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateClass)
+		
+		}
 	
 	
 	def deriveStatsTargetFileNameFor(Resource resource) {
-		resource.URI.appendFileExtension('txt').lastSegment
+		resource.URI.appendFileExtension('yaml').lastSegment
 	}
 	
 
@@ -43,6 +47,7 @@ class GithubactionGenerator extends AbstractGenerator {
 		- «program.eAllContents.filter(Event).size» Events
 		- «program.eAllContents.filter(Job).size» Jobs
 		- «program.eAllContents.filter(Step).size» Steps
+
 	'''
 	
 		def deriveClassNameFor(Resource resource) {
@@ -52,14 +57,59 @@ class GithubactionGenerator extends AbstractGenerator {
 	}
 	
 	/*
-	 * Below are parseable dispath mathos for all grammar types
+	 * Below are parseable dispatch mathos for all grammar types
 	 */
+	def String doGenerateClass(Repository program) '''
+		# This is the generated .yaml file for the input repository.
+		# Files are individually generated Individually for each workflow and differ by main/feature
+		
+		«program.workflows.map[generateActiontStmt()].join('\n')»
+	
+	'''
+	
+	//files need to be split here for master and featre- TBD
+	dispatch def String generateActiontStmt(Workflow stmt) '''
 	
 	
 	
 	
 	
 	
+	
+	'''
+	
+	dispatch def String generateActiontStmt(Event stmt) ''''''
+	
+	dispatch def String generateActiontStmt(Env stmt) ''''''
+	
+	dispatch def String generateActiontStmt(RunSetting stmt) ''''''
+	
+	dispatch def String generateActiontStmt(Job stmt) ''''''
+	
+	dispatch def String generateActiontStmt(Step stmt) ''''''
+	
+	dispatch def String generateActiontStmt(String stmt) '''
+	
+	#check for value comparisons here - may need to hardcode it
+	
+	
+	
+	
+	
+	
+	
+	'''
+	/* 
+	dispatch def String generateActiontStmt(Workflow stmt) ''''''
+	
+	dispatch def String generateActiontStmt(Workflow stmt) ''''''
+	
+	dispatch def String generateActiontStmt(Workflow stmt) ''''''
+	
+	dispatch def String generateActiontStmt(Workflow stmt) ''''''
+	
+	dispatch def String generateActiontStmt(Workflow stmt) ''''''
+	*/
 	
 		
 }
