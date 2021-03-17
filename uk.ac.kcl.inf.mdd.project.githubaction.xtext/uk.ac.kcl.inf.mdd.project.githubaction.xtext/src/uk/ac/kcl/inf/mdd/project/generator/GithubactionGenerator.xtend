@@ -51,7 +51,9 @@ class GithubactionGenerator extends AbstractGenerator {
 		origName.substring(0, origName.indexOf('.')).toFirstUpper + 'Turtle'
 	}
 	
-	
+	/*
+	 * Below are parseable dispath mathos for all grammar types
+	 */
 	
 	
 	
