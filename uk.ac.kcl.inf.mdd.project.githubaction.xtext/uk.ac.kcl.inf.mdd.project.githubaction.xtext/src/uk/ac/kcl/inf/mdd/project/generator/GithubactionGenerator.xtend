@@ -31,6 +31,8 @@ class GithubactionGenerator extends AbstractGenerator {
 		//The base call, this doesnt differ on the 2 file requirement in the same repo
 		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateClass)
 		
+		//split file using the link shown
+		
 		}
 	
 	
@@ -63,45 +65,73 @@ class GithubactionGenerator extends AbstractGenerator {
 		# This is the generated .yaml file for the input repository.
 		# Files are individually generated Individually for each workflow and differ by main/feature
 		
-		«program.workflows.map[generateActiontStmt()].join('\n')»
+		«program.workflows.map[generateWorkFlowStmt()].join('\n')»
+		
 	
+	''' 
+	// «» Ignore the name and just append to it. Get it from the top attribute values.
+	// Files need to be split here for master and featre- TBD
+	dispatch def String generateWorkFlowStmt(Workflow stmt) '''
+		name: «stmt.name»
+	
+		«if (stmt.on !== ""){'''on:'''}»«stmt.on.get(0).generateEventStmt»
+		
+		«if (stmt.env !== ""){'''env:'''}»«stmt.on.get(0).generateEventStmt»
+		
+		«if (stmt.defaults !== ""){'''defaults:'''}»«stmt.on.get(0).generateEventStmt»
+		
+		«if (stmt.jobs !== ""){'''jobs:'''}»«stmt.on.get(0).generateEventStmt»
+		
+		'''
+
+
+	//add more methods to handle the rest calls
+	dispatch def String generateEventStmt(Event stmt) '''
+		
+		«if (stmt === PushEvent){'''    push:'''}»«generatePushEventStmt(PushEvent)»
+	
+	'''	
+	
+	
+	dispatch def String generatePushEventStmt(PushEvent stmt) ''''''
+	
+	
+	
+	
+	
+	
+	dispatch def String generateActiontStmt(Job stmt) '''
+	on:
+		(«if (stmt.jobName === '' ) {'''-'''}»);
 	'''
 	
-	//files need to be split here for master and featre- TBD
-	dispatch def String generateActiontStmt(Workflow stmt) '''
+
 	
-	
-	
-	
-	
-	
-	
-	'''
-	
-	dispatch def String generateActiontStmt(Event stmt) ''''''
-	
-	dispatch def String generateActiontStmt(Env stmt) ''''''
 	
 	dispatch def String generateActiontStmt(RunSetting stmt) ''''''
-	
-	dispatch def String generateActiontStmt(Job stmt) ''''''
+		
+	dispatch def String generateActiontsStmt(Job stmt) ''''''
 	
 	dispatch def String generateActiontStmt(Step stmt) ''''''
 	
-	dispatch def String generateActiontStmt(String stmt) '''
+	// check for value comparisons here - may need to hardcode it
+	dispatch def String generateActiontStmt(IssueEvent stmt) '''
 	
-	#check for value comparisons here - may need to hardcode it
-	
-	
-	
+	«if (stmt.activityTypes === 'opened') {'''name:'''}»«»);
 	
 	
+	
+	
+	
+	
+	
+	'''
+	
+	dispatch def String generateActiontStmt(Name stmt) '''
 	
 	
 	'''
 	/* 
-	dispatch def String generateActiontStmt(Workflow stmt) ''''''
-	
 	dispatch def String generateActiontStmt(Workflow stmt) ''''''
 	
 	dispatch def String generateActiontStmt(Workflow stmt) ''''''

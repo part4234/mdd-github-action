@@ -5,6 +5,7 @@ package uk.ac.kcl.inf.mdd.project.generator;
 
 import com.google.common.collect.Iterators;
 import java.util.Arrays;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -18,7 +19,10 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import uk.ac.kcl.inf.mdd.project.githubaction.Env;
 import uk.ac.kcl.inf.mdd.project.githubaction.Event;
+import uk.ac.kcl.inf.mdd.project.githubaction.IssueActivityType;
+import uk.ac.kcl.inf.mdd.project.githubaction.IssueEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Job;
+import uk.ac.kcl.inf.mdd.project.githubaction.PushEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Repository;
 import uk.ac.kcl.inf.mdd.project.githubaction.RunSetting;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
@@ -98,42 +102,115 @@ public class GithubactionGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     final Function1<Workflow, String> _function = (Workflow it) -> {
-      return this.generateActiontStmt(it);
+      return this.generateWorkFlowStmt(it);
     };
     String _join = IterableExtensions.join(ListExtensions.<Workflow, String>map(program.getWorkflows(), _function), "\n");
     _builder.append(_join);
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
+  protected String _generateWorkFlowStmt(final Workflow stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\t");
+    _builder.append("name: ");
+    String _name = stmt.getName();
+    _builder.append(_name, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    CharSequence _xifexpression = null;
+    EList<Event> _on = stmt.getOn();
+    boolean _tripleNotEquals = (_on != "");
+    if (_tripleNotEquals) {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("on:");
+      _xifexpression = _builder_1;
+    }
+    _builder.append(_xifexpression, "\t");
+    String _generateEventStmt = this.generateEventStmt(stmt.getOn().get(0));
+    _builder.append(_generateEventStmt, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    CharSequence _xifexpression_1 = null;
+    EList<Env> _env = stmt.getEnv();
+    boolean _tripleNotEquals_1 = (_env != "");
+    if (_tripleNotEquals_1) {
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("env:");
+      _xifexpression_1 = _builder_2;
+    }
+    _builder.append(_xifexpression_1, "\t");
+    String _generateEventStmt_1 = this.generateEventStmt(stmt.getOn().get(0));
+    _builder.append(_generateEventStmt_1, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    CharSequence _xifexpression_2 = null;
+    RunSetting _defaults = stmt.getDefaults();
+    boolean _tripleNotEquals_2 = (_defaults != "");
+    if (_tripleNotEquals_2) {
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("defaults:");
+      _xifexpression_2 = _builder_3;
+    }
+    _builder.append(_xifexpression_2, "\t");
+    String _generateEventStmt_2 = this.generateEventStmt(stmt.getOn().get(0));
+    _builder.append(_generateEventStmt_2, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    CharSequence _xifexpression_3 = null;
+    EList<Job> _jobs = stmt.getJobs();
+    boolean _tripleNotEquals_3 = (_jobs != "");
+    if (_tripleNotEquals_3) {
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("jobs:");
+      _xifexpression_3 = _builder_4;
+    }
+    _builder.append(_xifexpression_3, "\t");
+    String _generateEventStmt_3 = this.generateEventStmt(stmt.getOn().get(0));
+    _builder.append(_generateEventStmt_3, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
     return _builder.toString();
   }
   
-  protected String _generateActiontStmt(final Workflow stmt) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    return _builder.toString();
+  protected String _generateEventStmt(final Event stmt) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nType mismatch: cannot convert from Class<PushEvent> to PushEvent");
   }
   
-  protected String _generateActiontStmt(final Event stmt) {
+  protected String _generatePushEventStmt(final PushEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateActiontStmt(final Env stmt) {
+  protected String _generateActiontStmt(final Job stmt) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("on:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("(");
+    CharSequence _xifexpression = null;
+    String _jobName = stmt.getJobName();
+    boolean _tripleEquals = (_jobName == "");
+    if (_tripleEquals) {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("-");
+      _xifexpression = _builder_1;
+    }
+    _builder.append(_xifexpression, "\t");
+    _builder.append(");");
+    _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
   
@@ -142,7 +219,7 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
-  protected String _generateActiontStmt(final Job stmt) {
+  protected String _generateActiontsStmt(final Job stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
@@ -152,11 +229,20 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
-  protected String _generateActiontStmt(final String stmt) {
+  protected String _generateActiontStmt(final IssueEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
-    _builder.append("#check for value comparisons here - may need to hardcode it");
-    _builder.newLine();
+    CharSequence _xifexpression = null;
+    EList<IssueActivityType> _activityTypes = stmt.getActivityTypes();
+    boolean _tripleEquals = (_activityTypes == "opened");
+    if (_tripleEquals) {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("name:");
+      _xifexpression = _builder_1;
+    }
+    _builder.append(_xifexpression);
+    _builder.append(");");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.newLine();
     _builder.newLine();
@@ -167,24 +253,45 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
-  public String generateActiontStmt(final Object stmt) {
-    if (stmt instanceof Env) {
-      return _generateActiontStmt((Env)stmt);
-    } else if (stmt instanceof Event) {
-      return _generateActiontStmt((Event)stmt);
-    } else if (stmt instanceof Job) {
-      return _generateActiontStmt((Job)stmt);
-    } else if (stmt instanceof RunSetting) {
-      return _generateActiontStmt((RunSetting)stmt);
-    } else if (stmt instanceof Step) {
-      return _generateActiontStmt((Step)stmt);
-    } else if (stmt instanceof Workflow) {
-      return _generateActiontStmt((Workflow)stmt);
-    } else if (stmt instanceof String) {
-      return _generateActiontStmt((String)stmt);
+  protected String _generateActiontStmt(final /* Name */Object stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
+  public String generateWorkFlowStmt(final Workflow stmt) {
+    return _generateWorkFlowStmt(stmt);
+  }
+  
+  public String generateEventStmt(final Event stmt) {
+    return _generateEventStmt(stmt);
+  }
+  
+  public String generatePushEventStmt(final PushEvent stmt) {
+    return _generatePushEventStmt(stmt);
+  }
+  
+  public String generateActiontStmt(final Name stmt) {
+    if (stmt != null) {
+      return _generateActiontStmt(stmt);
+    } else if (stmt != null) {
+      return _generateActiontStmt(stmt);
+    } else if (stmt != null) {
+      return _generateActiontStmt(stmt);
+    } else if (stmt != null) {
+      return _generateActiontStmt(stmt);
+    } else if (stmt != null) {
+      return _generateActiontStmt(stmt);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(stmt).toString());
     }
+  }
+  
+  public String generateActiontsStmt(final Job stmt) {
+    return _generateActiontsStmt(stmt);
   }
 }
