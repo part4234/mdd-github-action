@@ -3,8 +3,8 @@
  */
 package uk.ac.kcl.inf.mdd.project.generator;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
-import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -17,15 +17,23 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import uk.ac.kcl.inf.mdd.project.githubaction.CreateEvent;
+import uk.ac.kcl.inf.mdd.project.githubaction.DeleteEvent;
+import uk.ac.kcl.inf.mdd.project.githubaction.DeploymentEvent;
+import uk.ac.kcl.inf.mdd.project.githubaction.Env;
 import uk.ac.kcl.inf.mdd.project.githubaction.Event;
-import uk.ac.kcl.inf.mdd.project.githubaction.IssueActivityType;
 import uk.ac.kcl.inf.mdd.project.githubaction.IssueEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Job;
+import uk.ac.kcl.inf.mdd.project.githubaction.LabelEvent;
+import uk.ac.kcl.inf.mdd.project.githubaction.PullRequestEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.PushEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Repository;
+import uk.ac.kcl.inf.mdd.project.githubaction.RepositoryDispatchEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.RunSetting;
+import uk.ac.kcl.inf.mdd.project.githubaction.ScheduleEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 import uk.ac.kcl.inf.mdd.project.githubaction.Workflow;
+import uk.ac.kcl.inf.mdd.project.githubaction.WorkflowDispatchEvent;
 
 /**
  * Generates code from your model files on save.
@@ -115,12 +123,6 @@ public class GithubactionGenerator extends AbstractGenerator {
   /**
    * «» Ignore the name and just append to it. Get it from the top attribute values.
    * Files need to be split here for master and featre- TBD
-   * 
-   * 		«if (stmt.env !== ""){'''env:'''}»«stmt.on.get(0).generateEventStmt2»
-   * 
-   * «if (stmt.defaults !== ""){'''defaults:'''}»«stmt.on.get(0).generateEventStmt3»
-   * 
-   * «if (stmt.jobs !== ""){'''jobs:'''}»«stmt.on.get(0).generateEventStmt4»
    */
   protected String _generateWorkFlowStmt(final Workflow stmt) {
     StringConcatenation _builder = new StringConcatenation();
@@ -132,9 +134,9 @@ public class GithubactionGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t");
     CharSequence _xifexpression = null;
-    EList<Event> _on_1 = stmt.getOn();
-    boolean _tripleNotEquals = (_on_1 != "");
-    if (_tripleNotEquals) {
+    boolean _isEmpty = stmt.getOn().isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("on:");
       _xifexpression = _builder_1;
@@ -143,111 +145,241 @@ public class GithubactionGenerator extends AbstractGenerator {
     String _generateEventStmt = this.generateEventStmt(stmt.getOn().get(0));
     _builder.append(_generateEventStmt, "\t");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append(" \t\t");
+    CharSequence _xifexpression_1 = null;
+    boolean _isEmpty_1 = stmt.getEnv().isEmpty();
+    boolean _not_1 = (!_isEmpty_1);
+    if (_not_1) {
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("env:");
+      _xifexpression_1 = _builder_2;
+    }
+    _builder.append(_xifexpression_1, " \t\t");
+    String _generateEventStmt2 = this.generateEventStmt2(stmt.getEnv().get(0));
+    _builder.append(_generateEventStmt2, " \t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    CharSequence _xifexpression_2 = null;
+    RunSetting _defaults = stmt.getDefaults();
+    boolean _notEquals = (!Objects.equal(_defaults, ""));
+    if (_notEquals) {
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("defaults:");
+      _xifexpression_2 = _builder_3;
+    }
+    _builder.append(_xifexpression_2, "\t");
+    String _generateEventStmt3 = this.generateEventStmt3(stmt.getDefaults());
+    _builder.append(_generateEventStmt3, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    CharSequence _xifexpression_3 = null;
+    boolean _isEmpty_2 = stmt.getJobs().isEmpty();
+    boolean _not_2 = (!_isEmpty_2);
+    if (_not_2) {
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("jobs:");
+      _xifexpression_3 = _builder_4;
+    }
+    _builder.append(_xifexpression_3, "\t");
+    String _generateEventStmt4 = this.generateEventStmt4(stmt.getJobs().get(0));
+    _builder.append(_generateEventStmt4, "\t");
+    _builder.append("\t\t");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     return _builder.toString();
   }
   
   protected String _generateEventStmt(final Event stmt) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nno viable alternative at input \')\'");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    CharSequence _xifexpression = null;
+    boolean _notEquals = (!Objects.equal(PushEvent.class, null));
+    if (_notEquals) {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("    ");
+      _builder_1.append("push:");
+      _xifexpression = _builder_1;
+    }
+    _builder.append(_xifexpression);
+    String _generatePushEventStmt = this.generatePushEventStmt(PushEvent.class.cast(PushEvent.class));
+    _builder.append(_generatePushEventStmt);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_1 = null;
+    boolean _notEquals_1 = (!Objects.equal(PullRequestEvent.class, null));
+    if (_notEquals_1) {
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("    ");
+      _builder_2.append("push:");
+      _xifexpression_1 = _builder_2;
+    }
+    _builder.append(_xifexpression_1);
+    this.generatePullRequestEventt(this);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_2 = null;
+    boolean _notEquals_2 = (!Objects.equal(ScheduleEvent.class, null));
+    if (_notEquals_2) {
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("    ");
+      _builder_3.append("push:");
+      _xifexpression_2 = _builder_3;
+    }
+    _builder.append(_xifexpression_2);
+    this.generateScheduleEvent(this);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_3 = null;
+    boolean _notEquals_3 = (!Objects.equal(WorkflowDispatchEvent.class, null));
+    if (_notEquals_3) {
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("    ");
+      _builder_4.append("push:");
+      _xifexpression_3 = _builder_4;
+    }
+    _builder.append(_xifexpression_3);
+    this.generateWorkflowDispatchEvent(this);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_4 = null;
+    boolean _notEquals_4 = (!Objects.equal(RepositoryDispatchEvent.class, null));
+    if (_notEquals_4) {
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("    ");
+      _builder_5.append("push:");
+      _xifexpression_4 = _builder_5;
+    }
+    _builder.append(_xifexpression_4);
+    this.generateRepositoryDispatchEvent(this);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_5 = null;
+    boolean _notEquals_5 = (!Objects.equal(CreateEvent.class, null));
+    if (_notEquals_5) {
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("    ");
+      _builder_6.append("push:");
+      _xifexpression_5 = _builder_6;
+    }
+    _builder.append(_xifexpression_5);
+    this.generateCreateEvent(this);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_6 = null;
+    boolean _notEquals_6 = (!Objects.equal(DeleteEvent.class, null));
+    if (_notEquals_6) {
+      StringConcatenation _builder_7 = new StringConcatenation();
+      _builder_7.append("    ");
+      _builder_7.append("push:");
+      _xifexpression_6 = _builder_7;
+    }
+    _builder.append(_xifexpression_6);
+    this.generateDeleteEvent(this);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_7 = null;
+    boolean _notEquals_7 = (!Objects.equal(DeploymentEvent.class, null));
+    if (_notEquals_7) {
+      StringConcatenation _builder_8 = new StringConcatenation();
+      _builder_8.append("    ");
+      _builder_8.append("push:");
+      _xifexpression_7 = _builder_8;
+    }
+    _builder.append(_xifexpression_7);
+    this.generateDeploymentEvent(this);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_8 = null;
+    boolean _notEquals_8 = (!Objects.equal(IssueEvent.class, null));
+    if (_notEquals_8) {
+      StringConcatenation _builder_9 = new StringConcatenation();
+      _builder_9.append("    ");
+      _builder_9.append("push:");
+      _xifexpression_8 = _builder_9;
+    }
+    _builder.append(_xifexpression_8);
+    this.generateIssueEvent(this);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_9 = null;
+    boolean _notEquals_9 = (!Objects.equal(LabelEvent.class, null));
+    if (_notEquals_9) {
+      StringConcatenation _builder_10 = new StringConcatenation();
+      _builder_10.append("    ");
+      _builder_10.append("push:");
+      _xifexpression_9 = _builder_10;
+    }
+    _builder.append(_xifexpression_9);
+    this.generateLabelEvent(this);
+    _builder.append("\t\t\t\t\t\t");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
   }
   
   protected String _generatePushEventStmt(final PushEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
     CharSequence _xifexpression = null;
-    EList<String> _branches = stmt.getBranches();
-    boolean _tripleEquals = (_branches == "branchesIgnore");
-    if (_tripleEquals) {
+    boolean _isEmpty = stmt.getBranchesIgnore().isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append(":");
+      _builder_1.append("    ");
+      _builder_1.append("branches: [master]");
       _xifexpression = _builder_1;
     }
     _builder.append(_xifexpression);
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
     return _builder.toString();
   }
   
-  protected String _generateActiontStmt(final Job stmt) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("on:");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("(");
-    CharSequence _xifexpression = null;
-    String _jobName = stmt.getJobName();
-    boolean _tripleEquals = (_jobName == "");
-    if (_tripleEquals) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("-");
-      _xifexpression = _builder_1;
-    }
-    _builder.append(_xifexpression, "\t");
-    _builder.append(");");
-    _builder.newLineIfNotEmpty();
-    return _builder.toString();
-  }
-  
-  protected String _generateEventStmt2(final RunSetting stmt) {
+  protected String _generateEventStmt2(final Env stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateEventStmt3(final Job stmt) {
+  protected String _generateEventStmt3(final RunSetting stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateEventStmt4(final Step stmt) {
+  protected String _generateEventStmt4(final Job stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateActiontStmt(final IssueEvent stmt) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
-    CharSequence _xifexpression = null;
-    EList<IssueActivityType> _activityTypes = stmt.getActivityTypes();
-    boolean _tripleEquals = (_activityTypes == "opened");
-    if (_tripleEquals) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("name:");
-      _xifexpression = _builder_1;
-    }
-    _builder.append(_xifexpression);
-    _builder.append(");");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
-    return _builder.toString();
+  public void generateLabelEvent(final Object null1) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
-  protected String _generateActiontStmt(final /* Name */Object stmt) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    return _builder.toString();
+  public void generateIssueEvent(final Object null1) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  public void generateDeploymentEvent(final Object null1) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  public void generateDeleteEvent(final Object null1) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  public void generateCreateEvent(final Object null1) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  public void generateRepositoryDispatchEvent(final Object null1) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  public void generateWorkflowDispatchEvent(final Object null1) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  public void generateScheduleEvent(final Object null1) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  public void generatePullRequestEventt(final Object null1) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   public String generateWorkFlowStmt(final Workflow stmt) {
@@ -262,28 +394,15 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _generatePushEventStmt(stmt);
   }
   
-  public String generateActiontStmt(final Name stmt) {
-    if (stmt != null) {
-      return _generateActiontStmt(stmt);
-    } else if (stmt != null) {
-      return _generateActiontStmt(stmt);
-    } else if (stmt != null) {
-      return _generateActiontStmt(stmt);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(stmt).toString());
-    }
-  }
-  
-  public String generateEventStmt2(final RunSetting stmt) {
+  public String generateEventStmt2(final Env stmt) {
     return _generateEventStmt2(stmt);
   }
   
-  public String generateEventStmt3(final Job stmt) {
+  public String generateEventStmt3(final RunSetting stmt) {
     return _generateEventStmt3(stmt);
   }
   
-  public String generateEventStmt4(final Step stmt) {
+  public String generateEventStmt4(final Job stmt) {
     return _generateEventStmt4(stmt);
   }
 }
