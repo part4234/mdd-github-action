@@ -1414,9 +1414,9 @@ rule__Workflow__Group_3__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getWorkflowAccess().getNameAssignment_3_1()); }
-	(rule__Workflow__NameAssignment_3_1)
-	{ after(grammarAccess.getWorkflowAccess().getNameAssignment_3_1()); }
+	{ before(grammarAccess.getWorkflowAccess().getNamesAssignment_3_1()); }
+	(rule__Workflow__NamesAssignment_3_1)
+	{ after(grammarAccess.getWorkflowAccess().getNamesAssignment_3_1()); }
 )
 ;
 finally {
@@ -10661,15 +10661,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Workflow__NameAssignment_3_1
+rule__Workflow__NamesAssignment_3_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getWorkflowAccess().getNameEStringParserRuleCall_3_1_0()); }
+		{ before(grammarAccess.getWorkflowAccess().getNamesEStringParserRuleCall_3_1_0()); }
 		ruleEString
-		{ after(grammarAccess.getWorkflowAccess().getNameEStringParserRuleCall_3_1_0()); }
+		{ after(grammarAccess.getWorkflowAccess().getNamesEStringParserRuleCall_3_1_0()); }
 	)
 ;
 finally {

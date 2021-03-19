@@ -17,7 +17,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import uk.ac.kcl.inf.mdd.project.githubaction.Env;
 import uk.ac.kcl.inf.mdd.project.githubaction.Event;
 import uk.ac.kcl.inf.mdd.project.githubaction.IssueActivityType;
 import uk.ac.kcl.inf.mdd.project.githubaction.IssueEvent;
@@ -113,18 +112,28 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
+  /**
+   * «» Ignore the name and just append to it. Get it from the top attribute values.
+   * Files need to be split here for master and featre- TBD
+   * 
+   * 		«if (stmt.env !== ""){'''env:'''}»«stmt.on.get(0).generateEventStmt2»
+   * 
+   * «if (stmt.defaults !== ""){'''defaults:'''}»«stmt.on.get(0).generateEventStmt3»
+   * 
+   * «if (stmt.jobs !== ""){'''jobs:'''}»«stmt.on.get(0).generateEventStmt4»
+   */
   protected String _generateWorkFlowStmt(final Workflow stmt) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\t");
     _builder.append("name: ");
-    String _name = stmt.getName();
-    _builder.append(_name, "\t");
+    EList<Event> _on = stmt.getOn();
+    _builder.append(_on, "\t");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
     CharSequence _xifexpression = null;
-    EList<Event> _on = stmt.getOn();
-    boolean _tripleNotEquals = (_on != "");
+    EList<Event> _on_1 = stmt.getOn();
+    boolean _tripleNotEquals = (_on_1 != "");
     if (_tripleNotEquals) {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("on:");
@@ -134,63 +143,42 @@ public class GithubactionGenerator extends AbstractGenerator {
     String _generateEventStmt = this.generateEventStmt(stmt.getOn().get(0));
     _builder.append(_generateEventStmt, "\t");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    CharSequence _xifexpression_1 = null;
-    EList<Env> _env = stmt.getEnv();
-    boolean _tripleNotEquals_1 = (_env != "");
-    if (_tripleNotEquals_1) {
-      StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("env:");
-      _xifexpression_1 = _builder_2;
-    }
-    _builder.append(_xifexpression_1, "\t");
-    String _generateEventStmt_1 = this.generateEventStmt(stmt.getOn().get(0));
-    _builder.append(_generateEventStmt_1, "\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    CharSequence _xifexpression_2 = null;
-    RunSetting _defaults = stmt.getDefaults();
-    boolean _tripleNotEquals_2 = (_defaults != "");
-    if (_tripleNotEquals_2) {
-      StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append("defaults:");
-      _xifexpression_2 = _builder_3;
-    }
-    _builder.append(_xifexpression_2, "\t");
-    String _generateEventStmt_2 = this.generateEventStmt(stmt.getOn().get(0));
-    _builder.append(_generateEventStmt_2, "\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    CharSequence _xifexpression_3 = null;
-    EList<Job> _jobs = stmt.getJobs();
-    boolean _tripleNotEquals_3 = (_jobs != "");
-    if (_tripleNotEquals_3) {
-      StringConcatenation _builder_4 = new StringConcatenation();
-      _builder_4.append("jobs:");
-      _xifexpression_3 = _builder_4;
-    }
-    _builder.append(_xifexpression_3, "\t");
-    String _generateEventStmt_3 = this.generateEventStmt(stmt.getOn().get(0));
-    _builder.append(_generateEventStmt_3, "\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
     _builder.newLine();
     return _builder.toString();
   }
   
   protected String _generateEventStmt(final Event stmt) {
     throw new Error("Unresolved compilation problems:"
-      + "\nType mismatch: cannot convert from Class<PushEvent> to PushEvent");
+      + "\nno viable alternative at input \')\'");
   }
   
   protected String _generatePushEventStmt(final PushEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    CharSequence _xifexpression = null;
+    EList<String> _branches = stmt.getBranches();
+    boolean _tripleEquals = (_branches == "branchesIgnore");
+    if (_tripleEquals) {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append(":");
+      _xifexpression = _builder_1;
+    }
+    _builder.append(_xifexpression);
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
     return _builder.toString();
   }
   
@@ -214,17 +202,17 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
-  protected String _generateActiontStmt(final RunSetting stmt) {
+  protected String _generateEventStmt2(final RunSetting stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateActiontsStmt(final Job stmt) {
+  protected String _generateEventStmt3(final Job stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateActiontStmt(final Step stmt) {
+  protected String _generateEventStmt4(final Step stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
@@ -281,17 +269,21 @@ public class GithubactionGenerator extends AbstractGenerator {
       return _generateActiontStmt(stmt);
     } else if (stmt != null) {
       return _generateActiontStmt(stmt);
-    } else if (stmt != null) {
-      return _generateActiontStmt(stmt);
-    } else if (stmt != null) {
-      return _generateActiontStmt(stmt);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(stmt).toString());
     }
   }
   
-  public String generateActiontsStmt(final Job stmt) {
-    return _generateActiontsStmt(stmt);
+  public String generateEventStmt2(final RunSetting stmt) {
+    return _generateEventStmt2(stmt);
+  }
+  
+  public String generateEventStmt3(final Job stmt) {
+    return _generateEventStmt3(stmt);
+  }
+  
+  public String generateEventStmt4(final Step stmt) {
+    return _generateEventStmt4(stmt);
   }
 }

@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Workflow#getName <em>Name</em>}</li>
+ *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Workflow#getNames <em>Names</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Workflow#getOn <em>On</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Workflow#getEnv <em>Env</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.Workflow#getDefaults <em>Defaults</em>}</li>
@@ -30,26 +30,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface Workflow extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * Returns the value of the '<em><b>Names</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getWorkflow_Name()
+   * @return the value of the '<em>Names</em>' attribute.
+   * @see #setNames(String)
+   * @see uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage#getWorkflow_Names()
    * @model
    * @generated
    */
-  String getName();
+  String getNames();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.inf.mdd.project.githubaction.Workflow#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link uk.ac.kcl.inf.mdd.project.githubaction.Workflow#getNames <em>Names</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
+   * @param value the new value of the '<em>Names</em>' attribute.
+   * @see #getNames()
    * @generated
    */
-  void setName(String value);
+  void setNames(String value);
 
   /**
    * Returns the value of the '<em><b>On</b></em>' containment reference list.

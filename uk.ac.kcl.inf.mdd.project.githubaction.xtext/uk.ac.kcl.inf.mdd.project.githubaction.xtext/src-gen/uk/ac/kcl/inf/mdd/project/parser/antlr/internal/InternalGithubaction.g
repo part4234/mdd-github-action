@@ -196,17 +196,17 @@ ruleWorkflow returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getWorkflowAccess().getNameEStringParserRuleCall_3_1_0());
+						newCompositeNode(grammarAccess.getWorkflowAccess().getNamesEStringParserRuleCall_3_1_0());
 					}
-					lv_name_4_0=ruleEString
+					lv_names_4_0=ruleEString
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getWorkflowRule());
 						}
 						set(
 							$current,
-							"name",
-							lv_name_4_0,
+							"names",
+							lv_names_4_0,
 							"uk.ac.kcl.inf.mdd.project.Githubaction.EString");
 						afterParserOrEnumRuleCall();
 					}

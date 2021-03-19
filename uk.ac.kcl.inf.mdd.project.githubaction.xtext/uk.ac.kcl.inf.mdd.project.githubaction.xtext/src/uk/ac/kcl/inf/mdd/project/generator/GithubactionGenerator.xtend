@@ -68,32 +68,45 @@ class GithubactionGenerator extends AbstractGenerator {
 		«program.workflows.map[generateWorkFlowStmt()].join('\n')»
 		
 	
-	''' 
-	// «» Ignore the name and just append to it. Get it from the top attribute values.
-	// Files need to be split here for master and featre- TBD
+	'''
+	/* 
+	 * «» Ignore the name and just append to it. Get it from the top attribute values.
+	   Files need to be split here for master and featre- TBD
+	 * 
+	 * 		«if (stmt.env !== ""){'''env:'''}»«stmt.on.get(0).generateEventStmt2»
+		
+		«if (stmt.defaults !== ""){'''defaults:'''}»«stmt.on.get(0).generateEventStmt3»
+		
+		«if (stmt.jobs !== ""){'''jobs:'''}»«stmt.on.get(0).generateEventStmt4»
+	 * */ 
+	 
 	dispatch def String generateWorkFlowStmt(Workflow stmt) '''
-		name: «stmt.name»
+		name: «stmt.on»
 	
 		«if (stmt.on !== ""){'''on:'''}»«stmt.on.get(0).generateEventStmt»
-		
-		«if (stmt.env !== ""){'''env:'''}»«stmt.on.get(0).generateEventStmt»
-		
-		«if (stmt.defaults !== ""){'''defaults:'''}»«stmt.on.get(0).generateEventStmt»
-		
-		«if (stmt.jobs !== ""){'''jobs:'''}»«stmt.on.get(0).generateEventStmt»
-		
+	
 		'''
 
 
 	//add more methods to handle the rest calls
 	dispatch def String generateEventStmt(Event stmt) '''
 		
-		«if (stmt === PushEvent){'''    push:'''}»«generatePushEventStmt(PushEvent)»
+		«if (stmt === PushEvent){'''    push:'''}»«generatePushEventStmt(PushEvent.)»
 	
 	'''	
 	
 	
-	dispatch def String generatePushEventStmt(PushEvent stmt) ''''''
+	dispatch def String generatePushEventStmt(PushEvent stmt) '''
+		
+		«if (stmt.branches === "branchesIgnore"){''':'''}»
+	
+	
+	
+	
+	
+	
+	
+	'''
 	
 	
 	
@@ -108,11 +121,11 @@ class GithubactionGenerator extends AbstractGenerator {
 
 	
 	
-	dispatch def String generateActiontStmt(RunSetting stmt) ''''''
+	dispatch def String generateEventStmt2(RunSetting stmt) ''''''
 		
-	dispatch def String generateActiontsStmt(Job stmt) ''''''
+	dispatch def String generateEventStmt3(Job stmt) ''''''
 	
-	dispatch def String generateActiontStmt(Step stmt) ''''''
+	dispatch def String generateEventStmt4(Step stmt) ''''''
 	
 	// check for value comparisons here - may need to hardcode it
 	dispatch def String generateActiontStmt(IssueEvent stmt) '''

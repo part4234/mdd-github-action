@@ -33,7 +33,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Githubaction.ecore#//Repository/workflows"/>
     </genClasses>
     <genClasses ecoreClass="Githubaction.ecore#//Workflow">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Githubaction.ecore#//Workflow/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Githubaction.ecore#//Workflow/names"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Githubaction.ecore#//Workflow/on"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Githubaction.ecore#//Workflow/env"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Githubaction.ecore#//Workflow/defaults"/>
