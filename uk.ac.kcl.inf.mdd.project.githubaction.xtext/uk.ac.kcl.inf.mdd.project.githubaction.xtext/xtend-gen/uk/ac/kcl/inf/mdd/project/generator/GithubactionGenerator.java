@@ -4,20 +4,36 @@
 package uk.ac.kcl.inf.mdd.project.generator;
 
 import com.google.common.collect.Iterators;
+import java.util.Arrays;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import uk.ac.kcl.inf.mdd.project.githubaction.CreateEvent;
+import uk.ac.kcl.inf.mdd.project.githubaction.DeleteEvent;
+import uk.ac.kcl.inf.mdd.project.githubaction.DeploymentEvent;
+import uk.ac.kcl.inf.mdd.project.githubaction.Env;
 import uk.ac.kcl.inf.mdd.project.githubaction.Event;
+import uk.ac.kcl.inf.mdd.project.githubaction.InputParameter;
+import uk.ac.kcl.inf.mdd.project.githubaction.IssueEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Job;
+import uk.ac.kcl.inf.mdd.project.githubaction.LabelEvent;
+import uk.ac.kcl.inf.mdd.project.githubaction.PullRequestEvent;
+import uk.ac.kcl.inf.mdd.project.githubaction.PushEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Repository;
+import uk.ac.kcl.inf.mdd.project.githubaction.RepositoryDispatchEvent;
+import uk.ac.kcl.inf.mdd.project.githubaction.ScheduleEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 import uk.ac.kcl.inf.mdd.project.githubaction.Workflow;
+import uk.ac.kcl.inf.mdd.project.githubaction.WorkflowDispatchEvent;
 
 /**
  * Generates code from your model files on save.
@@ -26,12 +42,28 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Workflow;
  */
 @SuppressWarnings("all")
 public class GithubactionGenerator extends AbstractGenerator {
+  private static class Environment {
+    private int counter = 0;
+    
+    public CharSequence getFreshVarName() {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("i_");
+      int _plusPlus = this.counter++;
+      _builder.append(_plusPlus);
+      return _builder;
+    }
+    
+    public int exit() {
+      return this.counter--;
+    }
+  }
+  
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final Repository model = ((Repository) _head);
     fsa.generateFile(this.deriveStatsTargetFileNameFor(resource), this.doGenerateStats(model));
-    this.doGenerateStats(model);
+    fsa.generateFile("githubaction2.yaml", this.doGenerateClass(model));
   }
   
   public String deriveStatsTargetFileNameFor(final Resource resource) {
@@ -46,7 +78,7 @@ public class GithubactionGenerator extends AbstractGenerator {
     _builder.append("- ");
     int _size = IteratorExtensions.size(Iterators.<Repository>filter(program.eAllContents(), Repository.class));
     _builder.append(_size);
-    _builder.append(" Repositories");
+    _builder.append(" Repositoriese");
     _builder.newLineIfNotEmpty();
     _builder.append("- ");
     int _size_1 = IteratorExtensions.size(Iterators.<Workflow>filter(program.eAllContents(), Workflow.class));
@@ -68,6 +100,7 @@ public class GithubactionGenerator extends AbstractGenerator {
     _builder.append(_size_4);
     _builder.append(" Steps");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
     return _builder.toString();
   }
   
@@ -79,5 +112,391 @@ public class GithubactionGenerator extends AbstractGenerator {
       _xblockexpression = (_firstUpper + "Turtle");
     }
     return _xblockexpression;
+  }
+  
+  /**
+   * Below are parseable dispatch mathos for all grammar types
+   */
+  public String doGenerateClass(final Repository program) {
+    StringConcatenation _builder = new StringConcatenation();
+    final Function1<Workflow, String> _function = (Workflow it) -> {
+      GithubactionGenerator.Environment _environment = new GithubactionGenerator.Environment();
+      return this.generateWorkflow(it, _environment);
+    };
+    String _join = IterableExtensions.join(ListExtensions.<Workflow, String>map(program.getWorkflows(), _function), "\n");
+    _builder.append(_join);
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  public String generateWorkflow(final Workflow workflow, final GithubactionGenerator.Environment env) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("name: ");
+    String _string = workflow.getName().toString();
+    _builder.append(_string);
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    {
+      boolean _isEmpty = workflow.getOn().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder.append("on:");
+        _builder.newLine();
+        {
+          EList<Event> _on = workflow.getOn();
+          for(final Event event : _on) {
+            _builder.newLine();
+            String _generateEvent = this.generateEvent(event);
+            _builder.append(_generateEvent);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      boolean _isEmpty_1 = workflow.getJobs().isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      if (_not_1) {
+        _builder.append("jobs:");
+        _builder.newLine();
+        {
+          EList<Job> _jobs = workflow.getJobs();
+          for(final Job job : _jobs) {
+            String _generateJob = this.generateJob(job);
+            _builder.append(_generateJob);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final PushEvent event) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\t");
+    _builder.append("push:");
+    _builder.newLine();
+    CharSequence _xifexpression = null;
+    if (((!event.getBranches().isEmpty()) && (event.getBranches().get(0) != null))) {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\t");
+      _builder_1.append("branches: [");
+      String _get = event.getBranches().get(0);
+      _builder_1.append(_get, "\t");
+      _builder_1.append("]");
+      _xifexpression = _builder_1;
+    }
+    _builder.append(_xifexpression);
+    _builder.append(" ");
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_1 = null;
+    if (((!event.getTags().isEmpty()) && (event.getTags().get(1) != null))) {
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("stmt.branches.get(1)");
+      _xifexpression_1 = _builder_2;
+    }
+    _builder.append(_xifexpression_1);
+    _builder.newLineIfNotEmpty();
+    String _xifexpression_2 = null;
+    if (((!event.getBranchesIgnore().isEmpty()) && (event.getBranchesIgnore().get(1) != null))) {
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("branches:");
+      String _get_1 = event.getBranches().get(1);
+      _xifexpression_2 = (_builder_3.toString() + _get_1);
+    }
+    _builder.append(_xifexpression_2);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_3 = null;
+    if (((!event.getTagsIgnore().isEmpty()) && (event.getTagsIgnore().get(1) != null))) {
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("stmt.branches.get(1)");
+      _xifexpression_3 = _builder_4;
+    }
+    _builder.append(_xifexpression_3);
+    _builder.newLineIfNotEmpty();
+    String _xifexpression_4 = null;
+    if (((!event.getPaths().isEmpty()) && (event.getPaths().get(1) != null))) {
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("branches:");
+      String _get_2 = event.getBranches().get(1);
+      _xifexpression_4 = (_builder_5.toString() + _get_2);
+    }
+    _builder.append(_xifexpression_4);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_5 = null;
+    if (((!event.getPathsIgnore().isEmpty()) && (event.getPathsIgnore().get(1) != null))) {
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("stmt.branches.get(1)");
+      _xifexpression_5 = _builder_6;
+    }
+    _builder.append(_xifexpression_5);
+    _builder.append("\t\t");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final PullRequestEvent stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _xifexpression = null;
+    String _get = stmt.getBranches().get(1);
+    boolean _tripleNotEquals = (_get != null);
+    if (_tripleNotEquals) {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("branches:");
+      String _get_1 = stmt.getBranches().get(1);
+      _xifexpression = (_builder_1.toString() + _get_1);
+    }
+    _builder.append(_xifexpression);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_1 = null;
+    String _get_2 = stmt.getTags().get(1);
+    boolean _tripleNotEquals_1 = (_get_2 != null);
+    if (_tripleNotEquals_1) {
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("stmt.branches.get(1)");
+      _xifexpression_1 = _builder_2;
+    }
+    _builder.append(_xifexpression_1);
+    _builder.newLineIfNotEmpty();
+    String _xifexpression_2 = null;
+    String _get_3 = stmt.getBranchesIgnore().get(1);
+    boolean _tripleNotEquals_2 = (_get_3 != null);
+    if (_tripleNotEquals_2) {
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("branches:");
+      String _get_4 = stmt.getBranches().get(1);
+      _xifexpression_2 = (_builder_3.toString() + _get_4);
+    }
+    _builder.append(_xifexpression_2);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_3 = null;
+    String _get_5 = stmt.getTagsIgnore().get(1);
+    boolean _tripleNotEquals_3 = (_get_5 != null);
+    if (_tripleNotEquals_3) {
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("stmt.branches.get(1)");
+      _xifexpression_3 = _builder_4;
+    }
+    _builder.append(_xifexpression_3);
+    _builder.newLineIfNotEmpty();
+    String _xifexpression_4 = null;
+    String _get_6 = stmt.getPaths().get(1);
+    boolean _tripleNotEquals_4 = (_get_6 != null);
+    if (_tripleNotEquals_4) {
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("branches:");
+      String _get_7 = stmt.getBranches().get(1);
+      _xifexpression_4 = (_builder_5.toString() + _get_7);
+    }
+    _builder.append(_xifexpression_4);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_5 = null;
+    String _get_8 = stmt.getPathsIgnore().get(1);
+    boolean _tripleNotEquals_5 = (_get_8 != null);
+    if (_tripleNotEquals_5) {
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("stmt.branches.get(1)");
+      _xifexpression_5 = _builder_6;
+    }
+    _builder.append(_xifexpression_5);
+    _builder.append("\t\t\t");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final ScheduleEvent stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final WorkflowDispatchEvent stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final RepositoryDispatchEvent stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final CreateEvent stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final DeleteEvent stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final DeploymentEvent stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final IssueEvent stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final LabelEvent stmt) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  public String generateJob(final Job job) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\t");
+    _builder.append("test:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("name: ");
+    String _string = job.getJobName().toString();
+    _builder.append(_string, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("runsOn: ");
+    String _string_1 = job.getRunsOn().toString();
+    _builder.append(_string_1, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    {
+      boolean _isEmpty = job.getSteps().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder.append("\t");
+        _builder.append("steps:");
+        _builder.newLine();
+        {
+          EList<Step> _steps = job.getSteps();
+          for(final Step step : _steps) {
+            String _generateStepsType = this.generateStepsType(step);
+            _builder.append(_generateStepsType);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    return _builder.toString();
+  }
+  
+  public String generateStepsType(final Step step) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      String _stepName = step.getStepName();
+      boolean _tripleNotEquals = (_stepName != null);
+      if (_tripleNotEquals) {
+        _builder.append("\t\t- name: ");
+        String _stepName_1 = step.getStepName();
+        _builder.append(_stepName_1);
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if (((step.getStepName() == null) && (step.getUses() != null))) {
+        _builder.append("\t\t- uses: ");
+        String _string = step.getUses().toString();
+        _builder.append(_string);
+      } else {
+        String _uses = step.getUses();
+        boolean _tripleNotEquals_1 = (_uses != null);
+        if (_tripleNotEquals_1) {
+          _builder.append(" \t \t\tuses: ");
+          String _string_1 = step.getUses().toString();
+          _builder.append(_string_1);
+        }
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    {
+      boolean _isEmpty = step.getWith().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder.append("\t\twith: ");
+        String _name = step.getName();
+        _builder.append(_name);
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        {
+          EList<InputParameter> _with = step.getWith();
+          for(final InputParameter input : _with) {
+            String _name_1 = input.getName();
+            _builder.append(_name_1, "\t");
+            _builder.append(":");
+            String _value = input.getValue();
+            _builder.append(_value, "\t");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _isEmpty_1 = step.getRun().isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      if (_not_1) {
+        _builder.append("\trun: ");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        {
+          EList<String> _run = step.getRun();
+          for(final String line : _run) {
+            _builder.append(line, "\t");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _isEmpty_2 = step.getEnv().isEmpty();
+      boolean _not_2 = (!_isEmpty_2);
+      if (_not_2) {
+        _builder.append("\tenv: ");
+        String _name_2 = step.getName();
+        _builder.append(_name_2);
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        {
+          EList<Env> _env = step.getEnv();
+          for(final Env input_1 : _env) {
+            String _name_3 = input_1.getName();
+            _builder.append(_name_3, "\t");
+            _builder.append(":");
+            String _value_1 = input_1.getValue();
+            _builder.append(_value_1, "\t");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder.toString();
+  }
+  
+  public String generateEvent(final Event stmt) {
+    if (stmt instanceof CreateEvent) {
+      return _generateEvent((CreateEvent)stmt);
+    } else if (stmt instanceof DeleteEvent) {
+      return _generateEvent((DeleteEvent)stmt);
+    } else if (stmt instanceof DeploymentEvent) {
+      return _generateEvent((DeploymentEvent)stmt);
+    } else if (stmt instanceof IssueEvent) {
+      return _generateEvent((IssueEvent)stmt);
+    } else if (stmt instanceof LabelEvent) {
+      return _generateEvent((LabelEvent)stmt);
+    } else if (stmt instanceof PullRequestEvent) {
+      return _generateEvent((PullRequestEvent)stmt);
+    } else if (stmt instanceof PushEvent) {
+      return _generateEvent((PushEvent)stmt);
+    } else if (stmt instanceof RepositoryDispatchEvent) {
+      return _generateEvent((RepositoryDispatchEvent)stmt);
+    } else if (stmt instanceof ScheduleEvent) {
+      return _generateEvent((ScheduleEvent)stmt);
+    } else if (stmt instanceof WorkflowDispatchEvent) {
+      return _generateEvent((WorkflowDispatchEvent)stmt);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(stmt).toString());
+    }
   }
 }

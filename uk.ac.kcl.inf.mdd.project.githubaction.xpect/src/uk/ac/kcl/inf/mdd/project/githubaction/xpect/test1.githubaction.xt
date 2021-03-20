@@ -1,26 +1,49 @@
 /* XPECT_SETUP uk.ac.kcl.inf.mdd.project.githubaction.xpect.XPectTests END_SETUP */
 /*
-XPECT generated ---
+XPECT generated file test1.githubaction.xt.txt ---
 Program contains:
 
 - 0 Repositories
-- 2 Workflows
-- 2 Events
-- 5 Jobs
-- 15 Steps
----  
+- 1 Workflows
+- 1 Events
+- 1 Jobs
+- 3 Steps
+---     
+   
+XPECT generated file TextGithubAction.yaml---
+
+name: Feature Branch
+
+on:
+   push:
+		branches: [ master ]
+		
+jobs:
+	test:
+ 	name: macos-latest
+	runsOn: ubuntu-18.04
+	
+	steps:
+		- uses: actions/checkout@v1
+		
+		- name: Set up JDK 11
+		  uses: actions/setup-java@v1
+		  with:
+		    java-version: 1.11
+			
+		- name: Maven Package
+		  run: mvn -B clean package -DskipTests
+---
  */
-
-
 
 Repository {
 	workflows {
 		
 		Workflow {
-			name "Main Branch"
+			name "Feature Branch"
 			on {
 				PushEvent {
-					branchesIgnore { master, "release*" }
+					branches { master, "release*" }
 				}
 			}
 			jobs {
@@ -41,92 +64,6 @@ Repository {
 							run { "mvn -B clean package -DskipTests" }
 						}
 					}
-				}
-			}
-		},
-		
-		Workflow  {
-			name "Master Branch"
-			on {
-				PushEvent {
-					branches { master }
-				}
-			}
-			jobs {
-				Job test {
-					name "Test - Units & Integrations"
-					runsOn "ubuntu-18.04"
-					steps {
-						Step {
-							uses "actions/checkout@v1"
-						},
-						Step {
-							uses "actions/setup-java@v1"
-							with { "java-version": "11.0.4" }
-						},
-						Step {
-							name "Maven Package"
-							run { "mvn -B clean package -DskipTests" }
-						},
-						Step {
-							name "Maven Verify"
-							run { "mvn -B clean verify -Pintegration-test" }
-						}
-					}
-				},
-				Job sonar {
-					name "Test - SonarCloud Scan"
-    				runsOn "ubuntu-18.04"
-    				steps {
-    					Step {
-    						uses "actions/checkout@v1"
-    					},
-    					Step {
-    						name "Set up JDK 11"
-    						uses "actions/setup-java@v1"
-    						with { "java-version" : "11.0.4" }
-    					}
-    				}
-				},
-				Job artifact {
-					name "Publish - GitHub Packages"
-					needs (test, sonar)
-    				runsOn "ubuntu-18.04"
-    				steps {
-    					Step {
-    						uses "actions/checkout@v1"
-    					},
-    					Step {
-    						name "Set up JDK 11"
-        					uses "actions/setup-java@v1"
-        					with { "java-version": "11.0.4" }
-    					},
-    					Step {
-    						name "Publish artifact on GitHub Packages"
-    						run { "mvn -B clean deploy -DskipTests" }
-    						env { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" }
-    					}
-    				}
-				},
-				Job docker {
-					name "Publish - Docker Hub"
-				    needs (test, sonar)
-				    runsOn "ubuntu-18.04"
-				    env { "REPO": "${{ secrets.DOCKER_REPO }}" }
-				    steps {
-				    	Step {
-				    		uses "actions/checkout@v1"
-				    	},
-				    	Step {
-				    		name "Set up JDK 11"
-				    		uses "Set up JDK 11"
-				    		with { "java-version": "11.0.4" }
-				    	},
-				    	Step {
-				    		name "Login to Docker Hub"
-				    		run { "docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}" }
-				    	}
-				    }
 				}
 			}
 		}
