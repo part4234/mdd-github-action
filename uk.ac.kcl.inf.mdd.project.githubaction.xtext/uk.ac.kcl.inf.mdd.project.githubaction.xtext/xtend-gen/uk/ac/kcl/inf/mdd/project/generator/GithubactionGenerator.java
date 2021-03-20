@@ -62,11 +62,12 @@ public class GithubactionGenerator extends AbstractGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final Repository model = ((Repository) _head);
-    fsa.generateFile("test.txt", this.doGenerateClass(model));
+    fsa.generateFile(this.deriveStatsTargetFileNameFor(resource), this.doGenerateStats(model));
+    fsa.generateFile("githubaction2.yaml", this.doGenerateClass(model));
   }
   
   public String deriveStatsTargetFileNameFor(final Resource resource) {
-    return resource.getURI().appendFileExtension("yaml").lastSegment();
+    return resource.getURI().appendFileExtension("txt").lastSegment();
   }
   
   public String doGenerateStats(final Repository program) {
@@ -77,7 +78,7 @@ public class GithubactionGenerator extends AbstractGenerator {
     _builder.append("- ");
     int _size = IteratorExtensions.size(Iterators.<Repository>filter(program.eAllContents(), Repository.class));
     _builder.append(_size);
-    _builder.append(" Repositories");
+    _builder.append(" Repositoriese");
     _builder.newLineIfNotEmpty();
     _builder.append("- ");
     int _size_1 = IteratorExtensions.size(Iterators.<Workflow>filter(program.eAllContents(), Workflow.class));
@@ -401,7 +402,7 @@ public class GithubactionGenerator extends AbstractGenerator {
         String _uses = step.getUses();
         boolean _tripleNotEquals_1 = (_uses != null);
         if (_tripleNotEquals_1) {
-          _builder.append(" \t uses: ");
+          _builder.append(" \t \t\tuses: ");
           String _string_1 = step.getUses().toString();
           _builder.append(_string_1);
         }
@@ -414,10 +415,8 @@ public class GithubactionGenerator extends AbstractGenerator {
       boolean _not = (!_isEmpty);
       if (_not) {
         _builder.append("\t\twith: ");
-        _builder.newLineIfNotEmpty();
-        _builder.append("                              ");
         String _name = step.getName();
-        _builder.append(_name, "                              ");
+        _builder.append(_name);
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         {

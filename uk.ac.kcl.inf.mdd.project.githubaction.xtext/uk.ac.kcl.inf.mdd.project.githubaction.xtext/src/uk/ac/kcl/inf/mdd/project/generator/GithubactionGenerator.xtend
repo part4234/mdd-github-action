@@ -28,10 +28,10 @@ class GithubactionGenerator extends AbstractGenerator {
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 
 		val model = resource.contents.head as Repository
-		//fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats ) -- To be added later for file generation
+		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats ) //-- To be added later for file generation
 		
 		//val className = resource.deriveClassNameFor
-		fsa.generateFile( 'test.txt', model.doGenerateClass())
+		fsa.generateFile('githubaction2.yaml', model.doGenerateClass())
 		
 		//split file using the link shown
 		
@@ -39,14 +39,14 @@ class GithubactionGenerator extends AbstractGenerator {
 	
 	
 	def deriveStatsTargetFileNameFor(Resource resource) {
-		resource.URI.appendFileExtension('yaml').lastSegment
+		resource.URI.appendFileExtension('txt').lastSegment
 	}
 	
 
 	def String doGenerateStats(Repository program) '''
 		Program contains:
 		
-		- «program.eAllContents.filter(Repository).size» Repositories
+		- «program.eAllContents.filter(Repository).size» Repositoriese
 		- «program.eAllContents.filter(Workflow).size» Workflows
 		- «program.eAllContents.filter(Event).size» Events
 		- «program.eAllContents.filter(Job).size» Jobs
@@ -139,10 +139,9 @@ class GithubactionGenerator extends AbstractGenerator {
 
 	def String generateStepsType(Step step) '''
 		«IF step.stepName !== null»		- name: «step.stepName»«ENDIF»
-		«IF step.stepName === null && step.uses !== null»		- uses: «step.uses.toString»«ELSEIF step.uses !== null» 	 uses: «step.uses.toString»«ENDIF»
+		«IF step.stepName === null && step.uses !== null»		- uses: «step.uses.toString»«ELSEIF step.uses !== null» 	 		uses: «step.uses.toString»«ENDIF»
 		
-		«IF !step.with.empty»		with: 
-		                              «step.name»
+		«IF !step.with.empty»		with: «step.name»
 			«FOR input : step.with»«input.name»:«input.value»«ENDFOR»
 		«ENDIF»
 		«IF !step.run.empty»	run: 
