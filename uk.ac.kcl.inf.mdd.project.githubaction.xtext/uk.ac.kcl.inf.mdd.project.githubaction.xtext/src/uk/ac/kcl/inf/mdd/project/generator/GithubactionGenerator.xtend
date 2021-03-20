@@ -74,34 +74,35 @@ class GithubactionGenerator extends AbstractGenerator {
 	}
 	
 	def String generateWorkflow(Workflow workflow, Environment env) '''
-		name: «workflow.name.toString.join('\n')»
+		name: «workflow.name.toString»
+		
 		«IF !workflow.on.empty»
 			on:
 			«FOR event : workflow.on»
-				«event»
-				«event.generateEvent().join('\n')»
+
+				«event.generateEvent»
 			«ENDFOR»
 		«ENDIF»
 		«IF !workflow.jobs.empty»
 			jobs:
 			«FOR job : workflow.jobs»
-				«generateJob(job).join('\n')»
+				«generateJob(job)»
 			«ENDFOR»
 		«ENDIF»
 	'''
     
    // assuming the attributes are in EList we simply check the 1st index as null or not
    /*
-    * 		«if (!event.tags.empty && event.tags.get(1) !== null){'''stmt.branches.get(1)'''}»
-		«if (!event.branchesIgnore.empty && event.branchesIgnore.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
-		«if (!event.tagsIgnore.empty && event.tagsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»
-		«if (!event.paths.empty && event.paths.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
-		«if (!event.pathsIgnore.empty && event.pathsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»
+    * 		
     */
 	dispatch def String generateEvent(PushEvent event) '''
 			push:
-		«if (!event.branches.empty && event.branches.get(1) !== null){'''	branches: «event.branches.get(1)»'''}» 
-				
+		«if (!event.branches.empty && event.branches.get(0) !== null){'''	branches: [«event.branches.get(0)»]'''}» 
+		«if (!event.tags.empty && event.tags.get(1) !== null){'''stmt.branches.get(1)'''}»
+		«if (!event.branchesIgnore.empty && event.branchesIgnore.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
+		«if (!event.tagsIgnore.empty && event.tagsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»
+		«if (!event.paths.empty && event.paths.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
+		«if (!event.pathsIgnore.empty && event.pathsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»		
 	'''
 	
 	dispatch def String generateEvent(PullRequestEvent stmt) '''
@@ -131,7 +132,7 @@ class GithubactionGenerator extends AbstractGenerator {
 		«IF !job.steps.empty»
 			steps:
 			«FOR step : job.steps»
-				«generateStepsType(step).join('\n')»
+				«generateStepsType(step)»
 			«ENDFOR»	
 		«ENDIF»						
 	'''	

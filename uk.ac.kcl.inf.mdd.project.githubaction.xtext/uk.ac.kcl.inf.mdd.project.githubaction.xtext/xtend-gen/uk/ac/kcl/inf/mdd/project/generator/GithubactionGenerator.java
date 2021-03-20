@@ -131,9 +131,10 @@ public class GithubactionGenerator extends AbstractGenerator {
   public String generateWorkflow(final Workflow workflow, final GithubactionGenerator.Environment env) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("name: ");
-    String _join = String.join(workflow.getName().toString(), "\n");
-    _builder.append(_join);
+    String _string = workflow.getName().toString();
+    _builder.append(_string);
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
     {
       boolean _isEmpty = workflow.getOn().isEmpty();
       boolean _not = (!_isEmpty);
@@ -143,10 +144,9 @@ public class GithubactionGenerator extends AbstractGenerator {
         {
           EList<Event> _on = workflow.getOn();
           for(final Event event : _on) {
-            _builder.append(event);
-            _builder.newLineIfNotEmpty();
-            String _join_1 = String.join(this.generateEvent(event), "\n");
-            _builder.append(_join_1);
+            _builder.newLine();
+            String _generateEvent = this.generateEvent(event);
+            _builder.append(_generateEvent);
             _builder.newLineIfNotEmpty();
           }
         }
@@ -161,8 +161,8 @@ public class GithubactionGenerator extends AbstractGenerator {
         {
           EList<Job> _jobs = workflow.getJobs();
           for(final Job job : _jobs) {
-            String _join_2 = String.join(this.generateJob(job), "\n");
-            _builder.append(_join_2);
+            String _generateJob = this.generateJob(job);
+            _builder.append(_generateJob);
             _builder.newLineIfNotEmpty();
           }
         }
@@ -171,32 +171,67 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
-  /**
-   * «if (!event.tags.empty && event.tags.get(1) !== null){'''stmt.branches.get(1)'''}»
-   * «if (!event.branchesIgnore.empty && event.branchesIgnore.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
-   * «if (!event.tagsIgnore.empty && event.tagsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»
-   * «if (!event.paths.empty && event.paths.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
-   * «if (!event.pathsIgnore.empty && event.pathsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»
-   */
   protected String _generateEvent(final PushEvent event) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\t");
     _builder.append("push:");
     _builder.newLine();
     CharSequence _xifexpression = null;
-    if (((!event.getBranches().isEmpty()) && (event.getBranches().get(1) != null))) {
+    if (((!event.getBranches().isEmpty()) && (event.getBranches().get(0) != null))) {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("\t");
-      _builder_1.append("branches: ");
-      String _get = event.getBranches().get(1);
+      _builder_1.append("branches: [");
+      String _get = event.getBranches().get(0);
       _builder_1.append(_get, "\t");
+      _builder_1.append("]");
       _xifexpression = _builder_1;
     }
     _builder.append(_xifexpression);
     _builder.append(" ");
     _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_1 = null;
+    if (((!event.getTags().isEmpty()) && (event.getTags().get(1) != null))) {
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("stmt.branches.get(1)");
+      _xifexpression_1 = _builder_2;
+    }
+    _builder.append(_xifexpression_1);
+    _builder.newLineIfNotEmpty();
+    String _xifexpression_2 = null;
+    if (((!event.getBranchesIgnore().isEmpty()) && (event.getBranchesIgnore().get(1) != null))) {
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("branches:");
+      String _get_1 = event.getBranches().get(1);
+      _xifexpression_2 = (_builder_3.toString() + _get_1);
+    }
+    _builder.append(_xifexpression_2);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_3 = null;
+    if (((!event.getTagsIgnore().isEmpty()) && (event.getTagsIgnore().get(1) != null))) {
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("stmt.branches.get(1)");
+      _xifexpression_3 = _builder_4;
+    }
+    _builder.append(_xifexpression_3);
+    _builder.newLineIfNotEmpty();
+    String _xifexpression_4 = null;
+    if (((!event.getPaths().isEmpty()) && (event.getPaths().get(1) != null))) {
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("branches:");
+      String _get_2 = event.getBranches().get(1);
+      _xifexpression_4 = (_builder_5.toString() + _get_2);
+    }
+    _builder.append(_xifexpression_4);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_5 = null;
+    if (((!event.getPathsIgnore().isEmpty()) && (event.getPathsIgnore().get(1) != null))) {
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("stmt.branches.get(1)");
+      _xifexpression_5 = _builder_6;
+    }
+    _builder.append(_xifexpression_5);
     _builder.append("\t\t");
-    _builder.newLine();
+    _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
   
@@ -338,8 +373,8 @@ public class GithubactionGenerator extends AbstractGenerator {
         {
           EList<Step> _steps = job.getSteps();
           for(final Step step : _steps) {
-            String _join = String.join(this.generateStepsType(step), "\n");
-            _builder.append(_join);
+            String _generateStepsType = this.generateStepsType(step);
+            _builder.append(_generateStepsType);
             _builder.newLineIfNotEmpty();
           }
         }
