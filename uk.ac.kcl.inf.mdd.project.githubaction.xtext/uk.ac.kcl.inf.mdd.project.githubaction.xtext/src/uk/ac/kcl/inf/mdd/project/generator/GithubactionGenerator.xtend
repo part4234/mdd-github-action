@@ -64,9 +64,7 @@ class GithubactionGenerator extends AbstractGenerator {
 	 * Below are parseable dispatch mathos for all grammar types
 	 */
 	def String doGenerateClass(Repository program) '''
-		«program.workflows.map[generateWorkFlowStmt(new Environment)].join('\n')»
-		
-	
+		«program.workflows.map[generateWorkflow(new Environment)].join('\n')»
 	'''
 
 	private static class Environment {
@@ -75,87 +73,74 @@ class GithubactionGenerator extends AbstractGenerator {
 		def exit() { counter-- }
 	}
 	
-	
-	
-	dispatch def String generateWorkFlowStmt(Workflow stmt, Environment env) '''
-		name: «stmt.name.toString»
-		
-		on:
-		
-		«if (!stmt.on.empty){
-			'''push:'''
-				for (Event ev : stmt.on){
-					«generateEventType(ev).join('\n')»
-				}
-		}»
-
-		«if (!stmt.jobs.empty){
-			'''jobs:'''
-				for (Job jobs : stmt.jobs){
-					«generateJobType(jobs).join('\n')»
-				}
-		}»						
-
-		'''
-		
-
+	def String generateWorkflow(Workflow workflow, Environment env) '''
+		name: «workflow.name.toString»
+		«IF !workflow.on.empty»
+			on:
+			«FOR event : workflow.on»
+				«generateEvent(event).join('\n')»
+			«ENDFOR»
+		«ENDIF»
+		«IF !workflow.jobs.empty»
+			jobs:
+			«FOR job : workflow.jobs»
+				«generateJob(job).join('\n')»
+			«ENDFOR»
+		«ENDIF»
+	'''
     
    // assuming the attributes are in EList we simply check the 1st index as null or not
-	dispatch def String generateEventType(PushEvent stmt) '''
-		
-		«if (stmt.branches.get(1) !== null){'''branches:'''+ stmt.branches.get(1)}»
-		«if (stmt.tags.get(1) !== null){'''stmt.branches.get(1)'''}»
-		«if (stmt.branchesIgnore.get(1) !== null){'''branches:'''+ stmt.branches.get(1)}»
-		«if (stmt.tagsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»
-		«if (stmt.paths.get(1) !== null){'''branches:'''+ stmt.branches.get(1)}»
-		«if (stmt.pathsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»				
+	dispatch def String generateEvent(PushEvent event) '''
+		«if (event.branches.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
+		«if (event.tags.get(1) !== null){'''stmt.branches.get(1)'''}»
+		«if (event.branchesIgnore.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
+		«if (event.tagsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»
+		«if (event.paths.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
+		«if (event.pathsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»				
 	'''
 	
-	dispatch def String generateEventType(PullRequestEvent stmt) '''
-	
+	dispatch def String generateEvent(PullRequestEvent stmt) '''
 		«if (stmt.branches.get(1) !== null){'''branches:'''+ stmt.branches.get(1)}»
 		«if (stmt.tags.get(1) !== null){'''stmt.branches.get(1)'''}»
 		«if (stmt.branchesIgnore.get(1) !== null){'''branches:'''+ stmt.branches.get(1)}»
 		«if (stmt.tagsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»
 		«if (stmt.paths.get(1) !== null){'''branches:'''+ stmt.branches.get(1)}»
 		«if (stmt.pathsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»			
-	
 	'''
-	dispatch def String generateEventType(ScheduleEvent stmt) ''''''	
-	dispatch def String generateEventType(WorkflowDispatchEvent stmt) ''''''
-	dispatch def String generateEventType(RepositoryDispatchEvent stmt) ''''''	
-	dispatch def String generateEventType(CreateEvent stmt) ''''''
-	dispatch def String generateEventType(DeleteEvent stmt) ''''''
-	dispatch def String generateEventType(DeploymentEvent stmt) ''''''	
-	dispatch def String generateEventType(IssueEvent stmt) ''''''	
-	dispatch def String generateEventType(LabelEvent stmt) ''''''	
+	dispatch def String generateEvent(ScheduleEvent stmt) ''''''	
+	dispatch def String generateEvent(WorkflowDispatchEvent stmt) ''''''
+	dispatch def String generateEvent(RepositoryDispatchEvent stmt) ''''''	
+	dispatch def String generateEvent(CreateEvent stmt) ''''''
+	dispatch def String generateEvent(DeleteEvent stmt) ''''''
+	dispatch def String generateEvent(DeploymentEvent stmt) ''''''	
+	dispatch def String generateEvent(IssueEvent stmt) ''''''	
+	dispatch def String generateEvent(LabelEvent stmt) ''''''	
 	
 
-	dispatch def String generateEventType(Job jobs) '''
+	def String generateJob(Job job) '''
 		test:
-		name: «jobs.name.toString»
-		runsOn: «jobs.name.toString»	 
-		name: «jobs.runsOn.toString»	
-	
-		«if (!jobs.steps.empty){
-			'''steps::'''
-				for (Step stps : jobs.steps){
-					«generateStepsType(stps).join('\n')»
-				}
-		}»						
-
+		name: «job.name.toString»
+		runsOn: «job.name.toString»
+		name: «job.runsOn.toString»
+		«IF !job.steps.empty»
+			steps:
+			«FOR step : job.steps»
+				«generateStepsType(step).join('\n')»
+			«ENDFOR»	
+		«ENDIF»						
 	'''	
 
-	dispatch def String generateStepsType(Step step) '''
-		«if (step.name !== null){'''- name'''«step.name»}»
-		«if (step.uses !== null){'''- uses'''«step.uses»	}»	
-		«if (step.with.get(1) !== null){'''with:'''«step.with.get(1)»}»
-		«if (step.run.get(1) !== null){'''run:'''«step.run.get(1) »}»
-		«if (step.env.get(1) !== null){'''env:'''«step.env.get(1)»}»
-
+	def String generateStepsType(Step step) '''
+		«IF step.name !== null»name: «step.name»«ENDIF»
+		«IF step.uses !== null»uses: «step.uses.toString»«ENDIF»
+		«IF !step.with.empty»with: «step.name»
+			«FOR input : step.with»«input.name»:«input.value»«ENDFOR»
+		«ENDIF»
+		«IF !step.run.empty»run: 
+			«FOR line : step.run»«line»«ENDFOR»
+		«ENDIF»
+		«IF !step.env.empty»env: «step.name»
+			«FOR input : step.env»«input.name»:«input.value»«ENDFOR»
+		«ENDIF»
 	'''	
-
-	
-
-		
 }
