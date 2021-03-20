@@ -126,11 +126,11 @@ class GithubactionGenerator extends AbstractGenerator {
 
 	def String generateJob(Job job) '''
 			test:
-			name: «job.name.toString»
-			runsOn: «job.name.toString»
-			name: «job.runsOn.toString»
+			name: «job.jobName.toString»
+			runsOn: «job.runsOn.toString»
+
 		«IF !job.steps.empty»
-			steps:
+				steps:
 			«FOR step : job.steps»
 				«generateStepsType(step)»
 			«ENDFOR»	
@@ -138,16 +138,17 @@ class GithubactionGenerator extends AbstractGenerator {
 	'''	
 
 	def String generateStepsType(Step step) '''
-		«IF step.name !== null»		- name: «step.name»«ENDIF»
-		«IF step.name === null && step.uses !== null»		- uses: «ELSEIF step.uses !== null» 	 uses: «step.uses.toString»«ENDIF»
+		«IF step.stepName !== null»		- name: «step.stepName»«ENDIF»
+		«IF step.stepName === null && step.uses !== null»		- uses: «step.uses.toString»«ELSEIF step.uses !== null» 	 uses: «step.uses.toString»«ENDIF»
 		
-		«IF !step.with.empty»with: «step.name»
+		«IF !step.with.empty»		with: 
+		                              «step.name»
 			«FOR input : step.with»«input.name»:«input.value»«ENDFOR»
 		«ENDIF»
-		«IF !step.run.empty»run: 
+		«IF !step.run.empty»	run: 
 			«FOR line : step.run»«line»«ENDFOR»
 		«ENDIF»
-		«IF !step.env.empty»env: «step.name»
+		«IF !step.env.empty»	env: «step.name»
 			«FOR input : step.env»«input.name»:«input.value»«ENDFOR»
 		«ENDIF»
 	'''	

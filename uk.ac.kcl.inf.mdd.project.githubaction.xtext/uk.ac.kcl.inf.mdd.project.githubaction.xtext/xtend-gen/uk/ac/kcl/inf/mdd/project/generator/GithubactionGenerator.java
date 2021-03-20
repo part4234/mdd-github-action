@@ -351,23 +351,20 @@ public class GithubactionGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("name: ");
-    String _string = job.getName().toString();
+    String _string = job.getJobName().toString();
     _builder.append(_string, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("runsOn: ");
-    String _string_1 = job.getName().toString();
+    String _string_1 = job.getRunsOn().toString();
     _builder.append(_string_1, "\t");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("name: ");
-    String _string_2 = job.getRunsOn().toString();
-    _builder.append(_string_2, "\t");
-    _builder.newLineIfNotEmpty();
+    _builder.newLine();
     {
       boolean _isEmpty = job.getSteps().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
+        _builder.append("\t");
         _builder.append("steps:");
         _builder.newLine();
         {
@@ -386,25 +383,27 @@ public class GithubactionGenerator extends AbstractGenerator {
   public String generateStepsType(final Step step) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      String _name = step.getName();
-      boolean _tripleNotEquals = (_name != null);
+      String _stepName = step.getStepName();
+      boolean _tripleNotEquals = (_stepName != null);
       if (_tripleNotEquals) {
         _builder.append("\t\t- name: ");
-        String _name_1 = step.getName();
-        _builder.append(_name_1);
+        String _stepName_1 = step.getStepName();
+        _builder.append(_stepName_1);
       }
     }
     _builder.newLineIfNotEmpty();
     {
-      if (((step.getName() == null) && (step.getUses() != null))) {
+      if (((step.getStepName() == null) && (step.getUses() != null))) {
         _builder.append("\t\t- uses: ");
+        String _string = step.getUses().toString();
+        _builder.append(_string);
       } else {
         String _uses = step.getUses();
         boolean _tripleNotEquals_1 = (_uses != null);
         if (_tripleNotEquals_1) {
           _builder.append(" \t uses: ");
-          String _string = step.getUses().toString();
-          _builder.append(_string);
+          String _string_1 = step.getUses().toString();
+          _builder.append(_string_1);
         }
       }
     }
@@ -414,16 +413,18 @@ public class GithubactionGenerator extends AbstractGenerator {
       boolean _isEmpty = step.getWith().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        _builder.append("with: ");
-        String _name_2 = step.getName();
-        _builder.append(_name_2);
+        _builder.append("\t\twith: ");
+        _builder.newLineIfNotEmpty();
+        _builder.append("                              ");
+        String _name = step.getName();
+        _builder.append(_name, "                              ");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         {
           EList<InputParameter> _with = step.getWith();
           for(final InputParameter input : _with) {
-            String _name_3 = input.getName();
-            _builder.append(_name_3, "\t");
+            String _name_1 = input.getName();
+            _builder.append(_name_1, "\t");
             _builder.append(":");
             String _value = input.getValue();
             _builder.append(_value, "\t");
@@ -436,7 +437,7 @@ public class GithubactionGenerator extends AbstractGenerator {
       boolean _isEmpty_1 = step.getRun().isEmpty();
       boolean _not_1 = (!_isEmpty_1);
       if (_not_1) {
-        _builder.append("run: ");
+        _builder.append("\trun: ");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         {
@@ -452,16 +453,16 @@ public class GithubactionGenerator extends AbstractGenerator {
       boolean _isEmpty_2 = step.getEnv().isEmpty();
       boolean _not_2 = (!_isEmpty_2);
       if (_not_2) {
-        _builder.append("env: ");
-        String _name_4 = step.getName();
-        _builder.append(_name_4);
+        _builder.append("\tenv: ");
+        String _name_2 = step.getName();
+        _builder.append(_name_2);
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         {
           EList<Env> _env = step.getEnv();
           for(final Env input_1 : _env) {
-            String _name_5 = input_1.getName();
-            _builder.append(_name_5, "\t");
+            String _name_3 = input_1.getName();
+            _builder.append(_name_3, "\t");
             _builder.append(":");
             String _value_1 = input_1.getValue();
             _builder.append(_value_1, "\t");
