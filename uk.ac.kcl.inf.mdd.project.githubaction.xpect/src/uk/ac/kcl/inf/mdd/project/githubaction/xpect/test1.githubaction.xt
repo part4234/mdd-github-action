@@ -1,18 +1,8 @@
 /* XPECT_SETUP uk.ac.kcl.inf.mdd.project.githubaction.xpect.XPectTests END_SETUP */
 /*
-XPECT generated file test1.githubaction.xt.txt ---
-Program contains:
+XPECT generated ---
 
-- 0 Repositories
-- 1 Workflows
-- 1 Events
-- 1 Jobs
-- 3 Steps
----  
-
-XPECT generated file Githubaction.yaml ---
-
-name: Main Branch
+name: Feature Branch
 
 on:
    push:

@@ -28,10 +28,10 @@ class GithubactionGenerator extends AbstractGenerator {
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 
 		val model = resource.contents.head as Repository
-		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats )
+		//fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats ) -- To be added later for file generation
 		
-		//The base call, this doesnt differ on the 2 file requirement in the same repo
-		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateClass)
+		//val className = resource.deriveClassNameFor
+		fsa.generateFile( 'test.txt', model.doGenerateClass())
 		
 		//split file using the link shown
 		
@@ -54,7 +54,7 @@ class GithubactionGenerator extends AbstractGenerator {
 
 	'''
 	
-		def deriveClassNameFor(Resource resource) {
+	def deriveClassNameFor(Resource resource) {
 		val origName = resource.URI.lastSegment
 		
 		origName.substring(0, origName.indexOf('.')).toFirstUpper + 'Turtle'
@@ -64,92 +64,70 @@ class GithubactionGenerator extends AbstractGenerator {
 	 * Below are parseable dispatch mathos for all grammar types
 	 */
 	def String doGenerateClass(Repository program) '''
-		# This is the generated .yaml file for the input repository.
-		# Files are individually generated Individually for each workflow and differ by main/feature
-		
-			«program.workflows.map[generateWorkFlowStmt(new Environment)].join('\n')»
+		«program.workflows.map[generateWorkFlowStmt(new Environment)].join('\n')»
 		
 	
 	'''
 
 	private static class Environment {
 		var int counter = 0
-		def getFreshVarName() '''i«counter++»'''
+		def getFreshVarName() '''i_«counter++»'''
 		def exit() { counter-- }
 	}
 	
 	
 	
 	dispatch def String generateWorkFlowStmt(Workflow stmt, Environment env) '''
-		name: «stmt.on»
+		name: «stmt.name.toString.join('\n')»
 		
-		on:
+		on: «"".join('\n')»
 		
 		«if (!stmt.on.empty){
 			
 		    val freshVarName = env.getFreshVarName
-			val result = '''
+			val result = 
+			'''
 				for (int «freshVarName» = 0; «freshVarName» < «stmt.on.size»; «freshVarName»++) {
-					«stmt.statements.map[generateJavaStatement(env)].join('\n')»
+					«stmt.on.map[generateEventType()].join('\n')»
+					"".join('\n')»
 				}
-				
-		env.exit
-		result
+		   '''		
+		  env.exit
+		  result
 		
+		}»
 		
-		'''}»« stmt.on.generateEventStmt»
-		
- 		«if (!stmt.env.empty){'''env:'''}»«stmt.env.get(0).generateEventStmt2»
-		
-		«if (stmt.defaults != ""){'''defaults:'''}»«stmt.defaults.generateEventStmt3»
-		
-		«if (!stmt.jobs.empty){'''jobs:'''}»«stmt.jobs.get(0).generateEventStmt4»		
+     '''
 	
-		'''
-
-
-	/*add more methods to handle the rest calls
-	dispatch def String generateEventStmt(Event stmt) '''
 		
-		«if (PushEvent != null ){'''    push:'''}»«generatePullRequestEventt»
-		«if (PullRequestEvent != null){'''    push:'''}»«generatePullRequestEventt»
-		«if (ScheduleEvent != null){'''    push:'''}»«generateScheduleEvent»
-		«if (WorkflowDispatchEvent != null){'''    push:'''}»«generateWorkflowDispatchEvent»
-		«if (RepositoryDispatchEvent != null){'''    push:'''}»«generateRepositoryDispatchEvent»
-		«if (CreateEvent != null){'''    push:'''}»«generateCreateEvent»
-		«if (DeleteEvent != null){'''    push:'''}»«generateDeleteEvent»
-		«if (DeploymentEvent != null){'''    push:'''}»«generateDeploymentEvent»
-		«if (IssueEvent != null){'''    push:'''}»«generateIssueEvent»
-		«if (LabelEvent != null){'''    push:'''}»«generateLabelEvent»						
-	'''
-    */
+
     
 	//gets access to all local attributes of a class/interface
-	dispatch def String generatePushEvent(PushEvent stmt) '''
+	
+	dispatch def String generateEventType(PushEvent stmt) '''
 		
-		«if (!stmt.branchesIgnore.empty){'''    branches: [master]'''}»
+		«if (stmt !== null){'''«stmt»'''}»
 
 	'''
-
 	
-	dispatch def String generatePullEvent(PullRequestEvent stmt) ''''''
+	dispatch def String generateEventType(PullRequestEvent stmt) ''''''
 		
-	dispatch def String generateScheduleEvent(ScheduleEvent stmt) ''''''
+	dispatch def String generateEventType(ScheduleEvent stmt) ''''''
 
 		
-	dispatch def String generateWorkflowEvent(WorkflowDispatchEvent stmt) ''''''
+	dispatch def String generateEventType(WorkflowDispatchEvent stmt) ''''''
 	
-	dispatch def String generateDispatchEvent(RepositoryDispatchEvent stmt) ''''''
+	dispatch def String generateEventType(RepositoryDispatchEvent stmt) ''''''
 		
-	dispatch def String generateCreateEvent(CreateEvent stmt) ''''''
+	dispatch def String generateEventType(CreateEvent stmt) ''''''
 
-	dispatch def String generateDeleteEvent(DeleteEvent stmt) ''''''
+	dispatch def String generateEventType(DeleteEvent stmt) ''''''
 		
-	dispatch def String generateDeploymentEvent(DeploymentEvent stmt) ''''''	
+	dispatch def String generateEventType(DeploymentEvent stmt) ''''''	
 
-	dispatch def String generateIssueEvent(IssueEvent stmt) ''''''
+	dispatch def String generateEventType(IssueEvent stmt) ''''''
 		
-	dispatch def String generateLabelEvent(LabelEvent stmt) ''''''	
+	dispatch def String generateEventType(LabelEvent stmt) ''''''	
 
 		
 }

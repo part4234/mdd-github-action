@@ -4,6 +4,7 @@
 package uk.ac.kcl.inf.mdd.project.generator;
 
 import com.google.common.collect.Iterators;
+import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -43,7 +44,7 @@ public class GithubactionGenerator extends AbstractGenerator {
     
     public CharSequence getFreshVarName() {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("i");
+      _builder.append("i_");
       int _plusPlus = this.counter++;
       _builder.append(_plusPlus);
       return _builder;
@@ -58,8 +59,7 @@ public class GithubactionGenerator extends AbstractGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final Repository model = ((Repository) _head);
-    fsa.generateFile(this.deriveStatsTargetFileNameFor(resource), this.doGenerateStats(model));
-    fsa.generateFile(this.deriveStatsTargetFileNameFor(resource), this.doGenerateClass(model));
+    fsa.generateFile("test.txt", this.doGenerateClass(model));
   }
   
   public String deriveStatsTargetFileNameFor(final Resource resource) {
@@ -115,18 +115,12 @@ public class GithubactionGenerator extends AbstractGenerator {
    */
   public String doGenerateClass(final Repository program) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("# This is the generated .yaml file for the input repository.");
-    _builder.newLine();
-    _builder.append("# Files are individually generated Individually for each workflow and differ by main/feature");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
     final Function1<Workflow, String> _function = (Workflow it) -> {
       GithubactionGenerator.Environment _environment = new GithubactionGenerator.Environment();
       return this.generateWorkFlowStmt(it, _environment);
     };
     String _join = IterableExtensions.join(ListExtensions.<Workflow, String>map(program.getWorkflows(), _function), "\n");
-    _builder.append(_join, "\t");
+    _builder.append(_join);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
@@ -135,43 +129,67 @@ public class GithubactionGenerator extends AbstractGenerator {
   }
   
   protected String _generateWorkFlowStmt(final Workflow stmt, final GithubactionGenerator.Environment env) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field statements is undefined for the type Workflow"
-      + "\nThe method generateJavaStatement(Environment) is undefined"
-      + "\nThe method or field generateEventStmt is undefined for the type EList<Event>"
-      + "\nThe method or field generateEventStmt2 is undefined for the type Env"
-      + "\nThe method or field generateEventStmt3 is undefined for the type RunSetting"
-      + "\nThe method or field generateEventStmt4 is undefined for the type Job"
-      + "\nmap cannot be resolved"
-      + "\njoin cannot be resolved");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("name: ");
+    String _join = String.join(stmt.getName().toString(), "\n");
+    _builder.append(_join);
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("on: ");
+    String _join_1 = String.join("", "\n");
+    _builder.append(_join_1);
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    String _xifexpression = null;
+    boolean _isEmpty = stmt.getOn().isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      String _xblockexpression = null;
+      {
+        final CharSequence freshVarName = env.getFreshVarName();
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("for (int ");
+        _builder_1.append(freshVarName);
+        _builder_1.append(" = 0; ");
+        _builder_1.append(freshVarName);
+        _builder_1.append(" < ");
+        int _size = stmt.getOn().size();
+        _builder_1.append(_size);
+        _builder_1.append("; ");
+        _builder_1.append(freshVarName);
+        _builder_1.append("++) {");
+        _builder_1.newLineIfNotEmpty();
+        _builder_1.append("\t");
+        final Function1<Event, String> _function = (Event it) -> {
+          return this.generateEventType(it);
+        };
+        String _join_2 = IterableExtensions.join(ListExtensions.<Event, String>map(stmt.getOn(), _function), "\n");
+        _builder_1.append(_join_2, "\t");
+        _builder_1.newLineIfNotEmpty();
+        _builder_1.append("\t");
+        _builder_1.append("\"\".join(\'\\n\')»");
+        _builder_1.newLine();
+        _builder_1.append("}");
+        _builder_1.newLine();
+        final String result = _builder_1.toString();
+        env.exit();
+        _xblockexpression = result;
+      }
+      _xifexpression = _xblockexpression;
+    }
+    _builder.append(_xifexpression);
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    return _builder.toString();
   }
   
-  /**
-   * add more methods to handle the rest calls
-   * dispatch def String generateEventStmt(Event stmt) '''
-   * 
-   * «if (PushEvent != null ){'''    push:'''}»«generatePullRequestEventt»
-   * «if (PullRequestEvent != null){'''    push:'''}»«generatePullRequestEventt»
-   * «if (ScheduleEvent != null){'''    push:'''}»«generateScheduleEvent»
-   * «if (WorkflowDispatchEvent != null){'''    push:'''}»«generateWorkflowDispatchEvent»
-   * «if (RepositoryDispatchEvent != null){'''    push:'''}»«generateRepositoryDispatchEvent»
-   * «if (CreateEvent != null){'''    push:'''}»«generateCreateEvent»
-   * «if (DeleteEvent != null){'''    push:'''}»«generateDeleteEvent»
-   * «if (DeploymentEvent != null){'''    push:'''}»«generateDeploymentEvent»
-   * «if (IssueEvent != null){'''    push:'''}»«generateIssueEvent»
-   * «if (LabelEvent != null){'''    push:'''}»«generateLabelEvent»
-   * '''
-   */
-  protected String _generatePushEvent(final PushEvent stmt) {
+  protected String _generateEventType(final PushEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
     CharSequence _xifexpression = null;
-    boolean _isEmpty = stmt.getBranchesIgnore().isEmpty();
-    boolean _not = (!_isEmpty);
-    if (_not) {
+    if ((stmt != null)) {
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("    ");
-      _builder_1.append("branches: [master]");
+      _builder_1.append(stmt);
       _xifexpression = _builder_1;
     }
     _builder.append(_xifexpression);
@@ -180,47 +198,47 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
-  protected String _generatePullEvent(final PullRequestEvent stmt) {
+  protected String _generateEventType(final PullRequestEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateScheduleEvent(final ScheduleEvent stmt) {
+  protected String _generateEventType(final ScheduleEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateWorkflowEvent(final WorkflowDispatchEvent stmt) {
+  protected String _generateEventType(final WorkflowDispatchEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateDispatchEvent(final RepositoryDispatchEvent stmt) {
+  protected String _generateEventType(final RepositoryDispatchEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateCreateEvent(final CreateEvent stmt) {
+  protected String _generateEventType(final CreateEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateDeleteEvent(final DeleteEvent stmt) {
+  protected String _generateEventType(final DeleteEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateDeploymentEvent(final DeploymentEvent stmt) {
+  protected String _generateEventType(final DeploymentEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateIssueEvent(final IssueEvent stmt) {
+  protected String _generateEventType(final IssueEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateLabelEvent(final LabelEvent stmt) {
+  protected String _generateEventType(final LabelEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
@@ -229,43 +247,30 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _generateWorkFlowStmt(stmt, env);
   }
   
-  public String generatePushEvent(final PushEvent stmt) {
-    return _generatePushEvent(stmt);
-  }
-  
-  public String generatePullEvent(final PullRequestEvent stmt) {
-    return _generatePullEvent(stmt);
-  }
-  
-  public String generateScheduleEvent(final ScheduleEvent stmt) {
-    return _generateScheduleEvent(stmt);
-  }
-  
-  public String generateWorkflowEvent(final WorkflowDispatchEvent stmt) {
-    return _generateWorkflowEvent(stmt);
-  }
-  
-  public String generateDispatchEvent(final RepositoryDispatchEvent stmt) {
-    return _generateDispatchEvent(stmt);
-  }
-  
-  public String generateCreateEvent(final CreateEvent stmt) {
-    return _generateCreateEvent(stmt);
-  }
-  
-  public String generateDeleteEvent(final DeleteEvent stmt) {
-    return _generateDeleteEvent(stmt);
-  }
-  
-  public String generateDeploymentEvent(final DeploymentEvent stmt) {
-    return _generateDeploymentEvent(stmt);
-  }
-  
-  public String generateIssueEvent(final IssueEvent stmt) {
-    return _generateIssueEvent(stmt);
-  }
-  
-  public String generateLabelEvent(final LabelEvent stmt) {
-    return _generateLabelEvent(stmt);
+  public String generateEventType(final Event stmt) {
+    if (stmt instanceof CreateEvent) {
+      return _generateEventType((CreateEvent)stmt);
+    } else if (stmt instanceof DeleteEvent) {
+      return _generateEventType((DeleteEvent)stmt);
+    } else if (stmt instanceof DeploymentEvent) {
+      return _generateEventType((DeploymentEvent)stmt);
+    } else if (stmt instanceof IssueEvent) {
+      return _generateEventType((IssueEvent)stmt);
+    } else if (stmt instanceof LabelEvent) {
+      return _generateEventType((LabelEvent)stmt);
+    } else if (stmt instanceof PullRequestEvent) {
+      return _generateEventType((PullRequestEvent)stmt);
+    } else if (stmt instanceof PushEvent) {
+      return _generateEventType((PushEvent)stmt);
+    } else if (stmt instanceof RepositoryDispatchEvent) {
+      return _generateEventType((RepositoryDispatchEvent)stmt);
+    } else if (stmt instanceof ScheduleEvent) {
+      return _generateEventType((ScheduleEvent)stmt);
+    } else if (stmt instanceof WorkflowDispatchEvent) {
+      return _generateEventType((WorkflowDispatchEvent)stmt);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(stmt).toString());
+    }
   }
 }
