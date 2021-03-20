@@ -74,11 +74,12 @@ class GithubactionGenerator extends AbstractGenerator {
 	}
 	
 	def String generateWorkflow(Workflow workflow, Environment env) '''
-		name: «workflow.name.toString»
+		name: «workflow.name.toString.join('\n')»
 		«IF !workflow.on.empty»
 			on:
 			«FOR event : workflow.on»
-				«generateEvent(event).join('\n')»
+				«event»
+				«event.generateEvent().join('\n')»
 			«ENDFOR»
 		«ENDIF»
 		«IF !workflow.jobs.empty»
@@ -90,13 +91,17 @@ class GithubactionGenerator extends AbstractGenerator {
 	'''
     
    // assuming the attributes are in EList we simply check the 1st index as null or not
+   /*
+    * 		«if (!event.tags.empty && event.tags.get(1) !== null){'''stmt.branches.get(1)'''}»
+		«if (!event.branchesIgnore.empty && event.branchesIgnore.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
+		«if (!event.tagsIgnore.empty && event.tagsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»
+		«if (!event.paths.empty && event.paths.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
+		«if (!event.pathsIgnore.empty && event.pathsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»
+    */
 	dispatch def String generateEvent(PushEvent event) '''
-		«if (event.branches.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
-		«if (event.tags.get(1) !== null){'''stmt.branches.get(1)'''}»
-		«if (event.branchesIgnore.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
-		«if (event.tagsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»
-		«if (event.paths.get(1) !== null){'''branches:'''+ event.branches.get(1)}»
-		«if (event.pathsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»				
+			push:
+		«if (!event.branches.empty && event.branches.get(1) !== null){'''	branches: «event.branches.get(1)»'''}» 
+				
 	'''
 	
 	dispatch def String generateEvent(PullRequestEvent stmt) '''
@@ -107,6 +112,7 @@ class GithubactionGenerator extends AbstractGenerator {
 		«if (stmt.paths.get(1) !== null){'''branches:'''+ stmt.branches.get(1)}»
 		«if (stmt.pathsIgnore.get(1) !== null){'''stmt.branches.get(1)'''}»			
 	'''
+	
 	dispatch def String generateEvent(ScheduleEvent stmt) ''''''	
 	dispatch def String generateEvent(WorkflowDispatchEvent stmt) ''''''
 	dispatch def String generateEvent(RepositoryDispatchEvent stmt) ''''''	
@@ -118,10 +124,10 @@ class GithubactionGenerator extends AbstractGenerator {
 	
 
 	def String generateJob(Job job) '''
-		test:
-		name: «job.name.toString»
-		runsOn: «job.name.toString»
-		name: «job.runsOn.toString»
+			test:
+			name: «job.name.toString»
+			runsOn: «job.name.toString»
+			name: «job.runsOn.toString»
 		«IF !job.steps.empty»
 			steps:
 			«FOR step : job.steps»
@@ -131,8 +137,9 @@ class GithubactionGenerator extends AbstractGenerator {
 	'''	
 
 	def String generateStepsType(Step step) '''
-		«IF step.name !== null»name: «step.name»«ENDIF»
-		«IF step.uses !== null»uses: «step.uses.toString»«ENDIF»
+		«IF step.name !== null»		- name: «step.name»«ENDIF»
+		«IF step.name === null && step.uses !== null»		- uses: «ELSEIF step.uses !== null» 	 uses: «step.uses.toString»«ENDIF»
+		
 		«IF !step.with.empty»with: «step.name»
 			«FOR input : step.with»«input.name»:«input.value»«ENDFOR»
 		«ENDIF»
