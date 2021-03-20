@@ -129,77 +129,163 @@ public class GithubactionGenerator extends AbstractGenerator {
   }
   
   protected String _generateWorkFlowStmt(final Workflow stmt, final GithubactionGenerator.Environment env) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("name: ");
-    String _join = String.join(stmt.getName().toString(), "\n");
-    _builder.append(_join);
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("on: ");
-    String _join_1 = String.join("", "\n");
-    _builder.append(_join_1);
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    String _xifexpression = null;
-    boolean _isEmpty = stmt.getOn().isEmpty();
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      String _xblockexpression = null;
-      {
-        final CharSequence freshVarName = env.getFreshVarName();
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("for (int ");
-        _builder_1.append(freshVarName);
-        _builder_1.append(" = 0; ");
-        _builder_1.append(freshVarName);
-        _builder_1.append(" < ");
-        int _size = stmt.getOn().size();
-        _builder_1.append(_size);
-        _builder_1.append("; ");
-        _builder_1.append(freshVarName);
-        _builder_1.append("++) {");
-        _builder_1.newLineIfNotEmpty();
-        _builder_1.append("\t");
-        final Function1<Event, String> _function = (Event it) -> {
-          return this.generateEventType(it);
-        };
-        String _join_2 = IterableExtensions.join(ListExtensions.<Event, String>map(stmt.getOn(), _function), "\n");
-        _builder_1.append(_join_2, "\t");
-        _builder_1.newLineIfNotEmpty();
-        _builder_1.append("\t");
-        _builder_1.append("\"\".join(\'\\n\')»");
-        _builder_1.newLine();
-        _builder_1.append("}");
-        _builder_1.newLine();
-        final String result = _builder_1.toString();
-        env.exit();
-        _xblockexpression = result;
-      }
-      _xifexpression = _xblockexpression;
-    }
-    _builder.append(_xifexpression);
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    return _builder.toString();
+    throw new Error("Unresolved compilation problems:"
+      + "\nmismatched input \'«\' expecting \'}\'"
+      + "\nmissing \'}\' at \'»\\r\\n\\t\\t\\t\\t}\\r\\n\\t\\t}»\\r\\n\\r\\n\\t\\t«\'"
+      + "\nmismatched input \'«\' expecting \'}\'"
+      + "\nmissing \'}\' at \'»\\r\\n\\t\\t\\t\\t}\\r\\n\\t\\t}»\\t\\t\\t\\t\\t\\t\\r\\n\\r\\n\\t\\t\'\'\'\'"
+      + "\nThe method or field ev is undefined"
+      + "\nThe method generateJobType(Object) is undefined"
+      + "\nThe method or field jobs is undefined"
+      + "\nThis expression is not allowed in this context, since it doesn\'t cause any side effects."
+      + "\nThis expression is not allowed in this context, since it doesn\'t cause any side effects."
+      + "\njoin cannot be resolved");
   }
   
   protected String _generateEventType(final PushEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
-    CharSequence _xifexpression = null;
-    if ((stmt != null)) {
+    String _xifexpression = null;
+    String _get = stmt.getBranches().get(1);
+    boolean _tripleNotEquals = (_get != null);
+    if (_tripleNotEquals) {
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append(stmt);
-      _xifexpression = _builder_1;
+      _builder_1.append("branches:");
+      String _get_1 = stmt.getBranches().get(1);
+      _xifexpression = (_builder_1.toString() + _get_1);
     }
     _builder.append(_xifexpression);
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
+    CharSequence _xifexpression_1 = null;
+    String _get_2 = stmt.getTags().get(1);
+    boolean _tripleNotEquals_1 = (_get_2 != null);
+    if (_tripleNotEquals_1) {
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("stmt.branches.get(1)");
+      _xifexpression_1 = _builder_2;
+    }
+    _builder.append(_xifexpression_1);
+    _builder.newLineIfNotEmpty();
+    String _xifexpression_2 = null;
+    String _get_3 = stmt.getBranchesIgnore().get(1);
+    boolean _tripleNotEquals_2 = (_get_3 != null);
+    if (_tripleNotEquals_2) {
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("branches:");
+      String _get_4 = stmt.getBranches().get(1);
+      _xifexpression_2 = (_builder_3.toString() + _get_4);
+    }
+    _builder.append(_xifexpression_2);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_3 = null;
+    String _get_5 = stmt.getTagsIgnore().get(1);
+    boolean _tripleNotEquals_3 = (_get_5 != null);
+    if (_tripleNotEquals_3) {
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("stmt.branches.get(1)");
+      _xifexpression_3 = _builder_4;
+    }
+    _builder.append(_xifexpression_3);
+    _builder.newLineIfNotEmpty();
+    String _xifexpression_4 = null;
+    String _get_6 = stmt.getPaths().get(1);
+    boolean _tripleNotEquals_4 = (_get_6 != null);
+    if (_tripleNotEquals_4) {
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("branches:");
+      String _get_7 = stmt.getBranches().get(1);
+      _xifexpression_4 = (_builder_5.toString() + _get_7);
+    }
+    _builder.append(_xifexpression_4);
+    _builder.newLineIfNotEmpty();
+    CharSequence _xifexpression_5 = null;
+    String _get_8 = stmt.getPathsIgnore().get(1);
+    boolean _tripleNotEquals_5 = (_get_8 != null);
+    if (_tripleNotEquals_5) {
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("stmt.branches.get(1)");
+      _xifexpression_5 = _builder_6;
+    }
+    _builder.append(_xifexpression_5);
+    _builder.append("\t\t\t\t");
+    _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
   
   protected String _generateEventType(final PullRequestEvent stmt) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("\t");
+    String _xifexpression = null;
+    String _get = stmt.getBranches().get(1);
+    boolean _tripleNotEquals = (_get != null);
+    if (_tripleNotEquals) {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("branches:");
+      String _get_1 = stmt.getBranches().get(1);
+      _xifexpression = (_builder_1.toString() + _get_1);
+    }
+    _builder.append(_xifexpression, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    CharSequence _xifexpression_1 = null;
+    String _get_2 = stmt.getTags().get(1);
+    boolean _tripleNotEquals_1 = (_get_2 != null);
+    if (_tripleNotEquals_1) {
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("stmt.branches.get(1)");
+      _xifexpression_1 = _builder_2;
+    }
+    _builder.append(_xifexpression_1, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    String _xifexpression_2 = null;
+    String _get_3 = stmt.getBranchesIgnore().get(1);
+    boolean _tripleNotEquals_2 = (_get_3 != null);
+    if (_tripleNotEquals_2) {
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("branches:");
+      String _get_4 = stmt.getBranches().get(1);
+      _xifexpression_2 = (_builder_3.toString() + _get_4);
+    }
+    _builder.append(_xifexpression_2, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    CharSequence _xifexpression_3 = null;
+    String _get_5 = stmt.getTagsIgnore().get(1);
+    boolean _tripleNotEquals_3 = (_get_5 != null);
+    if (_tripleNotEquals_3) {
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("stmt.branches.get(1)");
+      _xifexpression_3 = _builder_4;
+    }
+    _builder.append(_xifexpression_3, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    String _xifexpression_4 = null;
+    String _get_6 = stmt.getPaths().get(1);
+    boolean _tripleNotEquals_4 = (_get_6 != null);
+    if (_tripleNotEquals_4) {
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("branches:");
+      String _get_7 = stmt.getBranches().get(1);
+      _xifexpression_4 = (_builder_5.toString() + _get_7);
+    }
+    _builder.append(_xifexpression_4, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    CharSequence _xifexpression_5 = null;
+    String _get_8 = stmt.getPathsIgnore().get(1);
+    boolean _tripleNotEquals_5 = (_get_8 != null);
+    if (_tripleNotEquals_5) {
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("stmt.branches.get(1)");
+      _xifexpression_5 = _builder_6;
+    }
+    _builder.append(_xifexpression_5, "\t");
+    _builder.append("\t\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
     return _builder.toString();
   }
   
@@ -243,11 +329,38 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
+  protected String _generateEventType(final Job jobs) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nmismatched input \'«\' expecting \'}\'"
+      + "\nmissing \'}\' at \'»\\r\\n\\t\\t\\t\\t}\\r\\n\\t\\t}»\\t\\t\\t\\t\\t\\t\\r\\n\\r\\n\\t\'\'\'\'"
+      + "\nThe method or field stps is undefined"
+      + "\nThis expression is not allowed in this context, since it doesn\'t cause any side effects.");
+  }
+  
+  protected String _generateStepsType(final Step step) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nno viable alternative at input \'«\'"
+      + "\nmissing \'}\' at \'»}»\\r\\n\\t\\t«\'"
+      + "\nno viable alternative at input \'«\'"
+      + "\nmissing \'}\' at \'»\\t}»\\t\\r\\n\\t\\t«\'"
+      + "\nno viable alternative at input \'«\'"
+      + "\nmissing \'}\' at \'»}»\\r\\n\\t\\t«\'"
+      + "\nno viable alternative at input \'«\'"
+      + "\nmissing \'}\' at \'»}»\\r\\n\\t\\t«\'"
+      + "\nno viable alternative at input \'«\'"
+      + "\nextraneous input \'»}»\\r\\n\\r\\n\\t\'\'\'\' expecting \'}\'"
+      + "\nThis expression is not allowed in this context, since it doesn\'t cause any side effects."
+      + "\nThis expression is not allowed in this context, since it doesn\'t cause any side effects."
+      + "\nThis expression is not allowed in this context, since it doesn\'t cause any side effects."
+      + "\nThis expression is not allowed in this context, since it doesn\'t cause any side effects."
+      + "\nThis expression is not allowed in this context, since it doesn\'t cause any side effects.");
+  }
+  
   public String generateWorkFlowStmt(final Workflow stmt, final GithubactionGenerator.Environment env) {
     return _generateWorkFlowStmt(stmt, env);
   }
   
-  public String generateEventType(final Event stmt) {
+  public String generateEventType(final EObject stmt) {
     if (stmt instanceof CreateEvent) {
       return _generateEventType((CreateEvent)stmt);
     } else if (stmt instanceof DeleteEvent) {
@@ -268,9 +381,15 @@ public class GithubactionGenerator extends AbstractGenerator {
       return _generateEventType((ScheduleEvent)stmt);
     } else if (stmt instanceof WorkflowDispatchEvent) {
       return _generateEventType((WorkflowDispatchEvent)stmt);
+    } else if (stmt instanceof Job) {
+      return _generateEventType((Job)stmt);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(stmt).toString());
     }
+  }
+  
+  public String generateStepsType(final Step step) {
+    return _generateStepsType(step);
   }
 }
