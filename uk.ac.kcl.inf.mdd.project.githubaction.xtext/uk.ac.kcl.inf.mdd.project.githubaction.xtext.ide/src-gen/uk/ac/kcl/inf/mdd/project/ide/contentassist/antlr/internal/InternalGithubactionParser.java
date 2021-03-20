@@ -4526,31 +4526,31 @@ public class InternalGithubactionParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Workflow__Group_3__1__Impl"
-    // InternalGithubaction.g:1411:1: rule__Workflow__Group_3__1__Impl : ( ( rule__Workflow__NamesAssignment_3_1 ) ) ;
+    // InternalGithubaction.g:1411:1: rule__Workflow__Group_3__1__Impl : ( ( rule__Workflow__NameAssignment_3_1 ) ) ;
     public final void rule__Workflow__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalGithubaction.g:1415:1: ( ( ( rule__Workflow__NamesAssignment_3_1 ) ) )
-            // InternalGithubaction.g:1416:1: ( ( rule__Workflow__NamesAssignment_3_1 ) )
+            // InternalGithubaction.g:1415:1: ( ( ( rule__Workflow__NameAssignment_3_1 ) ) )
+            // InternalGithubaction.g:1416:1: ( ( rule__Workflow__NameAssignment_3_1 ) )
             {
-            // InternalGithubaction.g:1416:1: ( ( rule__Workflow__NamesAssignment_3_1 ) )
-            // InternalGithubaction.g:1417:2: ( rule__Workflow__NamesAssignment_3_1 )
+            // InternalGithubaction.g:1416:1: ( ( rule__Workflow__NameAssignment_3_1 ) )
+            // InternalGithubaction.g:1417:2: ( rule__Workflow__NameAssignment_3_1 )
             {
-             before(grammarAccess.getWorkflowAccess().getNamesAssignment_3_1()); 
-            // InternalGithubaction.g:1418:2: ( rule__Workflow__NamesAssignment_3_1 )
-            // InternalGithubaction.g:1418:3: rule__Workflow__NamesAssignment_3_1
+             before(grammarAccess.getWorkflowAccess().getNameAssignment_3_1()); 
+            // InternalGithubaction.g:1418:2: ( rule__Workflow__NameAssignment_3_1 )
+            // InternalGithubaction.g:1418:3: rule__Workflow__NameAssignment_3_1
             {
             pushFollow(FOLLOW_2);
-            rule__Workflow__NamesAssignment_3_1();
+            rule__Workflow__NameAssignment_3_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getWorkflowAccess().getNamesAssignment_3_1()); 
+             after(grammarAccess.getWorkflowAccess().getNameAssignment_3_1()); 
 
             }
 
@@ -32339,9 +32339,9 @@ public class InternalGithubactionParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__Repository__WorkflowsAssignment_3_3_1"
 
 
-    // $ANTLR start "rule__Workflow__NamesAssignment_3_1"
-    // InternalGithubaction.g:10664:1: rule__Workflow__NamesAssignment_3_1 : ( ruleEString ) ;
-    public final void rule__Workflow__NamesAssignment_3_1() throws RecognitionException {
+    // $ANTLR start "rule__Workflow__NameAssignment_3_1"
+    // InternalGithubaction.g:10664:1: rule__Workflow__NameAssignment_3_1 : ( ruleEString ) ;
+    public final void rule__Workflow__NameAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -32352,13 +32352,13 @@ public class InternalGithubactionParser extends AbstractInternalContentAssistPar
             // InternalGithubaction.g:10669:2: ( ruleEString )
             // InternalGithubaction.g:10670:3: ruleEString
             {
-             before(grammarAccess.getWorkflowAccess().getNamesEStringParserRuleCall_3_1_0()); 
+             before(grammarAccess.getWorkflowAccess().getNameEStringParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
             ruleEString();
 
             state._fsp--;
 
-             after(grammarAccess.getWorkflowAccess().getNamesEStringParserRuleCall_3_1_0()); 
+             after(grammarAccess.getWorkflowAccess().getNameEStringParserRuleCall_3_1_0()); 
 
             }
 
@@ -32377,7 +32377,7 @@ public class InternalGithubactionParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__Workflow__NamesAssignment_3_1"
+    // $ANTLR end "rule__Workflow__NameAssignment_3_1"
 
 
     // $ANTLR start "rule__Workflow__OnAssignment_4_2"

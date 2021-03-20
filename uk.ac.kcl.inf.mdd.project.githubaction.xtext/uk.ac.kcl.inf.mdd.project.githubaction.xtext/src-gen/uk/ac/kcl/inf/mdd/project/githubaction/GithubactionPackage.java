@@ -97,13 +97,13 @@ public interface GithubactionPackage extends EPackage
   int WORKFLOW = 1;
 
   /**
-   * The feature id for the '<em><b>Names</b></em>' attribute.
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WORKFLOW__NAMES = 0;
+  int WORKFLOW__NAME = 0;
 
   /**
    * The feature id for the '<em><b>On</b></em>' containment reference list.
@@ -1031,15 +1031,15 @@ public interface GithubactionPackage extends EPackage
   EClass getWorkflow();
 
   /**
-   * Returns the meta object for the attribute '{@link uk.ac.kcl.inf.mdd.project.githubaction.Workflow#getNames <em>Names</em>}'.
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.inf.mdd.project.githubaction.Workflow#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Names</em>'.
-   * @see uk.ac.kcl.inf.mdd.project.githubaction.Workflow#getNames()
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see uk.ac.kcl.inf.mdd.project.githubaction.Workflow#getName()
    * @see #getWorkflow()
    * @generated
    */
-  EAttribute getWorkflow_Names();
+  EAttribute getWorkflow_Name();
 
   /**
    * Returns the meta object for the containment reference list '{@link uk.ac.kcl.inf.mdd.project.githubaction.Workflow#getOn <em>On</em>}'.
@@ -1931,12 +1931,12 @@ public interface GithubactionPackage extends EPackage
     EClass WORKFLOW = eINSTANCE.getWorkflow();
 
     /**
-     * The meta object literal for the '<em><b>Names</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute WORKFLOW__NAMES = eINSTANCE.getWorkflow_Names();
+    EAttribute WORKFLOW__NAME = eINSTANCE.getWorkflow_Name();
 
     /**
      * The meta object literal for the '<em><b>On</b></em>' containment reference list feature.

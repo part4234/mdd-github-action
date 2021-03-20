@@ -300,7 +300,7 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
    * @generated
    */
   @Override
-  public EAttribute getWorkflow_Names()
+  public EAttribute getWorkflow_Name()
   {
     return (EAttribute)workflowEClass.getEStructuralFeatures().get(0);
   }
@@ -1198,7 +1198,7 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
     createEReference(repositoryEClass, REPOSITORY__WORKFLOWS);
 
     workflowEClass = createEClass(WORKFLOW);
-    createEAttribute(workflowEClass, WORKFLOW__NAMES);
+    createEAttribute(workflowEClass, WORKFLOW__NAME);
     createEReference(workflowEClass, WORKFLOW__ON);
     createEReference(workflowEClass, WORKFLOW__ENV);
     createEReference(workflowEClass, WORKFLOW__DEFAULTS);
@@ -1344,7 +1344,7 @@ public class GithubactionPackageImpl extends EPackageImpl implements Githubactio
     initEReference(getRepository_Workflows(), this.getWorkflow(), null, "workflows", null, 0, -1, Repository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(workflowEClass, Workflow.class, "Workflow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getWorkflow_Names(), ecorePackage.getEString(), "names", null, 0, 1, Workflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getWorkflow_Name(), ecorePackage.getEString(), "name", null, 0, 1, Workflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getWorkflow_On(), this.getEvent(), null, "on", null, 0, -1, Workflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getWorkflow_Env(), this.getEnv(), null, "env", null, 0, -1, Workflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getWorkflow_Defaults(), this.getRunSetting(), null, "defaults", null, 0, 1, Workflow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

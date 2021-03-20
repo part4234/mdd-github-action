@@ -137,7 +137,7 @@ public class GithubactionParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getInputAccess().getGroup_6(), "rule__Input__Group_6__0");
 			builder.put(grammarAccess.getRepositoryAccess().getWorkflowsAssignment_3_2(), "rule__Repository__WorkflowsAssignment_3_2");
 			builder.put(grammarAccess.getRepositoryAccess().getWorkflowsAssignment_3_3_1(), "rule__Repository__WorkflowsAssignment_3_3_1");
-			builder.put(grammarAccess.getWorkflowAccess().getNamesAssignment_3_1(), "rule__Workflow__NamesAssignment_3_1");
+			builder.put(grammarAccess.getWorkflowAccess().getNameAssignment_3_1(), "rule__Workflow__NameAssignment_3_1");
 			builder.put(grammarAccess.getWorkflowAccess().getOnAssignment_4_2(), "rule__Workflow__OnAssignment_4_2");
 			builder.put(grammarAccess.getWorkflowAccess().getOnAssignment_4_3_1(), "rule__Workflow__OnAssignment_4_3_1");
 			builder.put(grammarAccess.getWorkflowAccess().getEnvAssignment_5_2(), "rule__Workflow__EnvAssignment_5_2");

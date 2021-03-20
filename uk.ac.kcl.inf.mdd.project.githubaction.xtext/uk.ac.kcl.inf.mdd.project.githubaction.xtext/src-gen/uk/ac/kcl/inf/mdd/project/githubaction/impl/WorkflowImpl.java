@@ -34,7 +34,7 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Workflow;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.WorkflowImpl#getNames <em>Names</em>}</li>
+ *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.WorkflowImpl#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.WorkflowImpl#getOn <em>On</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.WorkflowImpl#getEnv <em>Env</em>}</li>
  *   <li>{@link uk.ac.kcl.inf.mdd.project.githubaction.impl.WorkflowImpl#getDefaults <em>Defaults</em>}</li>
@@ -46,24 +46,24 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Workflow;
 public class WorkflowImpl extends MinimalEObjectImpl.Container implements Workflow
 {
   /**
-   * The default value of the '{@link #getNames() <em>Names</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNames()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String NAMES_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getNames() <em>Names</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNames()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String names = NAMES_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getOn() <em>On</em>}' containment reference list.
@@ -132,9 +132,9 @@ public class WorkflowImpl extends MinimalEObjectImpl.Container implements Workfl
    * @generated
    */
   @Override
-  public String getNames()
+  public String getName()
   {
-    return names;
+    return name;
   }
 
   /**
@@ -143,12 +143,12 @@ public class WorkflowImpl extends MinimalEObjectImpl.Container implements Workfl
    * @generated
    */
   @Override
-  public void setNames(String newNames)
+  public void setName(String newName)
   {
-    String oldNames = names;
-    names = newNames;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, GithubactionPackage.WORKFLOW__NAMES, oldNames, names));
+      eNotify(new ENotificationImpl(this, Notification.SET, GithubactionPackage.WORKFLOW__NAME, oldName, name));
   }
 
   /**
@@ -278,8 +278,8 @@ public class WorkflowImpl extends MinimalEObjectImpl.Container implements Workfl
   {
     switch (featureID)
     {
-      case GithubactionPackage.WORKFLOW__NAMES:
-        return getNames();
+      case GithubactionPackage.WORKFLOW__NAME:
+        return getName();
       case GithubactionPackage.WORKFLOW__ON:
         return getOn();
       case GithubactionPackage.WORKFLOW__ENV:
@@ -303,8 +303,8 @@ public class WorkflowImpl extends MinimalEObjectImpl.Container implements Workfl
   {
     switch (featureID)
     {
-      case GithubactionPackage.WORKFLOW__NAMES:
-        setNames((String)newValue);
+      case GithubactionPackage.WORKFLOW__NAME:
+        setName((String)newValue);
         return;
       case GithubactionPackage.WORKFLOW__ON:
         getOn().clear();
@@ -335,8 +335,8 @@ public class WorkflowImpl extends MinimalEObjectImpl.Container implements Workfl
   {
     switch (featureID)
     {
-      case GithubactionPackage.WORKFLOW__NAMES:
-        setNames(NAMES_EDEFAULT);
+      case GithubactionPackage.WORKFLOW__NAME:
+        setName(NAME_EDEFAULT);
         return;
       case GithubactionPackage.WORKFLOW__ON:
         getOn().clear();
@@ -364,8 +364,8 @@ public class WorkflowImpl extends MinimalEObjectImpl.Container implements Workfl
   {
     switch (featureID)
     {
-      case GithubactionPackage.WORKFLOW__NAMES:
-        return NAMES_EDEFAULT == null ? names != null : !NAMES_EDEFAULT.equals(names);
+      case GithubactionPackage.WORKFLOW__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case GithubactionPackage.WORKFLOW__ON:
         return on != null && !on.isEmpty();
       case GithubactionPackage.WORKFLOW__ENV:
@@ -389,8 +389,8 @@ public class WorkflowImpl extends MinimalEObjectImpl.Container implements Workfl
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (names: ");
-    result.append(names);
+    result.append(" (name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

@@ -107,8 +107,8 @@ public class GithubactionGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cNameKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cNamesAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cNamesEStringParserRuleCall_3_1_0 = (RuleCall)cNamesAssignment_3_1.eContents().get(0);
+		private final Assignment cNameAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cNameEStringParserRuleCall_3_1_0 = (RuleCall)cNameAssignment_3_1.eContents().get(0);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cOnKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
@@ -148,15 +148,15 @@ public class GithubactionGrammarAccess extends AbstractElementFinder.AbstractGra
 		//Workflow:
 		//	{Workflow}
 		//	'Workflow'
-		//	'{' ('name' names=EString)? ('on' '{' on+=Event ("," on+=Event)* '}')? ('env' '{' env+=Env ("," env+=Env)* '}')? (
+		//	'{' ('name' name=EString)? ('on' '{' on+=Event ("," on+=Event)* '}')? ('env' '{' env+=Env ("," env+=Env)* '}')? (
 		//	'defaults' defaults=RunSetting)? ('jobs' '{' jobs+=Job ("," jobs+=Job)* '}')?
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Workflow}
 		//'Workflow'
-		//'{' ('name' names=EString)? ('on' '{' on+=Event ("," on+=Event)* '}')? ('env' '{' env+=Env ("," env+=Env)* '}')? (
-		//'defaults' defaults=RunSetting)? ('jobs' '{' jobs+=Job ("," jobs+=Job)* '}')?
+		//'{' ('name' name=EString)? ('on' '{' on+=Event ("," on+=Event)* '}')? ('env' '{' env+=Env ("," env+=Env)* '}')? ('defaults'
+		//defaults=RunSetting)? ('jobs' '{' jobs+=Job ("," jobs+=Job)* '}')?
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -169,17 +169,17 @@ public class GithubactionGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//('name' names=EString)?
+		//('name' name=EString)?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'name'
 		public Keyword getNameKeyword_3_0() { return cNameKeyword_3_0; }
 		
-		//names=EString
-		public Assignment getNamesAssignment_3_1() { return cNamesAssignment_3_1; }
+		//name=EString
+		public Assignment getNameAssignment_3_1() { return cNameAssignment_3_1; }
 		
 		//EString
-		public RuleCall getNamesEStringParserRuleCall_3_1_0() { return cNamesEStringParserRuleCall_3_1_0; }
+		public RuleCall getNameEStringParserRuleCall_3_1_0() { return cNameEStringParserRuleCall_3_1_0; }
 		
 		//('on' '{' on+=Event ("," on+=Event)* '}')?
 		public Group getGroup_4() { return cGroup_4; }
@@ -2602,7 +2602,7 @@ public class GithubactionGrammarAccess extends AbstractElementFinder.AbstractGra
 	//Workflow:
 	//	{Workflow}
 	//	'Workflow'
-	//	'{' ('name' names=EString)? ('on' '{' on+=Event ("," on+=Event)* '}')? ('env' '{' env+=Env ("," env+=Env)* '}')? (
+	//	'{' ('name' name=EString)? ('on' '{' on+=Event ("," on+=Event)* '}')? ('env' '{' env+=Env ("," env+=Env)* '}')? (
 	//	'defaults' defaults=RunSetting)? ('jobs' '{' jobs+=Job ("," jobs+=Job)* '}')?
 	//	'}';
 	public WorkflowElements getWorkflowAccess() {

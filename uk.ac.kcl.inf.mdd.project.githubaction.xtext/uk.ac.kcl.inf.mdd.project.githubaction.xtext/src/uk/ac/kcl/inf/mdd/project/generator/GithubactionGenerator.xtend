@@ -14,7 +14,9 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Event;
 import uk.ac.kcl.inf.mdd.project.githubaction.Job;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 
-import uk.ac.kcl.inf.mdd.project.githubaction.*; //says deprecated but works :o
+import uk.ac.kcl.inf.mdd.project.githubaction.*; import org.eclipse.emf.common.util.EList
+
+//says deprecated but works :o
 
 /**
  * Generates code from your model files on save.
@@ -65,21 +67,37 @@ class GithubactionGenerator extends AbstractGenerator {
 		# This is the generated .yaml file for the input repository.
 		# Files are individually generated Individually for each workflow and differ by main/feature
 		
-		«program.workflows.map[generateWorkFlowStmt()].join('\n')»
+			«program.workflows.map[generateWorkFlowStmt(new Environment)].join('\n')»
 		
 	
 	'''
-	/* 
-	 * «» Ignore the name and just append to it. Get it from the top attribute values.
-	   Files need to be split here for master and featre- TBD
-	 * 
-	 *
-	 * */ 
-	 
-	dispatch def String generateWorkFlowStmt(Workflow stmt) '''
-		name: «stmt.on»
+
+	private static class Environment {
+		var int counter = 0
+		def getFreshVarName() '''i«counter++»'''
+		def exit() { counter-- }
+	}
 	
-		«if (!stmt.on.empty){'''on:'''}»«stmt.on.get(0).generateEventStmt»
+	
+	
+	dispatch def String generateWorkFlowStmt(Workflow stmt, Environment env) '''
+		name: «stmt.on»
+		
+		on:
+		
+		«if (!stmt.on.empty){
+			
+		    val freshVarName = env.getFreshVarName
+			val result = '''
+				for (int «freshVarName» = 0; «freshVarName» < «stmt.on.size»; «freshVarName»++) {
+					«stmt.statements.map[generateJavaStatement(env)].join('\n')»
+				}
+				
+		env.exit
+		result
+		
+		
+		'''}»« stmt.on.generateEventStmt»
 		
  		«if (!stmt.env.empty){'''env:'''}»«stmt.env.get(0).generateEventStmt2»
 		
@@ -90,10 +108,10 @@ class GithubactionGenerator extends AbstractGenerator {
 		'''
 
 
-	//add more methods to handle the rest calls
+	/*add more methods to handle the rest calls
 	dispatch def String generateEventStmt(Event stmt) '''
 		
-		«if (PushEvent != null){'''    push:'''}»«PushEvent.cast(PushEvent).generatePushEventStmt»
+		«if (PushEvent != null ){'''    push:'''}»«generatePullRequestEventt»
 		«if (PullRequestEvent != null){'''    push:'''}»«generatePullRequestEventt»
 		«if (ScheduleEvent != null){'''    push:'''}»«generateScheduleEvent»
 		«if (WorkflowDispatchEvent != null){'''    push:'''}»«generateWorkflowDispatchEvent»
@@ -104,63 +122,34 @@ class GithubactionGenerator extends AbstractGenerator {
 		«if (IssueEvent != null){'''    push:'''}»«generateIssueEvent»
 		«if (LabelEvent != null){'''    push:'''}»«generateLabelEvent»						
 	'''
-
+    */
+    
 	//gets access to all local attributes of a class/interface
-	dispatch def String generatePushEventStmt(PushEvent stmt) '''
+	dispatch def String generatePushEvent(PushEvent stmt) '''
 		
 		«if (!stmt.branchesIgnore.empty){'''    branches: [master]'''}»
 
 	'''
 
 	
-	dispatch def String generateEventStmt2(Env stmt) ''''''
+	dispatch def String generatePullEvent(PullRequestEvent stmt) ''''''
 		
-	dispatch def String generateEventStmt3(RunSetting stmt) ''''''
-	
-	dispatch def String generateEventStmt4(Job stmt) ''''''
-	
-
-	
-	
-
-
+	dispatch def String generateScheduleEvent(ScheduleEvent stmt) ''''''
 
 		
-	def generateLabelEvent(Object null1) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
+	dispatch def String generateWorkflowEvent(WorkflowDispatchEvent stmt) ''''''
 	
-	def generateIssueEvent(Object null1) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	def generateDeploymentEvent(Object null1) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	def generateDeleteEvent(Object null1) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	def generateCreateEvent(Object null1) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	def generateRepositoryDispatchEvent(Object null1) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	def generateWorkflowDispatchEvent(Object null1) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	def generateScheduleEvent(Object null1) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	def generatePullRequestEventt(Object null1) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
+	dispatch def String generateDispatchEvent(RepositoryDispatchEvent stmt) ''''''
+		
+	dispatch def String generateCreateEvent(CreateEvent stmt) ''''''
+
+	dispatch def String generateDeleteEvent(DeleteEvent stmt) ''''''
+		
+	dispatch def String generateDeploymentEvent(DeploymentEvent stmt) ''''''	
+
+	dispatch def String generateIssueEvent(IssueEvent stmt) ''''''
+		
+	dispatch def String generateLabelEvent(LabelEvent stmt) ''''''	
+
 		
 }

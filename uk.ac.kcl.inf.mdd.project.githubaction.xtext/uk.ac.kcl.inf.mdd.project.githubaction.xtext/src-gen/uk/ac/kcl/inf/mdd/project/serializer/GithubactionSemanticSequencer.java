@@ -397,7 +397,7 @@ public class GithubactionSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     Workflow returns Workflow
 	 *
 	 * Constraint:
-	 *     (names=EString? (on+=Event on+=Event*)? (env+=Env env+=Env*)? defaults=RunSetting? (jobs+=Job jobs+=Job*)?)
+	 *     (name=EString? (on+=Event on+=Event*)? (env+=Env env+=Env*)? defaults=RunSetting? (jobs+=Job jobs+=Job*)?)
 	 */
 	protected void sequence_Workflow(ISerializationContext context, Workflow semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

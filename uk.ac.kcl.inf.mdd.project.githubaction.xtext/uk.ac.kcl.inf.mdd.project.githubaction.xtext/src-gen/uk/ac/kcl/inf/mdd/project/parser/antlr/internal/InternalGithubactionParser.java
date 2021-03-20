@@ -412,7 +412,7 @@ public class InternalGithubactionParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleWorkflow"
-    // InternalGithubaction.g:168:1: ruleWorkflow returns [EObject current=null] : ( () otherlv_1= 'Workflow' otherlv_2= '{' (otherlv_3= 'name' ( (lv_names_4_0= ruleEString ) ) )? (otherlv_5= 'on' otherlv_6= '{' ( (lv_on_7_0= ruleEvent ) ) (otherlv_8= ',' ( (lv_on_9_0= ruleEvent ) ) )* otherlv_10= '}' )? (otherlv_11= 'env' otherlv_12= '{' ( (lv_env_13_0= ruleEnv ) ) (otherlv_14= ',' ( (lv_env_15_0= ruleEnv ) ) )* otherlv_16= '}' )? (otherlv_17= 'defaults' ( (lv_defaults_18_0= ruleRunSetting ) ) )? (otherlv_19= 'jobs' otherlv_20= '{' ( (lv_jobs_21_0= ruleJob ) ) (otherlv_22= ',' ( (lv_jobs_23_0= ruleJob ) ) )* otherlv_24= '}' )? otherlv_25= '}' ) ;
+    // InternalGithubaction.g:168:1: ruleWorkflow returns [EObject current=null] : ( () otherlv_1= 'Workflow' otherlv_2= '{' (otherlv_3= 'name' ( (lv_name_4_0= ruleEString ) ) )? (otherlv_5= 'on' otherlv_6= '{' ( (lv_on_7_0= ruleEvent ) ) (otherlv_8= ',' ( (lv_on_9_0= ruleEvent ) ) )* otherlv_10= '}' )? (otherlv_11= 'env' otherlv_12= '{' ( (lv_env_13_0= ruleEnv ) ) (otherlv_14= ',' ( (lv_env_15_0= ruleEnv ) ) )* otherlv_16= '}' )? (otherlv_17= 'defaults' ( (lv_defaults_18_0= ruleRunSetting ) ) )? (otherlv_19= 'jobs' otherlv_20= '{' ( (lv_jobs_21_0= ruleJob ) ) (otherlv_22= ',' ( (lv_jobs_23_0= ruleJob ) ) )* otherlv_24= '}' )? otherlv_25= '}' ) ;
     public final EObject ruleWorkflow() throws RecognitionException {
         EObject current = null;
 
@@ -433,7 +433,7 @@ public class InternalGithubactionParser extends AbstractInternalAntlrParser {
         Token otherlv_22=null;
         Token otherlv_24=null;
         Token otherlv_25=null;
-        AntlrDatatypeRuleToken lv_names_4_0 = null;
+        AntlrDatatypeRuleToken lv_name_4_0 = null;
 
         EObject lv_on_7_0 = null;
 
@@ -454,11 +454,11 @@ public class InternalGithubactionParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGithubaction.g:174:2: ( ( () otherlv_1= 'Workflow' otherlv_2= '{' (otherlv_3= 'name' ( (lv_names_4_0= ruleEString ) ) )? (otherlv_5= 'on' otherlv_6= '{' ( (lv_on_7_0= ruleEvent ) ) (otherlv_8= ',' ( (lv_on_9_0= ruleEvent ) ) )* otherlv_10= '}' )? (otherlv_11= 'env' otherlv_12= '{' ( (lv_env_13_0= ruleEnv ) ) (otherlv_14= ',' ( (lv_env_15_0= ruleEnv ) ) )* otherlv_16= '}' )? (otherlv_17= 'defaults' ( (lv_defaults_18_0= ruleRunSetting ) ) )? (otherlv_19= 'jobs' otherlv_20= '{' ( (lv_jobs_21_0= ruleJob ) ) (otherlv_22= ',' ( (lv_jobs_23_0= ruleJob ) ) )* otherlv_24= '}' )? otherlv_25= '}' ) )
-            // InternalGithubaction.g:175:2: ( () otherlv_1= 'Workflow' otherlv_2= '{' (otherlv_3= 'name' ( (lv_names_4_0= ruleEString ) ) )? (otherlv_5= 'on' otherlv_6= '{' ( (lv_on_7_0= ruleEvent ) ) (otherlv_8= ',' ( (lv_on_9_0= ruleEvent ) ) )* otherlv_10= '}' )? (otherlv_11= 'env' otherlv_12= '{' ( (lv_env_13_0= ruleEnv ) ) (otherlv_14= ',' ( (lv_env_15_0= ruleEnv ) ) )* otherlv_16= '}' )? (otherlv_17= 'defaults' ( (lv_defaults_18_0= ruleRunSetting ) ) )? (otherlv_19= 'jobs' otherlv_20= '{' ( (lv_jobs_21_0= ruleJob ) ) (otherlv_22= ',' ( (lv_jobs_23_0= ruleJob ) ) )* otherlv_24= '}' )? otherlv_25= '}' )
+            // InternalGithubaction.g:174:2: ( ( () otherlv_1= 'Workflow' otherlv_2= '{' (otherlv_3= 'name' ( (lv_name_4_0= ruleEString ) ) )? (otherlv_5= 'on' otherlv_6= '{' ( (lv_on_7_0= ruleEvent ) ) (otherlv_8= ',' ( (lv_on_9_0= ruleEvent ) ) )* otherlv_10= '}' )? (otherlv_11= 'env' otherlv_12= '{' ( (lv_env_13_0= ruleEnv ) ) (otherlv_14= ',' ( (lv_env_15_0= ruleEnv ) ) )* otherlv_16= '}' )? (otherlv_17= 'defaults' ( (lv_defaults_18_0= ruleRunSetting ) ) )? (otherlv_19= 'jobs' otherlv_20= '{' ( (lv_jobs_21_0= ruleJob ) ) (otherlv_22= ',' ( (lv_jobs_23_0= ruleJob ) ) )* otherlv_24= '}' )? otherlv_25= '}' ) )
+            // InternalGithubaction.g:175:2: ( () otherlv_1= 'Workflow' otherlv_2= '{' (otherlv_3= 'name' ( (lv_name_4_0= ruleEString ) ) )? (otherlv_5= 'on' otherlv_6= '{' ( (lv_on_7_0= ruleEvent ) ) (otherlv_8= ',' ( (lv_on_9_0= ruleEvent ) ) )* otherlv_10= '}' )? (otherlv_11= 'env' otherlv_12= '{' ( (lv_env_13_0= ruleEnv ) ) (otherlv_14= ',' ( (lv_env_15_0= ruleEnv ) ) )* otherlv_16= '}' )? (otherlv_17= 'defaults' ( (lv_defaults_18_0= ruleRunSetting ) ) )? (otherlv_19= 'jobs' otherlv_20= '{' ( (lv_jobs_21_0= ruleJob ) ) (otherlv_22= ',' ( (lv_jobs_23_0= ruleJob ) ) )* otherlv_24= '}' )? otherlv_25= '}' )
             {
-            // InternalGithubaction.g:175:2: ( () otherlv_1= 'Workflow' otherlv_2= '{' (otherlv_3= 'name' ( (lv_names_4_0= ruleEString ) ) )? (otherlv_5= 'on' otherlv_6= '{' ( (lv_on_7_0= ruleEvent ) ) (otherlv_8= ',' ( (lv_on_9_0= ruleEvent ) ) )* otherlv_10= '}' )? (otherlv_11= 'env' otherlv_12= '{' ( (lv_env_13_0= ruleEnv ) ) (otherlv_14= ',' ( (lv_env_15_0= ruleEnv ) ) )* otherlv_16= '}' )? (otherlv_17= 'defaults' ( (lv_defaults_18_0= ruleRunSetting ) ) )? (otherlv_19= 'jobs' otherlv_20= '{' ( (lv_jobs_21_0= ruleJob ) ) (otherlv_22= ',' ( (lv_jobs_23_0= ruleJob ) ) )* otherlv_24= '}' )? otherlv_25= '}' )
-            // InternalGithubaction.g:176:3: () otherlv_1= 'Workflow' otherlv_2= '{' (otherlv_3= 'name' ( (lv_names_4_0= ruleEString ) ) )? (otherlv_5= 'on' otherlv_6= '{' ( (lv_on_7_0= ruleEvent ) ) (otherlv_8= ',' ( (lv_on_9_0= ruleEvent ) ) )* otherlv_10= '}' )? (otherlv_11= 'env' otherlv_12= '{' ( (lv_env_13_0= ruleEnv ) ) (otherlv_14= ',' ( (lv_env_15_0= ruleEnv ) ) )* otherlv_16= '}' )? (otherlv_17= 'defaults' ( (lv_defaults_18_0= ruleRunSetting ) ) )? (otherlv_19= 'jobs' otherlv_20= '{' ( (lv_jobs_21_0= ruleJob ) ) (otherlv_22= ',' ( (lv_jobs_23_0= ruleJob ) ) )* otherlv_24= '}' )? otherlv_25= '}'
+            // InternalGithubaction.g:175:2: ( () otherlv_1= 'Workflow' otherlv_2= '{' (otherlv_3= 'name' ( (lv_name_4_0= ruleEString ) ) )? (otherlv_5= 'on' otherlv_6= '{' ( (lv_on_7_0= ruleEvent ) ) (otherlv_8= ',' ( (lv_on_9_0= ruleEvent ) ) )* otherlv_10= '}' )? (otherlv_11= 'env' otherlv_12= '{' ( (lv_env_13_0= ruleEnv ) ) (otherlv_14= ',' ( (lv_env_15_0= ruleEnv ) ) )* otherlv_16= '}' )? (otherlv_17= 'defaults' ( (lv_defaults_18_0= ruleRunSetting ) ) )? (otherlv_19= 'jobs' otherlv_20= '{' ( (lv_jobs_21_0= ruleJob ) ) (otherlv_22= ',' ( (lv_jobs_23_0= ruleJob ) ) )* otherlv_24= '}' )? otherlv_25= '}' )
+            // InternalGithubaction.g:176:3: () otherlv_1= 'Workflow' otherlv_2= '{' (otherlv_3= 'name' ( (lv_name_4_0= ruleEString ) ) )? (otherlv_5= 'on' otherlv_6= '{' ( (lv_on_7_0= ruleEvent ) ) (otherlv_8= ',' ( (lv_on_9_0= ruleEvent ) ) )* otherlv_10= '}' )? (otherlv_11= 'env' otherlv_12= '{' ( (lv_env_13_0= ruleEnv ) ) (otherlv_14= ',' ( (lv_env_15_0= ruleEnv ) ) )* otherlv_16= '}' )? (otherlv_17= 'defaults' ( (lv_defaults_18_0= ruleRunSetting ) ) )? (otherlv_19= 'jobs' otherlv_20= '{' ( (lv_jobs_21_0= ruleJob ) ) (otherlv_22= ',' ( (lv_jobs_23_0= ruleJob ) ) )* otherlv_24= '}' )? otherlv_25= '}'
             {
             // InternalGithubaction.g:176:3: ()
             // InternalGithubaction.g:177:4: 
@@ -479,7 +479,7 @@ public class InternalGithubactionParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getWorkflowAccess().getLeftCurlyBracketKeyword_2());
             		
-            // InternalGithubaction.g:191:3: (otherlv_3= 'name' ( (lv_names_4_0= ruleEString ) ) )?
+            // InternalGithubaction.g:191:3: (otherlv_3= 'name' ( (lv_name_4_0= ruleEString ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -488,23 +488,23 @@ public class InternalGithubactionParser extends AbstractInternalAntlrParser {
             }
             switch (alt3) {
                 case 1 :
-                    // InternalGithubaction.g:192:4: otherlv_3= 'name' ( (lv_names_4_0= ruleEString ) )
+                    // InternalGithubaction.g:192:4: otherlv_3= 'name' ( (lv_name_4_0= ruleEString ) )
                     {
                     otherlv_3=(Token)match(input,17,FOLLOW_9); 
 
                     				newLeafNode(otherlv_3, grammarAccess.getWorkflowAccess().getNameKeyword_3_0());
                     			
-                    // InternalGithubaction.g:196:4: ( (lv_names_4_0= ruleEString ) )
-                    // InternalGithubaction.g:197:5: (lv_names_4_0= ruleEString )
+                    // InternalGithubaction.g:196:4: ( (lv_name_4_0= ruleEString ) )
+                    // InternalGithubaction.g:197:5: (lv_name_4_0= ruleEString )
                     {
-                    // InternalGithubaction.g:197:5: (lv_names_4_0= ruleEString )
-                    // InternalGithubaction.g:198:6: lv_names_4_0= ruleEString
+                    // InternalGithubaction.g:197:5: (lv_name_4_0= ruleEString )
+                    // InternalGithubaction.g:198:6: lv_name_4_0= ruleEString
                     {
 
-                    						newCompositeNode(grammarAccess.getWorkflowAccess().getNamesEStringParserRuleCall_3_1_0());
+                    						newCompositeNode(grammarAccess.getWorkflowAccess().getNameEStringParserRuleCall_3_1_0());
                     					
                     pushFollow(FOLLOW_10);
-                    lv_names_4_0=ruleEString();
+                    lv_name_4_0=ruleEString();
 
                     state._fsp--;
 
@@ -514,8 +514,8 @@ public class InternalGithubactionParser extends AbstractInternalAntlrParser {
                     						}
                     						set(
                     							current,
-                    							"names",
-                    							lv_names_4_0,
+                    							"name",
+                    							lv_name_4_0,
                     							"uk.ac.kcl.inf.mdd.project.Githubaction.EString");
                     						afterParserOrEnumRuleCall();
                     					
