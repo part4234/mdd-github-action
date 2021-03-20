@@ -22,9 +22,12 @@ import uk.ac.kcl.inf.mdd.project.githubaction.DeleteEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.DeploymentEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Env;
 import uk.ac.kcl.inf.mdd.project.githubaction.Event;
+import uk.ac.kcl.inf.mdd.project.githubaction.Input;
 import uk.ac.kcl.inf.mdd.project.githubaction.InputParameter;
+import uk.ac.kcl.inf.mdd.project.githubaction.IssueActivityType;
 import uk.ac.kcl.inf.mdd.project.githubaction.IssueEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Job;
+import uk.ac.kcl.inf.mdd.project.githubaction.LabelActivityType;
 import uk.ac.kcl.inf.mdd.project.githubaction.LabelEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.PullRequestEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.PushEvent;
@@ -193,155 +196,403 @@ public class GithubactionGenerator extends AbstractGenerator {
     CharSequence _xifexpression_1 = null;
     if (((!event.getTags().isEmpty()) && (event.getTags().get(1) != null))) {
       StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("stmt.branches.get(1)");
+      _builder_2.append(" \t");
+      _builder_2.append("tags: ");
+      String _get_1 = event.getTags().get(0);
+      _builder_2.append(_get_1, " \t");
       _xifexpression_1 = _builder_2;
     }
     _builder.append(_xifexpression_1);
     _builder.newLineIfNotEmpty();
-    String _xifexpression_2 = null;
+    CharSequence _xifexpression_2 = null;
     if (((!event.getBranchesIgnore().isEmpty()) && (event.getBranchesIgnore().get(1) != null))) {
       StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append("branches:");
-      String _get_1 = event.getBranches().get(1);
-      _xifexpression_2 = (_builder_3.toString() + _get_1);
+      _builder_3.append(" \t");
+      _builder_3.append("branchesIgnore: ");
+      String _get_2 = event.getBranchesIgnore().get(0);
+      _builder_3.append(_get_2, " \t");
+      _xifexpression_2 = _builder_3;
     }
     _builder.append(_xifexpression_2);
     _builder.newLineIfNotEmpty();
     CharSequence _xifexpression_3 = null;
     if (((!event.getTagsIgnore().isEmpty()) && (event.getTagsIgnore().get(1) != null))) {
       StringConcatenation _builder_4 = new StringConcatenation();
-      _builder_4.append("stmt.branches.get(1)");
+      _builder_4.append(" \t");
+      _builder_4.append("tagsIgnore: ");
+      String _get_3 = event.getTagsIgnore().get(0);
+      _builder_4.append(_get_3, " \t");
       _xifexpression_3 = _builder_4;
     }
     _builder.append(_xifexpression_3);
     _builder.newLineIfNotEmpty();
-    String _xifexpression_4 = null;
+    CharSequence _xifexpression_4 = null;
     if (((!event.getPaths().isEmpty()) && (event.getPaths().get(1) != null))) {
       StringConcatenation _builder_5 = new StringConcatenation();
-      _builder_5.append("branches:");
-      String _get_2 = event.getBranches().get(1);
-      _xifexpression_4 = (_builder_5.toString() + _get_2);
+      _builder_5.append(" \t");
+      _builder_5.append("paths: ");
+      String _get_4 = event.getPaths().get(0);
+      _builder_5.append(_get_4, " \t");
+      _xifexpression_4 = _builder_5;
     }
     _builder.append(_xifexpression_4);
     _builder.newLineIfNotEmpty();
     CharSequence _xifexpression_5 = null;
     if (((!event.getPathsIgnore().isEmpty()) && (event.getPathsIgnore().get(1) != null))) {
       StringConcatenation _builder_6 = new StringConcatenation();
-      _builder_6.append("stmt.branches.get(1)");
+      _builder_6.append(" \t");
+      _builder_6.append("pathsIgnore: ");
+      String _get_5 = event.getPathsIgnore().get(0);
+      _builder_6.append(_get_5, " \t");
       _xifexpression_5 = _builder_6;
     }
     _builder.append(_xifexpression_5);
-    _builder.append("\t\t");
+    _builder.append("\t");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
   
-  protected String _generateEvent(final PullRequestEvent stmt) {
+  protected String _generateEvent(final PullRequestEvent event) {
     StringConcatenation _builder = new StringConcatenation();
-    String _xifexpression = null;
-    String _get = stmt.getBranches().get(1);
-    boolean _tripleNotEquals = (_get != null);
-    if (_tripleNotEquals) {
+    _builder.append("\t");
+    _builder.append("pull:");
+    _builder.newLine();
+    CharSequence _xifexpression = null;
+    if (((!event.getBranches().isEmpty()) && (event.getBranches().get(0) != null))) {
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("branches:");
-      String _get_1 = stmt.getBranches().get(1);
-      _xifexpression = (_builder_1.toString() + _get_1);
+      _builder_1.append("\t");
+      _builder_1.append("branches: [");
+      String _get = event.getBranches().get(0);
+      _builder_1.append(_get, "\t");
+      _builder_1.append("]");
+      _xifexpression = _builder_1;
     }
     _builder.append(_xifexpression);
+    _builder.append(" ");
     _builder.newLineIfNotEmpty();
     CharSequence _xifexpression_1 = null;
-    String _get_2 = stmt.getTags().get(1);
-    boolean _tripleNotEquals_1 = (_get_2 != null);
-    if (_tripleNotEquals_1) {
+    if (((!event.getTags().isEmpty()) && (event.getTags().get(1) != null))) {
       StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("stmt.branches.get(1)");
+      _builder_2.append(" \t");
+      _builder_2.append("tags: ");
+      String _get_1 = event.getTags().get(0);
+      _builder_2.append(_get_1, " \t");
       _xifexpression_1 = _builder_2;
     }
     _builder.append(_xifexpression_1);
     _builder.newLineIfNotEmpty();
-    String _xifexpression_2 = null;
-    String _get_3 = stmt.getBranchesIgnore().get(1);
-    boolean _tripleNotEquals_2 = (_get_3 != null);
-    if (_tripleNotEquals_2) {
+    CharSequence _xifexpression_2 = null;
+    if (((!event.getBranchesIgnore().isEmpty()) && (event.getBranchesIgnore().get(1) != null))) {
       StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append("branches:");
-      String _get_4 = stmt.getBranches().get(1);
-      _xifexpression_2 = (_builder_3.toString() + _get_4);
+      _builder_3.append(" \t");
+      _builder_3.append("branchesIgnore: ");
+      String _get_2 = event.getBranchesIgnore().get(0);
+      _builder_3.append(_get_2, " \t");
+      _xifexpression_2 = _builder_3;
     }
     _builder.append(_xifexpression_2);
     _builder.newLineIfNotEmpty();
     CharSequence _xifexpression_3 = null;
-    String _get_5 = stmt.getTagsIgnore().get(1);
-    boolean _tripleNotEquals_3 = (_get_5 != null);
-    if (_tripleNotEquals_3) {
+    if (((!event.getTagsIgnore().isEmpty()) && (event.getTagsIgnore().get(1) != null))) {
       StringConcatenation _builder_4 = new StringConcatenation();
-      _builder_4.append("stmt.branches.get(1)");
+      _builder_4.append(" \t");
+      _builder_4.append("tagsIgnore: ");
+      String _get_3 = event.getTagsIgnore().get(0);
+      _builder_4.append(_get_3, " \t");
       _xifexpression_3 = _builder_4;
     }
     _builder.append(_xifexpression_3);
     _builder.newLineIfNotEmpty();
-    String _xifexpression_4 = null;
-    String _get_6 = stmt.getPaths().get(1);
-    boolean _tripleNotEquals_4 = (_get_6 != null);
-    if (_tripleNotEquals_4) {
+    CharSequence _xifexpression_4 = null;
+    if (((!event.getPaths().isEmpty()) && (event.getPaths().get(1) != null))) {
       StringConcatenation _builder_5 = new StringConcatenation();
-      _builder_5.append("branches:");
-      String _get_7 = stmt.getBranches().get(1);
-      _xifexpression_4 = (_builder_5.toString() + _get_7);
+      _builder_5.append(" \t");
+      _builder_5.append("paths: ");
+      String _get_4 = event.getPaths().get(0);
+      _builder_5.append(_get_4, " \t");
+      _xifexpression_4 = _builder_5;
     }
     _builder.append(_xifexpression_4);
     _builder.newLineIfNotEmpty();
     CharSequence _xifexpression_5 = null;
-    String _get_8 = stmt.getPathsIgnore().get(1);
-    boolean _tripleNotEquals_5 = (_get_8 != null);
-    if (_tripleNotEquals_5) {
+    if (((!event.getPathsIgnore().isEmpty()) && (event.getPathsIgnore().get(1) != null))) {
       StringConcatenation _builder_6 = new StringConcatenation();
-      _builder_6.append("stmt.branches.get(1)");
+      _builder_6.append(" \t");
+      _builder_6.append("pathsIgnore: ");
+      String _get_5 = event.getPathsIgnore().get(0);
+      _builder_6.append(_get_5, " \t");
       _xifexpression_5 = _builder_6;
     }
     _builder.append(_xifexpression_5);
-    _builder.append("\t\t\t");
+    _builder.append("\t");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
   
-  protected String _generateEvent(final ScheduleEvent stmt) {
+  protected String _generateEvent(final ScheduleEvent event) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\t");
+    _builder.append("schedule:\t");
+    _builder.newLine();
+    CharSequence _xifexpression = null;
+    String _hour = event.getHour();
+    boolean _tripleNotEquals = (_hour != null);
+    if (_tripleNotEquals) {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\t ");
+      _builder_1.append("-cron: ");
+      String _minute = event.getMinute();
+      _builder_1.append(_minute, "\t ");
+      _builder_1.append(" ");
+      String _hour_1 = event.getHour();
+      _builder_1.append(_hour_1, "\t ");
+      _builder_1.append(" ");
+      String _day = event.getDay();
+      _builder_1.append(_day, "\t ");
+      _builder_1.append(" ");
+      String _month = event.getMonth();
+      _builder_1.append(_month, "\t ");
+      _builder_1.append(" ");
+      String _dayOfWeek = event.getDayOfWeek();
+      _builder_1.append(_dayOfWeek, "\t ");
+      _xifexpression = _builder_1;
+    }
+    _builder.append(_xifexpression);
+    _builder.append(" ");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final WorkflowDispatchEvent event) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\t");
+    _builder.append("workflow_dispatch:");
+    _builder.newLine();
+    CharSequence _xifexpression = null;
+    Input _get = event.getInputs().get(0);
+    boolean _tripleNotEquals = (_get != null);
+    if (_tripleNotEquals) {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\t ");
+      _builder_1.append("inputs: ");
+      Input _get_1 = event.getInputs().get(0);
+      _builder_1.append(_get_1, "\t ");
+      _builder_1.append(" ");
+      Input _get_2 = event.getInputs().get(1);
+      _builder_1.append(_get_2, "\t ");
+      _xifexpression = _builder_1;
+    }
+    _builder.append(_xifexpression);
+    _builder.append(" \t\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final RepositoryDispatchEvent event) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("\t");
+    _builder.append("repository_dispatch:");
+    _builder.newLine();
+    CharSequence _xifexpression = null;
+    String _get = event.getEventTypes().get(0);
+    boolean _tripleNotEquals = (_get != null);
+    if (_tripleNotEquals) {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\t ");
+      _builder_1.append("types: [");
+      String _get_1 = event.getEventTypes().get(0);
+      _builder_1.append(_get_1, "\t ");
+      _builder_1.append(",");
+      String _get_2 = event.getEventTypes().get(1);
+      _builder_1.append(_get_2, "\t ");
+      _builder_1.append("]");
+      _xifexpression = _builder_1;
+    }
+    _builder.append(_xifexpression);
+    _builder.append(" \t");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final CreateEvent event) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateEvent(final WorkflowDispatchEvent stmt) {
+  protected String _generateEvent(final DeleteEvent event) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateEvent(final RepositoryDispatchEvent stmt) {
+  protected String _generateEvent(final DeploymentEvent event) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder.toString();
   }
   
-  protected String _generateEvent(final CreateEvent stmt) {
+  protected String _generateEvent(final IssueEvent event) {
     StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isEmpty = event.getActivityTypes().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        {
+          EList<IssueActivityType> _activityTypes = event.getActivityTypes();
+          for(final IssueActivityType type : _activityTypes) {
+            _builder.append("types: [");
+            String _IssueActivityType = this.IssueActivityType(type);
+            _builder.append(_IssueActivityType);
+            _builder.append("]");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
     return _builder.toString();
   }
   
-  protected String _generateEvent(final DeleteEvent stmt) {
+  protected String _generateEvent(final LabelEvent event) {
     StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isEmpty = event.getActivityTypes().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        {
+          EList<LabelActivityType> _activityTypes = event.getActivityTypes();
+          for(final LabelActivityType type : _activityTypes) {
+            _builder.append("types: [");
+            String _labelActivityType = this.labelActivityType(type);
+            _builder.append(_labelActivityType);
+            _builder.append("]");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
     return _builder.toString();
   }
   
-  protected String _generateEvent(final DeploymentEvent stmt) {
+  protected String _IssueActivityType(final IssueActivityType type) {
     StringConcatenation _builder = new StringConcatenation();
+    {
+      if ((type == IssueActivityType.OPENED)) {
+        _builder.append(" ");
+        _builder.append(IssueActivityType.OPENED);
+        _builder.append(", ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if ((type == IssueActivityType.CLOSED)) {
+        _builder.append(" ");
+        _builder.append(IssueActivityType.CLOSED);
+        _builder.append(", ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if ((type == IssueActivityType.DELETED)) {
+        _builder.append(" ");
+        _builder.append(IssueActivityType.DELETED);
+        _builder.append(" ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if ((type == IssueActivityType.EDITED)) {
+        _builder.append(" ");
+        _builder.append(IssueActivityType.EDITED);
+        _builder.append(", ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if ((type == IssueActivityType.DELETED)) {
+        _builder.append(" ");
+        _builder.append(IssueActivityType.DELETED);
+        _builder.append(", ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if ((type == IssueActivityType.TRANSFERRED)) {
+        _builder.append(" ");
+        _builder.append(IssueActivityType.TRANSFERRED);
+        _builder.append(", ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if ((type == IssueActivityType.ASSIGNED)) {
+        _builder.append(" ");
+        _builder.append(IssueActivityType.ASSIGNED);
+        _builder.append(", ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if ((type == IssueActivityType.UNASSIGNED)) {
+        _builder.append(" ");
+        _builder.append(IssueActivityType.UNASSIGNED);
+        _builder.append(", ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if ((type == IssueActivityType.LOCKED)) {
+        _builder.append(" ");
+        _builder.append(IssueActivityType.LOCKED);
+        _builder.append(", ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if ((type == IssueActivityType.UNLOCKED)) {
+        _builder.append(" ");
+        _builder.append(IssueActivityType.UNLOCKED);
+        _builder.append(", ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if ((type == IssueActivityType.REOPENED)) {
+        _builder.append(" ");
+        _builder.append(IssueActivityType.REOPENED);
+        _builder.append(" ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
   
-  protected String _generateEvent(final IssueEvent stmt) {
+  protected String _labelActivityType(final LabelActivityType type) {
     StringConcatenation _builder = new StringConcatenation();
-    return _builder.toString();
-  }
-  
-  protected String _generateEvent(final LabelEvent stmt) {
-    StringConcatenation _builder = new StringConcatenation();
+    {
+      if ((type == LabelActivityType.CREATED)) {
+        _builder.append(" ");
+        _builder.append(LabelActivityType.CREATED);
+        _builder.append(", ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if ((type == LabelActivityType.EDITED)) {
+        _builder.append(" ");
+        _builder.append(LabelActivityType.EDITED);
+        _builder.append(", ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    {
+      if ((type == LabelActivityType.DELETED)) {
+        _builder.append(" ");
+        _builder.append(LabelActivityType.DELETED);
+        _builder.append(" ");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
     return _builder.toString();
   }
   
@@ -473,30 +724,38 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
-  public String generateEvent(final Event stmt) {
-    if (stmt instanceof CreateEvent) {
-      return _generateEvent((CreateEvent)stmt);
-    } else if (stmt instanceof DeleteEvent) {
-      return _generateEvent((DeleteEvent)stmt);
-    } else if (stmt instanceof DeploymentEvent) {
-      return _generateEvent((DeploymentEvent)stmt);
-    } else if (stmt instanceof IssueEvent) {
-      return _generateEvent((IssueEvent)stmt);
-    } else if (stmt instanceof LabelEvent) {
-      return _generateEvent((LabelEvent)stmt);
-    } else if (stmt instanceof PullRequestEvent) {
-      return _generateEvent((PullRequestEvent)stmt);
-    } else if (stmt instanceof PushEvent) {
-      return _generateEvent((PushEvent)stmt);
-    } else if (stmt instanceof RepositoryDispatchEvent) {
-      return _generateEvent((RepositoryDispatchEvent)stmt);
-    } else if (stmt instanceof ScheduleEvent) {
-      return _generateEvent((ScheduleEvent)stmt);
-    } else if (stmt instanceof WorkflowDispatchEvent) {
-      return _generateEvent((WorkflowDispatchEvent)stmt);
+  public String generateEvent(final Event event) {
+    if (event instanceof CreateEvent) {
+      return _generateEvent((CreateEvent)event);
+    } else if (event instanceof DeleteEvent) {
+      return _generateEvent((DeleteEvent)event);
+    } else if (event instanceof DeploymentEvent) {
+      return _generateEvent((DeploymentEvent)event);
+    } else if (event instanceof IssueEvent) {
+      return _generateEvent((IssueEvent)event);
+    } else if (event instanceof LabelEvent) {
+      return _generateEvent((LabelEvent)event);
+    } else if (event instanceof PullRequestEvent) {
+      return _generateEvent((PullRequestEvent)event);
+    } else if (event instanceof PushEvent) {
+      return _generateEvent((PushEvent)event);
+    } else if (event instanceof RepositoryDispatchEvent) {
+      return _generateEvent((RepositoryDispatchEvent)event);
+    } else if (event instanceof ScheduleEvent) {
+      return _generateEvent((ScheduleEvent)event);
+    } else if (event instanceof WorkflowDispatchEvent) {
+      return _generateEvent((WorkflowDispatchEvent)event);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(stmt).toString());
+        Arrays.<Object>asList(event).toString());
     }
+  }
+  
+  public String IssueActivityType(final IssueActivityType type) {
+    return _IssueActivityType(type);
+  }
+  
+  public String labelActivityType(final LabelActivityType type) {
+    return _labelActivityType(type);
   }
 }
