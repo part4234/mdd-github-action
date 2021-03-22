@@ -1,6 +1,6 @@
 Program contains:
 
-- 0 Repositoriese
+- 0 Repositories
 - 2 Workflows
 - 2 Events
 - 5 Jobs

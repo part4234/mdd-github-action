@@ -19,7 +19,6 @@ on:
 		branches: [ master ]
 		
 jobs:
-	test:
  	name: macos-latest
 	runsOn: ubuntu-18.04
 	

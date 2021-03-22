@@ -30,8 +30,10 @@ class GithubactionGenerator extends AbstractGenerator {
 		val model = resource.contents.head as Repository
 		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats ) //-- To be added later for file generation
 		
+		
 		//val className = resource.deriveClassNameFor
-		fsa.generateFile('githubaction2.yaml', model.doGenerateClass())
+		
+		fsa.generateFile('githubaction.yaml', model.doGenerateClass())
 		
 		//split file using the link shown
 		
@@ -46,7 +48,7 @@ class GithubactionGenerator extends AbstractGenerator {
 	def String doGenerateStats(Repository program) '''
 		Program contains:
 		
-		- «program.eAllContents.filter(Repository).size» Repositoriese
+		- «program.eAllContents.filter(Repository).size» Repositories
 		- «program.eAllContents.filter(Workflow).size» Workflows
 		- «program.eAllContents.filter(Event).size» Events
 		- «program.eAllContents.filter(Job).size» Jobs
@@ -78,6 +80,7 @@ class GithubactionGenerator extends AbstractGenerator {
 		
 		«IF !workflow.on.empty»
 			on:
+			
 			«FOR event : workflow.on»
 
 				«event.generateEvent»
@@ -92,7 +95,7 @@ class GithubactionGenerator extends AbstractGenerator {
 	'''
 	dispatch def String generateEvent(PushEvent event) '''
 			push:
-		«if (!event.branches.empty && event.branches.get(0) !== null){'''	branches: [«event.branches.get(0)»]'''}» 
+		«if (!event.branches.empty && event.branches.get(0) !== null){'''	branches: [«event.branches.get(0)»]'''}»
 		«if (!event.tags.empty && event.tags.get(1) !== null){''' 	tags: «event.tags.get(0)»'''}»
 		«if (!event.branchesIgnore.empty && event.branchesIgnore.get(1) !== null){''' 	branchesIgnore: «event.branchesIgnore.get(0)»'''}»
 		«if (!event.tagsIgnore.empty && event.tagsIgnore.get(1) !== null){''' 	tagsIgnore: «event.tagsIgnore.get(0)»'''}»
@@ -106,7 +109,7 @@ class GithubactionGenerator extends AbstractGenerator {
 		«if (!event.branchesIgnore.empty && event.branchesIgnore.get(1) !== null){''' 	branchesIgnore: «event.branchesIgnore.get(0)»'''}»
 		«if (!event.tagsIgnore.empty && event.tagsIgnore.get(1) !== null){''' 	tagsIgnore: «event.tagsIgnore.get(0)»'''}»
 		«if (!event.paths.empty && event.paths.get(1) !== null){''' 	paths: «event.paths.get(0)»'''}»
-		«if (!event.pathsIgnore.empty && event.pathsIgnore.get(1) !== null){''' 	pathsIgnore: «event.pathsIgnore.get(0)»'''}»	
+		«if (!event.pathsIgnore.empty && event.pathsIgnore.get(1)  !== null){''' 	pathsIgnore: «event.pathsIgnore.get(0)»'''}»	
 	'''
 	dispatch def String generateEvent(ScheduleEvent event) '''
 			schedule:	
@@ -154,16 +157,18 @@ class GithubactionGenerator extends AbstractGenerator {
 		«IF type === IssueActivityType.REOPENED» «IssueActivityType.REOPENED» «ENDIF»
 	'''	
 	dispatch def String labelActivityType(LabelActivityType type) '''
-		«IF type === LabelActivityType.CREATED» «LabelActivityType.CREATED», «ENDIF»
+		«IF type === LabelActivityType.CREATED»  «LabelActivityType.CREATED», «ENDIF»
 		«IF type === LabelActivityType.EDITED» «LabelActivityType.EDITED», «ENDIF»
 		«IF type === LabelActivityType.DELETED» «LabelActivityType.DELETED» «ENDIF»
 
 	'''
 	def String generateJob(Job job) '''
-			test:
-			name: «job.jobName.toString»
+			«job.name»:
+				name: «job.jobName.toString»
 			runsOn: «job.runsOn.toString»
-
+			«IF !job.needs.empty»needs: [«job.needs.get(0).toString.substring(147,152)»,«job.needs.get(1).toString.substring(147,152)»]«ENDIF»
+			«IF !job.env.empty»	env:
+				«FOR input : job.env»«input.name»: «input.value»«ENDFOR»«ENDIF»
 		«IF !job.steps.empty»
 				steps:
 			«FOR step : job.steps»
@@ -174,16 +179,13 @@ class GithubactionGenerator extends AbstractGenerator {
 
 	def String generateStepsType(Step step) '''
 		«IF step.stepName !== null»		- name: «step.stepName»«ENDIF»
-		«IF step.stepName === null && step.uses !== null»		- uses: «step.uses.toString»«ELSEIF step.uses !== null» 	 		uses: «step.uses.toString»«ENDIF»
+		«IF step.stepName === null && step.uses !== null»		- uses: «step.uses.toString»
+		«ELSEIF step.uses !== null»		uses: «step.uses.toString»«ENDIF»
 		
-		«IF !step.with.empty»		with: «step.name»
+		«IF !step.with.empty»		with:
 			«FOR input : step.with»«input.name»:«input.value»«ENDFOR»
 		«ENDIF»
-		«IF !step.run.empty»	run: 
-			«FOR line : step.run»«line»«ENDFOR»
-		«ENDIF»
-		«IF !step.env.empty»	env: «step.name»
-			«FOR input : step.env»«input.name»:«input.value»«ENDFOR»
-		«ENDIF»
+		«IF !step.run.empty»		run:  «FOR line : step.run»«line»«ENDFOR» «ENDIF»
+		«IF !step.env.empty»		env: «FOR input : step.env»«input.name»:«input.value»«ENDFOR»«ENDIF»
 	'''	
 }
