@@ -10,28 +10,40 @@ Program contains:
 - 3 Steps
 ---     
    
-XPECT generated file TextGithubAction.yaml---
+XPECT generated file TextGithubAction.java---
 
-name: Feature Branch
+import java.io.FileWriter;   // Import the FileWriter class
+import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.File; 
 
-on:
-   push:
-		branches: [ master ]
-		
-jobs:
- 	name: macos-latest
-	runsOn: ubuntu-18.04
-	
-	steps:
-		- uses: actions/checkout@v1
-		
-		- name: Set up JDK 11
-		  uses: actions/setup-java@v1
-		  with:
-		    java-version: 1.11
-			
-		- name: Maven Package
-		  run: mvn -B clean package -DskipTests
+public class GeneratorClass{
+
+     public static void main(String []args){
+        String parsedData  = """""";
+        generateYamlFiles(parsedData);
+     }
+     
+     public static void generateYamlFiles(String parsedData){
+         if (parsedData.contains("branchesIgnore: master")){
+             //generate feature and master file
+             createAndWriteFile(parsedData.substring(0,parsedData.indexOf("name: Master Branch")-1),"featureBranch.yaml");
+         }
+          createAndWriteFile(parsedData.substring(parsedData.indexOf("name: Master Branch")),"MasterBranch.yaml");
+  
+     }
+     
+    public static void createAndWriteFile(String confData, String filename){
+        try {
+          File fileObj = new File("./../"+filename); // use 'backslash' for win and '/' unix-like os
+          FileWriter myWriter = new FileWriter(fileObj);
+          myWriter.write(confData);
+          myWriter.close();
+          System.out.println("Successfully created yaml file: "+filename);
+        } catch (IOException e) {
+          System.out.println("An error occurred.");
+          e.printStackTrace();
+        }
+   }
 ---
  */
 

@@ -66,7 +66,8 @@ public class GithubactionGenerator extends AbstractGenerator {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final Repository model = ((Repository) _head);
     fsa.generateFile(this.deriveStatsTargetFileNameFor(resource), this.doGenerateStats(model));
-    fsa.generateFile("githubaction.yaml", this.doGenerateClass(model));
+    final String className = this.deriveClassNameFor(resource);
+    fsa.generateFile((className + ".java"), this.doGenerateClass(model, className));
   }
   
   public String deriveStatsTargetFileNameFor(final Resource resource) {
@@ -112,7 +113,7 @@ public class GithubactionGenerator extends AbstractGenerator {
     {
       final String origName = resource.getURI().lastSegment();
       String _firstUpper = StringExtensions.toFirstUpper(origName.substring(0, origName.indexOf(".")));
-      _xblockexpression = (_firstUpper + "Turtle");
+      _xblockexpression = (_firstUpper + "GithubAction");
     }
     return _xblockexpression;
   }
@@ -120,34 +121,101 @@ public class GithubactionGenerator extends AbstractGenerator {
   /**
    * Below are parseable dispatch mathos for all grammar types
    */
-  public String doGenerateClass(final Repository program) {
+  public String doGenerateClass(final Repository program, final String className) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.io.FileWriter;");
+    _builder.newLine();
+    _builder.append("import java.io.IOException;");
+    _builder.newLine();
+    _builder.append("import java.io.File; ");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("public class ");
+    _builder.append(className);
+    _builder.append(" {");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append("     ");
+    _builder.append("public static void main(String []args){");
     _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
+    _builder.append("        ");
+    _builder.append("String parsedData  = \"\"\"");
     final Function1<Workflow, String> _function = (Workflow it) -> {
       GithubactionGenerator.Environment _environment = new GithubactionGenerator.Environment();
       return this.generateWorkflow(it, _environment);
     };
     String _join = IterableExtensions.join(ListExtensions.<Workflow, String>map(program.getWorkflows(), _function), "\n");
-    _builder.append(_join, "\t");
+    _builder.append(_join, "        ");
+    _builder.append("\"\"\";");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
+    _builder.append("        ");
+    _builder.append("generateYamlFiles(parsedData);");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("     ");
+    _builder.append("}");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("     ");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("     ");
+    _builder.append("public static void generateYamlFiles(String parsedData){");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("         ");
+    _builder.append("if (parsedData.contains(\"branchesIgnore: master\")){");
+    _builder.newLine();
+    _builder.append("             ");
+    _builder.append("//generate feature and master file");
+    _builder.newLine();
+    _builder.append("             ");
+    _builder.append("createAndWriteFile(parsedData.substring(0,parsedData.indexOf(\"name: Master Branch\")-1),\"featureBranch.yaml\");");
+    _builder.newLine();
+    _builder.append("         ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("          ");
+    _builder.append("createAndWriteFile(parsedData.substring(parsedData.indexOf(\"name: Master Branch\")),\"MasterBranch.yaml\");");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public static void createAndWriteFile(String confData, String filename){");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("          ");
+    _builder.append("File fileObj = new File(\"./../\"+filename); // use \'backslash\' for win and \'/\' unix-like os");
+    _builder.newLine();
+    _builder.append("          ");
+    _builder.append("FileWriter myWriter = new FileWriter(fileObj);");
+    _builder.newLine();
+    _builder.append("          ");
+    _builder.append("myWriter.write(confData);");
+    _builder.newLine();
+    _builder.append("          ");
+    _builder.append("myWriter.close();");
+    _builder.newLine();
+    _builder.append("          ");
+    _builder.append("System.out.println(\"Successfully created yaml file: \"+filename);");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("} catch (IOException e) {");
+    _builder.newLine();
+    _builder.append("          ");
+    _builder.append("System.out.println(\"An error occurred.\");");
+    _builder.newLine();
+    _builder.append("          ");
+    _builder.append("e.printStackTrace();");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("}\t\t");
     _builder.newLine();
     return _builder.toString();
   }

@@ -31,9 +31,8 @@ class GithubactionGenerator extends AbstractGenerator {
 		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats ) //-- To be added later for file generation
 		
 		
-		//val className = resource.deriveClassNameFor
-		
-		fsa.generateFile('githubaction.yaml', model.doGenerateClass())
+		val className = resource.deriveClassNameFor
+		fsa.generateFile(className +".java", model.doGenerateClass(className))
 		
 		//split file using the link shown
 		
@@ -59,28 +58,45 @@ class GithubactionGenerator extends AbstractGenerator {
 	def deriveClassNameFor(Resource resource) {
 		val origName = resource.URI.lastSegment
 		
-		origName.substring(0, origName.indexOf('.')).toFirstUpper + 'Turtle'
+		origName.substring(0, origName.indexOf('.')).toFirstUpper + 'GithubAction'
 	}
 	
 	/*
 	 * Below are parseable dispatch mathos for all grammar types
 	 */
-	def String doGenerateClass(Repository program) '''
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		«program.workflows.map[generateWorkflow(new Environment)].join('\n')»
+	def String doGenerateClass(Repository program, String className) '''
+		import java.io.FileWriter;
+		import java.io.IOException;
+		import java.io.File; 
 		
+		public class «className» {
 		
-		
-		
-		
+		     public static void main(String []args){
+		        String parsedData  = """«program.workflows.map[generateWorkflow(new Environment)].join('\n')»""";
+		        generateYamlFiles(parsedData);
+		     }
+		     
+		     public static void generateYamlFiles(String parsedData){
+		         if (parsedData.contains("branchesIgnore: master")){
+		             //generate feature and master file
+		             createAndWriteFile(parsedData.substring(0,parsedData.indexOf("name: Master Branch")-1),"featureBranch.yaml");
+		         }
+		          createAndWriteFile(parsedData.substring(parsedData.indexOf("name: Master Branch")),"MasterBranch.yaml");
+		  
+		     }
+		     
+		    public static void createAndWriteFile(String confData, String filename){
+		        try {
+		          File fileObj = new File("./../"+filename); // use 'backslash' for win and '/' unix-like os
+		          FileWriter myWriter = new FileWriter(fileObj);
+		          myWriter.write(confData);
+		          myWriter.close();
+		          System.out.println("Successfully created yaml file: "+filename);
+		        } catch (IOException e) {
+		          System.out.println("An error occurred.");
+		          e.printStackTrace();
+		        }
+		   }		
 	'''
 
 	private static class Environment {
