@@ -122,13 +122,33 @@ public class GithubactionGenerator extends AbstractGenerator {
    */
   public String doGenerateClass(final Repository program) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
     final Function1<Workflow, String> _function = (Workflow it) -> {
       GithubactionGenerator.Environment _environment = new GithubactionGenerator.Environment();
       return this.generateWorkflow(it, _environment);
     };
     String _join = IterableExtensions.join(ListExtensions.<Workflow, String>map(program.getWorkflows(), _function), "\n");
-    _builder.append(_join);
+    _builder.append(_join, "\t");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
     return _builder.toString();
   }
   
@@ -622,7 +642,7 @@ public class GithubactionGenerator extends AbstractGenerator {
         String _substring = job.getNeeds().get(0).toString().substring(147, 152);
         _builder.append(_substring, "\t");
         _builder.append(",");
-        String _substring_1 = job.getNeeds().get(1).toString().substring(147, 152);
+        String _substring_1 = job.getNeeds().get(1).toString().substring(147, 153);
         _builder.append(_substring_1, "\t");
         _builder.append("]");
       }

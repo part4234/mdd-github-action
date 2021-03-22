@@ -66,7 +66,21 @@ class GithubactionGenerator extends AbstractGenerator {
 	 * Below are parseable dispatch mathos for all grammar types
 	 */
 	def String doGenerateClass(Repository program) '''
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		«program.workflows.map[generateWorkflow(new Environment)].join('\n')»
+		
+		
+		
+		
+		
 	'''
 
 	private static class Environment {
@@ -166,7 +180,7 @@ class GithubactionGenerator extends AbstractGenerator {
 			«job.name»:
 				name: «job.jobName.toString»
 			runsOn: «job.runsOn.toString»
-			«IF !job.needs.empty»needs: [«job.needs.get(0).toString.substring(147,152)»,«job.needs.get(1).toString.substring(147,152)»]«ENDIF»
+			«IF !job.needs.empty»needs: [«job.needs.get(0).toString.substring(147,152)»,«job.needs.get(1).toString.substring(147,153)»]«ENDIF»
 			«IF !job.env.empty»	env:
 				«FOR input : job.env»«input.name»: «input.value»«ENDFOR»«ENDIF»
 		«IF !job.steps.empty»
