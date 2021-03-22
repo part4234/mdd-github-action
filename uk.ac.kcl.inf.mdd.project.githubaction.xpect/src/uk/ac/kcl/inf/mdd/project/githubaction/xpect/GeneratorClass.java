@@ -1,16 +1,4 @@
-/* XPECT_SETUP uk.ac.kcl.inf.mdd.project.githubaction.xpect.XPectTests END_SETUP */
-/*
-XPECT generated file test1.githubaction.xt.txt ---
-Program contains:
-
-- 0 Repositories
-- 1 Workflows
-- 1 Events
-- 1 Jobs
-- 3 Steps
----     
-   
-XPECT generated file TextGithubAction.java---
+package uk.ac.kcl.inf.mdd.project.githubaction.xpect;
 
 import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;  // Import the IOException class to handle errors
@@ -19,7 +7,7 @@ import java.io.File;
 public class GeneratorClass{
 
      public static void main(String []args){
-        String parsedData  = """""";
+        String parsedData  = "";
         generateYamlFiles(parsedData);
      }
      
@@ -44,39 +32,5 @@ public class GeneratorClass{
           e.printStackTrace();
         }
    }
----
- */
 
-Repository {
-	workflows {
-		
-		Workflow {
-			name "Feature Branch"
-			on {
-				PushEvent {
-					branches { master, "release*" }
-				}
-			}
-			jobs {
-				Job test {
-					name "macos-latest"
-					runsOn "ubuntu-18.04"
-					steps {
-						Step {
-							uses "actions/checkout@v1"
-						},
-						Step {
-							name "Set up JDK 11"
-							uses "actions/setup-java@v1"
-							with { "java-version": "1.11" }
-						},
-						Step {
-							name "Maven Package"
-							run { "mvn -B clean package -DskipTests" }
-						}
-					}
-				}
-			}
-		}
-	}
 }
