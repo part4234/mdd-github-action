@@ -47,11 +47,11 @@ class GithubactionGenerator extends AbstractGenerator {
 	def String doGenerateStats(Repository program) '''
 		Program contains:
 		
-		- «program.eAllContents.filter(Repository).size» Repositories
-		- «program.eAllContents.filter(Workflow).size» Workflows
-		- «program.eAllContents.filter(Event).size» Events
-		- «program.eAllContents.filter(Job).size» Jobs
-		- «program.eAllContents.filter(Step).size» Steps
+		- Â«program.eAllContents.filter(Repository).sizeÂ» Repositories
+		- Â«program.eAllContents.filter(Workflow).sizeÂ» Workflows
+		- Â«program.eAllContents.filter(Event).sizeÂ» Events
+		- Â«program.eAllContents.filter(Job).sizeÂ» Jobs
+		- Â«program.eAllContents.filter(Step).sizeÂ» Steps
 
 	'''
 	
@@ -69,10 +69,12 @@ class GithubactionGenerator extends AbstractGenerator {
 		import java.io.IOException;
 		import java.io.File; 
 		
-		public class «className» {
+		public class Â«classNameÂ» {
 		
 		     public static void main(String []args){
-		        String parsedData  = """«program.workflows.map[generateWorkflow(new Environment)].join('\n')»""";
+		        String parsedData  = """
+			Â«program.workflows.map[generateWorkflow(new Environment)].join('\n')Â»
+			""";
 		        generateYamlFiles(parsedData);
 		     }
 		     
@@ -101,121 +103,121 @@ class GithubactionGenerator extends AbstractGenerator {
 
 	private static class Environment {
 		var int counter = 0
-		def getFreshVarName() '''i_«counter++»'''
+		def getFreshVarName() '''i_Â«counter++Â»'''
 		def exit() { counter-- }
 	}
 	
 	def String generateWorkflow(Workflow workflow, Environment env) '''
-		name: «workflow.name.toString»
+		name: Â«workflow.name.toStringÂ»
 		
-		«IF !workflow.on.empty»
+		Â«IF !workflow.on.emptyÂ»
 			on:
 			
-			«FOR event : workflow.on»
+			Â«FOR event : workflow.onÂ»
 
-				«event.generateEvent»
-			«ENDFOR»
-		«ENDIF»
-		«IF !workflow.jobs.empty»
+				Â«event.generateEventÂ»
+			Â«ENDFORÂ»
+		Â«ENDIFÂ»
+		Â«IF !workflow.jobs.emptyÂ»
 			jobs:
-			«FOR job : workflow.jobs»
-				«generateJob(job)»
-			«ENDFOR»
-		«ENDIF»
+			Â«FOR job : workflow.jobsÂ»
+				Â«generateJob(job)Â»
+			Â«ENDFORÂ»
+		Â«ENDIFÂ»
 	'''
 	dispatch def String generateEvent(PushEvent event) '''
 			push:
-		«if (!event.branches.empty && event.branches.get(0) !== null){'''	branches: [«event.branches.get(0)»]'''}»
-		«if (!event.tags.empty && event.tags.get(1) !== null){''' 	tags: «event.tags.get(0)»'''}»
-		«if (!event.branchesIgnore.empty && event.branchesIgnore.get(1) !== null){''' 	branchesIgnore: «event.branchesIgnore.get(0)»'''}»
-		«if (!event.tagsIgnore.empty && event.tagsIgnore.get(1) !== null){''' 	tagsIgnore: «event.tagsIgnore.get(0)»'''}»
-		«if (!event.paths.empty && event.paths.get(1) !== null){''' 	paths: «event.paths.get(0)»'''}»
-		«if (!event.pathsIgnore.empty && event.pathsIgnore.get(1) !== null){''' 	pathsIgnore: «event.pathsIgnore.get(0)»'''}»	
+		Â«if (!event.branches.empty && event.branches.get(0) !== null){'''	branches: [Â«event.branches.get(0)Â»]'''}Â»
+		Â«if (!event.tags.empty && event.tags.get(1) !== null){''' 	tags: Â«event.tags.get(0)Â»'''}Â»
+		Â«if (!event.branchesIgnore.empty && event.branchesIgnore.get(1) !== null){''' 	branchesIgnore: Â«event.branchesIgnore.get(0)Â»'''}Â»
+		Â«if (!event.tagsIgnore.empty && event.tagsIgnore.get(1) !== null){''' 	tagsIgnore: Â«event.tagsIgnore.get(0)Â»'''}Â»
+		Â«if (!event.paths.empty && event.paths.get(1) !== null){''' 	paths: Â«event.paths.get(0)Â»'''}Â»
+		Â«if (!event.pathsIgnore.empty && event.pathsIgnore.get(1) !== null){''' 	pathsIgnore: Â«event.pathsIgnore.get(0)Â»'''}Â»	
 	'''
 	dispatch def String generateEvent(PullRequestEvent event) '''
 			pull:
-		«if (!event.branches.empty && event.branches.get(0) !== null){'''	branches: [«event.branches.get(0)»]'''}» 
-		«if (!event.tags.empty && event.tags.get(1) !== null){''' 	tags: «event.tags.get(0)»'''}»
-		«if (!event.branchesIgnore.empty && event.branchesIgnore.get(1) !== null){''' 	branchesIgnore: «event.branchesIgnore.get(0)»'''}»
-		«if (!event.tagsIgnore.empty && event.tagsIgnore.get(1) !== null){''' 	tagsIgnore: «event.tagsIgnore.get(0)»'''}»
-		«if (!event.paths.empty && event.paths.get(1) !== null){''' 	paths: «event.paths.get(0)»'''}»
-		«if (!event.pathsIgnore.empty && event.pathsIgnore.get(1)  !== null){''' 	pathsIgnore: «event.pathsIgnore.get(0)»'''}»	
+		Â«if (!event.branches.empty && event.branches.get(0) !== null){'''	branches: [Â«event.branches.get(0)Â»]'''}Â» 
+		Â«if (!event.tags.empty && event.tags.get(1) !== null){''' 	tags: Â«event.tags.get(0)Â»'''}Â»
+		Â«if (!event.branchesIgnore.empty && event.branchesIgnore.get(1) !== null){''' 	branchesIgnore: Â«event.branchesIgnore.get(0)Â»'''}Â»
+		Â«if (!event.tagsIgnore.empty && event.tagsIgnore.get(1) !== null){''' 	tagsIgnore: Â«event.tagsIgnore.get(0)Â»'''}Â»
+		Â«if (!event.paths.empty && event.paths.get(1) !== null){''' 	paths: Â«event.paths.get(0)Â»'''}Â»
+		Â«if (!event.pathsIgnore.empty && event.pathsIgnore.get(1)  !== null){''' 	pathsIgnore: Â«event.pathsIgnore.get(0)Â»'''}Â»	
 	'''
 	dispatch def String generateEvent(ScheduleEvent event) '''
 			schedule:	
-		«if (event.hour !== null){'''	 -cron: «event.minute» «event.hour» «event.day» «event.month» «event.dayOfWeek»'''}» 
+		Â«if (event.hour !== null){'''	 -cron: Â«event.minuteÂ» Â«event.hourÂ» Â«event.dayÂ» Â«event.monthÂ» Â«event.dayOfWeekÂ»'''}Â» 
 		
 	'''	
 	dispatch def String generateEvent(WorkflowDispatchEvent event) '''
 			workflow_dispatch:
-		«if (event.inputs.get(0) !== null){'''	 inputs: «event.inputs.get(0)» «event.inputs.get(1)»'''}» 			
+		Â«if (event.inputs.get(0) !== null){'''	 inputs: Â«event.inputs.get(0)Â» Â«event.inputs.get(1)Â»'''}Â» 			
 
 	'''
 	dispatch def String generateEvent(RepositoryDispatchEvent event) '''
 			repository_dispatch:
-		«if (event.eventTypes.get(0) !== null){'''	 types: [«event.eventTypes.get(0)»,«event.eventTypes.get(1)»]'''}» 	
+		Â«if (event.eventTypes.get(0) !== null){'''	 types: [Â«event.eventTypes.get(0)Â»,Â«event.eventTypes.get(1)Â»]'''}Â» 	
 	'''	
 	
 	dispatch def String generateEvent(CreateEvent event) ''''''
 	dispatch def String generateEvent(DeleteEvent event) ''''''
 	dispatch def String generateEvent(DeploymentEvent event) ''''''	
 	dispatch def String generateEvent(IssueEvent event) '''		
-		«IF !event.activityTypes.empty»
-			«FOR type : event.activityTypes»
-				types: [«IssueActivityType(type)»]
-			«ENDFOR»
-		«ENDIF»
+		Â«IF !event.activityTypes.emptyÂ»
+			Â«FOR type : event.activityTypesÂ»
+				types: [Â«IssueActivityType(type)Â»]
+			Â«ENDFORÂ»
+		Â«ENDIFÂ»
 	'''	
 	dispatch def String generateEvent(LabelEvent event) '''
-		«IF !event.activityTypes.empty»
-			«FOR type : event.activityTypes»
-				types: [«labelActivityType(type)»]
-			«ENDFOR»
-		«ENDIF»	
+		Â«IF !event.activityTypes.emptyÂ»
+			Â«FOR type : event.activityTypesÂ»
+				types: [Â«labelActivityType(type)Â»]
+			Â«ENDFORÂ»
+		Â«ENDIFÂ»	
 	'''	
 	dispatch def String IssueActivityType(IssueActivityType type) '''
-		«IF type === IssueActivityType.OPENED» «IssueActivityType.OPENED», «ENDIF»
-		«IF type === IssueActivityType.CLOSED» «IssueActivityType.CLOSED», «ENDIF»
-		«IF type === IssueActivityType.DELETED» «IssueActivityType.DELETED» «ENDIF»
-		«IF type === IssueActivityType.EDITED» «IssueActivityType.EDITED», «ENDIF»
-		«IF type === IssueActivityType.DELETED» «IssueActivityType.DELETED», «ENDIF»
-		«IF type === IssueActivityType.TRANSFERRED» «IssueActivityType.TRANSFERRED», «ENDIF»
-		«IF type === IssueActivityType.ASSIGNED» «IssueActivityType.ASSIGNED», «ENDIF»
-		«IF type === IssueActivityType.UNASSIGNED» «IssueActivityType.UNASSIGNED», «ENDIF»
-		«IF type === IssueActivityType.LOCKED» «IssueActivityType.LOCKED», «ENDIF»
-		«IF type === IssueActivityType.UNLOCKED» «IssueActivityType.UNLOCKED», «ENDIF»
-		«IF type === IssueActivityType.REOPENED» «IssueActivityType.REOPENED» «ENDIF»
+		Â«IF type === IssueActivityType.OPENEDÂ» Â«IssueActivityType.OPENEDÂ», Â«ENDIFÂ»
+		Â«IF type === IssueActivityType.CLOSEDÂ» Â«IssueActivityType.CLOSEDÂ», Â«ENDIFÂ»
+		Â«IF type === IssueActivityType.DELETEDÂ» Â«IssueActivityType.DELETEDÂ» Â«ENDIFÂ»
+		Â«IF type === IssueActivityType.EDITEDÂ» Â«IssueActivityType.EDITEDÂ», Â«ENDIFÂ»
+		Â«IF type === IssueActivityType.DELETEDÂ» Â«IssueActivityType.DELETEDÂ», Â«ENDIFÂ»
+		Â«IF type === IssueActivityType.TRANSFERREDÂ» Â«IssueActivityType.TRANSFERREDÂ», Â«ENDIFÂ»
+		Â«IF type === IssueActivityType.ASSIGNEDÂ» Â«IssueActivityType.ASSIGNEDÂ», Â«ENDIFÂ»
+		Â«IF type === IssueActivityType.UNASSIGNEDÂ» Â«IssueActivityType.UNASSIGNEDÂ», Â«ENDIFÂ»
+		Â«IF type === IssueActivityType.LOCKEDÂ» Â«IssueActivityType.LOCKEDÂ», Â«ENDIFÂ»
+		Â«IF type === IssueActivityType.UNLOCKEDÂ» Â«IssueActivityType.UNLOCKEDÂ», Â«ENDIFÂ»
+		Â«IF type === IssueActivityType.REOPENEDÂ» Â«IssueActivityType.REOPENEDÂ» Â«ENDIFÂ»
 	'''	
 	dispatch def String labelActivityType(LabelActivityType type) '''
-		«IF type === LabelActivityType.CREATED»  «LabelActivityType.CREATED», «ENDIF»
-		«IF type === LabelActivityType.EDITED» «LabelActivityType.EDITED», «ENDIF»
-		«IF type === LabelActivityType.DELETED» «LabelActivityType.DELETED» «ENDIF»
+		Â«IF type === LabelActivityType.CREATEDÂ»  Â«LabelActivityType.CREATEDÂ», Â«ENDIFÂ»
+		Â«IF type === LabelActivityType.EDITEDÂ» Â«LabelActivityType.EDITEDÂ», Â«ENDIFÂ»
+		Â«IF type === LabelActivityType.DELETEDÂ» Â«LabelActivityType.DELETEDÂ» Â«ENDIFÂ»
 
 	'''
 	def String generateJob(Job job) '''
-			«job.name»:
-				name: «job.jobName.toString»
-			runsOn: «job.runsOn.toString»
-			«IF !job.needs.empty»needs: [«job.needs.get(0).toString.substring(147,152)»,«job.needs.get(1).toString.substring(147,153)»]«ENDIF»
-			«IF !job.env.empty»	env:
-				«FOR input : job.env»«input.name»: «input.value»«ENDFOR»«ENDIF»
-		«IF !job.steps.empty»
+			Â«job.nameÂ»:
+				name: Â«job.jobName.toStringÂ»
+			runsOn: Â«job.runsOn.toStringÂ»
+			Â«IF !job.needs.emptyÂ»needs: [Â«job.needs.get(0).toString.substring(147,152)Â»,Â«job.needs.get(1).toString.substring(147,153)Â»]Â«ENDIFÂ»
+			Â«IF !job.env.emptyÂ»	env:
+				Â«FOR input : job.envÂ»Â«input.nameÂ»: Â«input.valueÂ»Â«ENDFORÂ»Â«ENDIFÂ»
+		Â«IF !job.steps.emptyÂ»
 				steps:
-			«FOR step : job.steps»
-				«generateStepsType(step)»
-			«ENDFOR»	
-		«ENDIF»						
+			Â«FOR step : job.stepsÂ»
+				Â«generateStepsType(step)Â»
+			Â«ENDFORÂ»	
+		Â«ENDIFÂ»						
 	'''	
 
 	def String generateStepsType(Step step) '''
-		«IF step.stepName !== null»		- name: «step.stepName»«ENDIF»
-		«IF step.stepName === null && step.uses !== null»		- uses: «step.uses.toString»
-		«ELSEIF step.uses !== null»		uses: «step.uses.toString»«ENDIF»
+		Â«IF step.stepName !== nullÂ»		- name: Â«step.stepNameÂ»Â«ENDIFÂ»
+		Â«IF step.stepName === null && step.uses !== nullÂ»		- uses: Â«step.uses.toStringÂ»
+		Â«ELSEIF step.uses !== nullÂ»		uses: Â«step.uses.toStringÂ»Â«ENDIFÂ»
 		
-		«IF !step.with.empty»		with:
-			«FOR input : step.with»«input.name»:«input.value»«ENDFOR»
-		«ENDIF»
-		«IF !step.run.empty»		run:  «FOR line : step.run»«line»«ENDFOR» «ENDIF»
-		«IF !step.env.empty»		env: «FOR input : step.env»«input.name»:«input.value»«ENDFOR»«ENDIF»
+		Â«IF !step.with.emptyÂ»		with:
+			Â«FOR input : step.withÂ»Â«input.nameÂ»:Â«input.valueÂ»Â«ENDFORÂ»
+		Â«ENDIFÂ»
+		Â«IF !step.run.emptyÂ»		run:  Â«FOR line : step.runÂ»Â«lineÂ»Â«ENDFORÂ» Â«ENDIFÂ»
+		Â«IF !step.env.emptyÂ»		env: Â«FOR input : step.envÂ»Â«input.nameÂ»:Â«input.valueÂ»Â«ENDFORÂ»Â«ENDIFÂ»
 	'''	
 }
