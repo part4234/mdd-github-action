@@ -1,5 +1,7 @@
 package uk.ac.kcl.inf.mdd.project.validation;
 
+import java.util.ArrayList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.validation.Check;
 import uk.ac.kcl.inf.mdd.project.githubaction.Env;
 import uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage;
@@ -16,6 +18,8 @@ import uk.ac.kcl.inf.mdd.project.validation.AbstractGithubactionValidator;
  */
 @SuppressWarnings("all")
 public class GithubactionValidator extends AbstractGithubactionValidator {
+  public ArrayList array = new ArrayList<Object>();
+  
   public static final String INVALID_VARIABLE_NAME = "uk.ac.kcl.inf.mdd.project.githubaction.INVALID_VARIABLE_NAME";
   
   public static final String DUPLICATE_VARIABLE_NAME = "uk.ac.kcl.inf.mdd.project.githubaction.DUPLICATE_VARIABLE_NAME";
@@ -25,6 +29,57 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
   public static final String VARIABLE_DEF_REQUIRED = "uk.ac.kcl.inf.mdd.project.githubaction.VARIABLE_DEF_REQUIRED";
   
   public static final String KEY_DEF_ERROR = "uk.ac.kcl.inf.mdd.project.githubaction.KEY_DEF_ERROR";
+  
+  /**
+   * Duplicate name checks for workflows, jobs and steps
+   */
+  @Check
+  public void checkDuplicateNaming(final Repository program) {
+    EList<Workflow> _workflows = program.getWorkflows();
+    for (final Workflow wfObj : _workflows) {
+      {
+        boolean _contains = this.array.contains(wfObj);
+        if (_contains) {
+          this.error("Name definiitons must be unique ", wfObj, 
+            GithubactionPackage.Literals.WORKFLOW__NAME, GithubactionValidator.KEY_DEF_ERROR);
+        }
+        this.array.add(wfObj);
+      }
+    }
+    this.array.clear();
+  }
+  
+  @Check
+  public void checkDuplicateNaming(final Workflow wf) {
+    EList<Job> _jobs = wf.getJobs();
+    for (final Job jbObj : _jobs) {
+      {
+        boolean _contains = this.array.contains(jbObj);
+        if (_contains) {
+          this.error("Name definiitons must be unique ", jbObj, 
+            GithubactionPackage.Literals.JOB__NAME, GithubactionValidator.KEY_DEF_ERROR);
+        }
+        this.array.add(jbObj);
+      }
+    }
+    this.array.clear();
+  }
+  
+  @Check
+  public void checkDuplicateNaming(final Job jobs) {
+    EList<Step> _steps = jobs.getSteps();
+    for (final Step stepObj : _steps) {
+      {
+        boolean _contains = this.array.contains(stepObj);
+        if (_contains) {
+          this.error("Name definiitons must be unique", stepObj, 
+            GithubactionPackage.Literals.STEP__NAME, GithubactionValidator.KEY_DEF_ERROR);
+        }
+        this.array.add(stepObj);
+      }
+    }
+    this.array.clear();
+  }
   
   /**
    * Required values checking
@@ -62,7 +117,7 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
   }
   
   /**
-   * Case sensitive/insensitive checks below
+   * Case sensitive/insensitive checks
    */
   @Check
   public void checkVariableNamesStartWithUpperCase(final Workflow decl) {
@@ -105,10 +160,10 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
   }
   
   /**
-   * Unique checks for definitions
+   * Unique key definitions
    */
   @Check
-  public void checkRequiredVariablesNames(final Step innerSteps) {
+  public void checkForDuplicateKeyError(final Step innerSteps) {
     String _name = innerSteps.getWith().get(0).getName();
     String _name_1 = innerSteps.getWith().get(1).getName();
     boolean _tripleEquals = (_name == _name_1);

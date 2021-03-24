@@ -9,7 +9,8 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Event;
 import uk.ac.kcl.inf.mdd.project.githubaction.Job;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 
-import uk.ac.kcl.inf.mdd.project.githubaction.*; 
+import uk.ac.kcl.inf.mdd.project.githubaction.*; import java.util.ArrayList
+
 /**
  * This class contains custom validation rules. 
  *
@@ -17,17 +18,60 @@ import uk.ac.kcl.inf.mdd.project.githubaction.*;
  */
 class GithubactionValidator extends AbstractGithubactionValidator  {
 	
+	public ArrayList array = new ArrayList; 
 	//This checks for mis-spellings and case-sensitiveness
 	public static val INVALID_VARIABLE_NAME = 'uk.ac.kcl.inf.mdd.project.githubaction.INVALID_VARIABLE_NAME'
 	public static val DUPLICATE_VARIABLE_NAME = 'uk.ac.kcl.inf.mdd.project.githubaction.DUPLICATE_VARIABLE_NAME'	
 	public static val CASE_VARIABLE_ISSUE = 'uk.ac.kcl.inf.mdd.project.githubaction.WRONG_CASE_USAGE'	
 	public static val VARIABLE_DEF_REQUIRED = 'uk.ac.kcl.inf.mdd.project.githubaction.VARIABLE_DEF_REQUIRED'		
 	public static val KEY_DEF_ERROR = 'uk.ac.kcl.inf.mdd.project.githubaction.KEY_DEF_ERROR'		
+	
+	/*
+	 * Duplicate name checks for workflows, jobs and steps
+	 */
+	@Check
+	def checkDuplicateNaming(Repository program) {
+		
+		for (Workflow wfObj: program.workflows){
+			if (array.contains(wfObj)){
+			error('Name definiitons must be unique ', wfObj,
+				GithubactionPackage.Literals.WORKFLOW__NAME, KEY_DEF_ERROR)
+			}	
+			array.add(wfObj);			
+		}
+		array.clear;
+	}
+	
+	@Check
+	def checkDuplicateNaming(Workflow wf) {
+		
+		for (Job jbObj: wf.jobs){
+			if (array.contains(jbObj)){
+			error('Name definiitons must be unique ', jbObj,
+				GithubactionPackage.Literals.JOB__NAME, KEY_DEF_ERROR)
+			}	
+			array.add(jbObj);			
+		}
+		array.clear;
+	}		
+
+	@Check
+	def checkDuplicateNaming(Job jobs) {
+		
+		for (Step stepObj: jobs.steps){
+			if (array.contains(stepObj)){
+			error('Name definiitons must be unique', stepObj,
+				GithubactionPackage.Literals.STEP__NAME, KEY_DEF_ERROR)
+			}	
+			array.add(stepObj);			
+		}
+		array.clear;
+	}
 
 	/*
 	 * Required values checking
 	 */
-		@Check
+	@Check
 	def checkRequiredVariablesNames(Repository program) {
 		if (program.workflows.size === 0) {
 			warning('Workflow definitions required ', program,
@@ -52,7 +96,7 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	}		
 	
 	/*
-	 * Case sensitive/insensitive checks below
+	 * Case sensitive/insensitive checks
 	 */
 	
 	@Check
@@ -88,19 +132,14 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	}	
 
 	/*
-	 * Unique checks for definitions
+	 * Unique key definitions
 	 */
 	 
-	 //checks duplicate key definitions
 	@Check
-	def checkRequiredVariablesNames(Step innerSteps) {
+	def checkForDuplicateKeyError(Step innerSteps) {
 		if (innerSteps.with.get(0).name === innerSteps.with.get(1).name) {
 			error('Duplicate keys definitions are not alloweed ', innerSteps,
 				GithubactionPackage.Literals.STEP__WITH, KEY_DEF_ERROR)
 		}
 	}
-	
-	
-			
-	
 }
