@@ -14,7 +14,8 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Event;
 import uk.ac.kcl.inf.mdd.project.githubaction.Job;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 
-import uk.ac.kcl.inf.mdd.project.githubaction.*; import org.eclipse.emf.common.util.EList
+import uk.ac.kcl.inf.mdd.project.githubaction.*; 
+import org.eclipse.emf.common.util.EList
 
 //says deprecated but works :o
 
@@ -72,7 +73,9 @@ class GithubactionGenerator extends AbstractGenerator {
 		public class «className» {
 		
 		     public static void main(String []args){
-		        String parsedData  = """«program.workflows.map[generateWorkflow(new Environment)].join('\n')»""";
+		        String parsedData  = """
+		        «program.workflows.map[generateWorkflow(new Environment)].join('\n')»
+		        """;
 		        generateYamlFiles(parsedData);
 		     }
 		     

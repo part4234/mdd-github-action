@@ -140,14 +140,18 @@ public class GithubactionGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("String parsedData  = \"\"\"");
+    _builder.newLine();
+    _builder.append("        ");
     final Function1<Workflow, String> _function = (Workflow it) -> {
       GithubactionGenerator.Environment _environment = new GithubactionGenerator.Environment();
       return this.generateWorkflow(it, _environment);
     };
     String _join = IterableExtensions.join(ListExtensions.<Workflow, String>map(program.getWorkflows(), _function), "\n");
     _builder.append(_join, "        ");
-    _builder.append("\"\"\";");
     _builder.newLineIfNotEmpty();
+    _builder.append("        ");
+    _builder.append("\"\"\";");
+    _builder.newLine();
     _builder.append("        ");
     _builder.append("generateYamlFiles(parsedData);");
     _builder.newLine();
