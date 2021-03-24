@@ -21,8 +21,40 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	public static val INVALID_VARIABLE_NAME = 'uk.ac.kcl.inf.mdd.project.githubaction.INVALID_VARIABLE_NAME'
 	public static val DUPLICATE_VARIABLE_NAME = 'uk.ac.kcl.inf.mdd.project.githubaction.DUPLICATE_VARIABLE_NAME'	
 	public static val CASE_VARIABLE_ISSUE = 'uk.ac.kcl.inf.mdd.project.githubaction.WRONG_CASE_USAGE'	
+	public static val VARIABLE_DEF_REQUIRED = 'uk.ac.kcl.inf.mdd.project.githubaction.VARIABLE_DEF_REQUIRED'		
 	
+
 	
+	/*
+	 * Required values checking
+	 */
+		@Check
+	def checkRequiredVariablesNames(Repository program) {
+		if (program.workflows.size === 0) {
+			warning('Workflow definitions required ', program,
+				GithubactionPackage.Literals.WORKFLOW__NAME, DUPLICATE_VARIABLE_NAME)
+		}
+	}		
+
+	@Check
+	def checkRequiredVariablesNames(Workflow workF) {
+		if (workF.name === ""){
+			error('Workflow name is required', workF,
+				GithubactionPackage.Literals.PUSH_EVENT__BRANCHES, VARIABLE_DEF_REQUIRED)
+		}		
+		if (workF.on.size === 0){
+			warning('Event definition required', workF,
+				GithubactionPackage.Literals.PUSH_EVENT__BRANCHES, VARIABLE_DEF_REQUIRED)
+		}
+		if (workF.jobs.size === 0){
+			warning('Event definition required', workF,
+				GithubactionPackage.Literals.PUSH_EVENT__BRANCHES, DUPLICATE_VARIABLE_NAME)
+		}				
+	}		
+	
+	/*
+	 * Case sensitive/insensitive checks below
+	 */
 	
 	@Check
 	def checkVariableNamesStartWithUpperCase(Workflow decl) {
