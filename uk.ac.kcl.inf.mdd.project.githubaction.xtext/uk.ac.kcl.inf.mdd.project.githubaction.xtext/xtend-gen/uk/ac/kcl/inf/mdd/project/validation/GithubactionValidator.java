@@ -24,6 +24,8 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
   
   public static final String VARIABLE_DEF_REQUIRED = "uk.ac.kcl.inf.mdd.project.githubaction.VARIABLE_DEF_REQUIRED";
   
+  public static final String KEY_DEF_ERROR = "uk.ac.kcl.inf.mdd.project.githubaction.KEY_DEF_ERROR";
+  
   /**
    * Required values checking
    */
@@ -99,6 +101,20 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
     if (_not) {
       this.warning("Name should start with a lower-case character", decl, 
         GithubactionPackage.Literals.WORKFLOW__NAME, GithubactionValidator.CASE_VARIABLE_ISSUE);
+    }
+  }
+  
+  /**
+   * Unique checks for definitions
+   */
+  @Check
+  public void checkRequiredVariablesNames(final Step innerSteps) {
+    String _name = innerSteps.getWith().get(0).getName();
+    String _name_1 = innerSteps.getWith().get(1).getName();
+    boolean _tripleEquals = (_name == _name_1);
+    if (_tripleEquals) {
+      this.error("Duplicate keys definitions are not alloweed ", innerSteps, 
+        GithubactionPackage.Literals.STEP__WITH, GithubactionValidator.KEY_DEF_ERROR);
     }
   }
 }

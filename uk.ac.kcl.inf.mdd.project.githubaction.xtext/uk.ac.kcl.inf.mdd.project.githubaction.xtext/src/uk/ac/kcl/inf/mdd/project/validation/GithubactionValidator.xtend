@@ -22,9 +22,8 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	public static val DUPLICATE_VARIABLE_NAME = 'uk.ac.kcl.inf.mdd.project.githubaction.DUPLICATE_VARIABLE_NAME'	
 	public static val CASE_VARIABLE_ISSUE = 'uk.ac.kcl.inf.mdd.project.githubaction.WRONG_CASE_USAGE'	
 	public static val VARIABLE_DEF_REQUIRED = 'uk.ac.kcl.inf.mdd.project.githubaction.VARIABLE_DEF_REQUIRED'		
-	
+	public static val KEY_DEF_ERROR = 'uk.ac.kcl.inf.mdd.project.githubaction.KEY_DEF_ERROR'		
 
-	
 	/*
 	 * Required values checking
 	 */
@@ -88,7 +87,20 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 		}
 	}	
 
+	/*
+	 * Unique checks for definitions
+	 */
+	 
+	 //checks duplicate key definitions
+	@Check
+	def checkRequiredVariablesNames(Step innerSteps) {
+		if (innerSteps.with.get(0).name === innerSteps.with.get(1).name) {
+			error('Duplicate keys definitions are not alloweed ', innerSteps,
+				GithubactionPackage.Literals.STEP__WITH, KEY_DEF_ERROR)
+		}
+	}
 	
 	
+			
 	
 }
