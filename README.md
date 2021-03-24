@@ -5,7 +5,7 @@
 ```
 Version: 2020-12 (4.18.0)
 Build id: 20201210-1552
-Java compiler compliance level: 11
+Java compiler compliance level: 11 (The test project must use 13's enable-preview method or 15 that supports block strings.)
 JRE version: jdk-11.0.10.9-hotspot (AdoptOpenJDK 11 Hotspot)
 Xtext: 2.20.0
 Xsemantics: 1.19.0
