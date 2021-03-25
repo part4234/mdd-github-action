@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:githubaction="http://www.example.org/githubaction" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:githubaction="http://www.example.org/githubaction" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
   <viewpoint:DAnalysis uid="_A-D5AI2OEeu5zftVXJ6J3g" selectedViews="_JlmWkI2OEeu5zftVXJ6J3g" version="14.3.1.202003261200">
     <semanticResources>My.githubaction</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_JlmWkI2OEeu5zftVXJ6J3g">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_OGGtUI2OEeu5zftVXJ6J3g" name="new Repository Diagram" repPath="#_OFoMMI2OEeu5zftVXJ6J3g" changeId="33cb6499-3882-40a4-9633-ddd223886d5b">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_OGGtUI2OEeu5zftVXJ6J3g" name="new Repository Diagram" repPath="#_OFoMMI2OEeu5zftVXJ6J3g" changeId="a45654a7-53bb-462e-9494-0941041d6619">
         <description xmi:type="description_1:DiagramDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']"/>
         <target xmi:type="githubaction:Repository" href="My.githubaction#/"/>
       </ownedRepresentationDescriptors>
@@ -13,12 +13,571 @@
   <diagram:DSemanticDiagram uid="_OFoMMI2OEeu5zftVXJ6J3g">
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_OGoRwI2OEeu5zftVXJ6J3g" source="GMF_DIAGRAMS">
       <data xmi:type="notation:Diagram" xmi:id="_OGoRwY2OEeu5zftVXJ6J3g" type="Sirius" element="_OFoMMI2OEeu5zftVXJ6J3g" measurementUnit="Pixel">
+        <children xmi:type="notation:Node" xmi:id="_Xb5ikI2PEeu5zftVXJ6J3g" type="2001" element="_XbkLYI2PEeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_Xb-bEI2PEeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_Xb-bEY2PEeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_jXa8kI2TEeu5zftVXJ6J3g" type="3003" element="_jWUJUY2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_jXa8kY2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jXa8ko2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_Xb6JoI2PEeu5zftVXJ6J3g" fontColor="16777215" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Xb6JoY2PEeu5zftVXJ6J3g" x="165" y="-30" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_XcA3UI2PEeu5zftVXJ6J3g" type="2001" element="_Xbt8YI2PEeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_XcA3U42PEeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_XcA3VI2PEeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_jXbjoI2TEeu5zftVXJ6J3g" type="3003" element="_jWUwZY2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_jXbjoY2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jXbjoo2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_XcA3UY2PEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XcA3Uo2PEeu5zftVXJ6J3g" x="345" y="75" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_XcBeYI2PEeu5zftVXJ6J3g" type="2001" element="_Xbt8YY2PEeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_XcCFcI2PEeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_XcCFcY2PEeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2MI2TEeu5zftVXJ6J3g" type="3003" element="_HNL7cI2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2MY2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2Mo2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_XcBeYY2PEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XcBeYo2PEeu5zftVXJ6J3g" x="480" y="150" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_XcCsgI2PEeu5zftVXJ6J3g" type="2001" element="_XbujcI2PEeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_XcCsg42PEeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_XcCshI2PEeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2M42TEeu5zftVXJ6J3g" type="3003" element="_HNNJkY2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2NI2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2NY2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_XcCsgY2PEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XcCsgo2PEeu5zftVXJ6J3g" x="480" y="210" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_XcDTkI2PEeu5zftVXJ6J3g" type="2001" element="_XbujcY2PEeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_XcDTk42PEeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_XcDTlI2PEeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2No2TEeu5zftVXJ6J3g" type="3003" element="_HNNwoY2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2N42TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2OI2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_XcDTkY2PEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XcDTko2PEeu5zftVXJ6J3g" x="480" y="270" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_XcD6oI2PEeu5zftVXJ6J3g" type="2001" element="_XbvKgI2PEeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_XcEhsI2PEeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_XcEhsY2PEeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2OY2TEeu5zftVXJ6J3g" type="3003" element="_HNNwpI2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2Oo2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2O42TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_XcD6oY2PEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XcD6oo2PEeu5zftVXJ6J3g" x="480" y="330" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_VRtGcI2QEeu5zftVXJ6J3g" type="2001" element="_VQsZ0I2QEeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_VRtGc42QEeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_VRtGdI2QEeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_Z_MJQI2QEeu5zftVXJ6J3g" type="3016" element="_Z-SKVI2QEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_Z_MJQY2QEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Z_MJQo2QEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_VRtGcY2QEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VRtGco2QEeu5zftVXJ6J3g" x="45" y="75" width="80" height="80"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uA6VsI2REeu5zftVXJ6J3g" type="2001" element="_uAxLwo2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uA6Vs42REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uA6VtI2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_jXbjo42TEeu5zftVXJ6J3g" type="3003" element="_jWUwYo2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_jXbjpI2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jXbjpY2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uA6VsY2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uA6Vso2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uA7j0I2REeu5zftVXJ6J3g" type="2001" element="_uAyZ4I2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uA7j042REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uA7j1I2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_jXcKsI2TEeu5zftVXJ6J3g" type="3003" element="_jWUwaI2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_jXcKsY2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jXcKso2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uA7j0Y2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uA7j0o2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uA7j1Y2REeu5zftVXJ6J3g" type="2001" element="_uAyZ442REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uA8K4I2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uA8K4Y2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_jXcKs42TEeu5zftVXJ6J3g" type="3003" element="_jWVXco2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_jXcKtI2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jXcKtY2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uA7j1o2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uA7j142REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uA8K4o2REeu5zftVXJ6J3g" type="2001" element="_uAyZ5o2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uA8K5Y2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uA8K5o2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_jXcKto2TEeu5zftVXJ6J3g" type="3003" element="_jWVXdY2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_jXcKt42TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jXcKuI2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uA8K442REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uA8K5I2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uA8K542REeu5zftVXJ6J3g" type="2001" element="_uAzA8o2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uA8K6o2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uA8K642REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_jXcxwI2TEeu5zftVXJ6J3g" type="3003" element="_jWVXeI2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_jXcxwY2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jXcxwo2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uA8K6I2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uA8K6Y2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uA8x8I2REeu5zftVXJ6J3g" type="2001" element="_uAzoCI2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uA8x842REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uA8x9I2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2PI2TEeu5zftVXJ6J3g" type="3003" element="_HNOXso2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2PY2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2Po2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uA8x8Y2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uA8x8o2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uA8x9Y2REeu5zftVXJ6J3g" type="2001" element="_uA0PEI2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uA9ZAI2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uA9ZAY2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2P42TEeu5zftVXJ6J3g" type="3003" element="_HNO-wY2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2QI2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2QY2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uA8x9o2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uA8x942REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uA9ZAo2REeu5zftVXJ6J3g" type="2001" element="_uA0PE42REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uA9ZBY2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uA9ZBo2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2Qo2TEeu5zftVXJ6J3g" type="3003" element="_HNO-xI2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2Q42TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2RI2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uA9ZA42REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uA9ZBI2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uA-AEI2REeu5zftVXJ6J3g" type="2001" element="_uA0PFo2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uA-nII2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uA-nIY2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2RY2TEeu5zftVXJ6J3g" type="3003" element="_HNPl0Y2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2Ro2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2R42TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uA-AEY2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uA-AEo2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uA_OMI2REeu5zftVXJ6J3g" type="2001" element="_uA02II2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uA_OM42REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uA_ONI2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2SI2TEeu5zftVXJ6J3g" type="3003" element="_HNPl1I2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2SY2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2So2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uA_OMY2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uA_OMo2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uA_1QI2REeu5zftVXJ6J3g" type="2001" element="_uA02I42REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uA_1Q42REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uA_1RI2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2S42TEeu5zftVXJ6J3g" type="3003" element="_HNQM4o2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2TI2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2TY2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uA_1QY2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uA_1Qo2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uA_1RY2REeu5zftVXJ6J3g" type="2001" element="_uA02Jo2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uA_1SI2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uA_1SY2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2To2TEeu5zftVXJ6J3g" type="3003" element="_HNQz8o2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2T42TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2UI2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uA_1Ro2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uA_1R42REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uBAcUI2REeu5zftVXJ6J3g" type="2001" element="_uA1dMo2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uBAcU42REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uBAcVI2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2UY2TEeu5zftVXJ6J3g" type="3003" element="_HNSCEI2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2Uo2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2U42TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uBAcUY2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uBAcUo2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uBAcVY2REeu5zftVXJ6J3g" type="2001" element="_uA1dNY2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uBBDYI2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uBBDYY2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2VI2TEeu5zftVXJ6J3g" type="3003" element="_HNSpIY2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2VY2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2Vo2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uBAcVo2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uBAcV42REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uBBDYo2REeu5zftVXJ6J3g" type="2001" element="_uA2EQI2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uBBDZY2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uBBDZo2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2V42TEeu5zftVXJ6J3g" type="3003" element="_HNSpJI2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2WI2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2WY2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uBBDY42REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uBBDZI2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uBBDZ42REeu5zftVXJ6J3g" type="2001" element="_uA2EQ42REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uBBqcI2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uBBqcY2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2Wo2TEeu5zftVXJ6J3g" type="3003" element="_HNTQMo2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2W42TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2XI2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uBBDaI2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uBBDaY2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uBBqco2REeu5zftVXJ6J3g" type="2001" element="_uA2ERo2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uBCRgI2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uBCRgY2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2XY2TEeu5zftVXJ6J3g" type="3003" element="_HNTQNY2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2Xo2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2X42TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uBBqc42REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uBBqdI2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uBCRgo2REeu5zftVXJ6J3g" type="2001" element="_uA2rUY2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uBCRhY2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uBCRho2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HON2YI2TEeu5zftVXJ6J3g" type="3003" element="_HNT3Qo2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HON2YY2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HON2Yo2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uBCRg42REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uBCRhI2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uBCRh42REeu5zftVXJ6J3g" type="2001" element="_uA2rVI2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uBC4kI2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uBC4kY2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HOXAII2TEeu5zftVXJ6J3g" type="3003" element="_HNUeUI2TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HOXAIY2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HOXAIo2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uBCRiI2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uBCRiY2REeu5zftVXJ6J3g" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uBC4ko2REeu5zftVXJ6J3g" type="2001" element="_uA3SYY2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uBC4lY2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uBC4lo2REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_HOXAI42TEeu5zftVXJ6J3g" type="3003" element="_HNUeU42TEeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_HOXAJI2TEeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HOXAJY2TEeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uBC4k42REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uBC4lI2REeu5zftVXJ6J3g" x="795" y="315" width="200" height="50"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_uBC4l42REeu5zftVXJ6J3g" type="2001" element="_uA3SZo2REeu5zftVXJ6J3g">
+          <children xmi:type="notation:Node" xmi:id="_uBC4mo2REeu5zftVXJ6J3g" type="5002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uBC4m42REeu5zftVXJ6J3g" y="5"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_uBIYJo2REeu5zftVXJ6J3g" type="3016" element="_uA35cI2REeu5zftVXJ6J3g">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_uBIYJ42REeu5zftVXJ6J3g" fontName="Segoe UI"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uBIYKI2REeu5zftVXJ6J3g"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_uBC4mI2REeu5zftVXJ6J3g" fontName="Segoe UI" fontHeight="12"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uBC4mY2REeu5zftVXJ6J3g" x="795" y="75" width="80" height="80"/>
+        </children>
         <styles xmi:type="notation:DiagramStyle" xmi:id="_OGoRwo2OEeu5zftVXJ6J3g"/>
       </data>
     </ownedAnnotationEntries>
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_OGwNkI2OEeu5zftVXJ6J3g" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_OGw0oI2OEeu5zftVXJ6J3g"/>
     </ownedAnnotationEntries>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_XbkLYI2PEeu5zftVXJ6J3g" name="feature_branch" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Workflow" href="My.githubaction#//@workflows.0"/>
+      <semanticElements xmi:type="githubaction:Workflow" href="My.githubaction#//@workflows.0"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Square" uid="_jWUJUY2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="114,159,207">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Workflow']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Workflow']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uAxLwo2REeu5zftVXJ6J3g" name="master_branch" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Workflow" href="My.githubaction#//@workflows.1"/>
+      <semanticElements xmi:type="githubaction:Workflow" href="My.githubaction#//@workflows.1"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_jWUwYo2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="114,159,207">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Workflow']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Workflow']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_Xbt8YI2PEeu5zftVXJ6J3g" name="Unit Test" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Job" href="My.githubaction#//@workflows.0/@jobs.0"/>
+      <semanticElements xmi:type="githubaction:Job" href="My.githubaction#//@workflows.0/@jobs.0"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Square" uid="_jWUwZY2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="138,226,52">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uAyZ4I2REeu5zftVXJ6J3g" name="Test - Units &amp; Integrations" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Job" href="My.githubaction#//@workflows.1/@jobs.0"/>
+      <semanticElements xmi:type="githubaction:Job" href="My.githubaction#//@workflows.1/@jobs.0"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_jWUwaI2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="138,226,52">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uAyZ442REeu5zftVXJ6J3g" name="Test - SonarCloud Scan" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Job" href="My.githubaction#//@workflows.1/@jobs.1"/>
+      <semanticElements xmi:type="githubaction:Job" href="My.githubaction#//@workflows.1/@jobs.1"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_jWVXco2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="138,226,52">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uAyZ5o2REeu5zftVXJ6J3g" name="Publish - GitHub Packages" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Job" href="My.githubaction#//@workflows.1/@jobs.2"/>
+      <semanticElements xmi:type="githubaction:Job" href="My.githubaction#//@workflows.1/@jobs.2"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_jWVXdY2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="138,226,52">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uAzA8o2REeu5zftVXJ6J3g" name="Publish - Docker Hub" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Job" href="My.githubaction#//@workflows.1/@jobs.3"/>
+      <semanticElements xmi:type="githubaction:Job" href="My.githubaction#//@workflows.1/@jobs.3"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_jWVXeI2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="138,226,52">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_Xbt8YY2PEeu5zftVXJ6J3g" name="checkout" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.0/@jobs.0/@steps.0"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.0/@jobs.0/@steps.0"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNL7cI2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_XbujcI2PEeu5zftVXJ6J3g" name="Set up JDK 11" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.0/@jobs.0/@steps.1"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.0/@jobs.0/@steps.1"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNNJkY2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_XbujcY2PEeu5zftVXJ6J3g" name="Maven Package" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.0/@jobs.0/@steps.2"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.0/@jobs.0/@steps.2"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNNwoY2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_XbvKgI2PEeu5zftVXJ6J3g" name="Maven Verify" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.0/@jobs.0/@steps.3"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.0/@jobs.0/@steps.3"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNNwpI2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uAzoCI2REeu5zftVXJ6J3g" name="checkout" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.0/@steps.0"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.0/@steps.0"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNOXso2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA0PEI2REeu5zftVXJ6J3g" name="setup_java" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.0/@steps.1"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.0/@steps.1"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNO-wY2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA0PE42REeu5zftVXJ6J3g" name="Maven Package" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.0/@steps.2"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.0/@steps.2"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNO-xI2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA0PFo2REeu5zftVXJ6J3g" name="Maven Verify" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.0/@steps.3"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.0/@steps.3"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNPl0Y2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA02II2REeu5zftVXJ6J3g" name="checkout" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.1/@steps.0"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.1/@steps.0"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNPl1I2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA02I42REeu5zftVXJ6J3g" name="Set up JDK 11" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.1/@steps.1"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.1/@steps.1"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNQM4o2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA02Jo2REeu5zftVXJ6J3g" name="SonarCloudScan" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.1/@steps.2"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.1/@steps.2"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNQz8o2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA1dMo2REeu5zftVXJ6J3g" name="checkout" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.2/@steps.0"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.2/@steps.0"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNSCEI2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA1dNY2REeu5zftVXJ6J3g" name="Set up JDK 11" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.2/@steps.1"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.2/@steps.1"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNSpIY2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA2EQI2REeu5zftVXJ6J3g" name="Publish artifact on GitHub Packages" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.2/@steps.2"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.2/@steps.2"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNSpJI2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA2EQ42REeu5zftVXJ6J3g" name="checkout" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.3/@steps.0"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.3/@steps.0"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNTQMo2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA2ERo2REeu5zftVXJ6J3g" name="Set up JDK 11" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.3/@steps.1"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.3/@steps.1"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNTQNY2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA2rUY2REeu5zftVXJ6J3g" name="Login to Docker Hub" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.3/@steps.2"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.3/@steps.2"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNT3Qo2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA2rVI2REeu5zftVXJ6J3g" name="Build Docker image" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.3/@steps.3"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.3/@steps.3"/>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNUeUI2TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA3SYY2REeu5zftVXJ6J3g" name="Publish Docker image" width="20" height="5" resizeKind="NSEW">
+      <target xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.3/@steps.4"/>
+      <semanticElements xmi:type="githubaction:Step" href="My.githubaction#//@workflows.1/@jobs.3/@steps.4"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Square" uid="_HNUeU42TEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" width="20" height="5" color="204,242,166">
+        <description xmi:type="style:SquareDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_VQsZ0I2QEeu5zftVXJ6J3g" name="Push Event" width="8" height="8" resizeKind="NSEW">
+      <target xmi:type="githubaction:PushEvent" href="My.githubaction#//@workflows.0/@on.0"/>
+      <semanticElements xmi:type="githubaction:PushEvent" href="My.githubaction#//@workflows.0/@on.0"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Ellipse" uid="_Z-SKVI2QEeu5zftVXJ6J3g" labelSize="12" labelPosition="node" color="252,175,62">
+        <description xmi:type="style:EllipseNodeDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='PushEvent']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='PushEvent']"/>
+    </ownedDiagramElements>
+    <ownedDiagramElements xmi:type="diagram:DNode" uid="_uA3SZo2REeu5zftVXJ6J3g" name="Push Event" width="8" height="8" resizeKind="NSEW">
+      <target xmi:type="githubaction:PushEvent" href="My.githubaction#//@workflows.1/@on.0"/>
+      <semanticElements xmi:type="githubaction:PushEvent" href="My.githubaction#//@workflows.1/@on.0"/>
+      <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
+      <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
+      <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
+      <ownedStyle xmi:type="diagram:Ellipse" uid="_uA35cI2REeu5zftVXJ6J3g" labelSize="12" labelPosition="node" color="252,175,62">
+        <description xmi:type="style:EllipseNodeDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='PushEvent']/@style"/>
+      </ownedStyle>
+      <actualMapping xmi:type="description_1:NodeMapping" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='PushEvent']"/>
+    </ownedDiagramElements>
     <description xmi:type="description_1:DiagramDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']"/>
     <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_OF3cwI2OEeu5zftVXJ6J3g"/>
     <activatedLayers xmi:type="description_1:Layer" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer"/>
