@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:githubaction="http://www.example.org/githubaction" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description">
+  <viewpoint:DAnalysis uid="_A-D5AI2OEeu5zftVXJ6J3g" selectedViews="_JlmWkI2OEeu5zftVXJ6J3g" version="14.3.1.202003261200">
+    <semanticResources>My.githubaction</semanticResources>
+    <ownedViews xmi:type="viewpoint:DView" uid="_JlmWkI2OEeu5zftVXJ6J3g">
+      <viewpoint xmi:type="description:Viewpoint" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']"/>
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_OGGtUI2OEeu5zftVXJ6J3g" name="new Repository Diagram" repPath="#_OFoMMI2OEeu5zftVXJ6J3g" changeId="33cb6499-3882-40a4-9633-ddd223886d5b">
+        <description xmi:type="description_1:DiagramDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']"/>
+        <target xmi:type="githubaction:Repository" href="My.githubaction#/"/>
+      </ownedRepresentationDescriptors>
+    </ownedViews>
+  </viewpoint:DAnalysis>
+  <diagram:DSemanticDiagram uid="_OFoMMI2OEeu5zftVXJ6J3g">
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_OGoRwI2OEeu5zftVXJ6J3g" source="GMF_DIAGRAMS">
+      <data xmi:type="notation:Diagram" xmi:id="_OGoRwY2OEeu5zftVXJ6J3g" type="Sirius" element="_OFoMMI2OEeu5zftVXJ6J3g" measurementUnit="Pixel">
+        <styles xmi:type="notation:DiagramStyle" xmi:id="_OGoRwo2OEeu5zftVXJ6J3g"/>
+      </data>
+    </ownedAnnotationEntries>
+    <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_OGwNkI2OEeu5zftVXJ6J3g" source="DANNOTATION_CUSTOMIZATION_KEY">
+      <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_OGw0oI2OEeu5zftVXJ6J3g"/>
+    </ownedAnnotationEntries>
+    <description xmi:type="description_1:DiagramDescription" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']"/>
+    <filterVariableHistory xmi:type="diagram:FilterVariableHistory" uid="_OF3cwI2OEeu5zftVXJ6J3g"/>
+    <activatedLayers xmi:type="description_1:Layer" href="platform:/resource/uk.ac.kcl.inf.mdd.project.githubaction.design/description/githubaction.odesign#//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer"/>
+    <target xmi:type="githubaction:Repository" href="My.githubaction#/"/>
+  </diagram:DSemanticDiagram>
+</xmi:XMI>
