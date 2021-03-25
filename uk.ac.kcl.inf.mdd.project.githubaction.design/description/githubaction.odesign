@@ -32,6 +32,30 @@
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
           </style>
         </nodeMappings>
+        <edgeMappings name="WorkflowJobs" sourceMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Workflow']" targetMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']" targetFinderExpression="feature:jobs">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="WorkflowEvents" sourceMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Workflow']" targetMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='PushEvent']" targetFinderExpression="feature:on">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="JobSteps" sourceMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']" targetMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']" targetFinderExpression="feature:steps">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
       </defaultLayer>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="uk.ac.kcl.inf.mdd.project.githubaction.design.Services"/>
