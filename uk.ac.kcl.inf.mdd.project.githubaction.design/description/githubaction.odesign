@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" name="githubaction" version="12.0.0.2017041100">
+  <ownedViewpoints name="Githubaction Specification" modelFileExtension="githubaction">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Repository Diagram" domainClass="githubaction::Repository" enablePopupBars="true">
+      <metamodel href="http://www.example.org/githubaction#/"/>
+      <defaultLayer name="Default"/>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="uk.ac.kcl.inf.mdd.project.githubaction.design.Services"/>
+  </ownedViewpoints>
+</description:Group>
