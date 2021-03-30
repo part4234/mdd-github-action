@@ -30,6 +30,8 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
   
   public static final String KEY_DEF_ERROR = "uk.ac.kcl.inf.mdd.project.githubaction.KEY_DEF_ERROR";
   
+  public static final String NOT_WELL_FORMED = "uk.ac.kcl.inf.mdd.project.githubaction.NOT_WELL_FORMED";
+  
   /**
    * Duplicate name checks for workflows, jobs and steps
    */
@@ -174,6 +176,17 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
         this.error("Duplicate keys definitions are not alloweed ", innerSteps, 
           GithubactionPackage.Literals.STEP__WITH, GithubactionValidator.KEY_DEF_ERROR);
       }
+    }
+  }
+  
+  /**
+   * Static semantic checks for well-formedness to ensure it has name, on, jobs
+   */
+  @Check
+  public void checkStaticsemanticCheck(final Workflow workF) {
+    if ((((workF.getName() == "") || (workF.getOn().size() == 0)) || (workF.getJobs().size() == 0))) {
+      this.warning("This definition is not well-formed", workF, 
+        GithubactionPackage.Literals.WORKFLOW__NAME, GithubactionValidator.NOT_WELL_FORMED);
     }
   }
 }

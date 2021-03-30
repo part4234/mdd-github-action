@@ -25,7 +25,7 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	public static val CASE_VARIABLE_ISSUE = 'uk.ac.kcl.inf.mdd.project.githubaction.WRONG_CASE_USAGE'	
 	public static val VARIABLE_DEF_REQUIRED = 'uk.ac.kcl.inf.mdd.project.githubaction.VARIABLE_DEF_REQUIRED'		
 	public static val KEY_DEF_ERROR = 'uk.ac.kcl.inf.mdd.project.githubaction.KEY_DEF_ERROR'		
-	
+	public static val NOT_WELL_FORMED = 'uk.ac.kcl.inf.mdd.project.githubaction.NOT_WELL_FORMED'	
 	/*
 	 * Duplicate name checks for workflows, jobs and steps
 	 */
@@ -139,7 +139,21 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 				error('Duplicate keys definitions are not alloweed ', innerSteps,
 					GithubactionPackage.Literals.STEP__WITH, KEY_DEF_ERROR)
 			}
-			}
 		}
 	}
+	
+	/*
+	 * Static semantic checks for well-formedness to ensure it has name, on, jobs
+	 */
+	@Check
+	def checkStaticsemanticCheck(Workflow workF) {
+		if (workF.name === "" || workF.on.size === 0 || workF.jobs.size === 0){
+			warning('This definition is not well-formed', workF,
+				GithubactionPackage.Literals.WORKFLOW__NAME, NOT_WELL_FORMED)
+		}						
+	}	 
+	
+	
+	
+	
 }

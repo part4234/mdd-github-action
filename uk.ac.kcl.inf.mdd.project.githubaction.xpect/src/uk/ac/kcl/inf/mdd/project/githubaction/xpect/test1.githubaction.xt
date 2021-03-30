@@ -77,10 +77,6 @@ Repository {
 					}
 				}
 			}
-		},
-		
-		Workflow {
-			name "Feature Branch"
 		}
 		
 	}
