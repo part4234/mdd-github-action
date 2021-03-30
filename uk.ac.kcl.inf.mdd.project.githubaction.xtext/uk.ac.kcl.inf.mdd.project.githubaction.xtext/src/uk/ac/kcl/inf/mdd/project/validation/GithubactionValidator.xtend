@@ -31,7 +31,6 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	 */
 	@Check
 	def checkDuplicateNaming(Repository program) {
-		
 		for (Workflow wfObj: program.workflows){
 			if (array.contains(wfObj)){
 			error('Name definiitons must be unique ', wfObj,
@@ -44,7 +43,6 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	
 	@Check
 	def checkDuplicateNaming(Workflow wf) {
-		
 		for (Job jbObj: wf.jobs){
 			if (array.contains(jbObj)){
 			error('Name definiitons must be unique ', jbObj,
@@ -57,7 +55,6 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 
 	@Check
 	def checkDuplicateNaming(Job jobs) {
-		
 		for (Step stepObj: jobs.steps){
 			if (array.contains(stepObj)){
 			error('Name definiitons must be unique', stepObj,
@@ -83,15 +80,15 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	def checkRequiredVariablesNames(Workflow workF) {
 		if (workF.name === ""){
 			error('Workflow name is required', workF,
-				GithubactionPackage.Literals.PUSH_EVENT__BRANCHES, VARIABLE_DEF_REQUIRED)
+				GithubactionPackage.Literals.WORKFLOW__NAME, VARIABLE_DEF_REQUIRED)
 		}		
 		if (workF.on.size === 0){
 			warning('Event definition required', workF,
-				GithubactionPackage.Literals.PUSH_EVENT__BRANCHES, VARIABLE_DEF_REQUIRED)
+				GithubactionPackage.Literals.WORKFLOW__NAME, VARIABLE_DEF_REQUIRED)
 		}
 		if (workF.jobs.size === 0){
 			warning('Event definition required', workF,
-				GithubactionPackage.Literals.PUSH_EVENT__BRANCHES, DUPLICATE_VARIABLE_NAME)
+				GithubactionPackage.Literals.JOB__NAME, DUPLICATE_VARIABLE_NAME)
 		}				
 	}		
 	
@@ -111,7 +108,7 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	def checkVariableNamesStartWithUpperCase(Job decl) {
 		if (!Character.isUpperCase(decl.name.charAt(0))) {
 			warning('Name should start with an upper-case character', decl,
-				GithubactionPackage.Literals.WORKFLOW__NAME, CASE_VARIABLE_ISSUE)
+				GithubactionPackage.Literals.JOB__NAME, CASE_VARIABLE_ISSUE)
 		}
 	}
 	
@@ -119,7 +116,7 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	def checkVariableNamesStartWithUpperCase(Step decl) {
 		if (!Character.isUpperCase(decl.name.charAt(0))) {
 			warning('Name should start with an upper-case character', decl,
-				GithubactionPackage.Literals.WORKFLOW__NAME, CASE_VARIABLE_ISSUE)
+				GithubactionPackage.Literals.STEP__NAME, CASE_VARIABLE_ISSUE)
 		}
 	}	
 	
@@ -127,7 +124,7 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	def checkVariableNamesStartWithUpperCase(Env decl) {
 		if (!Character.isLowerCase(decl.name.charAt(0))) {
 			warning('Name should start with a lower-case character', decl,
-				GithubactionPackage.Literals.WORKFLOW__NAME, CASE_VARIABLE_ISSUE)
+				GithubactionPackage.Literals.ENV__NAME, CASE_VARIABLE_ISSUE)
 		}
 	}	
 
@@ -137,9 +134,12 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	 
 	@Check
 	def checkForDuplicateKeyError(Step innerSteps) {
-		if (innerSteps.with.get(0).name === innerSteps.with.get(1).name) {
-			error('Duplicate keys definitions are not alloweed ', innerSteps,
-				GithubactionPackage.Literals.STEP__WITH, KEY_DEF_ERROR)
+		if (innerSteps.with.size > 0){
+			if (innerSteps.with.get(0).name === innerSteps.with.get(1).name) {
+				error('Duplicate keys definitions are not alloweed ', innerSteps,
+					GithubactionPackage.Literals.STEP__WITH, KEY_DEF_ERROR)
+			}
+			}
 		}
 	}
 }

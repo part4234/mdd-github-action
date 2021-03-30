@@ -100,19 +100,19 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
     boolean _tripleEquals = (_name == "");
     if (_tripleEquals) {
       this.error("Workflow name is required", workF, 
-        GithubactionPackage.Literals.PUSH_EVENT__BRANCHES, GithubactionValidator.VARIABLE_DEF_REQUIRED);
+        GithubactionPackage.Literals.WORKFLOW__NAME, GithubactionValidator.VARIABLE_DEF_REQUIRED);
     }
     int _size = workF.getOn().size();
     boolean _tripleEquals_1 = (_size == 0);
     if (_tripleEquals_1) {
       this.warning("Event definition required", workF, 
-        GithubactionPackage.Literals.PUSH_EVENT__BRANCHES, GithubactionValidator.VARIABLE_DEF_REQUIRED);
+        GithubactionPackage.Literals.WORKFLOW__NAME, GithubactionValidator.VARIABLE_DEF_REQUIRED);
     }
     int _size_1 = workF.getJobs().size();
     boolean _tripleEquals_2 = (_size_1 == 0);
     if (_tripleEquals_2) {
       this.warning("Event definition required", workF, 
-        GithubactionPackage.Literals.PUSH_EVENT__BRANCHES, GithubactionValidator.DUPLICATE_VARIABLE_NAME);
+        GithubactionPackage.Literals.JOB__NAME, GithubactionValidator.DUPLICATE_VARIABLE_NAME);
     }
   }
   
@@ -135,7 +135,7 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
     boolean _not = (!_isUpperCase);
     if (_not) {
       this.warning("Name should start with an upper-case character", decl, 
-        GithubactionPackage.Literals.WORKFLOW__NAME, GithubactionValidator.CASE_VARIABLE_ISSUE);
+        GithubactionPackage.Literals.JOB__NAME, GithubactionValidator.CASE_VARIABLE_ISSUE);
     }
   }
   
@@ -145,7 +145,7 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
     boolean _not = (!_isUpperCase);
     if (_not) {
       this.warning("Name should start with an upper-case character", decl, 
-        GithubactionPackage.Literals.WORKFLOW__NAME, GithubactionValidator.CASE_VARIABLE_ISSUE);
+        GithubactionPackage.Literals.STEP__NAME, GithubactionValidator.CASE_VARIABLE_ISSUE);
     }
   }
   
@@ -155,7 +155,7 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
     boolean _not = (!_isLowerCase);
     if (_not) {
       this.warning("Name should start with a lower-case character", decl, 
-        GithubactionPackage.Literals.WORKFLOW__NAME, GithubactionValidator.CASE_VARIABLE_ISSUE);
+        GithubactionPackage.Literals.ENV__NAME, GithubactionValidator.CASE_VARIABLE_ISSUE);
     }
   }
   
@@ -164,12 +164,16 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
    */
   @Check
   public void checkForDuplicateKeyError(final Step innerSteps) {
-    String _name = innerSteps.getWith().get(0).getName();
-    String _name_1 = innerSteps.getWith().get(1).getName();
-    boolean _tripleEquals = (_name == _name_1);
-    if (_tripleEquals) {
-      this.error("Duplicate keys definitions are not alloweed ", innerSteps, 
-        GithubactionPackage.Literals.STEP__WITH, GithubactionValidator.KEY_DEF_ERROR);
+    int _size = innerSteps.getWith().size();
+    boolean _greaterThan = (_size > 0);
+    if (_greaterThan) {
+      String _name = innerSteps.getWith().get(0).getName();
+      String _name_1 = innerSteps.getWith().get(1).getName();
+      boolean _tripleEquals = (_name == _name_1);
+      if (_tripleEquals) {
+        this.error("Duplicate keys definitions are not alloweed ", innerSteps, 
+          GithubactionPackage.Literals.STEP__WITH, GithubactionValidator.KEY_DEF_ERROR);
+      }
     }
   }
 }
