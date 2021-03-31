@@ -12,27 +12,23 @@ Repository {
 					name "Unit Test"
 					runsOn "ubuntu-18.04"
 					steps {
-						Step checkout {
+						Step {
 							uses "actions/checkout@v1"
 						},
-						Step setup_java {
+						Step {
 							name "Set up JDK 11"
 							uses "actions/setup-java@v1"
 							with { "java-version": "1.11" }
 						},
-						Step setup_maven {
+						Step {
 							name "Maven Package"
 							run { "mvn -B clean package -DskipTests" }
-						},
-						Step verify_maven {
-							name "Maven Verify"
-							run { "mvn -B clean verify" }
 						}
 					}
 				}
 			}
 		},
-		Workflow {
+		Workflow  {
 			name "Master Branch"
 			on {
 				PushEvent {
@@ -44,18 +40,18 @@ Repository {
 					name "Test - Units & Integrations"
 					runsOn "ubuntu-18.04"
 					steps {
-						Step checkout {
+						Step {
 							uses "actions/checkout@v1"
 						},
-						Step setup_java {
+						Step {
 							uses "actions/setup-java@v1"
 							with { "java-version": "11.0.4" }
 						},
-						Step setup_maven {
+						Step {
 							name "Maven Package"
 							run { "mvn -B clean package -DskipTests" }
 						},
-						Step verify_maven {
+						Step {
 							name "Maven Verify"
 							run { "mvn -B clean verify -Pintegration-test" }
 						}
@@ -65,15 +61,15 @@ Repository {
 					name "Test - SonarCloud Scan"
     				runsOn "ubuntu-18.04"
     				steps {
-    					Step checkout {
+    					Step {
     						uses "actions/checkout@v1"
     					},
-    					Step setup_java {
+    					Step {
     						name "Set up JDK 11"
     						uses "actions/setup-java@v1"
     						with { "java-version" : "11.0.4" }
     					},
-    					Step sonar_cloud_scan {
+    					Step {
     						name "SonarCloudScan"
     						run { "mvn -B clean verify -Psonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}" }
     						env { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" }
@@ -85,15 +81,15 @@ Repository {
 					needs (test, sonar)
     				runsOn "ubuntu-18.04"
     				steps {
-    					Step checkout {
+    					Step {
     						uses "actions/checkout@v1"
     					},
-    					Step setup_java {
+    					Step {
     						name "Set up JDK 11"
         					uses "actions/setup-java@v1"
         					with { "java-version": "11.0.4" }
     					},
-    					Step publish_package {
+    					Step {
     						name "Publish artifact on GitHub Packages"
     						run { "mvn -B clean deploy -DskipTests" }
     						env { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" }
@@ -106,23 +102,23 @@ Repository {
 				    runsOn "ubuntu-18.04"
 				    env { "REPO": "${{ secrets.DOCKER_REPO }}" }
 				    steps {
-				    	Step checkout {
+				    	Step {
 				    		uses "actions/checkout@v1"
 				    	},
-				    	Step setup_java {
+				    	Step {
 				    		name "Set up JDK 11"
 				    		uses "actions/setup-java@v1"
 				    		with { "java-version": "11.0.4" }
 				    	},
-				    	Step login_docker {
+				    	Step {
 				    		name "Login to Docker Hub"
 				    		run { "docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}" }
 				    	},
-				    	Step build_docker {
+				    	Step {
 				    		name "Build Docker image"
 				    		run { "docker build -t $REPO:latest -t $REPO:${GITHUB_SHA::8} ." }
 				    	},
-				    	Step publish_docker {
+				    	Step {
 				    		name "Publish Docker image"
 				    		run { "docker push $REPO" }
 				    	}

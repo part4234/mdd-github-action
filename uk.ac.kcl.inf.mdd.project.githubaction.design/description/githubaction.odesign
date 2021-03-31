@@ -4,98 +4,100 @@
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Repository Diagram" domainClass="githubaction::Repository" enablePopupBars="true">
       <metamodel href="http://www.example.org/githubaction#/"/>
       <defaultLayer name="Default">
-        <nodeMappings name="Workflow" domainClass="githubaction::Workflow">
+        <nodeMappings name="WorkflowNode" domainClass="githubaction::Workflow">
           <style xsi:type="style:SquareDescription" labelSize="12" labelPosition="node" resizeKind="NSEW" width="20" height="5">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="Job" domainClass="githubaction::Job">
-          <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="aql:if self.jobName != null then self.jobName else self.name endif" labelPosition="node" resizeKind="NSEW" width="20" height="5">
-            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
-          </style>
-        </nodeMappings>
-        <nodeMappings name="Step" domainClass="githubaction::Step">
-          <style xsi:type="style:SquareDescription" labelSize="12" labelExpression="aql:if self.stepName != null then self.stepName else self.name endif" labelPosition="node" resizeKind="NSEW" width="20" height="5">
-            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
-          </style>
-        </nodeMappings>
-        <nodeMappings name="ScheduleEvent" domainClass="githubaction::ScheduleEvent">
+        <nodeMappings name="ScheduleEventNode" domainClass="githubaction::ScheduleEvent">
           <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="Schedule Event" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="WorkflowDispatchEvent" domainClass="githubaction::WorkflowDispatchEvent">
+        <nodeMappings name="WorkflowDispatchEventNode" domainClass="githubaction::WorkflowDispatchEvent">
           <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="Workflow Dispatch Event" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="RepositoryDispatchEvent" domainClass="githubaction::RepositoryDispatchEvent">
+        <nodeMappings name="RepositoryDispatchEventNode" domainClass="githubaction::RepositoryDispatchEvent">
           <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="Repository Dispatch Event" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="PushEvent" domainClass="githubaction::PushEvent">
+        <nodeMappings name="PushEventNode" domainClass="githubaction::PushEvent">
           <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="Push Event" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="PullRequest" domainClass="githubaction::PullRequestEvent">
+        <nodeMappings name="PullRequestEventNode" domainClass="githubaction::PullRequestEvent">
           <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="Pull Request Event" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="CreateEvent" domainClass="githubaction::CreateEvent">
+        <nodeMappings name="CreateEventNode" domainClass="githubaction::CreateEvent">
           <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="Create Event" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="DeleteEvent" domainClass="githubaction::DeleteEvent">
+        <nodeMappings name="DeleteEventNode" domainClass="githubaction::DeleteEvent">
           <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="Delete Event" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="DeploymentEvent" domainClass="githubaction::DeploymentEvent">
+        <nodeMappings name="DeploymentEventNode" domainClass="githubaction::DeploymentEvent">
           <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="Deployment Event" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="IssueEvent" domainClass="githubaction::IssueEvent">
+        <nodeMappings name="IssueEventNode" domainClass="githubaction::IssueEvent">
           <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="Issue Event" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="LabelEvent" domainClass="githubaction::LabelEvent">
+        <nodeMappings name="LabelEventNode" domainClass="githubaction::LabelEvent">
           <style xsi:type="style:EllipseNodeDescription" labelSize="12" labelExpression="Label Event" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
           </style>
         </nodeMappings>
-        <edgeMappings name="WorkflowJobs" sourceMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Workflow']" targetMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']" targetFinderExpression="feature:jobs">
+        <edgeMappings name="WorkflowJobEdge" sourceMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='WorkflowNode']" targetMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@containerMappings[name='JobContainer']" targetFinderExpression="aql:self.jobs->first()">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="run">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="WorkflowEventEdge" sourceMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='WorkflowNode']" targetMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='PushEventNode'] //@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='CreateEventNode'] //@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='DeleteEventNode'] //@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='DeploymentEventNode'] //@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='IssueEventNode'] //@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='LabelEventNode'] //@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='RepositoryDispatchEventNode'] //@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='ScheduleEventNode'] //@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='WorkflowDispatchEventNode'] //@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='PullRequestEventNode']" targetFinderExpression="feature:on">
+          <style sourceArrow="InputArrow" targetArrow="NoDecoration" sizeComputationExpression="2" routingStyle="tree">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription labelSize="12" showIcon="false" labelExpression="triggers">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="JobOrderEdge" sourceMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@containerMappings[name='JobContainer']" targetMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@containerMappings[name='JobContainer']" targetFinderExpression="aql:self.followingSiblings()->first()">
           <style sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <centerLabelStyleDescription labelSize="12">
@@ -103,7 +105,7 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <edgeMappings name="WorkflowEvents" sourceMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Workflow']" targetMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='PushEvent']" targetFinderExpression="feature:on">
+        <edgeMappings name="StepOrderEdge" sourceMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@containerMappings[name='JobContainer']/@subNodeMappings[name='StepNode']" targetMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@containerMappings[name='JobContainer']/@subNodeMappings[name='StepNode']" targetFinderExpression="aql:self.followingSiblings()->first()">
           <style sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <centerLabelStyleDescription labelSize="12">
@@ -111,14 +113,21 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <edgeMappings name="JobSteps" sourceMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Job']" targetMapping="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='Step']" targetFinderExpression="feature:steps">
-          <style sizeComputationExpression="2">
-            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
-            <centerLabelStyleDescription labelSize="12">
+        <containerMappings name="JobContainer" domainClass="githubaction::Job">
+          <subNodeMappings name="StepNode" semanticCandidatesExpression="feature:eAllContents" domainClass="githubaction::Step">
+            <style xsi:type="style:SquareDescription" labelSize="12" showIcon="false" labelExpression="aql:if self.stepName != null then self.stepName else (if self.name != null then self.name else 'Step ' + self.eContainer().steps->indexOf(self) endif)endif" tooltipExpression="aql:if self.stepName != null then self.stepName else (if self.name != null then self.name else 'Step ' + self.eContainer().steps->indexOf(self) endif)endif" labelPosition="node" resizeKind="NSEW" width="20" height="5">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            </centerLabelStyleDescription>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" labelSize="12" labelExpression="aql:if self.jobName != null then self.jobName else self.name endif" tooltipExpression="aql:if self.jobName != null then self.jobName else self.name endif" widthComputationExpression="27" heightComputationExpression="20">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
           </style>
-        </edgeMappings>
+        </containerMappings>
       </defaultLayer>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="uk.ac.kcl.inf.mdd.project.githubaction.design.Services"/>
