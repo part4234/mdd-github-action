@@ -1,7 +1,7 @@
 Repository {
 	workflows {
-		
-		Workflow feature_branch {
+		Workflow {
+			name "Feature Branch"
 			on {
 				PushEvent {
 					branchesIgnore { master, "release*" }
@@ -32,8 +32,8 @@ Repository {
 				}
 			}
 		},
-		
-		Workflow master_branch {
+		Workflow {
+			name "Master Branch"
 			on {
 				PushEvent {
 					branches { master }
