@@ -33,7 +33,7 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	def checkDuplicateNaming(Repository program) {
 		for (Workflow wfObj: program.workflows){
 			if (array.contains(wfObj)){
-			error('Name definiitons must be unique ', wfObj,
+				error('Name definiitons must be unique ', wfObj,
 				GithubactionPackage.Literals.WORKFLOW__NAME, KEY_DEF_ERROR)
 			}	
 			array.add(wfObj);			
@@ -45,7 +45,7 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	def checkDuplicateNaming(Workflow wf) {
 		for (Job jbObj: wf.jobs){
 			if (array.contains(jbObj)){
-			error('Name definiitons must be unique ', jbObj,
+				error('Name definiitons must be unique ', jbObj,
 				GithubactionPackage.Literals.JOB__NAME, KEY_DEF_ERROR)
 			}	
 			array.add(jbObj);			
@@ -57,7 +57,7 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	def checkDuplicateNaming(Job jobs) {
 		for (Step stepObj: jobs.steps){
 			if (array.contains(stepObj)){
-			error('Name definiitons must be unique', stepObj,
+				error('Name definiitons must be unique', stepObj,
 				GithubactionPackage.Literals.STEP__NAME, KEY_DEF_ERROR)
 			}	
 			array.add(stepObj);			
@@ -72,7 +72,7 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	def checkRequiredVariablesNames(Repository program) {
 		if (program.workflows.size === 0) {
 			warning('Workflow definitions required ', program,
-				GithubactionPackage.Literals.WORKFLOW__NAME, DUPLICATE_VARIABLE_NAME)
+				GithubactionPackage.Literals.REPOSITORY__WORKFLOWS, DUPLICATE_VARIABLE_NAME)
 		}
 	}		
 
@@ -91,6 +91,15 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 				GithubactionPackage.Literals.JOB__NAME, DUPLICATE_VARIABLE_NAME)
 		}				
 	}		
+	
+	@Check
+	def checkRequiredVariablesNames(PushEvent event) {
+		if (event.branches.size === 0) {
+			warning('PushEvent definitions required!', event,
+				null, VARIABLE_DEF_REQUIRED)
+		}
+	}		
+	
 	
 	/*
 	 * Case sensitive/insensitive checks
@@ -135,7 +144,7 @@ class GithubactionValidator extends AbstractGithubactionValidator  {
 	@Check
 	def checkForDuplicateKeyError(Step innerSteps) {
 		if (innerSteps.with.size > 0){
-			if (innerSteps.with.get(0).name === innerSteps.with.get(1).name) {
+			if (innerSteps.with.get(0) === innerSteps.with.get(1)) {
 				error('Duplicate keys definitions are not alloweed ', innerSteps,
 					GithubactionPackage.Literals.STEP__WITH, KEY_DEF_ERROR)
 			}

@@ -58,7 +58,7 @@ Repository {
 				}
 			}
 			jobs {
-				Job test {
+				Job Test {
 					name "macos-latest"
 					runsOn "ubuntu-18.04"
 					steps {

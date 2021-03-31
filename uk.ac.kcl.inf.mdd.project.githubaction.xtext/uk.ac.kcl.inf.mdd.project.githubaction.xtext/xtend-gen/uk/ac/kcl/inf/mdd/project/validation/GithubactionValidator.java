@@ -5,7 +5,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.validation.Check;
 import uk.ac.kcl.inf.mdd.project.githubaction.Env;
 import uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage;
+import uk.ac.kcl.inf.mdd.project.githubaction.InputParameter;
 import uk.ac.kcl.inf.mdd.project.githubaction.Job;
+import uk.ac.kcl.inf.mdd.project.githubaction.PushEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Repository;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 import uk.ac.kcl.inf.mdd.project.githubaction.Workflow;
@@ -92,7 +94,7 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
     boolean _tripleEquals = (_size == 0);
     if (_tripleEquals) {
       this.warning("Workflow definitions required ", program, 
-        GithubactionPackage.Literals.WORKFLOW__NAME, GithubactionValidator.DUPLICATE_VARIABLE_NAME);
+        GithubactionPackage.Literals.REPOSITORY__WORKFLOWS, GithubactionValidator.DUPLICATE_VARIABLE_NAME);
     }
   }
   
@@ -115,6 +117,16 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
     if (_tripleEquals_2) {
       this.warning("Event definition required", workF, 
         GithubactionPackage.Literals.JOB__NAME, GithubactionValidator.DUPLICATE_VARIABLE_NAME);
+    }
+  }
+  
+  @Check
+  public void checkRequiredVariablesNames(final PushEvent event) {
+    int _size = event.getBranches().size();
+    boolean _tripleEquals = (_size == 0);
+    if (_tripleEquals) {
+      this.warning("PushEvent definitions required!", event, 
+        null, GithubactionValidator.VARIABLE_DEF_REQUIRED);
     }
   }
   
@@ -169,9 +181,9 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
     int _size = innerSteps.getWith().size();
     boolean _greaterThan = (_size > 0);
     if (_greaterThan) {
-      String _name = innerSteps.getWith().get(0).getName();
-      String _name_1 = innerSteps.getWith().get(1).getName();
-      boolean _tripleEquals = (_name == _name_1);
+      InputParameter _get = innerSteps.getWith().get(0);
+      InputParameter _get_1 = innerSteps.getWith().get(1);
+      boolean _tripleEquals = (_get == _get_1);
       if (_tripleEquals) {
         this.error("Duplicate keys definitions are not alloweed ", innerSteps, 
           GithubactionPackage.Literals.STEP__WITH, GithubactionValidator.KEY_DEF_ERROR);
