@@ -10,13 +10,14 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Job;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 
 import uk.ac.kcl.inf.mdd.project.githubaction.*; import java.util.ArrayList
+import uk.ac.kcl.inf.mdd.project.typing.validation.GithubactionTypeSystemValidator
 
 /**
  * This class contains custom validation rules. 
  *
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
-class GithubactionValidator extends AbstractGithubactionValidator  {
+class GithubactionValidator extends GithubactionTypeSystemValidator  {
 	
 	public ArrayList array = new ArrayList; 
 	//This checks for mis-spellings and case-sensitiveness

@@ -14,7 +14,8 @@ Require-Bundle: uk.ac.kcl.inf.mdd.project.githubaction,
  org.eclipse.xtext.util,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.emf.ecore,
- org.eclipse.emf.common
+ org.eclipse.emf.common,
+ it.xsemantics.runtime;bundle-version="1.10.2"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: uk.ac.kcl.inf.mdd.project.validation,
  uk.ac.kcl.inf.mdd.project.scoping,

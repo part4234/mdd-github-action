@@ -1,0 +1,6 @@
+import uk.ac.kcl.inf.mdd.project.validation.AbstractGithubactionValidator
+
+system uk.ac.kcl.inf.mdd.project.typing.GithubactionTypeSystem
+
+validatorExtends AbstractGithubactionValidator
+
