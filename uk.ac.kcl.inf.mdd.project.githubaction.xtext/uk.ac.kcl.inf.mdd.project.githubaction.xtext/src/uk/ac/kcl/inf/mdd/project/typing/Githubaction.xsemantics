@@ -1,6 +1,40 @@
 import uk.ac.kcl.inf.mdd.project.validation.AbstractGithubactionValidator
+import uk.ac.kcl.inf.mdd.project.githubaction.*;
+
 
 system uk.ac.kcl.inf.mdd.project.typing.GithubactionTypeSystem
 
 validatorExtends AbstractGithubactionValidator
 
+//Aim to check 2 pushevent contradiction via assigning and checking
+//their types. At the end, should not be null.
+// Alternative implement for needs!
+
+auxiliary {
+	typeExpressions(Iterable<Event> exps) : GithubactionType cached
+}
+
+
+judgments {
+	type |- Event exp : output GithubactionType
+		cached
+		error "cannot type " + stringRep(exp)
+	subType |- GithubactionType left <: GithubactionType right
+		error stringRep(left) + " is not a subtype of " + stringRep(right)
+}
+
+auxiliary typeExpressions(Iterable<Event> exps) {
+	if (exps.forall[exp | 
+			empty |- exp : var GithubactionType exp2Type 
+			exp2Type === GithubactionType.INT]) {
+		return GithubactionType.INT			
+	} else {
+		return GithubactionType.REAL
+	}
+}
+
+
+
+axiom StringLiteral
+    G |- StringLiteral str : 
+        ExpressionsFactory::eINSTANCE.createStringType
