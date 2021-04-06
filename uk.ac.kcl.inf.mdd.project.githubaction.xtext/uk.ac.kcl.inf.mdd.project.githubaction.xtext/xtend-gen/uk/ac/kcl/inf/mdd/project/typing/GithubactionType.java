@@ -4,5 +4,5 @@ package uk.ac.kcl.inf.mdd.project.typing;
 public enum GithubactionType {
   MASTER,
   
-  NONMASTER;
+  CONFLICTMASTER;
 }
