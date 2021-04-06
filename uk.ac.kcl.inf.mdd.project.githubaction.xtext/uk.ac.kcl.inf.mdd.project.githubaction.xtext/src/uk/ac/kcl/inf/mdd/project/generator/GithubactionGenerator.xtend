@@ -7,16 +7,23 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
-
-import uk.ac.kcl.inf.mdd.project.githubaction.Repository;
-import uk.ac.kcl.inf.mdd.project.githubaction.Workflow;
-import uk.ac.kcl.inf.mdd.project.githubaction.Event;
-import uk.ac.kcl.inf.mdd.project.githubaction.Job;
-import uk.ac.kcl.inf.mdd.project.githubaction.Step;
-
-import uk.ac.kcl.inf.mdd.project.githubaction.*; 
-
-//says deprecated but works :o
+import uk.ac.kcl.inf.mdd.project.githubaction.CreateEvent
+import uk.ac.kcl.inf.mdd.project.githubaction.DeleteEvent
+import uk.ac.kcl.inf.mdd.project.githubaction.DeploymentEvent
+import uk.ac.kcl.inf.mdd.project.githubaction.Event
+import uk.ac.kcl.inf.mdd.project.githubaction.IssueActivityType
+import uk.ac.kcl.inf.mdd.project.githubaction.IssueEvent
+import uk.ac.kcl.inf.mdd.project.githubaction.Job
+import uk.ac.kcl.inf.mdd.project.githubaction.LabelActivityType
+import uk.ac.kcl.inf.mdd.project.githubaction.LabelEvent
+import uk.ac.kcl.inf.mdd.project.githubaction.PullRequestEvent
+import uk.ac.kcl.inf.mdd.project.githubaction.PushEvent
+import uk.ac.kcl.inf.mdd.project.githubaction.Repository
+import uk.ac.kcl.inf.mdd.project.githubaction.RepositoryDispatchEvent
+import uk.ac.kcl.inf.mdd.project.githubaction.ScheduleEvent
+import uk.ac.kcl.inf.mdd.project.githubaction.Step
+import uk.ac.kcl.inf.mdd.project.githubaction.Workflow
+import uk.ac.kcl.inf.mdd.project.githubaction.WorkflowDispatchEvent
 
 /**
  * Generates code from your model files on save.
@@ -26,17 +33,14 @@ import uk.ac.kcl.inf.mdd.project.githubaction.*;
 class GithubactionGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-
 		val model = resource.contents.head as Repository
 		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats ) //-- To be added later for file generation
-		
 		
 		val className = resource.deriveClassNameFor
 		fsa.generateFile(className +".java", model.doGenerateClass(className))
 		
 		//split file using the link shown
-		
-		}
+	}
 	
 	
 	def deriveStatsTargetFileNameFor(Resource resource) {
@@ -175,7 +179,7 @@ class GithubactionGenerator extends AbstractGenerator {
 			«ENDFOR»
 		«ENDIF»	
 	'''	
-	dispatch def String IssueActivityType(IssueActivityType type) '''
+	def String IssueActivityType(IssueActivityType type) '''
 		«IF type === IssueActivityType.OPENED» «IssueActivityType.OPENED», «ENDIF»
 		«IF type === IssueActivityType.CLOSED» «IssueActivityType.CLOSED», «ENDIF»
 		«IF type === IssueActivityType.DELETED» «IssueActivityType.DELETED» «ENDIF»
@@ -188,7 +192,7 @@ class GithubactionGenerator extends AbstractGenerator {
 		«IF type === IssueActivityType.UNLOCKED» «IssueActivityType.UNLOCKED», «ENDIF»
 		«IF type === IssueActivityType.REOPENED» «IssueActivityType.REOPENED» «ENDIF»
 	'''	
-	dispatch def String labelActivityType(LabelActivityType type) '''
+	def String labelActivityType(LabelActivityType type) '''
 		«IF type === LabelActivityType.CREATED»  «LabelActivityType.CREATED», «ENDIF»
 		«IF type === LabelActivityType.EDITED» «LabelActivityType.EDITED», «ENDIF»
 		«IF type === LabelActivityType.DELETED» «LabelActivityType.DELETED» «ENDIF»

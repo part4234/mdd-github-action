@@ -565,7 +565,7 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
-  protected String _IssueActivityType(final IssueActivityType type) {
+  public String IssueActivityType(final IssueActivityType type) {
     StringConcatenation _builder = new StringConcatenation();
     {
       if ((type == IssueActivityType.OPENED)) {
@@ -658,7 +658,7 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
-  protected String _labelActivityType(final LabelActivityType type) {
+  public String labelActivityType(final LabelActivityType type) {
     StringConcatenation _builder = new StringConcatenation();
     {
       if ((type == LabelActivityType.CREATED)) {
@@ -873,13 +873,5 @@ public class GithubactionGenerator extends AbstractGenerator {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(event).toString());
     }
-  }
-  
-  public String IssueActivityType(final IssueActivityType type) {
-    return _IssueActivityType(type);
-  }
-  
-  public String labelActivityType(final LabelActivityType type) {
-    return _labelActivityType(type);
   }
 }

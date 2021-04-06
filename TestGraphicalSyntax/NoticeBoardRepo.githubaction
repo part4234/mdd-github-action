@@ -89,7 +89,7 @@ Repository {
         					uses "actions/setup-java@v1"
         					with { "java-version": "11.0.4" }
     					},
-    					Step {
+    					Step x {
     						name "Publish artifact on GitHub Packages"
     						run { "mvn -B clean deploy -DskipTests" }
     						env { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" }
