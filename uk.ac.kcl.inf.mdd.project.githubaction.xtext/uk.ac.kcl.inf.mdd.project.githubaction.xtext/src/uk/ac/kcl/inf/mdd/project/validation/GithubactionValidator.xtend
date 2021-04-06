@@ -1,24 +1,21 @@
 package uk.ac.kcl.inf.mdd.project.validation
 
-import org.eclipse.emf.common.util.EList
-import org.eclipse.xtext.validation.Check
-
-import uk.ac.kcl.inf.mdd.project.githubaction.Repository;
-import uk.ac.kcl.inf.mdd.project.githubaction.Workflow;
-import uk.ac.kcl.inf.mdd.project.githubaction.Event;
-import uk.ac.kcl.inf.mdd.project.githubaction.Job;
-import uk.ac.kcl.inf.mdd.project.githubaction.Step;
-
-import uk.ac.kcl.inf.mdd.project.githubaction.*;
 import java.util.ArrayList
-import uk.ac.kcl.inf.mdd.project.typing.validation.GithubactionTypeSystemValidator
+import org.eclipse.xtext.validation.Check
+import uk.ac.kcl.inf.mdd.project.githubaction.Env
+import uk.ac.kcl.inf.mdd.project.githubaction.GithubactionPackage
+import uk.ac.kcl.inf.mdd.project.githubaction.Job
+import uk.ac.kcl.inf.mdd.project.githubaction.PushEvent
+import uk.ac.kcl.inf.mdd.project.githubaction.Repository
+import uk.ac.kcl.inf.mdd.project.githubaction.Step
+import uk.ac.kcl.inf.mdd.project.githubaction.Workflow
 
 /**
  * This class contains custom validation rules. 
  *
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
-class GithubactionValidator extends AbstractGithubactionValidator { //GithubactionTypeSystemValidator  {
+class GithubactionValidator extends AbstractGithubactionValidator {
 	
 	public ArrayList array = new ArrayList; 
 	//This checks for mis-spellings and case-sensitiveness
@@ -35,7 +32,7 @@ class GithubactionValidator extends AbstractGithubactionValidator { //Githubacti
 	def checkDuplicateNaming(Repository program) {
 		for (Workflow wfObj: program.workflows){
 			if (array.contains(wfObj)){
-				error('Name definiitons must be unique ', wfObj,
+				error('Name definitions must be unique ', wfObj,
 				GithubactionPackage.Literals.WORKFLOW__NAME, KEY_DEF_ERROR)
 			}	
 			array.add(wfObj);			
@@ -47,7 +44,7 @@ class GithubactionValidator extends AbstractGithubactionValidator { //Githubacti
 	def checkDuplicateNaming(Workflow wf) {
 		for (Job jbObj: wf.jobs){
 			if (array.contains(jbObj)){
-				error('Name definiitons must be unique ', jbObj,
+				error('Name definitions must be unique ', jbObj,
 				GithubactionPackage.Literals.JOB__NAME, KEY_DEF_ERROR)
 			}	
 			array.add(jbObj);			
@@ -59,7 +56,7 @@ class GithubactionValidator extends AbstractGithubactionValidator { //Githubacti
 	def checkDuplicateNaming(Job jobs) {
 		for (Step stepObj: jobs.steps){
 			if (array.contains(stepObj)){
-				error('Name definiitons must be unique', stepObj,
+				error('Name definitions must be unique', stepObj,
 				GithubactionPackage.Literals.STEP__NAME, KEY_DEF_ERROR)
 			}	
 			array.add(stepObj);			

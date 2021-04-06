@@ -15,7 +15,6 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Job;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 
 import uk.ac.kcl.inf.mdd.project.githubaction.*; 
-import org.eclipse.emf.common.util.EList
 
 //says deprecated but works :o
 

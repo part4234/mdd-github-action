@@ -44,7 +44,7 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
       {
         boolean _contains = this.array.contains(wfObj);
         if (_contains) {
-          this.error("Name definiitons must be unique ", wfObj, 
+          this.error("Name definitions must be unique ", wfObj, 
             GithubactionPackage.Literals.WORKFLOW__NAME, GithubactionValidator.KEY_DEF_ERROR);
         }
         this.array.add(wfObj);
@@ -60,7 +60,7 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
       {
         boolean _contains = this.array.contains(jbObj);
         if (_contains) {
-          this.error("Name definiitons must be unique ", jbObj, 
+          this.error("Name definitions must be unique ", jbObj, 
             GithubactionPackage.Literals.JOB__NAME, GithubactionValidator.KEY_DEF_ERROR);
         }
         this.array.add(jbObj);
@@ -76,7 +76,7 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
       {
         boolean _contains = this.array.contains(stepObj);
         if (_contains) {
-          this.error("Name definiitons must be unique", stepObj, 
+          this.error("Name definitions must be unique", stepObj, 
             GithubactionPackage.Literals.STEP__NAME, GithubactionValidator.KEY_DEF_ERROR);
         }
         this.array.add(stepObj);
