@@ -9,7 +9,8 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Event;
 import uk.ac.kcl.inf.mdd.project.githubaction.Job;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 
-import uk.ac.kcl.inf.mdd.project.githubaction.*; import java.util.ArrayList
+import uk.ac.kcl.inf.mdd.project.githubaction.*;
+import java.util.ArrayList
 import uk.ac.kcl.inf.mdd.project.typing.validation.GithubactionTypeSystemValidator
 
 /**
@@ -17,7 +18,7 @@ import uk.ac.kcl.inf.mdd.project.typing.validation.GithubactionTypeSystemValidat
  *
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
-class GithubactionValidator extends GithubactionTypeSystemValidator  {
+class GithubactionValidator extends AbstractGithubactionValidator { //GithubactionTypeSystemValidator  {
 	
 	public ArrayList array = new ArrayList; 
 	//This checks for mis-spellings and case-sensitiveness

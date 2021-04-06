@@ -11,7 +11,7 @@ import uk.ac.kcl.inf.mdd.project.githubaction.PushEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.Repository;
 import uk.ac.kcl.inf.mdd.project.githubaction.Step;
 import uk.ac.kcl.inf.mdd.project.githubaction.Workflow;
-import uk.ac.kcl.inf.mdd.project.typing.validation.GithubactionTypeSystemValidator;
+import uk.ac.kcl.inf.mdd.project.validation.AbstractGithubactionValidator;
 
 /**
  * This class contains custom validation rules.
@@ -19,7 +19,7 @@ import uk.ac.kcl.inf.mdd.project.typing.validation.GithubactionTypeSystemValidat
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 @SuppressWarnings("all")
-public class GithubactionValidator extends GithubactionTypeSystemValidator {
+public class GithubactionValidator extends AbstractGithubactionValidator {
   public ArrayList array = new ArrayList<Object>();
   
   public static final String INVALID_VARIABLE_NAME = "uk.ac.kcl.inf.mdd.project.githubaction.INVALID_VARIABLE_NAME";
