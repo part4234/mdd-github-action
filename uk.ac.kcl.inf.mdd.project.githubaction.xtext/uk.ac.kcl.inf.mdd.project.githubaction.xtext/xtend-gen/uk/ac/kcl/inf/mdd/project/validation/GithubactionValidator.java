@@ -30,6 +30,8 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
   
   public static final String ATTRIBUTE_REQUIRED = "uk.ac.kcl.inf.mdd.project.githubaction.ATTRIBUTE_REQUIRED";
   
+  public static final String CONFLICT_TRIGGER = "uk.ac.kcl.inf.mdd.project.githubaction.CONFLICT_TRIGGER";
+  
   public static final String WRONG_CASE_USAGE = "uk.ac.kcl.inf.mdd.project.githubaction.WRONG_CASE_USAGE";
   
   public static final String NOT_WELL_FORMED = "uk.ac.kcl.inf.mdd.project.githubaction.NOT_WELL_FORMED";
@@ -80,8 +82,8 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
     EList<Step> _steps = job.getSteps();
     for (final Step step : _steps) {
       String _name = step.getName();
-      boolean _notEquals = (!Objects.equal(_name, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_name != null);
+      if (_tripleNotEquals) {
         boolean _contains = this.cache.contains(step.getName());
         if (_contains) {
           this.error("Step IDs must be unique", step, 
@@ -190,6 +192,29 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
   }
   
   /**
+   * Check conflicting event triggers
+   */
+  @Check
+  public void checkEventConflict(final BranchEvent event) {
+    final boolean branchConflict = this.checkConflict(event.getBranches(), event.getBranchesIgnore());
+    final boolean tagConflict = this.checkConflict(event.getTags(), event.getTagsIgnore());
+    final boolean pathConflict = this.checkConflict(event.getPaths(), event.getPathsIgnore());
+    if (((branchConflict || tagConflict) || pathConflict)) {
+      this.error("Event trigger conflicted, workflow will never run", event, null, GithubactionValidator.CONFLICT_TRIGGER);
+    }
+  }
+  
+  public boolean checkConflict(final EList<?> list, final EList<?> ignoreList) {
+    if (((list.size() > 0) && (ignoreList.size() > 0))) {
+      final Function1<Object, Boolean> _function = (Object exp) -> {
+        return Boolean.valueOf(ignoreList.contains(exp));
+      };
+      return IterableExtensions.exists(list, _function);
+    }
+    return false;
+  }
+  
+  /**
    * Check case sensitivity
    */
   @Check
@@ -274,8 +299,7 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
   @Check
   public void checkWellFormedness(final BranchEvent event) {
     if (((((((event.getBranches().size() == 0) && (event.getBranchesIgnore().size() == 0)) && (event.getTags().size() == 0)) && (event.getTagsIgnore().size() == 0)) && (event.getPaths().size() == 0)) && (event.getPathsIgnore().size() == 0))) {
-      this.warning("Event should have at least one triggering criteria", event, 
-        null, GithubactionValidator.NOT_WELL_FORMED);
+      this.warning("Event should have at least one triggering criteria", event, null, GithubactionValidator.NOT_WELL_FORMED);
     }
   }
   

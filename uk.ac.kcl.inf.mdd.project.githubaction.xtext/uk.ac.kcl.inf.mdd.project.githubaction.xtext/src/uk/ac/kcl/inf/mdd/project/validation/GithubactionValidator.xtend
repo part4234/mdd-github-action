@@ -20,7 +20,8 @@ import uk.ac.kcl.inf.mdd.project.githubaction.Workflow
 class GithubactionValidator extends AbstractGithubactionValidator { 
 
 	public static val DUPLICATE_NAMING = 'uk.ac.kcl.inf.mdd.project.githubaction.DUPLICATE_NAMING'
-	public static val ATTRIBUTE_REQUIRED = 'uk.ac.kcl.inf.mdd.project.githubaction.ATTRIBUTE_REQUIRED'		
+	public static val ATTRIBUTE_REQUIRED = 'uk.ac.kcl.inf.mdd.project.githubaction.ATTRIBUTE_REQUIRED'
+	public static val CONFLICT_TRIGGER = 'uk.ac.kcl.inf.mdd.project.githubaction.CONFLICT_TRIGGER'
 	public static val WRONG_CASE_USAGE = 'uk.ac.kcl.inf.mdd.project.githubaction.WRONG_CASE_USAGE'
 	public static val NOT_WELL_FORMED = 'uk.ac.kcl.inf.mdd.project.githubaction.NOT_WELL_FORMED'
 	
@@ -61,7 +62,7 @@ class GithubactionValidator extends AbstractGithubactionValidator {
 	@Check
 	def checkDuplicateNaming(Job job) {
 		for (Step step: job.steps) {
-			if (step.name != null) {
+			if (step.name !== null) {
 				if (cache.contains(step.name)){
 					error('Step IDs must be unique', step,
 						GithubactionPackage.Literals.STEP__NAME, DUPLICATE_NAMING)
@@ -154,6 +155,28 @@ class GithubactionValidator extends AbstractGithubactionValidator {
 	}
 	
 	/*
+	 * Check conflicting event triggers
+	 */
+	
+	@Check
+	def checkEventConflict(BranchEvent event) {
+		val branchConflict = checkConflict(event.branches, event.branchesIgnore)
+		val tagConflict = checkConflict(event.tags, event.tagsIgnore)
+		val pathConflict = checkConflict(event.paths, event.pathsIgnore)
+
+		if (branchConflict || tagConflict || pathConflict) {
+			error('Event trigger conflicted, workflow will never run', event, null, CONFLICT_TRIGGER)
+		}
+	}
+	
+	def checkConflict(EList<?> list, EList<?> ignoreList) {
+		if (list.size > 0 && ignoreList.size > 0) {
+			return list.exists[exp | ignoreList.contains(exp)]
+		}
+		return false
+	}
+	
+	/*
 	 * Check case sensitivity
 	 */
 	
@@ -230,8 +253,7 @@ class GithubactionValidator extends AbstractGithubactionValidator {
 			&& event.tags.size == 0 && event.tagsIgnore.size == 0
 			&& event.paths.size == 0 && event.pathsIgnore.size == 0
 		) {
-			warning('Event should have at least one triggering criteria', event,
-				null, NOT_WELL_FORMED)
+			warning('Event should have at least one triggering criteria', event, null, NOT_WELL_FORMED)
 		}
 	}
 
