@@ -5,6 +5,7 @@ package uk.ac.kcl.inf.mdd.project.generator;
 
 import com.google.common.collect.Iterators;
 import java.util.Arrays;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import uk.ac.kcl.inf.mdd.project.githubaction.BranchEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.CreateEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.DeleteEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.DeploymentEvent;
@@ -66,46 +68,14 @@ public class GithubactionGenerator extends AbstractGenerator {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final Repository model = ((Repository) _head);
     fsa.generateFile(this.deriveStatsTargetFileNameFor(resource), this.doGenerateStats(model));
-    final String className = this.deriveClassNameFor(resource);
-    fsa.generateFile((className + ".java"), this.doGenerateClass(model, className));
+    final Consumer<Workflow> _function = (Workflow wf) -> {
+      fsa.generateFile(this.deriveYamlFileNameFor(wf), this.doGenerateWorkflow(wf));
+    };
+    model.getWorkflows().forEach(_function);
   }
   
   public String deriveStatsTargetFileNameFor(final Resource resource) {
-    return resource.getURI().appendFileExtension("txt").lastSegment();
-  }
-  
-  public String doGenerateStats(final Repository program) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Program contains:");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("- ");
-    int _size = IteratorExtensions.size(Iterators.<Repository>filter(program.eAllContents(), Repository.class));
-    _builder.append(_size);
-    _builder.append(" Repositories");
-    _builder.newLineIfNotEmpty();
-    _builder.append("- ");
-    int _size_1 = IteratorExtensions.size(Iterators.<Workflow>filter(program.eAllContents(), Workflow.class));
-    _builder.append(_size_1);
-    _builder.append(" Workflows");
-    _builder.newLineIfNotEmpty();
-    _builder.append("- ");
-    int _size_2 = IteratorExtensions.size(Iterators.<Event>filter(program.eAllContents(), Event.class));
-    _builder.append(_size_2);
-    _builder.append(" Events");
-    _builder.newLineIfNotEmpty();
-    _builder.append("- ");
-    int _size_3 = IteratorExtensions.size(Iterators.<Job>filter(program.eAllContents(), Job.class));
-    _builder.append(_size_3);
-    _builder.append(" Jobs");
-    _builder.newLineIfNotEmpty();
-    _builder.append("- ");
-    int _size_4 = IteratorExtensions.size(Iterators.<Step>filter(program.eAllContents(), Step.class));
-    _builder.append(_size_4);
-    _builder.append(" Steps");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    return _builder.toString();
+    return resource.getURI().appendFileExtension("stat.txt").lastSegment();
   }
   
   public String deriveClassNameFor(final Resource resource) {
@@ -118,10 +88,45 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _xblockexpression;
   }
   
-  /**
-   * Below are parseable dispatch mathos for all grammar types
-   */
-  public String doGenerateClass(final Repository program, final String className) {
+  public String deriveYamlFileNameFor(final Workflow wf) {
+    String _replace = wf.getName().toLowerCase().replace(" ", "-");
+    return (_replace + ".yaml");
+  }
+  
+  public String doGenerateStats(final Repository repo) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Program contains:");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("- ");
+    int _size = IteratorExtensions.size(Iterators.<Repository>filter(repo.eAllContents(), Repository.class));
+    _builder.append(_size);
+    _builder.append(" Repositories");
+    _builder.newLineIfNotEmpty();
+    _builder.append("- ");
+    int _size_1 = IteratorExtensions.size(Iterators.<Workflow>filter(repo.eAllContents(), Workflow.class));
+    _builder.append(_size_1);
+    _builder.append(" Workflows");
+    _builder.newLineIfNotEmpty();
+    _builder.append("- ");
+    int _size_2 = IteratorExtensions.size(Iterators.<Event>filter(repo.eAllContents(), Event.class));
+    _builder.append(_size_2);
+    _builder.append(" Events");
+    _builder.newLineIfNotEmpty();
+    _builder.append("- ");
+    int _size_3 = IteratorExtensions.size(Iterators.<Job>filter(repo.eAllContents(), Job.class));
+    _builder.append(_size_3);
+    _builder.append(" Jobs");
+    _builder.newLineIfNotEmpty();
+    _builder.append("- ");
+    int _size_4 = IteratorExtensions.size(Iterators.<Step>filter(repo.eAllContents(), Step.class));
+    _builder.append(_size_4);
+    _builder.append(" Steps");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  public String doGenerateClass(final Repository repo, final String className) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.io.FileWriter;");
     _builder.newLine();
@@ -146,7 +151,7 @@ public class GithubactionGenerator extends AbstractGenerator {
       GithubactionGenerator.Environment _environment = new GithubactionGenerator.Environment();
       return this.generateWorkflow(it, _environment);
     };
-    String _join = IterableExtensions.join(ListExtensions.<Workflow, String>map(program.getWorkflows(), _function), "\n");
+    String _join = IterableExtensions.join(ListExtensions.<Workflow, String>map(repo.getWorkflows(), _function), "\n");
     _builder.append(_join, "        ");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
@@ -167,7 +172,7 @@ public class GithubactionGenerator extends AbstractGenerator {
     _builder.append("if (parsedData.contains(\"branchesIgnore: master\")){");
     _builder.newLine();
     _builder.append("             ");
-    _builder.append("//generate feature and master file");
+    _builder.append("// generate feature and master file");
     _builder.newLine();
     _builder.append("             ");
     _builder.append("createAndWriteFile(parsedData.substring(0,parsedData.indexOf(\"name: Master Branch\")-1),\"featureBranch.yaml\");");
@@ -224,6 +229,14 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
+  public String doGenerateWorkflow(final Workflow wf) {
+    GithubactionGenerator.Environment _environment = new GithubactionGenerator.Environment();
+    return this.generateWorkflow(wf, _environment);
+  }
+  
+  /**
+   * Generator functions
+   */
   public String generateWorkflow(final Workflow workflow, final GithubactionGenerator.Environment env) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("name: ");
@@ -237,615 +250,507 @@ public class GithubactionGenerator extends AbstractGenerator {
       if (_not) {
         _builder.append("on:");
         _builder.newLine();
-        _builder.newLine();
-        {
-          EList<Event> _on = workflow.getOn();
-          for(final Event event : _on) {
-            _builder.newLine();
-            String _generateEvent = this.generateEvent(event);
-            _builder.append(_generateEvent);
-            _builder.newLineIfNotEmpty();
-          }
-        }
+        _builder.append("  ");
+        final Function1<Event, String> _function = (Event it) -> {
+          return this.generateEvent(it);
+        };
+        String _join = IterableExtensions.join(ListExtensions.<Event, String>map(workflow.getOn(), _function), "");
+        _builder.append(_join, "  ");
+        _builder.newLineIfNotEmpty();
       }
     }
+    _builder.newLine();
     {
       boolean _isEmpty_1 = workflow.getJobs().isEmpty();
       boolean _not_1 = (!_isEmpty_1);
       if (_not_1) {
         _builder.append("jobs:");
         _builder.newLine();
-        {
-          EList<Job> _jobs = workflow.getJobs();
-          for(final Job job : _jobs) {
-            String _generateJob = this.generateJob(job);
-            _builder.append(_generateJob);
-            _builder.newLineIfNotEmpty();
-          }
-        }
+        _builder.append("  ");
+        final Function1<Job, String> _function_1 = (Job it) -> {
+          return this.generateJob(it);
+        };
+        String _join_1 = IterableExtensions.join(ListExtensions.<Job, String>map(workflow.getJobs(), _function_1), "\n");
+        _builder.append(_join_1, "  ");
+        _builder.newLineIfNotEmpty();
       }
     }
     return _builder.toString();
   }
   
+  protected String _generateEvent(final ScheduleEvent event) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("schedule:");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("-cron: \"");
+    String _xifexpression = null;
+    String _minute = event.getMinute();
+    boolean _tripleNotEquals = (_minute != null);
+    if (_tripleNotEquals) {
+      _xifexpression = event.getMinute();
+    } else {
+      _xifexpression = "*";
+    }
+    String _plus = (_xifexpression + " ");
+    String _xifexpression_1 = null;
+    String _hour = event.getHour();
+    boolean _tripleNotEquals_1 = (_hour != null);
+    if (_tripleNotEquals_1) {
+      _xifexpression_1 = event.getHour();
+    } else {
+      _xifexpression_1 = "*";
+    }
+    String _plus_1 = (_plus + _xifexpression_1);
+    String _plus_2 = (_plus_1 + " ");
+    String _xifexpression_2 = null;
+    String _day = event.getDay();
+    boolean _tripleNotEquals_2 = (_day != null);
+    if (_tripleNotEquals_2) {
+      _xifexpression_2 = event.getDay();
+    } else {
+      _xifexpression_2 = "*";
+    }
+    String _plus_3 = (_plus_2 + _xifexpression_2);
+    String _plus_4 = (_plus_3 + " ");
+    String _xifexpression_3 = null;
+    String _month = event.getMonth();
+    boolean _tripleNotEquals_3 = (_month != null);
+    if (_tripleNotEquals_3) {
+      _xifexpression_3 = event.getMonth();
+    } else {
+      _xifexpression_3 = "*";
+    }
+    String _plus_5 = (_plus_4 + _xifexpression_3);
+    String _plus_6 = (_plus_5 + " ");
+    String _xifexpression_4 = null;
+    String _dayOfWeek = event.getDayOfWeek();
+    boolean _tripleNotEquals_4 = (_dayOfWeek != null);
+    if (_tripleNotEquals_4) {
+      _xifexpression_4 = event.getDayOfWeek();
+    } else {
+      _xifexpression_4 = "*";
+    }
+    String _plus_7 = (_plus_6 + _xifexpression_4);
+    _builder.append(_plus_7, "  ");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final RepositoryDispatchEvent event) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("repository_dispatch:");
+    _builder.newLine();
+    {
+      boolean _isEmpty = event.getEventTypes().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder.append("  types: [");
+        String _join = IterableExtensions.join(event.getEventTypes(), ", ");
+        _builder.append(_join);
+        _builder.append("]");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected String _generateEvent(final WorkflowDispatchEvent event) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("workflow_dispatch:");
+    _builder.newLine();
+    {
+      boolean _isEmpty = event.getInputs().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder.append("  ");
+        final Function1<Input, String> _function = (Input it) -> {
+          return this.generateInput(it);
+        };
+        String _join = IterableExtensions.join(ListExtensions.<Input, String>map(event.getInputs(), _function), "\n");
+        _builder.append(_join);
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
   protected String _generateEvent(final PushEvent event) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t");
     _builder.append("push:");
     _builder.newLine();
-    CharSequence _xifexpression = null;
-    if (((!event.getBranches().isEmpty()) && (event.getBranches().get(0) != null))) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("\t");
-      _builder_1.append("branches: [");
-      String _get = event.getBranches().get(0);
-      _builder_1.append(_get, "\t");
-      _builder_1.append("]");
-      _xifexpression = _builder_1;
-    }
-    _builder.append(_xifexpression);
-    _builder.newLineIfNotEmpty();
-    CharSequence _xifexpression_1 = null;
-    if (((!event.getTags().isEmpty()) && (event.getTags().get(1) != null))) {
-      StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append(" \t");
-      _builder_2.append("tags: ");
-      String _get_1 = event.getTags().get(0);
-      _builder_2.append(_get_1, " \t");
-      _xifexpression_1 = _builder_2;
-    }
-    _builder.append(_xifexpression_1);
-    _builder.newLineIfNotEmpty();
-    CharSequence _xifexpression_2 = null;
-    if (((!event.getBranchesIgnore().isEmpty()) && (event.getBranchesIgnore().get(1) != null))) {
-      StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append(" \t");
-      _builder_3.append("branchesIgnore: ");
-      String _get_2 = event.getBranchesIgnore().get(0);
-      _builder_3.append(_get_2, " \t");
-      _xifexpression_2 = _builder_3;
-    }
-    _builder.append(_xifexpression_2);
-    _builder.newLineIfNotEmpty();
-    CharSequence _xifexpression_3 = null;
-    if (((!event.getTagsIgnore().isEmpty()) && (event.getTagsIgnore().get(1) != null))) {
-      StringConcatenation _builder_4 = new StringConcatenation();
-      _builder_4.append(" \t");
-      _builder_4.append("tagsIgnore: ");
-      String _get_3 = event.getTagsIgnore().get(0);
-      _builder_4.append(_get_3, " \t");
-      _xifexpression_3 = _builder_4;
-    }
-    _builder.append(_xifexpression_3);
-    _builder.newLineIfNotEmpty();
-    CharSequence _xifexpression_4 = null;
-    if (((!event.getPaths().isEmpty()) && (event.getPaths().get(1) != null))) {
-      StringConcatenation _builder_5 = new StringConcatenation();
-      _builder_5.append(" \t");
-      _builder_5.append("paths: ");
-      String _get_4 = event.getPaths().get(0);
-      _builder_5.append(_get_4, " \t");
-      _xifexpression_4 = _builder_5;
-    }
-    _builder.append(_xifexpression_4);
-    _builder.newLineIfNotEmpty();
-    CharSequence _xifexpression_5 = null;
-    if (((!event.getPathsIgnore().isEmpty()) && (event.getPathsIgnore().get(1) != null))) {
-      StringConcatenation _builder_6 = new StringConcatenation();
-      _builder_6.append(" \t");
-      _builder_6.append("pathsIgnore: ");
-      String _get_5 = event.getPathsIgnore().get(0);
-      _builder_6.append(_get_5, " \t");
-      _xifexpression_5 = _builder_6;
-    }
-    _builder.append(_xifexpression_5);
-    _builder.append("\t");
+    _builder.append("  ");
+    String _generateEventTriggers = this.generateEventTriggers(((BranchEvent) event));
+    _builder.append(_generateEventTriggers, "  ");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
   
   protected String _generateEvent(final PullRequestEvent event) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t");
-    _builder.append("pull:");
+    _builder.append("pull_request:");
     _builder.newLine();
-    CharSequence _xifexpression = null;
-    if (((!event.getBranches().isEmpty()) && (event.getBranches().get(0) != null))) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("\t");
-      _builder_1.append("branches: [");
-      String _get = event.getBranches().get(0);
-      _builder_1.append(_get, "\t");
-      _builder_1.append("]");
-      _xifexpression = _builder_1;
-    }
-    _builder.append(_xifexpression);
-    _builder.append(" ");
-    _builder.newLineIfNotEmpty();
-    CharSequence _xifexpression_1 = null;
-    if (((!event.getTags().isEmpty()) && (event.getTags().get(1) != null))) {
-      StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append(" \t");
-      _builder_2.append("tags: ");
-      String _get_1 = event.getTags().get(0);
-      _builder_2.append(_get_1, " \t");
-      _xifexpression_1 = _builder_2;
-    }
-    _builder.append(_xifexpression_1);
-    _builder.newLineIfNotEmpty();
-    CharSequence _xifexpression_2 = null;
-    if (((!event.getBranchesIgnore().isEmpty()) && (event.getBranchesIgnore().get(1) != null))) {
-      StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append(" \t");
-      _builder_3.append("branchesIgnore: ");
-      String _get_2 = event.getBranchesIgnore().get(0);
-      _builder_3.append(_get_2, " \t");
-      _xifexpression_2 = _builder_3;
-    }
-    _builder.append(_xifexpression_2);
-    _builder.newLineIfNotEmpty();
-    CharSequence _xifexpression_3 = null;
-    if (((!event.getTagsIgnore().isEmpty()) && (event.getTagsIgnore().get(1) != null))) {
-      StringConcatenation _builder_4 = new StringConcatenation();
-      _builder_4.append(" \t");
-      _builder_4.append("tagsIgnore: ");
-      String _get_3 = event.getTagsIgnore().get(0);
-      _builder_4.append(_get_3, " \t");
-      _xifexpression_3 = _builder_4;
-    }
-    _builder.append(_xifexpression_3);
-    _builder.newLineIfNotEmpty();
-    CharSequence _xifexpression_4 = null;
-    if (((!event.getPaths().isEmpty()) && (event.getPaths().get(1) != null))) {
-      StringConcatenation _builder_5 = new StringConcatenation();
-      _builder_5.append(" \t");
-      _builder_5.append("paths: ");
-      String _get_4 = event.getPaths().get(0);
-      _builder_5.append(_get_4, " \t");
-      _xifexpression_4 = _builder_5;
-    }
-    _builder.append(_xifexpression_4);
-    _builder.newLineIfNotEmpty();
-    CharSequence _xifexpression_5 = null;
-    if (((!event.getPathsIgnore().isEmpty()) && (event.getPathsIgnore().get(1) != null))) {
-      StringConcatenation _builder_6 = new StringConcatenation();
-      _builder_6.append(" \t");
-      _builder_6.append("pathsIgnore: ");
-      String _get_5 = event.getPathsIgnore().get(0);
-      _builder_6.append(_get_5, " \t");
-      _xifexpression_5 = _builder_6;
-    }
-    _builder.append(_xifexpression_5);
-    _builder.append("\t");
-    _builder.newLineIfNotEmpty();
-    return _builder.toString();
-  }
-  
-  protected String _generateEvent(final ScheduleEvent event) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t");
-    _builder.append("schedule:\t");
-    _builder.newLine();
-    CharSequence _xifexpression = null;
-    String _hour = event.getHour();
-    boolean _tripleNotEquals = (_hour != null);
-    if (_tripleNotEquals) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("\t ");
-      _builder_1.append("-cron: ");
-      String _minute = event.getMinute();
-      _builder_1.append(_minute, "\t ");
-      _builder_1.append(" ");
-      String _hour_1 = event.getHour();
-      _builder_1.append(_hour_1, "\t ");
-      _builder_1.append(" ");
-      String _day = event.getDay();
-      _builder_1.append(_day, "\t ");
-      _builder_1.append(" ");
-      String _month = event.getMonth();
-      _builder_1.append(_month, "\t ");
-      _builder_1.append(" ");
-      String _dayOfWeek = event.getDayOfWeek();
-      _builder_1.append(_dayOfWeek, "\t ");
-      _xifexpression = _builder_1;
-    }
-    _builder.append(_xifexpression);
-    _builder.append(" ");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    return _builder.toString();
-  }
-  
-  protected String _generateEvent(final WorkflowDispatchEvent event) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t");
-    _builder.append("workflow_dispatch:");
-    _builder.newLine();
-    CharSequence _xifexpression = null;
-    Input _get = event.getInputs().get(0);
-    boolean _tripleNotEquals = (_get != null);
-    if (_tripleNotEquals) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("\t ");
-      _builder_1.append("inputs: ");
-      Input _get_1 = event.getInputs().get(0);
-      _builder_1.append(_get_1, "\t ");
-      _builder_1.append(" ");
-      Input _get_2 = event.getInputs().get(1);
-      _builder_1.append(_get_2, "\t ");
-      _xifexpression = _builder_1;
-    }
-    _builder.append(_xifexpression);
-    _builder.append(" \t\t\t");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    return _builder.toString();
-  }
-  
-  protected String _generateEvent(final RepositoryDispatchEvent event) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t");
-    _builder.append("repository_dispatch:");
-    _builder.newLine();
-    CharSequence _xifexpression = null;
-    String _get = event.getEventTypes().get(0);
-    boolean _tripleNotEquals = (_get != null);
-    if (_tripleNotEquals) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("\t ");
-      _builder_1.append("types: [");
-      String _get_1 = event.getEventTypes().get(0);
-      _builder_1.append(_get_1, "\t ");
-      _builder_1.append(",");
-      String _get_2 = event.getEventTypes().get(1);
-      _builder_1.append(_get_2, "\t ");
-      _builder_1.append("]");
-      _xifexpression = _builder_1;
-    }
-    _builder.append(_xifexpression);
-    _builder.append(" \t");
+    _builder.append("  ");
+    String _generateEventTriggers = this.generateEventTriggers(((BranchEvent) event));
+    _builder.append(_generateEventTriggers, "  ");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
   
   protected String _generateEvent(final CreateEvent event) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("create:");
+    _builder.newLine();
     return _builder.toString();
   }
   
   protected String _generateEvent(final DeleteEvent event) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("delete:");
+    _builder.newLine();
     return _builder.toString();
   }
   
   protected String _generateEvent(final DeploymentEvent event) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("deployment:");
+    _builder.newLine();
     return _builder.toString();
   }
   
   protected String _generateEvent(final IssueEvent event) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("issues:");
+    _builder.newLine();
     {
       boolean _isEmpty = event.getActivityTypes().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        {
-          EList<IssueActivityType> _activityTypes = event.getActivityTypes();
-          for(final IssueActivityType type : _activityTypes) {
-            _builder.append("types: [");
-            String _IssueActivityType = this.IssueActivityType(type);
-            _builder.append(_IssueActivityType);
-            _builder.append("]");
-            _builder.newLineIfNotEmpty();
-          }
-        }
+        _builder.append("  types: [");
+        final Function1<IssueActivityType, String> _function = (IssueActivityType it) -> {
+          return it.toString();
+        };
+        String _join = IterableExtensions.join(ListExtensions.<IssueActivityType, String>map(event.getActivityTypes(), _function), ", ");
+        _builder.append(_join);
+        _builder.append("]");
       }
     }
+    _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
   
   protected String _generateEvent(final LabelEvent event) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("label:");
+    _builder.newLine();
     {
       boolean _isEmpty = event.getActivityTypes().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        {
-          EList<LabelActivityType> _activityTypes = event.getActivityTypes();
-          for(final LabelActivityType type : _activityTypes) {
-            _builder.append("types: [");
-            String _labelActivityType = this.labelActivityType(type);
-            _builder.append(_labelActivityType);
-            _builder.append("]");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
-    return _builder.toString();
-  }
-  
-  public String IssueActivityType(final IssueActivityType type) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      if ((type == IssueActivityType.OPENED)) {
-        _builder.append(" ");
-        _builder.append(IssueActivityType.OPENED);
-        _builder.append(", ");
+        _builder.append("  types: [");
+        final Function1<LabelActivityType, String> _function = (LabelActivityType it) -> {
+          return it.toString();
+        };
+        String _join = IterableExtensions.join(ListExtensions.<LabelActivityType, String>map(event.getActivityTypes(), _function), ", ");
+        _builder.append(_join);
+        _builder.append("]");
       }
     }
     _builder.newLineIfNotEmpty();
-    {
-      if ((type == IssueActivityType.CLOSED)) {
-        _builder.append(" ");
-        _builder.append(IssueActivityType.CLOSED);
-        _builder.append(", ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    {
-      if ((type == IssueActivityType.DELETED)) {
-        _builder.append(" ");
-        _builder.append(IssueActivityType.DELETED);
-        _builder.append(" ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    {
-      if ((type == IssueActivityType.EDITED)) {
-        _builder.append(" ");
-        _builder.append(IssueActivityType.EDITED);
-        _builder.append(", ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    {
-      if ((type == IssueActivityType.DELETED)) {
-        _builder.append(" ");
-        _builder.append(IssueActivityType.DELETED);
-        _builder.append(", ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    {
-      if ((type == IssueActivityType.TRANSFERRED)) {
-        _builder.append(" ");
-        _builder.append(IssueActivityType.TRANSFERRED);
-        _builder.append(", ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    {
-      if ((type == IssueActivityType.ASSIGNED)) {
-        _builder.append(" ");
-        _builder.append(IssueActivityType.ASSIGNED);
-        _builder.append(", ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    {
-      if ((type == IssueActivityType.UNASSIGNED)) {
-        _builder.append(" ");
-        _builder.append(IssueActivityType.UNASSIGNED);
-        _builder.append(", ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    {
-      if ((type == IssueActivityType.LOCKED)) {
-        _builder.append(" ");
-        _builder.append(IssueActivityType.LOCKED);
-        _builder.append(", ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    {
-      if ((type == IssueActivityType.UNLOCKED)) {
-        _builder.append(" ");
-        _builder.append(IssueActivityType.UNLOCKED);
-        _builder.append(", ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    {
-      if ((type == IssueActivityType.REOPENED)) {
-        _builder.append(" ");
-        _builder.append(IssueActivityType.REOPENED);
-        _builder.append(" ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    return _builder.toString();
-  }
-  
-  public String labelActivityType(final LabelActivityType type) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      if ((type == LabelActivityType.CREATED)) {
-        _builder.append("  ");
-        _builder.append(LabelActivityType.CREATED);
-        _builder.append(", ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    {
-      if ((type == LabelActivityType.EDITED)) {
-        _builder.append(" ");
-        _builder.append(LabelActivityType.EDITED);
-        _builder.append(", ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    {
-      if ((type == LabelActivityType.DELETED)) {
-        _builder.append(" ");
-        _builder.append(LabelActivityType.DELETED);
-        _builder.append(" ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
     return _builder.toString();
   }
   
   public String generateJob(final Job job) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t");
     String _name = job.getName();
-    _builder.append(_name, "\t");
+    _builder.append(_name);
     _builder.append(":");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("name: ");
-    String _string = job.getJobName().toString();
-    _builder.append(_string, "\t\t");
+    {
+      String _jobName = job.getJobName();
+      boolean _tripleNotEquals = (_jobName != null);
+      if (_tripleNotEquals) {
+        _builder.append("  name: ");
+        String _jobName_1 = job.getJobName();
+        _builder.append(_jobName_1);
+      }
+    }
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("runsOn: ");
-    String _string_1 = job.getRunsOn().toString();
-    _builder.append(_string_1, "\t");
+    {
+      String _runsOn = job.getRunsOn();
+      boolean _tripleNotEquals_1 = (_runsOn != null);
+      if (_tripleNotEquals_1) {
+        _builder.append("  runsOn: ");
+        String _runsOn_1 = job.getRunsOn();
+        _builder.append(_runsOn_1);
+      }
+    }
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
     {
       boolean _isEmpty = job.getNeeds().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        _builder.append("needs: [");
-        String _substring = job.getNeeds().get(0).toString().substring(147, 152);
-        _builder.append(_substring, "\t");
-        _builder.append(",");
-        String _substring_1 = job.getNeeds().get(1).toString().substring(147, 153);
-        _builder.append(_substring_1, "\t");
+        _builder.append("  needs: [");
+        final Function1<Job, String> _function = (Job j) -> {
+          return j.getName();
+        };
+        String _join = IterableExtensions.join(ListExtensions.<Job, String>map(job.getNeeds(), _function), ", ");
+        _builder.append(_join);
         _builder.append("]");
       }
     }
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
     {
       boolean _isEmpty_1 = job.getEnv().isEmpty();
       boolean _not_1 = (!_isEmpty_1);
       if (_not_1) {
-        _builder.append("\tenv:");
+        _builder.append("  env:");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("\t");
-        {
-          EList<Env> _env = job.getEnv();
-          for(final Env input : _env) {
-            String _name_1 = input.getName();
-            _builder.append(_name_1, "\t\t");
-            _builder.append(": ");
-            String _value = input.getValue();
-            _builder.append(_value, "\t\t");
-          }
-        }
+        _builder.append("    ");
+        final Function1<Env, String> _function_1 = (Env it) -> {
+          return this.generateEnv(it);
+        };
+        String _join_1 = IterableExtensions.join(ListExtensions.<Env, String>map(job.getEnv(), _function_1), "\n");
+        _builder.append(_join_1, "    ");
+        _builder.newLineIfNotEmpty();
       }
     }
-    _builder.newLineIfNotEmpty();
     {
       boolean _isEmpty_2 = job.getSteps().isEmpty();
       boolean _not_2 = (!_isEmpty_2);
       if (_not_2) {
-        _builder.append("\t");
-        _builder.append("steps:");
-        _builder.newLine();
-        {
-          EList<Step> _steps = job.getSteps();
-          for(final Step step : _steps) {
-            String _generateStepsType = this.generateStepsType(step);
-            _builder.append(_generateStepsType);
-            _builder.newLineIfNotEmpty();
-          }
-        }
+        _builder.append("  steps:");
+        _builder.newLineIfNotEmpty();
+        _builder.append("    ");
+        String _generateStepList = this.generateStepList(job.getSteps());
+        _builder.append(_generateStepList, "    ");
+        _builder.newLineIfNotEmpty();
       }
     }
     return _builder.toString();
   }
   
-  public String generateStepsType(final Step step) {
+  public String generateStepList(final EList<Step> steps) {
+    final Function1<Step, String> _function = (Step it) -> {
+      return this.generateStep(it);
+    };
+    final Function1<String, Boolean> _function_1 = (String s) -> {
+      int _length = s.length();
+      return Boolean.valueOf((_length > 2));
+    };
+    final Function1<String, String> _function_2 = (String s) -> {
+      String _substring = s.substring(2);
+      return ("- " + _substring);
+    };
+    return IterableExtensions.join(IterableExtensions.<String, String>map(IterableExtensions.<String>filter(ListExtensions.<Step, String>map(steps, _function), _function_1), _function_2), "");
+  }
+  
+  public String generateStep(final Step step) {
     StringConcatenation _builder = new StringConcatenation();
     {
       String _stepName = step.getStepName();
       boolean _tripleNotEquals = (_stepName != null);
       if (_tripleNotEquals) {
-        _builder.append("\t\t- name: ");
+        _builder.append("  name: ");
         String _stepName_1 = step.getStepName();
         _builder.append(_stepName_1);
       }
     }
     _builder.newLineIfNotEmpty();
     {
-      if (((step.getStepName() == null) && (step.getUses() != null))) {
-        _builder.append("\t\t- uses: ");
-        String _string = step.getUses().toString();
-        _builder.append(_string);
-        _builder.newLineIfNotEmpty();
-      } else {
-        String _uses = step.getUses();
-        boolean _tripleNotEquals_1 = (_uses != null);
-        if (_tripleNotEquals_1) {
-          _builder.append("\t\tuses: ");
-          String _string_1 = step.getUses().toString();
-          _builder.append(_string_1);
-        }
+      String _uses = step.getUses();
+      boolean _tripleNotEquals_1 = (_uses != null);
+      if (_tripleNotEquals_1) {
+        _builder.append("  uses: ");
+        String _uses_1 = step.getUses();
+        _builder.append(_uses_1);
       }
     }
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
     {
       boolean _isEmpty = step.getWith().isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        _builder.append("\t\twith:");
+        _builder.append("  with:");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        {
-          EList<InputParameter> _with = step.getWith();
-          for(final InputParameter input : _with) {
-            String _name = input.getName();
-            _builder.append(_name, "\t");
-            _builder.append(":");
-            String _value = input.getValue();
-            _builder.append(_value, "\t");
-          }
-        }
+        _builder.append("    ");
+        final Function1<InputParameter, String> _function = (InputParameter it) -> {
+          return this.generateInputParameter(it);
+        };
+        String _join = IterableExtensions.join(ListExtensions.<InputParameter, String>map(step.getWith(), _function), "\n");
+        _builder.append(_join, "    ");
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      boolean _isEmpty_1 = step.getRun().isEmpty();
+      int _size = step.getRun().size();
+      boolean _equals = (_size == 1);
+      if (_equals) {
+        _builder.append("  run: ");
+        String _join_1 = IterableExtensions.join(step.getRun(), "\n");
+        _builder.append(_join_1);
+        _builder.newLineIfNotEmpty();
+      } else {
+        int _size_1 = step.getRun().size();
+        boolean _greaterThan = (_size_1 > 1);
+        if (_greaterThan) {
+          _builder.append("  run: |");
+          _builder.newLineIfNotEmpty();
+          _builder.append("    ");
+          String _join_2 = IterableExtensions.join(step.getRun(), "\n");
+          _builder.append(_join_2, "    ");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+    }
+    {
+      boolean _isEmpty_1 = step.getEnv().isEmpty();
       boolean _not_1 = (!_isEmpty_1);
       if (_not_1) {
-        _builder.append("\t\trun:  ");
-        {
-          EList<String> _run = step.getRun();
-          for(final String line : _run) {
-            _builder.append(line);
-          }
-        }
-        _builder.append(" ");
+        _builder.append("  env:");
+        _builder.newLineIfNotEmpty();
+        _builder.append("    ");
+        final Function1<Env, String> _function_1 = (Env it) -> {
+          return this.generateEnv(it);
+        };
+        String _join_3 = IterableExtensions.join(ListExtensions.<Env, String>map(step.getEnv(), _function_1), "\n");
+        _builder.append(_join_3, "    ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder.toString();
+  }
+  
+  public String generateEnv(final Env env) {
+    String _name = env.getName();
+    String _plus = (_name + ": ");
+    String _value = env.getValue();
+    return (_plus + _value);
+  }
+  
+  public String generateInputParameter(final InputParameter p) {
+    String _name = p.getName();
+    String _plus = (_name + ": ");
+    String _value = p.getValue();
+    return (_plus + _value);
+  }
+  
+  public String generateInput(final Input input) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _name = input.getName();
+    _builder.append(_name);
+    _builder.append(":");
+    _builder.newLineIfNotEmpty();
+    {
+      String _description = input.getDescription();
+      boolean _tripleNotEquals = (_description != null);
+      if (_tripleNotEquals) {
+        _builder.append("  description: ");
+        String _description_1 = input.getDescription();
+        _builder.append(_description_1);
       }
     }
     _builder.newLineIfNotEmpty();
+    _builder.append("required: ");
+    boolean _isRequired = input.isRequired();
+    _builder.append(_isRequired);
+    _builder.newLineIfNotEmpty();
     {
-      boolean _isEmpty_2 = step.getEnv().isEmpty();
-      boolean _not_2 = (!_isEmpty_2);
-      if (_not_2) {
-        _builder.append("\t\tenv: ");
-        {
-          EList<Env> _env = step.getEnv();
-          for(final Env input_1 : _env) {
-            String _name_1 = input_1.getName();
-            _builder.append(_name_1);
-            _builder.append(":");
-            String _value_1 = input_1.getValue();
-            _builder.append(_value_1);
-          }
-        }
+      String _default = input.getDefault();
+      boolean _tripleNotEquals_1 = (_default != null);
+      if (_tripleNotEquals_1) {
+        _builder.append("  default: ");
+        String _default_1 = input.getDefault();
+        _builder.append(_default_1);
       }
     }
     _builder.newLineIfNotEmpty();
     return _builder.toString();
+  }
+  
+  public String generateEventTriggers(final BranchEvent event) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isEmpty = event.getBranches().isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder.append("branches:");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        String _generateStringArray = this.generateStringArray(event.getBranches());
+        _builder.append(_generateStringArray, "  ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _isEmpty_1 = event.getTags().isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      if (_not_1) {
+        _builder.append("tags:");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        String _generateStringArray_1 = this.generateStringArray(event.getTags());
+        _builder.append(_generateStringArray_1, "  ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _isEmpty_2 = event.getBranchesIgnore().isEmpty();
+      boolean _not_2 = (!_isEmpty_2);
+      if (_not_2) {
+        _builder.append("branchesIgnore:");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        String _generateStringArray_2 = this.generateStringArray(event.getBranchesIgnore());
+        _builder.append(_generateStringArray_2, "  ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _isEmpty_3 = event.getTagsIgnore().isEmpty();
+      boolean _not_3 = (!_isEmpty_3);
+      if (_not_3) {
+        _builder.append("tagsIgnore:");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        String _generateStringArray_3 = this.generateStringArray(event.getTagsIgnore());
+        _builder.append(_generateStringArray_3, "  ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _isEmpty_4 = event.getPaths().isEmpty();
+      boolean _not_4 = (!_isEmpty_4);
+      if (_not_4) {
+        _builder.append("paths:");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        String _generateStringArray_4 = this.generateStringArray(event.getPaths());
+        _builder.append(_generateStringArray_4, "  ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _isEmpty_5 = event.getPathsIgnore().isEmpty();
+      boolean _not_5 = (!_isEmpty_5);
+      if (_not_5) {
+        _builder.append("pathsIgnore:");
+        _builder.newLineIfNotEmpty();
+        _builder.append("  ");
+        String _generateStringArray_5 = this.generateStringArray(event.getPathsIgnore());
+        _builder.append(_generateStringArray_5, "  ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder.toString();
+  }
+  
+  public String generateStringArray(final EList<String> list) {
+    final Function1<String, String> _function = (String s) -> {
+      return ("- " + s);
+    };
+    return IterableExtensions.join(ListExtensions.<String, String>map(list, _function), "\n");
   }
   
   public String generateEvent(final Event event) {

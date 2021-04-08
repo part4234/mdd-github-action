@@ -3,18 +3,18 @@
  */
 package uk.ac.kcl.inf.mdd.project.generator
 
+import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import uk.ac.kcl.inf.mdd.project.githubaction.BranchEvent
 import uk.ac.kcl.inf.mdd.project.githubaction.CreateEvent
 import uk.ac.kcl.inf.mdd.project.githubaction.DeleteEvent
 import uk.ac.kcl.inf.mdd.project.githubaction.DeploymentEvent
 import uk.ac.kcl.inf.mdd.project.githubaction.Event
-import uk.ac.kcl.inf.mdd.project.githubaction.IssueActivityType
 import uk.ac.kcl.inf.mdd.project.githubaction.IssueEvent
 import uk.ac.kcl.inf.mdd.project.githubaction.Job
-import uk.ac.kcl.inf.mdd.project.githubaction.LabelActivityType
 import uk.ac.kcl.inf.mdd.project.githubaction.LabelEvent
 import uk.ac.kcl.inf.mdd.project.githubaction.PullRequestEvent
 import uk.ac.kcl.inf.mdd.project.githubaction.PushEvent
@@ -24,6 +24,9 @@ import uk.ac.kcl.inf.mdd.project.githubaction.ScheduleEvent
 import uk.ac.kcl.inf.mdd.project.githubaction.Step
 import uk.ac.kcl.inf.mdd.project.githubaction.Workflow
 import uk.ac.kcl.inf.mdd.project.githubaction.WorkflowDispatchEvent
+import uk.ac.kcl.inf.mdd.project.githubaction.Input
+import uk.ac.kcl.inf.mdd.project.githubaction.Env
+import uk.ac.kcl.inf.mdd.project.githubaction.InputParameter
 
 /**
  * Generates code from your model files on save.
@@ -31,44 +34,52 @@ import uk.ac.kcl.inf.mdd.project.githubaction.WorkflowDispatchEvent
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 class GithubactionGenerator extends AbstractGenerator {
+	
+	private static class Environment {
+		var int counter = 0
+		def getFreshVarName() '''i_«counter++»'''
+		def exit() { counter-- }
+	}
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+		// generate statistics text file
 		val model = resource.contents.head as Repository
-		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats ) //-- To be added later for file generation
+		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats )
 		
-		val className = resource.deriveClassNameFor
-		fsa.generateFile(className +".java", model.doGenerateClass(className))
+		// generate java file
+//		 val className = resource.deriveClassNameFor
+//		 fsa.generateFile(className +".java", model.doGenerateClass(className))
 		
-		//split file using the link shown
+		// generate yaml file
+		model.workflows.forEach[wf | 
+			fsa.generateFile(wf.deriveYamlFileNameFor, wf.doGenerateWorkflow)
+		]
 	}
-	
 	
 	def deriveStatsTargetFileNameFor(Resource resource) {
-		resource.URI.appendFileExtension('txt').lastSegment
+		resource.URI.appendFileExtension('stat.txt').lastSegment
 	}
-	
-
-	def String doGenerateStats(Repository program) '''
-		Program contains:
-		
-		- «program.eAllContents.filter(Repository).size» Repositories
-		- «program.eAllContents.filter(Workflow).size» Workflows
-		- «program.eAllContents.filter(Event).size» Events
-		- «program.eAllContents.filter(Job).size» Jobs
-		- «program.eAllContents.filter(Step).size» Steps
-
-	'''
 	
 	def deriveClassNameFor(Resource resource) {
 		val origName = resource.URI.lastSegment
-		
 		origName.substring(0, origName.indexOf('.')).toFirstUpper + 'GithubAction'
 	}
 	
-	/*
-	 * Below are parseable dispatch mathos for all grammar types
-	 */
-	def String doGenerateClass(Repository program, String className) '''
+	def deriveYamlFileNameFor(Workflow wf) {
+		wf.name.toLowerCase.replace(' ', '-') + '.yaml'
+	}
+	
+	def String doGenerateStats(Repository repo) '''
+		Program contains:
+		
+		- «repo.eAllContents.filter(Repository).size» Repositories
+		- «repo.eAllContents.filter(Workflow).size» Workflows
+		- «repo.eAllContents.filter(Event).size» Events
+		- «repo.eAllContents.filter(Job).size» Jobs
+		- «repo.eAllContents.filter(Step).size» Steps
+	'''
+	
+	def String doGenerateClass(Repository repo, String className) '''
 		import java.io.FileWriter;
 		import java.io.IOException;
 		import java.io.File; 
@@ -77,14 +88,14 @@ class GithubactionGenerator extends AbstractGenerator {
 		
 		     public static void main(String []args){
 		        String parsedData  = """
-		        «program.workflows.map[generateWorkflow(new Environment)].join('\n')»
+		        «repo.workflows.map[generateWorkflow(new Environment)].join('\n')»
 		        """;
 		        generateYamlFiles(parsedData);
 		     }
 		     
 		     public static void generateYamlFiles(String parsedData){
 		         if (parsedData.contains("branchesIgnore: master")){
-		             //generate feature and master file
+		             // generate feature and master file
 		             createAndWriteFile(parsedData.substring(0,parsedData.indexOf("name: Master Branch")-1),"featureBranch.yaml");
 		         }
 		          createAndWriteFile(parsedData.substring(parsedData.indexOf("name: Master Branch")),"MasterBranch.yaml");
@@ -104,124 +115,152 @@ class GithubactionGenerator extends AbstractGenerator {
 		        }
 		   }		
 	'''
-
-	private static class Environment {
-		var int counter = 0
-		def getFreshVarName() '''i_«counter++»'''
-		def exit() { counter-- }
+	
+	def String doGenerateWorkflow(Workflow wf) {
+		wf.generateWorkflow(new Environment)
 	}
 	
+	/*
+	 * Generator functions
+	 */
+	 
 	def String generateWorkflow(Workflow workflow, Environment env) '''
 		name: «workflow.name.toString»
 		
 		«IF !workflow.on.empty»
 			on:
-			
-			«FOR event : workflow.on»
-
-				«event.generateEvent»
-			«ENDFOR»
+			  «workflow.on.map[generateEvent].join('')»
 		«ENDIF»
+
 		«IF !workflow.jobs.empty»
 			jobs:
-			«FOR job : workflow.jobs»
-				«generateJob(job)»
-			«ENDFOR»
+			  «workflow.jobs.map[generateJob].join('\n')»
 		«ENDIF»
 	'''
-	dispatch def String generateEvent(PushEvent event) '''
-			push:
-		«if (!event.branches.empty && event.branches.get(0) !== null){'''	branches: [«event.branches.get(0)»]'''}»
-		«if (!event.tags.empty && event.tags.get(1) !== null){''' 	tags: «event.tags.get(0)»'''}»
-		«if (!event.branchesIgnore.empty && event.branchesIgnore.get(1) !== null){''' 	branchesIgnore: «event.branchesIgnore.get(0)»'''}»
-		«if (!event.tagsIgnore.empty && event.tagsIgnore.get(1) !== null){''' 	tagsIgnore: «event.tagsIgnore.get(0)»'''}»
-		«if (!event.paths.empty && event.paths.get(1) !== null){''' 	paths: «event.paths.get(0)»'''}»
-		«if (!event.pathsIgnore.empty && event.pathsIgnore.get(1) !== null){''' 	pathsIgnore: «event.pathsIgnore.get(0)»'''}»	
-	'''
-	dispatch def String generateEvent(PullRequestEvent event) '''
-			pull:
-		«if (!event.branches.empty && event.branches.get(0) !== null){'''	branches: [«event.branches.get(0)»]'''}» 
-		«if (!event.tags.empty && event.tags.get(1) !== null){''' 	tags: «event.tags.get(0)»'''}»
-		«if (!event.branchesIgnore.empty && event.branchesIgnore.get(1) !== null){''' 	branchesIgnore: «event.branchesIgnore.get(0)»'''}»
-		«if (!event.tagsIgnore.empty && event.tagsIgnore.get(1) !== null){''' 	tagsIgnore: «event.tagsIgnore.get(0)»'''}»
-		«if (!event.paths.empty && event.paths.get(1) !== null){''' 	paths: «event.paths.get(0)»'''}»
-		«if (!event.pathsIgnore.empty && event.pathsIgnore.get(1)  !== null){''' 	pathsIgnore: «event.pathsIgnore.get(0)»'''}»	
-	'''
+ 
 	dispatch def String generateEvent(ScheduleEvent event) '''
-			schedule:	
-		«if (event.hour !== null){'''	 -cron: «event.minute» «event.hour» «event.day» «event.month» «event.dayOfWeek»'''}» 
-		
-	'''	
-	dispatch def String generateEvent(WorkflowDispatchEvent event) '''
-			workflow_dispatch:
-		«if (event.inputs.get(0) !== null){'''	 inputs: «event.inputs.get(0)» «event.inputs.get(1)»'''}» 			
-
+		schedule:
+		  -cron: "«(event.minute !== null ? event.minute : '*') + ' '
+		  	+ (event.hour !== null ? event.hour : '*') + ' '
+		  	+ (event.day !== null ? event.day : '*') + ' '
+		  	+ (event.month !== null ? event.month : '*') + ' '
+		  	+ (event.dayOfWeek !== null ? event.dayOfWeek : '*')»"
 	'''
-	dispatch def String generateEvent(RepositoryDispatchEvent event) '''
-			repository_dispatch:
-		«if (event.eventTypes.get(0) !== null){'''	 types: [«event.eventTypes.get(0)»,«event.eventTypes.get(1)»]'''}» 	
-	'''	
 	
-	dispatch def String generateEvent(CreateEvent event) ''''''
-	dispatch def String generateEvent(DeleteEvent event) ''''''
-	dispatch def String generateEvent(DeploymentEvent event) ''''''	
-	dispatch def String generateEvent(IssueEvent event) '''		
-		«IF !event.activityTypes.empty»
-			«FOR type : event.activityTypes»
-				types: [«IssueActivityType(type)»]
-			«ENDFOR»
-		«ENDIF»
-	'''	
-	dispatch def String generateEvent(LabelEvent event) '''
-		«IF !event.activityTypes.empty»
-			«FOR type : event.activityTypes»
-				types: [«labelActivityType(type)»]
-			«ENDFOR»
-		«ENDIF»	
-	'''	
-	def String IssueActivityType(IssueActivityType type) '''
-		«IF type === IssueActivityType.OPENED» «IssueActivityType.OPENED», «ENDIF»
-		«IF type === IssueActivityType.CLOSED» «IssueActivityType.CLOSED», «ENDIF»
-		«IF type === IssueActivityType.DELETED» «IssueActivityType.DELETED» «ENDIF»
-		«IF type === IssueActivityType.EDITED» «IssueActivityType.EDITED», «ENDIF»
-		«IF type === IssueActivityType.DELETED» «IssueActivityType.DELETED», «ENDIF»
-		«IF type === IssueActivityType.TRANSFERRED» «IssueActivityType.TRANSFERRED», «ENDIF»
-		«IF type === IssueActivityType.ASSIGNED» «IssueActivityType.ASSIGNED», «ENDIF»
-		«IF type === IssueActivityType.UNASSIGNED» «IssueActivityType.UNASSIGNED», «ENDIF»
-		«IF type === IssueActivityType.LOCKED» «IssueActivityType.LOCKED», «ENDIF»
-		«IF type === IssueActivityType.UNLOCKED» «IssueActivityType.UNLOCKED», «ENDIF»
-		«IF type === IssueActivityType.REOPENED» «IssueActivityType.REOPENED» «ENDIF»
-	'''	
-	def String labelActivityType(LabelActivityType type) '''
-		«IF type === LabelActivityType.CREATED»  «LabelActivityType.CREATED», «ENDIF»
-		«IF type === LabelActivityType.EDITED» «LabelActivityType.EDITED», «ENDIF»
-		«IF type === LabelActivityType.DELETED» «LabelActivityType.DELETED» «ENDIF»
-
+	dispatch def String generateEvent(RepositoryDispatchEvent event) '''
+		repository_dispatch:
+		«IF !event.eventTypes.empty»  types: [«event.eventTypes.join(', ')»]«ENDIF»
 	'''
+	
+	dispatch def String generateEvent(WorkflowDispatchEvent event) '''
+		workflow_dispatch:
+		«IF !event.inputs.empty»  «event.inputs.map[generateInput].join('\n')»«ENDIF»
+	'''
+	
+	dispatch def String generateEvent(PushEvent event)'''
+		push:
+		  «generateEventTriggers(event as BranchEvent)»
+	'''
+	
+	dispatch def String generateEvent(PullRequestEvent event)'''
+		pull_request:
+		  «generateEventTriggers(event as BranchEvent)»
+	'''
+	
+	dispatch def String generateEvent(CreateEvent event) '''
+		create:
+	'''
+	
+	dispatch def String generateEvent(DeleteEvent event) '''
+		delete:
+	'''
+	
+	dispatch def String generateEvent(DeploymentEvent event) '''
+		deployment:
+	'''
+	
+	dispatch def String generateEvent(IssueEvent event) '''
+		issues:
+		«IF !event.activityTypes.empty»  types: [«event.activityTypes.map[toString].join(', ')»]«ENDIF»
+	'''
+	
+	dispatch def String generateEvent(LabelEvent event) '''
+		label:
+		«IF !event.activityTypes.empty»  types: [«event.activityTypes.map[toString].join(', ')»]«ENDIF»
+	'''
+	
 	def String generateJob(Job job) '''
-			«job.name»:
-				name: «job.jobName.toString»
-			runsOn: «job.runsOn.toString»
-			«IF !job.needs.empty»needs: [«job.needs.get(0).toString.substring(147,152)»,«job.needs.get(1).toString.substring(147,153)»]«ENDIF»
-			«IF !job.env.empty»	env:
-				«FOR input : job.env»«input.name»: «input.value»«ENDFOR»«ENDIF»
-		«IF !job.steps.empty»
-				steps:
-			«FOR step : job.steps»
-				«generateStepsType(step)»
-			«ENDFOR»	
-		«ENDIF»						
-	'''	
-
-	def String generateStepsType(Step step) '''
-		«IF step.stepName !== null»		- name: «step.stepName»«ENDIF»
-		«IF step.stepName === null && step.uses !== null»		- uses: «step.uses.toString»
-		«ELSEIF step.uses !== null»		uses: «step.uses.toString»«ENDIF»
-		
-		«IF !step.with.empty»		with:
-			«FOR input : step.with»«input.name»:«input.value»«ENDFOR»
+		«job.name»:
+		«IF job.jobName !== null»  name: «job.jobName»«ENDIF»
+		«IF job.runsOn !== null»  runsOn: «job.runsOn»«ENDIF»
+		«IF !job.needs.empty»  needs: [«job.needs.map[j | j.name].join(', ')»]«ENDIF»
+		«IF !job.env.empty»  env:
+		    «job.env.map[generateEnv].join('\n')»
 		«ENDIF»
-		«IF !step.run.empty»		run:  «FOR line : step.run»«line»«ENDFOR» «ENDIF»
-		«IF !step.env.empty»		env: «FOR input : step.env»«input.name»:«input.value»«ENDFOR»«ENDIF»
-	'''	
+		«IF !job.steps.empty»  steps:
+		    «job.steps.generateStepList»
+		«ENDIF»
+	'''
+	
+	def String generateStepList(EList<Step> steps) {
+		steps.map[generateStep]
+			.filter[s | s.length > 2]
+			.map[s | '- ' + s.substring(2)]
+			.join('')
+	}
+	 
+	def String generateStep(Step step) '''
+		«IF step.stepName !== null»  name: «step.stepName»«ENDIF»
+		«IF step.uses !== null»  uses: «step.uses»«ENDIF»
+		«IF !step.with.empty»  with:
+		    «step.with.map[generateInputParameter].join('\n')»
+		«ENDIF»
+		«IF step.run.size == 1»  run: «step.run.join('\n')»
+		«ELSEIF step.run.size > 1»  run: |
+		    «step.run.join('\n')»
+		«ENDIF»
+		«IF !step.env.empty»  env:
+		    «step.env.map[generateEnv].join('\n')»
+		«ENDIF»
+	'''
+	 
+	def String generateEnv(Env env) {
+		env.name + ': ' + env.value
+	}
+	
+	def String generateInputParameter(InputParameter p) {
+		p.name + ': ' + p.value
+	}
+	
+	def String generateInput(Input input) '''
+		«input.name»:
+		«IF input.description !== null»  description: «input.description»«ENDIF»
+		required: «input.required»
+		«IF input.^default !== null»  default: «input.^default»«ENDIF»
+	'''
+	
+	def String generateEventTriggers(BranchEvent event) '''
+		«IF !event.branches.empty»branches:
+		  «event.branches.generateStringArray»
+		«ENDIF»
+		«IF !event.tags.empty»tags:
+		  «generateStringArray(event.tags)»
+		«ENDIF»
+		«IF !event.branchesIgnore.empty»branchesIgnore:
+		  «event.branchesIgnore.generateStringArray»
+		«ENDIF»
+		«IF !event.tagsIgnore.empty»tagsIgnore:
+		  «event.tagsIgnore.generateStringArray»
+		«ENDIF»
+		«IF !event.paths.empty»paths:
+		  «event.paths.generateStringArray»
+		«ENDIF»
+		«IF !event.pathsIgnore.empty»pathsIgnore:
+		  «event.pathsIgnore.generateStringArray»
+		«ENDIF»
+	'''
+	
+	def String generateStringArray(EList<String> list) {
+		list.map[s | '- ' + s].join('\n')
+	}
 }
