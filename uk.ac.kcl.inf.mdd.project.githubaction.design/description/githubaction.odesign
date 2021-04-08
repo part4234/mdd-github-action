@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="githubaction" version="12.0.0.2017041100">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" name="githubaction" version="12.0.0.2017041100">
   <ownedViewpoints name="Githubaction Specification" modelFileExtension="githubaction">
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Repository Diagram" domainClass="githubaction::Repository" enablePopupBars="true">
       <metamodel href="http://www.example.org/githubaction#/"/>
@@ -128,19 +128,6 @@
             <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_gray']"/>
           </style>
         </containerMappings>
-        <toolSections name="Repository">
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="WorkflowCreationTool" label="Workflow" nodeMappings="//@ownedViewpoints[name='Githubaction%20Specification']/@ownedRepresentations[name='Repository%20Diagram']/@defaultLayer/@nodeMappings[name='WorkflowNode']">
-            <variable name="container"/>
-            <viewVariable name="containerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="githubaction::Workflow" referenceName="workflows">
-                  <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="aql:'Workflow ' + self.eContainer().workflows->indexOf(self)"/>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-        </toolSections>
       </defaultLayer>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="uk.ac.kcl.inf.mdd.project.githubaction.design.Services"/>
