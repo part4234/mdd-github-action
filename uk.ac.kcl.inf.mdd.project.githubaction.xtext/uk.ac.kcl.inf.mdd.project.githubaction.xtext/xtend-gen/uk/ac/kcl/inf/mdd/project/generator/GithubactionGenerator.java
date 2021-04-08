@@ -12,8 +12,10 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import uk.ac.kcl.inf.mdd.project.githubaction.CreateEvent;
 import uk.ac.kcl.inf.mdd.project.githubaction.DeleteEvent;
@@ -140,8 +142,13 @@ public class GithubactionGenerator extends AbstractGenerator {
     _builder.append("String parsedData  = \"\"\"");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("�program.workflows.map[generateWorkflow(new Environment)].join(\'\\n\')�");
-    _builder.newLine();
+    final Function1<Workflow, String> _function = (Workflow it) -> {
+      GithubactionGenerator.Environment _environment = new GithubactionGenerator.Environment();
+      return this.generateWorkflow(it, _environment);
+    };
+    String _join = IterableExtensions.join(ListExtensions.<Workflow, String>map(program.getWorkflows(), _function), "\n");
+    _builder.append(_join, "        ");
+    _builder.newLineIfNotEmpty();
     _builder.append("        ");
     _builder.append("\"\"\";");
     _builder.newLine();
@@ -558,7 +565,7 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
-  protected String _IssueActivityType(final IssueActivityType type) {
+  public String IssueActivityType(final IssueActivityType type) {
     StringConcatenation _builder = new StringConcatenation();
     {
       if ((type == IssueActivityType.OPENED)) {
@@ -651,7 +658,7 @@ public class GithubactionGenerator extends AbstractGenerator {
     return _builder.toString();
   }
   
-  protected String _labelActivityType(final LabelActivityType type) {
+  public String labelActivityType(final LabelActivityType type) {
     StringConcatenation _builder = new StringConcatenation();
     {
       if ((type == LabelActivityType.CREATED)) {
@@ -866,13 +873,5 @@ public class GithubactionGenerator extends AbstractGenerator {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(event).toString());
     }
-  }
-  
-  public String IssueActivityType(final IssueActivityType type) {
-    return _IssueActivityType(type);
-  }
-  
-  public String labelActivityType(final LabelActivityType type) {
-    return _labelActivityType(type);
   }
 }
