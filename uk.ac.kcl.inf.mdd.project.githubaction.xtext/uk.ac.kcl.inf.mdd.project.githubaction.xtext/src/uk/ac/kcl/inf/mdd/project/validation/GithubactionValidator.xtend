@@ -93,15 +93,15 @@ class GithubactionValidator extends AbstractGithubactionValidator {
 	}
 	
 	def dispatch checkEnvKey(Workflow wf) {
-		checkDuplicateEnvKey(wf.env)
+		wf.env.checkDuplicateEnvKey
 	}
 	
 	def dispatch checkEnvKey(Job job) {
-		checkDuplicateEnvKey(job.env)
+		job.env.checkDuplicateEnvKey
 	}
 	
 	def dispatch checkEnvKey(Step step) {
-		checkDuplicateEnvKey(step.env) 
+		step.env.checkDuplicateEnvKey
 	}
 	
 	def checkDuplicateEnvKey(EList<Env> envs) {
@@ -160,9 +160,9 @@ class GithubactionValidator extends AbstractGithubactionValidator {
 	
 	@Check
 	def checkEventConflict(BranchEvent event) {
-		val branchConflict = checkConflict(event.branches, event.branchesIgnore)
-		val tagConflict = checkConflict(event.tags, event.tagsIgnore)
-		val pathConflict = checkConflict(event.paths, event.pathsIgnore)
+		val branchConflict = event.branches.checkConflict(event.branchesIgnore)
+		val tagConflict = event.tags.checkConflict(event.tagsIgnore)
+		val pathConflict = event.paths.checkConflict(event.pathsIgnore)
 
 		if (branchConflict || tagConflict || pathConflict) {
 			error('Event trigger conflicted, workflow will never run', event, null, CONFLICT_TRIGGER)
@@ -171,9 +171,9 @@ class GithubactionValidator extends AbstractGithubactionValidator {
 	
 	def checkConflict(EList<?> list, EList<?> ignoreList) {
 		if (list.size > 0 && ignoreList.size > 0) {
-			return list.exists[exp | ignoreList.contains(exp)]
+			list.exists[exp | ignoreList.contains(exp)]
 		}
-		return false
+		false
 	}
 	
 	/*

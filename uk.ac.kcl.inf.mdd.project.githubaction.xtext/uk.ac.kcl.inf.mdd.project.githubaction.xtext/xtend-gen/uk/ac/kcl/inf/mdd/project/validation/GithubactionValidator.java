@@ -205,13 +205,17 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
   }
   
   public boolean checkConflict(final EList<?> list, final EList<?> ignoreList) {
-    if (((list.size() > 0) && (ignoreList.size() > 0))) {
-      final Function1<Object, Boolean> _function = (Object exp) -> {
-        return Boolean.valueOf(ignoreList.contains(exp));
-      };
-      return IterableExtensions.exists(list, _function);
+    boolean _xblockexpression = false;
+    {
+      if (((list.size() > 0) && (ignoreList.size() > 0))) {
+        final Function1<Object, Boolean> _function = (Object exp) -> {
+          return Boolean.valueOf(ignoreList.contains(exp));
+        };
+        IterableExtensions.exists(list, _function);
+      }
+      _xblockexpression = false;
     }
-    return false;
+    return _xblockexpression;
   }
   
   /**
