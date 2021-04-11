@@ -18,15 +18,16 @@ Yaml Editor: 1.7.0
 * Install Yaml Editor from Eclipse Marketplace
 
 ## Project Setup
-1. Import the following projects to eclipse
+1. Download release v1.0 of the repository
+2. Import the following projects to eclipse
 ```
 uk.ac.kcl.inf.mdd.project.githubaction.edit
 uk.ac.kcl.inf.mdd.project.githubaction.editor
 uk.ac.kcl.inf.mdd.project.githubaction.xtext
 uk.ac.kcl.inf.mdd.project.githubaction
 ```
-2. Launch a runtime eclipse
-3. Import the follwing projects to your runtime eclipse
+3. Launch a runtime eclipse
+4. Import the follwing projects to your runtime eclipse
 ```
 TestGraphicalSyntax
 TestTextualSyntax
@@ -34,7 +35,7 @@ uk.ac.kcl.inf.mdd.project.githubaction.design
 uk.ac.kcl.inf.mdd.project.githubaction.xpect 
 ```
 
-## Usage
+## Example Projects
 ### `TestGraphicalSyntax`
 * Open `NoticeBoardRepo.githubaction` with `Githubaction Editor` and edit the file
 * In Modeling Perspective, view the corresponding graphical representation under `Notice Board Repository Diagram` 
@@ -43,5 +44,5 @@ uk.ac.kcl.inf.mdd.project.githubaction.xpect
 * Edit `test.githubaction` in the `src` folder
 * `YAML` files and a statistics file are generated automatically in the `src-gen` when the `.githubaction` files are saved
 ### `uk.ac.kcl.inf.mdd.project.githubaction.xpect`
-* Edit `test1.githubaction.xt` files in the `src/uk.ac.kcl.inf.mdd.project.githubaction.xpect` folder
+* Edit `test1.githubaction.xt` or `test2.githubaction.xt` files in the `src/uk.ac.kcl.inf.mdd.project.githubaction.xpect` folder
 * Run the test by right clicking the file and select Run As > JUnit Test
