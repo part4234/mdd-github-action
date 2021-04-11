@@ -44,7 +44,7 @@ class GithubactionGenerator extends AbstractGenerator {
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		// generate statistics text file
 		val model = resource.contents.head as Repository
-		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats )
+		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats)
 		
 		// generate java file
 //		 val className = resource.deriveClassNameFor
@@ -72,7 +72,6 @@ class GithubactionGenerator extends AbstractGenerator {
 	def String doGenerateStats(Repository repo) '''
 		Program contains:
 		
-		- «repo.eAllContents.filter(Repository).size» Repositories
 		- «repo.eAllContents.filter(Workflow).size» Workflows
 		- «repo.eAllContents.filter(Event).size» Events
 		- «repo.eAllContents.filter(Job).size» Jobs
