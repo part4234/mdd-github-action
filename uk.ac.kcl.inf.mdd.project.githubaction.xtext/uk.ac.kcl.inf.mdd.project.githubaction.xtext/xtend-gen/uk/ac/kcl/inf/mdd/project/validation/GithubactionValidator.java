@@ -196,26 +196,28 @@ public class GithubactionValidator extends AbstractGithubactionValidator {
    */
   @Check
   public void checkEventConflict(final BranchEvent event) {
-    final boolean branchConflict = this.checkConflict(event.getBranches(), event.getBranchesIgnore());
-    final boolean tagConflict = this.checkConflict(event.getTags(), event.getTagsIgnore());
-    final boolean pathConflict = this.checkConflict(event.getPaths(), event.getPathsIgnore());
-    if (((branchConflict || tagConflict) || pathConflict)) {
-      this.error("Event trigger conflicted, workflow will never run", event, null, GithubactionValidator.CONFLICT_TRIGGER);
+    boolean _checkConflict = this.checkConflict(event.getBranches(), event.getBranchesIgnore());
+    if (_checkConflict) {
+      this.error("Branch conflicted, workflow will never run", event, null, GithubactionValidator.CONFLICT_TRIGGER);
+    }
+    boolean _checkConflict_1 = this.checkConflict(event.getTags(), event.getTagsIgnore());
+    if (_checkConflict_1) {
+      this.error("Tag conflicted, workflow will never run", event, null, GithubactionValidator.CONFLICT_TRIGGER);
+    }
+    boolean _checkConflict_2 = this.checkConflict(event.getPaths(), event.getPathsIgnore());
+    if (_checkConflict_2) {
+      this.error("Path conflicted, workflow will never run", event, null, GithubactionValidator.CONFLICT_TRIGGER);
     }
   }
   
   public boolean checkConflict(final EList<?> list, final EList<?> ignoreList) {
-    boolean _xblockexpression = false;
-    {
-      if (((list.size() > 0) && (ignoreList.size() > 0))) {
-        final Function1<Object, Boolean> _function = (Object exp) -> {
-          return Boolean.valueOf(ignoreList.contains(exp));
-        };
-        IterableExtensions.exists(list, _function);
-      }
-      _xblockexpression = false;
+    if (((list.size() > 0) && (ignoreList.size() > 0))) {
+      final Function1<Object, Boolean> _function = (Object exp) -> {
+        return Boolean.valueOf(ignoreList.contains(exp));
+      };
+      return IterableExtensions.exists(list, _function);
     }
-    return _xblockexpression;
+    return false;
   }
   
   /**

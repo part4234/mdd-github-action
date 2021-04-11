@@ -157,23 +157,24 @@ class GithubactionValidator extends AbstractGithubactionValidator {
 	/*
 	 * Check conflicting event triggers
 	 */
-	
+	 
 	@Check
 	def checkEventConflict(BranchEvent event) {
-		val branchConflict = event.branches.checkConflict(event.branchesIgnore)
-		val tagConflict = event.tags.checkConflict(event.tagsIgnore)
-		val pathConflict = event.paths.checkConflict(event.pathsIgnore)
-
-		if (branchConflict || tagConflict || pathConflict) {
-			error('Event trigger conflicted, workflow will never run', event, null, CONFLICT_TRIGGER)
+		if (event.branches.checkConflict(event.branchesIgnore)) {
+			error('Branch conflicted, workflow will never run', event, null, CONFLICT_TRIGGER)
+		}
+		if (event.tags.checkConflict(event.tagsIgnore)) {
+			error('Tag conflicted, workflow will never run', event, null, CONFLICT_TRIGGER)
+		}
+		if (event.paths.checkConflict(event.pathsIgnore)) {
+			error('Path conflicted, workflow will never run', event, null, CONFLICT_TRIGGER)
 		}
 	}
 	
 	def checkConflict(EList<?> list, EList<?> ignoreList) {
 		if (list.size > 0 && ignoreList.size > 0) {
-			list.exists[exp | ignoreList.contains(exp)]
+			return list.exists[exp | ignoreList.contains(exp)]
 		}
-		false
 	}
 	
 	/*
@@ -184,7 +185,7 @@ class GithubactionValidator extends AbstractGithubactionValidator {
 	def checkNameStartWithUpperCase(Workflow wf) {
 		if (wf.name != '' && !Character.isUpperCase(wf.name.charAt(0))) {
 			warning('Workflow name should start with an upper-case character', wf,
-				GithubactionPackage.Literals.WORKFLOW__NAME, uk.ac.kcl.inf.mdd.project.validation.GithubactionValidator.WRONG_CASE_USAGE)
+				GithubactionPackage.Literals.WORKFLOW__NAME, GithubactionValidator.WRONG_CASE_USAGE)
 		}
 	}
 	
@@ -194,7 +195,7 @@ class GithubactionValidator extends AbstractGithubactionValidator {
 			val notUpperCase = env.name.toCharArray.exists[c | Character.isAlphabetic(c) && !Character.isUpperCase(c)]
 			if (notUpperCase) {
 				warning('Env name should be upper-case', env,
-					GithubactionPackage.Literals.ENV__NAME, uk.ac.kcl.inf.mdd.project.validation.GithubactionValidator.WRONG_CASE_USAGE)				
+					GithubactionPackage.Literals.ENV__NAME, GithubactionValidator.WRONG_CASE_USAGE)				
 			}
 		}
 	}
@@ -203,7 +204,7 @@ class GithubactionValidator extends AbstractGithubactionValidator {
 	def checkIdStartWithLowerCase(Job job) {
 		if (job.name != '' && !Character.isLowerCase(job.name.charAt(0))) {
 			warning('Job id should start with an lower-case character', job,
-				GithubactionPackage.Literals.JOB__NAME, uk.ac.kcl.inf.mdd.project.validation.GithubactionValidator.WRONG_CASE_USAGE)
+				GithubactionPackage.Literals.JOB__NAME, GithubactionValidator.WRONG_CASE_USAGE)
 		}
 	}
 	
@@ -211,7 +212,7 @@ class GithubactionValidator extends AbstractGithubactionValidator {
 	def checkIdStartWithUpperCase(Step step) {
 		if (step.name != '' && !Character.isLowerCase(step.name.charAt(0))) {
 			warning('Step id should start with a lower-case character', step,
-				GithubactionPackage.Literals.STEP__NAME, uk.ac.kcl.inf.mdd.project.validation.GithubactionValidator.WRONG_CASE_USAGE)
+				GithubactionPackage.Literals.STEP__NAME, GithubactionValidator.WRONG_CASE_USAGE)
 		}
 	}
 	
